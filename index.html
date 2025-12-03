@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Calculando.cl: calculadora de boletas de honorarios y conversor UF↔CLP. Herramientas simples y modernas para tus cálculos en Chile."
+    content="Calculando.cl: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile."
   />
   <style>
     /* --------- TIPOGRAFÍA Y RESET --------- */
@@ -237,6 +237,8 @@
       border: 1px solid var(--border-subtle);
       margin-top: 16px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 4px;
     }
 
     .tool-tab {
@@ -496,7 +498,7 @@
       font-weight: 600;
     }
 
-    /* --------- UF: CAJAS Y RESULTADOS --------- */
+    /* --------- UF & IVA: CAJAS Y RESULTADOS --------- */
 
     .direction-row {
       display: flex;
@@ -533,7 +535,8 @@
       transform: translateY(-0.5px);
     }
 
-    .uf-results {
+    .uf-results,
+    .iva-results {
       margin-top: 16px;
       border-radius: var(--radius-md);
       padding: 12px 14px;
@@ -544,7 +547,8 @@
       line-height: 1.5;
     }
 
-    .uf-results strong {
+    .uf-results strong,
+    .iva-results strong {
       color: var(--accent);
     }
 
@@ -583,8 +587,8 @@
   <section class="hero">
     <h1>Calculadoras rápidas para tu día a día en Chile</h1>
     <p>
-      Comienza con la calculadora de boletas de honorarios o usa el conversor UF↔CLP.
-      Herramientas simples, sin publicidad invasiva y pensadas para el celular.
+      Comienza con la calculadora de boletas de honorarios, el conversor UF↔CLP
+      o la calculadora de IVA. Herramientas simples, sin publicidad invasiva y pensadas para el celular.
     </p>
     <div class="pill">
       <span class="pill-dot"></span>
@@ -597,6 +601,9 @@
       </button>
       <button class="tool-tab" data-tool="uf" type="button">
         <span>💱</span> Calculadora UF
+      </button>
+      <button class="tool-tab" data-tool="iva" type="button">
+        <span>🧮</span> Calculadora IVA
       </button>
     </div>
   </section>
@@ -738,6 +745,55 @@
     </div>
   </section>
 
+  <!-- ------------- TOOL 3: IVA ------------- -->
+  <section id="tool-iva" class="shell tool-shell">
+    <div class="tool-title">Calculadora IVA (19%)</div>
+    <div class="tool-subtitle">
+      Convierte entre valores netos y brutos o calcula sólo el IVA, usando la tasa estándar del 19% en Chile.
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Monto</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="ivaMonto"
+          class="amount-input"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="100"
+          placeholder="Ej: 100000"
+        />
+      </div>
+    </div>
+
+    <div class="direction-row" id="ivaModeGroup">
+      <label class="direction-pill direction-pill-active">
+        <input type="radio" name="ivaMode" value="netoBruto" checked />
+        De neto a bruto
+      </label>
+      <label class="direction-pill">
+        <input type="radio" name="ivaMode" value="brutoNeto" />
+        De bruto a neto
+      </label>
+      <label class="direction-pill">
+        <input type="radio" name="ivaMode" value="soloIVA" />
+        Calcular sólo IVA
+      </label>
+    </div>
+
+    <div class="helper">
+      Tip: usa neto cuando el precio es “sin IVA” y bruto cuando incluye IVA.
+    </div>
+
+    <div id="ivaError" class="error"></div>
+
+    <div id="ivaResults" class="iva-results" style="opacity:0.45;">
+      Ingresa un monto para calcular su IVA, valor neto y bruto.
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
@@ -786,6 +842,7 @@
   const toolTabs = toolNav.querySelectorAll(".tool-tab");
   const boletaSection = document.getElementById("tool-boleta");
   const ufSection = document.getElementById("tool-uf");
+  const ivaSection = document.getElementById("tool-iva");
 
   function activateTool(tool) {
     toolTabs.forEach(tab => {
@@ -793,13 +850,9 @@
       tab.classList.toggle("tool-tab-active", isActive);
     });
 
-    if (tool === "boleta") {
-      boletaSection.classList.add("tool-shell-active");
-      ufSection.classList.remove("tool-shell-active");
-    } else {
-      ufSection.classList.add("tool-shell-active");
-      boletaSection.classList.remove("tool-shell-active");
-    }
+    boletaSection.classList.toggle("tool-shell-active", tool === "boleta");
+    ufSection.classList.toggle("tool-shell-active", tool === "uf");
+    ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
   toolTabs.forEach(tab => {
@@ -807,6 +860,21 @@
       activateTool(tab.dataset.tool);
     });
   });
+
+  // ---------- UTILS ----------
+
+  function formatCLP(value) {
+    if (!isFinite(value)) return "$0";
+    try {
+      return new Intl.NumberFormat("es-CL", {
+        style: "currency",
+        currency: "CLP",
+        maximumFractionDigits: 0
+      }).format(Math.round(value));
+    } catch (e) {
+      return "$" + Math.round(value).toLocaleString("es-CL");
+    }
+  }
 
   // ---------- CALCULADORA BOLETA ----------
 
@@ -822,19 +890,6 @@
   const bruBruto = document.getElementById("bru-bruto");
   const bruLiquido = document.getElementById("bru-liquido");
   const bruRetencion = document.getElementById("bru-retencion");
-
-  function formatCLP(value) {
-    if (!isFinite(value)) return "$0";
-    try {
-      return new Intl.NumberFormat("es-CL", {
-        style: "currency",
-        currency: "CLP",
-        maximumFractionDigits: 0
-      }).format(Math.round(value));
-    } catch (e) {
-      return "$" + Math.round(value).toLocaleString("es-CL");
-    }
-  }
 
   function getRate() {
     const checked = rateGroup.querySelector("input[name='rate']:checked");
@@ -904,7 +959,7 @@
   const ufResults = document.getElementById("ufResults");
   const ufLegend = document.getElementById("ufLegend");
 
-  // ------- UF automática desde API pública --------
+  // UF automática desde API pública
   async function autoFillUF() {
     try {
       const res = await fetch("https://mindicador.cl/api");
@@ -1005,6 +1060,72 @@
       pill.classList.toggle("direction-pill-active", input.checked);
     });
     recalculateUF();
+  });
+
+  // ---------- CALCULADORA IVA (19%) ----------
+
+  const ivaMontoInput = document.getElementById("ivaMonto");
+  const ivaModeGroup = document.getElementById("ivaModeGroup");
+  const ivaError = document.getElementById("ivaError");
+  const ivaResults = document.getElementById("ivaResults");
+  const IVA_RATE = 0.19;
+
+  function recalculateIVA() {
+    const raw = ivaMontoInput.value.trim();
+    ivaError.textContent = "";
+
+    if (!raw) {
+      ivaResults.style.opacity = 0.45;
+      ivaResults.textContent = "Ingresa un monto para calcular su IVA, valor neto y bruto.";
+      return;
+    }
+
+    const monto = Number(raw);
+    if (isNaN(monto) || monto <= 0) {
+      ivaError.textContent = "El monto debe ser un número mayor a 0.";
+      ivaResults.style.opacity = 0.45;
+      return;
+    }
+
+    const mode = ivaModeGroup.querySelector("input[name='ivaMode']:checked").value;
+
+    let texto = "";
+    if (mode === "netoBruto") {
+      const neto = monto;
+      const iva = neto * IVA_RATE;
+      const bruto = neto + iva;
+      texto =
+        `Si el monto <strong>neto</strong> es ${formatCLP(neto)}, ` +
+        `el IVA (19%) es <strong>${formatCLP(iva)}</strong> ` +
+        `y el total <strong>bruto</strong> es ${formatCLP(bruto)}.`;
+    } else if (mode === "brutoNeto") {
+      const bruto = monto;
+      const neto = bruto / (1 + IVA_RATE);
+      const iva = bruto - neto;
+      texto =
+        `Si el monto <strong>bruto</strong> es ${formatCLP(bruto)}, ` +
+        `el valor <strong>neto</strong> es ${formatCLP(neto)} ` +
+        `y el IVA (19%) es <strong>${formatCLP(iva)}</strong>.`;
+    } else {
+      const iva = monto * IVA_RATE;
+      texto =
+        `El IVA (19%) de ${formatCLP(monto)} es ` +
+        `<strong>${formatCLP(iva)}</strong>.`;
+    }
+
+    ivaResults.innerHTML = texto;
+    ivaResults.style.opacity = 1;
+  }
+
+  ivaMontoInput.addEventListener("input", recalculateIVA);
+
+  ivaModeGroup.addEventListener("change", () => {
+    const pills = ivaModeGroup.querySelectorAll(".direction-pill");
+    pills.forEach(pill => {
+      const input = pill.querySelector("input");
+      pill.classList.toggle("direction-pill-active", input.checked);
+    });
+    recalculateIVA();
   });
 </script>
 </body>
