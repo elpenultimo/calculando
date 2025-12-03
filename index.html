@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Boleta</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Boletita</h1>
+  <p class="sub">Calcula tu boleta de honorarios 🇨🇱</p>
+
+  <div class="input-box">
+    <span>$</span>
+    <input id="monto" type="number" placeholder="Ingresa el monto">
+  </div>
+
+  <div class="rates">
+    <label><input type="radio" name="rate" value="14.5" checked> 14.5%</label>
+    <label><input type="radio" name="rate" value="13.75"> 13.75%</label>
+  </div>
+
+  <div class="result">
+    <h2>Líquido → Bruto</h2>
+    <p id="resultado-liquido">—</p>
+
+    <h2>Bruto → Líquido</h2>
+    <p id="resultado-bruto">—</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+  

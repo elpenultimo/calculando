@@ -1,0 +1,68 @@
+body {
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px 10px;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 5px;
+}
+
+.sub {
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.input-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  padding: 12px 15px;
+  border-radius: 10px;
+  width: 92%;
+  max-width: 420px;
+  margin: auto;
+  font-size: 30px;
+}
+
+.input-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  width: 100%;
+  color: #fff;
+  font-size: 30px;
+}
+
+.rates {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+
+.rates label {
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 35px;
+  font-size: 22px;
+}
+
+.result h2 {
+  font-size: 26px;
+  margin-top: 25px;
+}
+
+.result p {
+  margin: 10px 0;
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+}
