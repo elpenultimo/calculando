@@ -711,7 +711,7 @@
           inputmode="decimal"
           min="0"
           step="1"
-          placeholder="Ej: 39643.59"
+          placeholder="Cargando UF..."
         />
       </div>
     </div>
@@ -727,8 +727,8 @@
       </label>
     </div>
 
-    <div class="helper">
-      Tip: actualiza el valor UF según la fecha que quieras usar.
+    <div class="helper" id="ufLegend">
+      Tip: el valor UF es referencial. Puedes editarlo si necesitas otra fecha.
     </div>
 
     <div id="ufError" class="error"></div>
@@ -902,6 +902,45 @@
   const ufDirectionGroup = document.getElementById("ufDirectionGroup");
   const ufErrorBox = document.getElementById("ufError");
   const ufResults = document.getElementById("ufResults");
+  const ufLegend = document.getElementById("ufLegend");
+
+  // ------- UF automática desde API pública --------
+  async function autoFillUF() {
+    try {
+      const res = await fetch("https://mindicador.cl/api");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const data = await res.json();
+      const ufData = data?.uf;
+      if (!ufData || ufData.valor == null) return;
+
+      const valorNum = Number(String(ufData.valor).replace(",", "."));
+      if (isNaN(valorNum) || valorNum <= 0) return;
+
+      ufValorInput.value = valorNum.toFixed(2);
+
+      if (ufData.fecha && ufLegend) {
+        const fechaObj = new Date(ufData.fecha);
+        const dia = String(fechaObj.getDate()).padStart(2, "0");
+        const mes = String(fechaObj.getMonth() + 1).padStart(2, "0");
+        const año = fechaObj.getFullYear();
+
+        ufLegend.textContent =
+          `UF automática del día ${dia}-${mes}-${año} (mindicador.cl). ` +
+          `Puedes editarla si necesitas otra fecha.`;
+      }
+
+      recalculateUF();
+    } catch (err) {
+      console.error("No se pudo cargar UF automática", err);
+      if (ufLegend) {
+        ufLegend.textContent =
+          "No se pudo obtener la UF automática. Ingresa el valor manualmente.";
+      }
+    }
+  }
+
+  autoFillUF();
 
   function formatUF(value) {
     if (!isFinite(value)) return "0 UF";
