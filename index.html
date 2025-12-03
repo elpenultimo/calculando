@@ -599,6 +599,9 @@
       <button class="tool-tab tool-tab-active" data-tool="boleta" type="button">
         <span>🧾</span> Boleta de honorarios
       </button>
+      <button class="tool-tab" data-tool="sueldo" type="button">
+    <span>💼</span> Sueldo Líquido
+      </button>
       <button class="tool-tab" data-tool="uf" type="button">
         <span>💱</span> Calculadora UF
       </button>
@@ -683,8 +686,36 @@
       </div>
     </div>
   </section>
+<!-- ------------- TOOL 2: SUELDO ------------- -->
+<section class="tool-section" id="tool-sueldo" style="display:none;">
+    <h2>Calculadora de Sueldo Líquido</h2>
 
-  <!-- ------------- TOOL 2: UF ------------- -->
+    <div class="input-group">
+        <label for="sl-bruto">Sueldo Bruto</label>
+        <input type="number" id="sl-bruto" placeholder="Ej: 1.200.000">
+    </div>
+
+    <div class="input-group">
+        <label for="sl-afp">AFP (%)</label>
+        <input type="number" id="sl-afp" value="11.44">
+    </div>
+
+    <div class="input-group">
+        <label for="sl-salud">Salud (%)</label>
+        <input type="number" id="sl-salud" value="7">
+    </div>
+
+    <div class="input-group">
+        <label for="sl-cesantia">Seguro de Cesantía (%)</label>
+        <input type="number" id="sl-cesantia" value="0.6">
+    </div>
+
+    <button class="calculate-btn" onclick="calcularSueldo()">Calcular Sueldo Líquido</button>
+
+    <div id="sl-resultado" class="result-block" style="margin-top:20px;"></div>
+</section>
+
+  <!-- ------------- TOOL 3: UF ------------- -->
   <section id="tool-uf" class="shell tool-shell">
     <div class="tool-title">Calculadora UF ↔ Pesos chilenos</div>
     <div class="tool-subtitle">
@@ -745,7 +776,7 @@
     </div>
   </section>
 
-  <!-- ------------- TOOL 3: IVA ------------- -->
+  <!-- ------------- TOOL 4: IVA ------------- -->
   <section id="tool-iva" class="shell tool-shell">
     <div class="tool-title">Calculadora IVA (19%)</div>
     <div class="tool-subtitle">
@@ -949,6 +980,49 @@
     });
     recalculateBoleta();
   });
+
+   // ---------- CALCULADORA SUELDO ----------
+function calcularSueldo() {
+    const bruto = Number(document.getElementById("sl-bruto").value);
+    const afp = Number(document.getElementById("sl-afp").value) / 100;
+    const salud = Number(document.getElementById("sl-salud").value) / 100;
+    const cesantia = Number(document.getElementById("sl-cesantia").value) / 100;
+
+    if (!bruto) {
+        document.getElementById("sl-resultado").innerHTML =
+            "<p class='error-msg'>Ingresa un sueldo bruto válido.</p>";
+        return;
+    }
+
+    const descAfp = bruto * afp;
+    const descSalud = bruto * salud;
+    const descCesantia = bruto * cesantia;
+
+    // Cálculo base imponible
+    const imponible = bruto - descAfp - descSalud;
+
+    // Impuesto simplificado 0 / 4 / 8 %
+    let impuesto = 0;
+    if (imponible > 2_052_302) {
+        impuesto = imponible * 0.08;
+    } else if (imponible > 923_537) {
+        impuesto = imponible * 0.04;
+    }
+
+    // Sueldo líquido final
+    const liquido = bruto - descAfp - descSalud - descCesantia - impuesto;
+
+    // Formato CLP
+    const fmt = (n) => n.toLocaleString("es-CL");
+
+    document.getElementById("sl-resultado").innerHTML = `
+        <p><strong>Sueldo Líquido: </strong>$${fmt(liquido)}</p>
+        <p>AFP: $${fmt(descAfp)}</p>
+        <p>Salud: $${fmt(descSalud)}</p>
+        <p>Seguro de Cesantía: $${fmt(descCesantia)}</p>
+        <p>Impuesto: $${fmt(impuesto)}</p>
+    `;
+}
 
   // ---------- CALCULADORA UF ----------
 
