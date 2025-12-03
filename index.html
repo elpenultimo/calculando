@@ -2,11 +2,11 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <title>Calculando.cl – Calculadora de Boletas de Honorarios 2025</title>
+  <title>Calculando.cl – Calculadoras Chile 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Calculadora simple y moderna de boletas de honorarios 2025 en Chile. Ingresa un monto y ve cuánto debes boletear y cuánto recibes líquido, con la retención aproximada del SII."
+    content="Calculando.cl: calculadora de boletas de honorarios y conversor UF↔CLP. Herramientas simples y modernas para tus cálculos en Chile."
   />
   <style>
     /* --------- TIPOGRAFÍA Y RESET --------- */
@@ -98,7 +98,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
 
@@ -191,11 +191,11 @@
 
     .hero {
       text-align: left;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hero h1 {
-      font-size: clamp(22px, 4.8vw, 28px);
+      font-size: clamp(22px, 4.2vw, 26px);
       margin-bottom: 6px;
     }
 
@@ -227,13 +227,51 @@
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
     }
 
-    /* --------- SHELL / CONTENEDOR PRINCIPAL --------- */
+    /* --------- NAV DE HERRAMIENTAS --------- */
+
+    .tool-nav {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    .tool-tab {
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .tool-tab span {
+      font-size: 14px;
+    }
+
+    .tool-tab-active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- SHELL / CONTENEDORES --------- */
 
     .shell {
-      margin-top: 22px;
+      margin-top: 14px;
       background: var(--shell);
       border-radius: var(--radius-lg);
-      padding: 20px 16px 22px;
+      padding: 18px 16px 22px;
       box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-subtle);
       backdrop-filter: blur(24px);
@@ -241,8 +279,28 @@
 
     @media (min-width: 768px) {
       .shell {
-        padding: 22px 22px 24px;
+        padding: 20px 22px 24px;
       }
+    }
+
+    .tool-shell {
+      display: none;
+    }
+
+    .tool-shell-active {
+      display: block;
+    }
+
+    .tool-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tool-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
     }
 
     /* INPUT MONTO */
@@ -310,7 +368,7 @@
       background: radial-gradient(circle at top, #eef2ff 0, #e0f2fe 45%, #eff6ff 100%);
     }
 
-    /* TASA / RATE */
+    /* TASA / RATE & HELPERS */
 
     .rate-row {
       display: flex;
@@ -368,7 +426,7 @@
       margin-top: 4px;
     }
 
-    /* RESULTADOS */
+    /* RESULTADOS BOLETA */
 
     .results-row {
       margin-top: 18px;
@@ -399,11 +457,7 @@
     }
 
     html[data-theme="light"] .result-card {
-      background: linear-gradient(
-        145deg,
-        #ffffff,
-        #e0edff
-      );
+      background: linear-gradient(145deg, #ffffff, #e0edff);
     }
 
     .result-card:hover {
@@ -442,6 +496,58 @@
       font-weight: 600;
     }
 
+    /* --------- UF: CAJAS Y RESULTADOS --------- */
+
+    .direction-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .direction-pill {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .direction-pill input {
+      accent-color: var(--primary);
+    }
+
+    .direction-pill-active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
+    }
+
+    .uf-results {
+      margin-top: 16px;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      border: 1px solid var(--border-subtle);
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .uf-results strong {
+      color: var(--accent);
+    }
+
     /* FOOTER */
 
     footer {
@@ -475,19 +581,40 @@
   </header>
 
   <section class="hero">
-    <h1>Calculadora de Boletas de Honorarios 2025</h1>
+    <h1>Calculadoras rápidas para tu día a día en Chile</h1>
     <p>
-      Ingresa un monto en pesos chilenos y te mostramos dos escenarios:
-      si el monto que tienes en mente es <strong>en líquido</strong> o
-      <strong>en bruto</strong>, con la retención aproximada que se va al SII.
+      Comienza con la calculadora de boletas de honorarios o usa el conversor UF↔CLP.
+      Herramientas simples, sin publicidad invasiva y pensadas para el celular.
     </p>
     <div class="pill">
       <span class="pill-dot"></span>
-      Tasa por defecto: 14,5% · Resultados referenciales, verifica siempre en SII.cl
+      BETA 2025 · Sumando nuevas calculadoras pronto
+    </div>
+
+    <div class="tool-nav" id="toolNav">
+      <button class="tool-tab tool-tab-active" data-tool="boleta" type="button">
+        <span>🧾</span> Boleta de honorarios
+      </button>
+      <button class="tool-tab" data-tool="uf" type="button">
+        <span>💱</span> Calculadora UF
+      </button>
     </div>
   </section>
 
-  <section class="shell">
+  <!-- ------------- TOOL 1: BOLETA ------------- -->
+  <section id="tool-boleta" class="shell tool-shell tool-shell-active">
+    <div class="tool-title">Calculadora de Boletas de Honorarios 2025</div>
+    <div class="tool-subtitle">
+      Ingresa un monto en pesos chilenos y te mostramos dos escenarios:
+      si el monto es <strong>en líquido</strong> o <strong>en bruto</strong>,
+      con la retención aproximada que se va al SII.
+    </div>
+
+    <div class="pill" style="margin-top:0;margin-bottom:12px;">
+      <span class="pill-dot"></span>
+      Tasa por defecto: 14,5% · Resultados referenciales, verifica siempre en SII.cl
+    </div>
+
     <div class="input-row">
       <div class="input-label">Monto en CLP</div>
       <div class="amount-wrap">
@@ -550,10 +677,71 @@
     </div>
   </section>
 
+  <!-- ------------- TOOL 2: UF ------------- -->
+  <section id="tool-uf" class="shell tool-shell">
+    <div class="tool-title">Calculadora UF ↔ Pesos chilenos</div>
+    <div class="tool-subtitle">
+      Ingresa el monto y el valor de la UF que quieras usar.
+      Puedes convertir de pesos a UF o de UF a pesos.
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Monto</div>
+      <div class="amount-wrap">
+        <input
+          id="ufMonto"
+          class="amount-input"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="0.0001"
+          placeholder="Ej: 1000000 o 10"
+        />
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Valor UF</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="ufValor"
+          class="amount-input"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="1"
+          placeholder="Ej: 39643.59"
+        />
+      </div>
+    </div>
+
+    <div class="direction-row" id="ufDirectionGroup">
+      <label class="direction-pill direction-pill-active">
+        <input type="radio" name="ufDirection" value="clpToUf" checked />
+        De pesos chilenos a UF
+      </label>
+      <label class="direction-pill">
+        <input type="radio" name="ufDirection" value="ufToClp" />
+        De UF a pesos chilenos
+      </label>
+    </div>
+
+    <div class="helper">
+      Tip: actualiza el valor UF según la fecha que quieras usar.
+    </div>
+
+    <div id="ufError" class="error"></div>
+
+    <div id="ufResults" class="uf-results" style="opacity:0.45;">
+      Ingresa un monto y el valor UF para ver el resultado.
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
-    Usa esta herramienta como guía rápida y, ante dudas, consulta con un contador.
+    Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
 
@@ -576,7 +764,6 @@
     }
   }
 
-  // Leer tema guardado
   (function initTheme() {
     const stored = localStorage.getItem("calculando-theme");
     if (stored === "light" || stored === "dark") {
@@ -593,7 +780,35 @@
     localStorage.setItem("calculando-theme", next);
   });
 
-  // ---------- CALCULADORA ----------
+  // ---------- NAV ENTRE HERRAMIENTAS ----------
+
+  const toolNav = document.getElementById("toolNav");
+  const toolTabs = toolNav.querySelectorAll(".tool-tab");
+  const boletaSection = document.getElementById("tool-boleta");
+  const ufSection = document.getElementById("tool-uf");
+
+  function activateTool(tool) {
+    toolTabs.forEach(tab => {
+      const isActive = tab.dataset.tool === tool;
+      tab.classList.toggle("tool-tab-active", isActive);
+    });
+
+    if (tool === "boleta") {
+      boletaSection.classList.add("tool-shell-active");
+      ufSection.classList.remove("tool-shell-active");
+    } else {
+      ufSection.classList.add("tool-shell-active");
+      boletaSection.classList.remove("tool-shell-active");
+    }
+  }
+
+  toolTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      activateTool(tab.dataset.tool);
+    });
+  });
+
+  // ---------- CALCULADORA BOLETA ----------
 
   const montoInput = document.getElementById("monto");
   const errorBox = document.getElementById("error");
@@ -626,7 +841,7 @@
     return checked ? Number(checked.value) : 0.145;
   }
 
-  function recalculate() {
+  function recalculateBoleta() {
     const raw = montoInput.value.trim();
     errorBox.textContent = "";
 
@@ -650,12 +865,10 @@
 
     const rate = getRate();
 
-    // Escenario 1: el monto ingresado es líquido
     const liquidoDeseado = monto;
     const brutoNecesario = liquidoDeseado / (1 - rate);
     const retencionLiquido = brutoNecesario - liquidoDeseado;
 
-    // Escenario 2: el monto ingresado es bruto
     const brutoPactado = monto;
     const liquidoRecibes = brutoPactado * (1 - rate);
     const retencionBruto = brutoPactado - liquidoRecibes;
@@ -671,16 +884,88 @@
     resultsEl.style.opacity = 1;
   }
 
-  montoInput.addEventListener("input", recalculate);
+  montoInput.addEventListener("input", recalculateBoleta);
 
   rateGroup.addEventListener("change", () => {
-    // actualizar estilos activos
     const pills = rateGroup.querySelectorAll(".rate-pill");
     pills.forEach(pill => {
       const input = pill.querySelector("input");
       pill.classList.toggle("active", input.checked);
     });
-    recalculate();
+    recalculateBoleta();
+  });
+
+  // ---------- CALCULADORA UF ----------
+
+  const ufMontoInput = document.getElementById("ufMonto");
+  const ufValorInput = document.getElementById("ufValor");
+  const ufDirectionGroup = document.getElementById("ufDirectionGroup");
+  const ufErrorBox = document.getElementById("ufError");
+  const ufResults = document.getElementById("ufResults");
+
+  function formatUF(value) {
+    if (!isFinite(value)) return "0 UF";
+    try {
+      return (
+        new Intl.NumberFormat("es-CL", {
+          minimumFractionDigits: 4,
+          maximumFractionDigits: 4
+        }).format(value) + " UF"
+      );
+    } catch (e) {
+      return value.toFixed(4) + " UF";
+    }
+  }
+
+  function recalculateUF() {
+    const rawMonto = ufMontoInput.value.trim();
+    const rawValor = ufValorInput.value.trim();
+    ufErrorBox.textContent = "";
+
+    if (!rawMonto || !rawValor) {
+      ufResults.style.opacity = 0.45;
+      ufResults.textContent = "Ingresa un monto y el valor UF para ver el resultado.";
+      return;
+    }
+
+    const monto = Number(rawMonto);
+    const valorUF = Number(rawValor);
+
+    if (isNaN(monto) || monto <= 0 || isNaN(valorUF) || valorUF <= 0) {
+      ufErrorBox.textContent = "Monto y valor UF deben ser números mayores a 0.";
+      ufResults.style.opacity = 0.45;
+      return;
+    }
+
+    const direction = ufDirectionGroup.querySelector("input[name='ufDirection']:checked").value;
+
+    let texto = "";
+    if (direction === "clpToUf") {
+      const uf = monto / valorUF;
+      texto =
+        `${formatCLP(monto)} equivalen aproximadamente a ` +
+        `<strong>${formatUF(uf)}</strong> usando UF = ${formatCLP(valorUF)}.`;
+    } else {
+      const clp = monto * valorUF;
+      texto =
+        `${formatUF(monto)} equivalen aproximadamente a ` +
+        `<strong>${formatCLP(clp)}</strong> usando UF = ${formatCLP(valorUF)}.`;
+    }
+
+    ufResults.innerHTML = texto;
+    ufResults.style.opacity = 1;
+  }
+
+  ufMontoInput.addEventListener("input", recalculateUF);
+  ufValorInput.addEventListener("input", recalculateUF);
+
+  ufDirectionGroup.addEventListener("change", () => {
+    const pills = ufDirectionGroup.querySelectorAll(".direction-pill");
+    pills.forEach(pill => {
+      const input = pill.querySelector("input");
+      pill.classList.toggle("direction-pill-active", input.checked);
+    });
+    recalculateUF();
   });
 </script>
 </body>
