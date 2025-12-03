@@ -1028,7 +1028,7 @@
     recalculateBoleta();
   });
 
-   // ---------- CALCULADORA SUELDO ----------
+// ---------- CALCULADORA SUELDO ----------
 function calcularSueldo() {
   const bruto = Number(document.getElementById("sl-bruto").value);
   const afpPct = Number(document.getElementById("sl-afp").value) / 100;
@@ -1074,6 +1074,11 @@ function calcularSueldo() {
 
   row.style.opacity = 1;
 }
+
+/* 🔥 AGREGA ESTO JUSTO AQUÍ ABAJO 🔥 */
+["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
+  document.getElementById(id).addEventListener("input", calcularSueldo);
+});
 
   // ---------- CALCULADORA UF ----------
 
