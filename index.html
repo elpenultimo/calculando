@@ -734,12 +734,29 @@
 
   <div id="sl-error" class="error"></div>
 
-  <div id="sl-results" style="margin-top:16px; opacity:0.45; font-size:14px; line-height:1.6;">
-  <div><strong>AFP:</strong> <span id="sl-afp-val">$0</span></div>
-  <div><strong>Salud:</strong> <span id="sl-salud-val">$0</span></div>
-  <div><strong>Cesantía:</strong> <span id="sl-cesantia-val">$0</span></div>
-  <div><strong>Impuesto:</strong> <span id="sl-impuesto-val">$0</span></div>
-  <div><strong>Sueldo líquido:</strong> <span id="sl-liquido-val">$0</span></div>
+  <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
+  <div class="result-card">
+    <div class="result-title">Descuentos obligatorios</div>
+
+    <div class="result-main-label">AFP:</div>
+    <div id="sl-afp-val" class="result-value">$0</div>
+
+    <div class="result-main-label" style="margin-top:10px;">Salud:</div>
+    <div id="sl-salud-val" class="result-value">$0</div>
+
+    <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
+    <div id="sl-cesantia-val" class="result-value">$0</div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-title">Resultado final</div>
+
+    <div class="result-main-label">Impuesto (simple):</div>
+    <div id="sl-impuesto-val" class="result-value">$0</div>
+
+    <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
+    <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
+  </div>
 </div>
 </section>
 
@@ -1013,45 +1030,49 @@
 
    // ---------- CALCULADORA SUELDO ----------
 function calcularSueldo() {
-    const bruto = Number(document.getElementById("sl-bruto").value);
-    const afp = Number(document.getElementById("sl-afp").value) / 100;
-    const salud = Number(document.getElementById("sl-salud").value) / 100;
-    const cesantia = Number(document.getElementById("sl-cesantia").value) / 100;
+  const bruto = Number(document.getElementById("sl-bruto").value);
+  const afpPct = Number(document.getElementById("sl-afp").value) / 100;
+  const saludPct = Number(document.getElementById("sl-salud").value) / 100;
+  const cesPct = Number(document.getElementById("sl-cesantia").value) / 100;
 
-    if (!bruto) {
-        document.getElementById("sl-resultado").innerHTML =
-            "<p class='error-msg'>Ingresa un sueldo bruto válido.</p>";
-        return;
-    }
+  const err = document.getElementById("sl-error");
+  const row = document.getElementById("sl-results");
 
-    const descAfp = bruto * afp;
-    const descSalud = bruto * salud;
-    const descCesantia = bruto * cesantia;
+  const vAfp = document.getElementById("sl-afp-val");
+  const vSalud = document.getElementById("sl-salud-val");
+  const vCes = document.getElementById("sl-cesantia-val");
+  const vImp = document.getElementById("sl-impuesto-val");
+  const vLiq = document.getElementById("sl-liquido-val");
 
-    // Cálculo base imponible
-    const imponible = bruto - descAfp - descSalud;
+  err.textContent = "";
 
-    // Impuesto simplificado 0 / 4 / 8 %
-    let impuesto = 0;
-    if (imponible > 2_052_302) {
-        impuesto = imponible * 0.08;
-    } else if (imponible > 923_537) {
-        impuesto = imponible * 0.04;
-    }
+  if (!bruto || bruto <= 0) {
+    err.textContent = "Ingresa un sueldo bruto válido.";
+    row.style.opacity = 0.45;
+    return;
+  }
 
-    // Sueldo líquido final
-    const liquido = bruto - descAfp - descSalud - descCesantia - impuesto;
+  const dAfp = bruto * afpPct;
+  const dSalud = bruto * saludPct;
+  const dCes = bruto * cesPct;
 
-    // Formato CLP
-    const fmt = (n) => n.toLocaleString("es-CL");
+  const imponible = bruto - dAfp - dSalud;
 
-    document.getElementById("sl-resultado").innerHTML = `
-        <p><strong>Sueldo Líquido: </strong>$${fmt(liquido)}</p>
-        <p>AFP: $${fmt(descAfp)}</p>
-        <p>Salud: $${fmt(descSalud)}</p>
-        <p>Seguro de Cesantía: $${fmt(descCesantia)}</p>
-        <p>Impuesto: $${fmt(impuesto)}</p>
-    `;
+  let impuesto = 0;
+  if (imponible > 2_052_302) impuesto = imponible * 0.08;
+  else if (imponible > 923_537) impuesto = imponible * 0.04;
+
+  const liquido = bruto - dAfp - dSalud - dCes - impuesto;
+
+  const f = n => n.toLocaleString("es-CL");
+
+  vAfp.textContent = "$" + f(dAfp);
+  vSalud.textContent = "$" + f(dSalud);
+  vCes.textContent = "$" + f(dCes);
+  vImp.textContent = "$" + f(impuesto);
+  vLiq.textContent = "$" + f(liquido);
+
+  row.style.opacity = 1;
 }
 
   // ---------- CALCULADORA UF ----------
