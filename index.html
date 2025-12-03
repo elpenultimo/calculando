@@ -1029,56 +1029,75 @@
   });
 
 // ---------- CALCULADORA SUELDO ----------
-function calcularSueldo() {
-  const bruto = Number(document.getElementById("sl-bruto").value);
-  const afpPct = Number(document.getElementById("sl-afp").value) / 100;
-  const saludPct = Number(document.getElementById("sl-salud").value) / 100;
-  const cesPct = Number(document.getElementById("sl-cesantia").value) / 100;
+  // ---------- CALCULADORA SUELDO ----------
 
-  const err = document.getElementById("sl-error");
-  const row = document.getElementById("sl-results");
+  const slBrutoInput = document.getElementById("sl-bruto");
+  const slAfpInput = document.getElementById("sl-afp");
+  const slSaludInput = document.getElementById("sl-salud");
+  const slCesInput = document.getElementById("sl-cesantia");
 
-  const vAfp = document.getElementById("sl-afp-val");
-  const vSalud = document.getElementById("sl-salud-val");
-  const vCes = document.getElementById("sl-cesantia-val");
-  const vImp = document.getElementById("sl-impuesto-val");
-  const vLiq = document.getElementById("sl-liquido-val");
+  function calcularSueldo() {
+    const bruto = Number(slBrutoInput.value);
+    const afpPct = Number(slAfpInput.value || 0) / 100;
+    const saludPct = Number(slSaludInput.value || 0) / 100;
+    const cesPct = Number(slCesInput.value || 0) / 100;
 
-  err.textContent = "";
+    const err = document.getElementById("sl-error");
+    const row = document.getElementById("sl-results");
 
-  if (!bruto || bruto <= 0) {
-    err.textContent = "Ingresa un sueldo bruto válido.";
-    row.style.opacity = 0.45;
-    return;
+    const vAfp = document.getElementById("sl-afp-val");
+    const vSalud = document.getElementById("sl-salud-val");
+    const vCes = document.getElementById("sl-cesantia-val");
+    const vImp = document.getElementById("sl-impuesto-val");
+    const vLiq = document.getElementById("sl-liquido-val");
+
+    err.textContent = "";
+
+    // Si no hay sueldo bruto válido, dejamos todo en cero
+    if (!bruto || bruto <= 0) {
+      row.style.opacity = 0.45;
+      vAfp.textContent = "$0";
+      vSalud.textContent = "$0";
+      vCes.textContent = "$0";
+      vImp.textContent = "$0";
+      vLiq.textContent = "$0";
+      return;
+    }
+
+    // Descuentos
+    const dAfp = bruto * afpPct;
+    const dSalud = bruto * saludPct;
+    const dCes = bruto * cesPct;
+
+    // Base imponible simple (bruto menos AFP y salud)
+    const imponible = bruto - dAfp - dSalud;
+
+    // Impuesto súper simplificado por tramos
+    let impuesto = 0;
+    if (imponible > 2052302) impuesto = imponible * 0.08;
+    else if (imponible > 923537) impuesto = imponible * 0.04;
+
+    const liquido = bruto - dAfp - dSalud - dCes - impuesto;
+
+    const f = n => n.toLocaleString("es-CL");
+
+    vAfp.textContent = "$" + f(Math.round(dAfp));
+    vSalud.textContent = "$" + f(Math.round(dSalud));
+    vCes.textContent = "$" + f(Math.round(dCes));
+    vImp.textContent = "$" + f(Math.round(impuesto));
+    vLiq.textContent = "$" + f(Math.round(liquido));
+
+    row.style.opacity = 1;
   }
 
-  const dAfp = bruto * afpPct;
-  const dSalud = bruto * saludPct;
-  const dCes = bruto * cesPct;
+  // Escuchar cambios en los 4 inputs
+  ["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", calcularSueldo);
+  });
 
-  const imponible = bruto - dAfp - dSalud;
-
-  let impuesto = 0;
-  if (imponible > 2_052_302) impuesto = imponible * 0.08;
-  else if (imponible > 923_537) impuesto = imponible * 0.04;
-
-  const liquido = bruto - dAfp - dSalud - dCes - impuesto;
-
-  const f = n => n.toLocaleString("es-CL");
-
-  vAfp.textContent = "$" + f(dAfp);
-  vSalud.textContent = "$" + f(dSalud);
-  vCes.textContent = "$" + f(dCes);
-  vImp.textContent = "$" + f(impuesto);
-  vLiq.textContent = "$" + f(liquido);
-
-  row.style.opacity = 1;
-}
-
-/* 🔥 AGREGA ESTO JUSTO AQUÍ ABAJO 🔥 */
-["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
-  document.getElementById(id).addEventListener("input", calcularSueldo);
-});
+  // Llamada inicial por si ya hay valores por defecto
+  calcularSueldo();
 
   // ---------- CALCULADORA UF ----------
 
