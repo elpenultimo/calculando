@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculando.cl</title>
+<script>
+  fetch("/index.html")
+    .then(r => r.text())
+    .then(html => {
+      document.documentElement.innerHTML = html;
+      const path = window.location.pathname;
+
+      if (path.includes("boleta")) {
+        document.querySelector("[data-tool='boleta']").click();
+      }
+    });
+</script>
+</head>
+<body></body>
+</html>
