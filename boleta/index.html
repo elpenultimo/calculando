@@ -977,7 +977,28 @@
       activateTool(tab.dataset.tool);
     });
   });
+  // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
+  (function selectToolFromPath() {
+    // Normalizamos el path (sin slash final)
+    let path = window.location.pathname || "/";
+    if (path.length > 1 && path.endsWith("/")) {
+      path = path.slice(0, -1);
+    }
 
+    let tool = "boleta"; // por defecto
+
+    if (path.endsWith("/boleta")) {
+      tool = "boleta";
+    } else if (path.endsWith("/sueldo-liquido")) {
+      tool = "sueldo";
+    } else if (path.endsWith("/uf")) {
+      tool = "uf";
+    } else if (path.endsWith("/iva")) {
+      tool = "iva";
+    }
+
+    activateTool(tool);
+  })();
   // ---------- UTILS ----------
 
   function formatCLP(value) {
