@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Tasas AFP 2026: tabla completa por administradora</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Tasas AFP 2026 por administradora: tabla y ejemplo simple</title>
 
-  <meta name="description" content="Revisa las tasas AFP 2026 por administradora: Habitat, Provida, Capital, Cuprum y UNO. Tabla actualizada y explicación simple de cómo se calcula el descuento.">
+  <meta name="description" content="Tasas AFP 2026 en Chile por administradora: incluye 10% obligatorio, comisión y SIS. Tabla referencial + ejemplo rápido para entender el descuento total.">
 
-  <link rel="stylesheet" href="/css/calculando.css">
+  <link rel="stylesheet" href="/css/calculando.css" />
 </head>
 
 <body>
 <main>
 
-  <!-- HEADER -->
   <header class="blog-header">
     <a href="/" class="logo-block">
       <div class="logo-mark">C</div>
@@ -23,24 +22,17 @@
       </div>
     </a>
 
-    <button id="themeToggle" class="theme-toggle">
+    <button id="themeToggle" class="theme-toggle" type="button">
       <span class="theme-toggle-icon" id="themeIcon">🌙</span>
       <span id="themeLabel">Modo oscuro</span>
     </button>
   </header>
 
-  <!-- BREADCRUMB -->
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Tasas AFP 2026</span>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
+  <section class="hero hero-compact">
     <h1>Tasas AFP 2026 por administradora</h1>
     <p>
-      Estas son las tasas previsionales 2026 por AFP, incluyendo comisión, SIS y el 10% obligatorio. Guía clara y explicada en simple.
+      Estas son las tasas previsionales 2026 por AFP, incluyendo comisión, SIS y el 10% obligatorio.
+      Guía clara y explicada en simple.
     </p>
     <div class="pill">
       <span class="pill-dot"></span>
@@ -48,25 +40,41 @@
     </div>
   </section>
 
-  <!-- CONTENIDO -->
+  <!-- CATEGORÍAS -->
+  <nav class="blog-categories">
+    <a href="/blog/sueldo-liquido-2026.html" class="chip">Sueldos</a>
+    <a href="/blog/impuesto-unico-2026.html" class="chip">Impuestos</a>
+    <a href="/blog/uf-2026.html" class="chip">UF</a>
+    <a href="/blog/boleta-vs-empresa-2026.html" class="chip">Boletas</a>
+    <a href="/blog/salud-2026.html" class="chip">Salud</a>
+    <a href="/blog/afp-2026.html" class="chip chip-active">AFP</a>
+    <a href="/blog/ipc-2026.html" class="chip">IPC</a>
+    <a href="/blog/ingreso-minimo-no-remuneracional-2026.html" class="chip">Beneficios</a>
+  </nav>
+
   <section class="shell" style="margin-top:16px;">
-    <article class="blog-article">
+    <article class="blog-article" style="font-size:13px; line-height:1.6; color:var(--muted); font-weight:400;">
 
-      <h2>¿Cómo se compone la tasa AFP?</h2>
-      <p>Incluye tres componentes:</p>
-
-      <ul>
-        <li>10% de ahorro obligatorio</li>
-        <li>Comisión de la AFP</li>
-        <li>SIS (Seguro de Invalidez y Sobrevivencia)</li>
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">
+        ¿Cómo se compone la tasa AFP?
+      </h2>
+      <p>
+        La tasa total AFP incluye tres componentes principales:
+      </p>
+      <ul style="margin-left:18px;">
+        <li><strong>10% de ahorro obligatorio</strong> (cotización legal).</li>
+        <li><strong>Comisión de la AFP</strong> por administrar tus fondos.</li>
+        <li><strong>SIS</strong> (Seguro de Invalidez y Sobrevivencia).</li>
       </ul>
+      <p>
+        La suma de estos tres elementos forma la <strong>tasa total AFP</strong> que ves en tu liquidación de sueldo.
+      </p>
 
-      <p>La suma forma la <strong>tasa total AFP</strong>.</p>
-
-      <h2>Tabla de tasas AFP 2026</h2>
-
-      <p class="highlight-box">
-        Reemplaza los valores cuando se publiquen oficialmente en enero 2026.
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tabla de tasas AFP 2026
+      </h2>
+      <p>
+        Reemplaza los valores entre corchetes cuando se publiquen oficialmente en enero 2026.
       </p>
 
       <table class="data-table">
@@ -75,26 +83,67 @@
           <th>Tasa total 2026</th>
           <th>Incluye</th>
         </tr>
-        <tr><td>AFP Habitat</td><td><strong>[TASA_HABITAT]</strong></td><td>10% + comisión + SIS</td></tr>
-        <tr><td>AFP Provida</td><td><strong>[TASA_PROVIDA]</strong></td><td>10% + comisión + SIS</td></tr>
-        <tr><td>AFP Capital</td><td><strong>[TASA_CAPITAL]</strong></td><td>10% + comisión + SIS</td></tr>
-        <tr><td>AFP Cuprum</td><td><strong>[TASA_CUPRUM]</strong></td><td>10% + comisión + SIS</td></tr>
-        <tr><td>AFP UNO</td><td><strong>[TASA_UNO]</strong></td><td>10% + comisión + SIS</td></tr>
+        <tr>
+          <td>AFP Habitat</td>
+          <td>[TASA_HABITAT]</td>
+          <td>10% + comisión + SIS</td>
+        </tr>
+        <tr>
+          <td>AFP Provida</td>
+          <td>[TASA_PROVIDA]</td>
+          <td>10% + comisión + SIS</td>
+        </tr>
+        <tr>
+          <td>AFP Capital</td>
+          <td>[TASA_CAPITAL]</td>
+          <td>10% + comisión + SIS</td>
+        </tr>
+        <tr>
+          <td>AFP Cuprum</td>
+          <td>[TASA_CUPRUM]</td>
+          <td>10% + comisión + SIS</td>
+        </tr>
+        <tr>
+          <td>AFP UNO</td>
+          <td>[TASA_UNO]</td>
+          <td>10% + comisión + SIS</td>
+        </tr>
       </table>
 
-      <h2>Ejemplo práctico</h2>
-      <p>Si tu sueldo es <strong>$1.000.000</strong> y tu AFP tiene una tasa de <strong>12%</strong>:</p>
-
-      <p class="highlight-box">
-        Descuento AFP = $1.000.000 × 0.12 = <strong>$120.000</strong>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo práctico
+      </h2>
+      <p>
+        Imaginemos un sueldo bruto de <strong>$1.000.000</strong> y una AFP con tasa total de <strong>12%</strong>.
+      </p>
+      <p>
+        El descuento previsional sería:
+      </p>
+      <ul style="margin-left:18px;">
+        <li><strong>Descuento AFP</strong> = $1.000.000 × 0,12 = <strong>$120.000</strong></li>
+      </ul>
+      <p>
+        De esos $120.000, una parte corresponde al 10% obligatorio y el resto a comisión + SIS.
       </p>
 
-      <h2>¿Quién tiene la tasa más baja?</h2>
-      <p>Generalmente AFP UNO, aunque depende de licitaciones anuales.</p>
-
-      <div class="cta-box">
-        <a href="/sueldo-liquido/" class="cta-button">Calcular sueldo líquido →</a>
+      <div style="margin-top:14px;">
+        Para ver cómo se combina este descuento con salud, cesantía e impuesto, puedes usar:
       </div>
+      <p style="margin-top:6px;">
+        👉 <a href="/sueldo-liquido/" style="color:var(--primary); text-decoration:underline;">
+          Calculadora de Sueldo Líquido 2026
+        </a>
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿Quién tiene la tasa más baja?
+      </h2>
+      <p>
+        Históricamente, <strong>AFP UNO</strong> suele tener una de las tasas más bajas,
+        pero esto puede cambiar con licitaciones y ajustes de comisiones.
+        Revisa siempre la información actualizada en la <em>Superintendencia de Pensiones</em>
+        antes de tomar una decisión.
+      </p>
 
     </article>
   </section>
@@ -105,28 +154,29 @@
 
 </main>
 
+<!-- JS tema claro/oscuro -->
 <script>
-  const themeToggle=document.getElementById("themeToggle");
-  const themeIcon=document.getElementById("themeIcon");
-  const themeLabel=document.getElementById("themeLabel");
-  const root=document.documentElement;
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
 
-  function applyTheme(t){
-    root.setAttribute("data-theme",t);
-    themeIcon.textContent=t==="dark"?"🌙":"☀️";
-    themeLabel.textContent=t==="dark"?"Modo oscuro":"Modo claro";
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
   }
 
-  (function(){
-    const saved=localStorage.getItem("calc-theme");
-    applyTheme(saved?saved:"light");
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
   })();
 
-  themeToggle.addEventListener("click",()=>{
-    const current=root.getAttribute("data-theme");
-    const next=current==="dark"?"light":"dark";
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
     applyTheme(next);
-    localStorage.setItem("calc-theme",next);
+    localStorage.setItem("calculando-theme", next);
   });
 </script>
 
