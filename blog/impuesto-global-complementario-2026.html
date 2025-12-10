@@ -12,99 +12,43 @@
   <!-- CSS global -->
   <link rel="stylesheet" href="/css/calculando.css" />
 
-  <!-- Estilos específicos blog -->
+  <!-- Mini menú estilo burbujas -->
   <style>
-    .blog-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
-    .blog-header a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .breadcrumb {
-      font-size: 12px;
-      margin: 4px 0 18px;
-      color: var(--muted);
-    }
-
-    .breadcrumb a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--primary);
-      text-decoration: underline;
-    }
-
-    .article-body {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .article-body h2 {
-      font-size: 16px;
-      margin: 22px 0 8px;
-      color: var(--text);
-    }
-
-    .article-body h2:first-of-type {
-      margin-top: 0;
-    }
-
-    .article-body ul {
-      margin-left: 18px;
-    }
-
-    .article-body table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 12px;
-    }
-
-    .article-body th,
-    .article-body td {
-      text-align: left;
-      padding: 6px 8px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
-    }
-
     .mini-blog-menu {
       margin: 14px 0 22px;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      font-size: 13px;
+      gap: 8px;
+      font-size: 12px;
     }
 
-    .mini-blog-menu .mini-link {
+    .mini-link {
       padding: 6px 12px;
-      border-radius: 20px;
-      background: var(--chip-bg);
+      border-radius: 999px;
       border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
       color: var(--muted);
       text-decoration: none;
-      transition: 0.2s ease-out;
+      transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
     }
 
-    .mini-blog-menu .mini-link.active {
-      background: var(--primary-soft);
+    .mini-link:hover {
       border-color: var(--primary);
       color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
+      transform: translateY(-0.5px);
     }
 
-    .mini-blog-menu .mini-link:hover {
-      transform: translateY(-1px);
+    .mini-link.active {
+      background: var(--primary-soft);
       color: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
     }
   </style>
 </head>
@@ -113,27 +57,20 @@
 <main>
 
   <!-- HEADER -->
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
         <span>Tus cálculos, sin enredos.</span>
       </div>
-    </a>
+    </div>
 
     <button id="themeToggle" class="theme-toggle" type="button">
       <span class="theme-toggle-icon" id="themeIcon">🌙</span>
       <span id="themeLabel">Modo oscuro</span>
     </button>
   </header>
-
-  <!-- BREADCRUMB -->
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Impuesto Global Complementario 2026</span>
-  </nav>
 
   <!-- HERO -->
   <section class="hero">
@@ -162,16 +99,18 @@
 
   <!-- ARTÍCULO -->
   <section class="shell" style="margin-top:16px;">
-    <article class="article-body">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
 
-      <h2>¿Qué es el Impuesto Global Complementario?</h2>
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">
+        ¿Qué es el Impuesto Global Complementario?
+      </h2>
       <p>
         Es un impuesto <strong>anual y progresivo</strong> que se calcula en la
         declaración de renta (formulario 22). A diferencia del Impuesto Único,
         que se descuenta mes a mes del sueldo, el Global Complementario considera
         <strong>todos tus ingresos del año</strong>, por ejemplo:
       </p>
-      <ul>
+      <ul style="margin-left:18px;">
         <li>Sueldos (trabajo dependiente).</li>
         <li>Boletas de honorarios.</li>
         <li>Arriendos.</li>
@@ -183,9 +122,11 @@
         la <strong>tabla de Impuesto Global Complementario 2026</strong>.
       </p>
 
-      <h2>¿Quiénes deben declarar Global Complementario?</h2>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿Quiénes deben declarar Global Complementario?
+      </h2>
       <p>De forma general, deben declarar quienes:</p>
-      <ul>
+      <ul style="margin-left:18px;">
         <li>
           Tienen ingresos anuales sobre el tramo exento (en UTA/UTM, según la tabla 2026).
         </li>
@@ -201,32 +142,69 @@
         y no pagar impuesto adicional.
       </p>
 
-      <h2>Tabla simplificada Impuesto Global Complementario 2026 (referencial)</h2>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tabla simplificada Impuesto Global Complementario 2026 (referencial)
+      </h2>
       <p>
         La tabla oficial se publica en UTA/UTM. Aquí va una versión
         <strong>simplificada y genérica</strong> solo para entender el concepto.
         Reemplaza los valores con la tabla oficial una vez que el SII la publique.
       </p>
 
-      <table>
+      <table
+        style="
+          width:100%;
+          border-collapse:collapse;
+          margin-top:10px;
+          font-size:12px;
+        "
+      >
         <thead>
           <tr>
-            <th>Tramo anual (en UTA/UTM)</th>
-            <th>Tasa marginal aprox.</th>
+            <th
+              style="
+                text-align:left;
+                padding:8px;
+                border-bottom:1px solid var(--border-subtle);
+              "
+            >
+              Tramo anual (en UTA/UTM)
+            </th>
+            <th
+              style="
+                text-align:left;
+                padding:8px;
+                border-bottom:1px solid var(--border-subtle);
+              "
+            >
+              Tasa marginal aprox.
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Hasta <strong>[TRAMO EXENTO]</strong></td>
-            <td>0% (exento)</td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Hasta <strong>[TRAMO EXENTO]</strong>
+            </td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              0% (exento)
+            </td>
           </tr>
           <tr>
-            <td>Sobre [TRAMO EXENTO] y hasta [TRAMO 2]</td>
-            <td>~4%–8% aprox.</td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Sobre [TRAMO EXENTO] y hasta [TRAMO 2]
+            </td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              ~4%–8% aprox.
+            </td>
           </tr>
           <tr>
-            <td>Tramos superiores</td>
-            <td>Tasa creciente (por ejemplo 13,5%, 23%, 30%, 35%, etc.)</td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Tramos superiores
+            </td>
+            <td style="padding:6px 8px;">
+              Tasa creciente (por ejemplo 13,5%, 23%, 30%, 35%, etc.)
+            </td>
           </tr>
         </tbody>
       </table>
@@ -236,11 +214,13 @@
         mientras más alta la renta, mayor la tasa marginal del tramo superior.
       </p>
 
-      <h2>¿Cómo se relaciona con el Impuesto Único y las retenciones?</h2>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿Cómo se relaciona con el Impuesto Único y las retenciones?
+      </h2>
       <p>
         Durante el año ya te retuvieron impuestos, por ejemplo:
       </p>
-      <ul>
+      <ul style="margin-left:18px;">
         <li>Impuesto Único en tu sueldo mensual.</li>
         <li>Retención del 13%–14,5% en boletas de honorarios.</li>
       </ul>
@@ -248,7 +228,7 @@
       <p>
         Al hacer la declaración anual:
       </p>
-      <ul>
+      <ul style="margin-left:18px;">
         <li>Se calcula tu impuesto Global Complementario total.</li>
         <li>Se descuentan las retenciones e impuestos que ya pagaste.</li>
       </ul>
@@ -259,11 +239,13 @@
         Si te retuvieron <strong>menos</strong> → debes pagar la diferencia.
       </p>
 
-      <h2>Ejemplo básico (muy simplificado)</h2>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo básico (muy simplificado)
+      </h2>
       <p>
         Imagina que en todo 2026 recibes:
       </p>
-      <ul>
+      <ul style="margin-left:18px;">
         <li>Sueldos imponibles que ya pagaron Impuesto Único.</li>
         <li>Boletas de honorarios con retención.</li>
       </ul>
@@ -271,7 +253,7 @@
         El SII suma esos ingresos, los lleva a UTA/UTM, aplica la tabla de Global
         Complementario 2026 y calcula tu impuesto anual total. Luego:
       </p>
-      <ul>
+      <ul style="margin-left:18px;">
         <li>Resta lo que ya pagaste por Impuesto Único.</li>
         <li>Resta las retenciones de boletas.</li>
       </ul>
@@ -281,8 +263,10 @@
         o <strong>“a pagar”</strong> (debes completar).
       </p>
 
-      <h2>Consejos prácticos para 2026</h2>
-      <ul>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Consejos prácticos para 2026
+      </h2>
+      <ul style="margin-left:18px;">
         <li>
           Revisa tus <strong>certificados de renta</strong> en el portal del SII
           antes de declarar.
