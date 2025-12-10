@@ -1,125 +1,261 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Impuesto Único a la Renta 2026: tabla, tramos y cálculo para sueldos</title>
+  <title>Impuesto Único 2026 en Chile: tabla, tramos y cálculo mensual | Calculando.cl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Guía simple del Impuesto Único 2026 en Chile: qué es, quiénes pagan, tabla de tramos y ejemplo de cálculo mensual para trabajadores dependientes."
+  />
 
-  <meta name="description" content="Tabla del Impuesto Único 2026 para trabajadores dependientes. Tramos, tasas, descuentos y ejemplos claros de cálculo mensual del impuesto. Actualizado 2026.">
-
-  <link rel="stylesheet" href="/css/calculando.css" />
+  <!-- CSS global -->
+  <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
 <main>
 
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
-        <span>Calculadoras online</span>
+        <span>Tus cálculos, sin enredos.</span>
       </div>
-    </a>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-toggle-icon">☀</span>
-      Tema
     </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Impuesto Único 2026</span>
-  </nav>
-
-  <article class="blog-article">
-    <h1>Impuesto Único 2026: tabla, tramos y cálculo mensual para trabajadores</h1>
-
-    <p class="intro">
-      El Impuesto Único es el impuesto mensual que se descuenta directamente del sueldo de los trabajadores dependientes en Chile.  
-      Aquí encontrarás la tabla oficial 2026, explicada de manera simple, junto a ejemplos reales.
-    </p>
-
-    <h2>¿Qué es el Impuesto Único?</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Impuesto Único 2026 en Chile: tabla, tramos y cálculo mensual</h1>
     <p>
-      Es un impuesto mensual que se aplica al sueldo imponible después de descontar AFP, salud y seguro de cesantía (si corresponde).  
-      Solo afecta a quienes superan cierto nivel de renta.
+      El Impuesto Único es el impuesto mensual que se descuenta directamente del sueldo
+      de muchos trabajadores dependientes en Chile. Aquí lo explicamos en simple:
+      qué es, quién lo paga y cómo se calcula usando la tabla 2026.
     </p>
-
-    <h2>Tabla de Impuesto Único 2026</h2>
-
-    <p>La tabla 2026 funciona igual que la del Impuesto Global, pero aplicada mes a mes en UTM mensuales:</p>
-
-    <table class="tax-table">
-      <tr><th>Renta mensual imponible (UTM)</th><th>Tasa</th></tr>
-      <tr><td>0 a 13,5 UTM</td><td>0%</td></tr>
-      <tr><td>13,5 a 30 UTM</td><td>4%</td></tr>
-      <tr><td>30 a 50 UTM</td><td>8%</td></tr>
-      <tr><td>50 a 70 UTM</td><td>13,5%</td></tr>
-      <tr><td>70 a 90 UTM</td><td>23%</td></tr>
-      <tr><td>90 a 120 UTM</td><td>30,4%</td></tr>
-      <tr><td>120 a 310 UTM</td><td>35%</td></tr>
-      <tr><td>Más de 310 UTM</td><td>40%</td></tr>
-    </table>
-
-    <h2>Ejemplo simple (2026)</h2>
-
-    <p>Supongamos un sueldo bruto mensual de <strong>$2.000.000</strong>.</p>
-
-    <h3>Paso 1: Descuentos previsionales</h3>
-    <ul>
-      <li>AFP: 11% aprox.</li>
-      <li>Salud: 7%</li>
-      <li>Seguro Cesantía: 0,6% aprox.</li>
-    </ul>
-
-    <p>Sueldo imponible final: aprox. <strong>$1.660.000</strong></p>
-
-    <h3>Paso 2: Convertimos a UTM mensual</h3>
-    <p>Con UTM referencial de $63.000:</p>
-    <p><strong>1.660.000 ÷ 63.000 = 26,3 UTM</strong></p>
-
-    <h3>Paso 3: Buscamos el tramo</h3>
-    <p>26,3 UTM cae en el tramo <strong>13,5 a 30 UTM</strong> → tasa del <strong>4%</strong></p>
-
-    <h3>Paso 4: Calculamos</h3>
-    <p>
-      26,3 UTM × 63.000 × 4%  
-      → <strong>$66.192</strong> aprox. de Impuesto Único.
-    </p>
-
-    <h2>¿Qué trabajadores pagan Impuesto Único?</h2>
-    <ul>
-      <li>Quienes ganan sobre 13,5 UTM imponibles al mes.</li>
-      <li>Trabajadores dependientes (con contrato).</li>
-      <li>Personas con sueldos altos y beneficios imponibles.</li>
-    </ul>
-
-    <h2>Conclusión</h2>
-    <p>
-      El Impuesto Único 2026 se calcula de forma progresiva y depende directamente de tu renta imponible mensual.
-      Conocer tu tramo te permite entender por qué tu sueldo líquido baja cuando recibes bonos, aguinaldos o aumentos.
-    </p>
-
-    <div class="cta-box">
-      <a href="/sueldo-liquido/" class="cta-button">Calcular sueldo líquido 2026 →</a>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Guía simple para sueldos mensuales
     </div>
+  </section>
 
-  </article>
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
+
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">
+        ¿Qué es el Impuesto Único?
+      </h2>
+      <p>
+        Es un impuesto mensual que se aplica al <strong>sueldo imponible</strong> de los
+        trabajadores dependientes. El sueldo imponible es el bruto después de descontar:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>AFP.</li>
+        <li>Salud (Fonasa o Isapre).</li>
+        <li>Seguro de cesantía (si corresponde).</li>
+      </ul>
+      <p>
+        Si tu renta imponible supera cierto tramo, se aplica una tasa según la
+        <strong>tabla de Impuesto Único 2026</strong> publicada por el SII.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿Quiénes pagan Impuesto Único en 2026?
+      </h2>
+      <p>En términos simples, pagan Impuesto Único quienes:</p>
+      <ul style="margin-left:18px;">
+        <li>Son trabajadores dependientes (con contrato de trabajo).</li>
+        <li>Reciben un sueldo imponible mensual sobre el tramo exento.</li>
+        <li>No están acogidos a regímenes especiales que cambien su forma de tributación.</li>
+      </ul>
+      <p>
+        Si tus ingresos son más bajos, puedes quedar <strong>exento</strong> y no se te
+        descuenta este impuesto.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tabla simplificada Impuesto Único 2026 (referencial)
+      </h2>
+      <p>
+        La tabla oficial se expresa en <strong>UTM</strong>. Aquí va una versión
+        <strong>simplificada y referencial</strong> para entender cómo funciona.
+        Reemplaza los montos apenas el SII publique la tabla oficial 2026.
+      </p>
+
+      <table
+        style="
+          width:100%;
+          border-collapse:collapse;
+          margin-top:10px;
+          font-size:12px;
+        "
+      >
+        <thead>
+          <tr>
+            <th
+              style="
+                text-align:left;
+                padding:8px;
+                border-bottom:1px solid var(--border-subtle);
+              "
+            >
+              Tramo (renta imponible mensual)
+            </th>
+            <th
+              style="
+                text-align:left;
+                padding:8px;
+                border-bottom:1px solid var(--border-subtle);
+              "
+            >
+              Tasa aproximada 2026
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Hasta aprox. <strong>[LÍMITE EXENTO]</strong>
+            </td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              0% (exento)
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Sobre [LÍMITE EXENTO] y hasta [TRAMO 2]
+            </td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              ~4% aprox.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Sobre [TRAMO 2]
+            </td>
+            <td style="padding:6px 8px;">
+              ~8% o más (según tabla oficial)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top:10px;">
+        🔎 <em>Importante:</em> estos valores son solo ilustrativos. Para cálculos
+        formales, revisa siempre la <strong>tabla oficial del SII 2026</strong>.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo rápido de cálculo 2026
+      </h2>
+      <p>
+        Supongamos un trabajador con:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>Sueldo bruto: <strong>$1.500.000</strong>.</li>
+        <li>AFP: 11,44%.</li>
+        <li>Salud: 7%.</li>
+        <li>Seguro de cesantía: 0,6%.</li>
+      </ul>
+
+      <p><strong>Paso 1: calcular descuentos previsionales</strong></p>
+      <ul style="margin-left:18px;">
+        <li>AFP ≈ $171.600</li>
+        <li>Salud ≈ $105.000</li>
+        <li>Cesantía ≈ $9.000</li>
+      </ul>
+
+      <p>
+        <strong>Paso 2: renta imponible</strong><br>
+        $1.500.000 − AFP − Salud = imponible (sin considerar cesantía para efecto de tramo).
+      </p>
+
+      <p>
+        <strong>Paso 3: aplicar tabla</strong><br>
+        Ese imponible se ubica en un tramo de la tabla 2026, al cual se le aplica
+        una tasa aproximada (por ejemplo 4% u 8%, según corresponda).
+      </p>
+
+      <p style="margin-top:6px;">
+        El resultado es el <strong>Impuesto Único mensual</strong>, que se descuenta
+        en tu liquidación de sueldo.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Relación con el Impuesto Global Complementario
+      </h2>
+      <p>
+        El Impuesto Único es un impuesto <strong>mensual y de carácter retenido</strong>.
+        Al final del año, todos tus ingresos (sueldos, boletas, arriendos, etc.) se
+        suman en la declaración anual y se comparan con la tabla del
+        <strong>Impuesto Global Complementario</strong>.
+      </p>
+      <p>
+        Lo que ya pagaste mes a mes como Impuesto Único se descuenta como crédito
+        en la declaración anual.
+      </p>
+
+      <div style="margin-top:20px; text-align:center;">
+        <a
+          href="/"
+          style="
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:999px;
+            background:var(--primary);
+            color:white;
+            font-size:13px;
+            text-decoration:none;
+            box-shadow:0 18px 32px rgba(15,23,42,0.6);
+          "
+        >
+          👉 Volver a las calculadoras
+        </a>
+      </div>
+
+    </article>
+  </section>
 
   <footer>
-    © 2026 Calculando.cl — Herramientas simples para Chile 🇨🇱
+    <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
+    relación con el SII ni con ningún organismo del Estado.
+    Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 
 </main>
 
+<!-- JS para tema claro/oscuro -->
 <script>
-function toggleTheme() {
-  const html = document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme") === "light" ? "dark" : "light");
-}
-</script>
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
 
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
+</script>
 </body>
 </html>
