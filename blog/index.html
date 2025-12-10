@@ -9,6 +9,54 @@
     content="Blog Calculando.cl 2026: guías simples sobre sueldo mínimo, sueldo líquido, impuestos, boletas de honorarios, UF, arriendos y reajustes en Chile."
   />
   <link rel="stylesheet" href="/css/calculando.css" />
+
+  <!-- ESTILOS ESPECÍFICOS DEL BLOG -->
+  <style>
+    .blog-nav {
+      margin-top: 16px;
+    }
+
+    .blog-list {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .blog-list-item-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .blog-list a {
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .blog-list a:hover .blog-list-item-title {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .blog-list-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .blog-section + .blog-section {
+      margin-top: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .blog-section .tool-title {
+        font-size: 13px;
+      }
+      .blog-section .tool-subtitle {
+        font-size: 11px;
+      }
+    }
+  </style>
 </head>
 <body>
 <main>
@@ -42,168 +90,347 @@
       <span class="pill-dot"></span>
       Guías 2026 · Pensadas para personas reales, no para abogados tributarios
     </div>
+
+    <!-- MINI NAV DE CATEGORÍAS -->
+    <nav class="tool-nav blog-nav">
+      <a href="#destacados" class="tool-tab tool-tab-active">Destacados</a>
+      <a href="#sueldos" class="tool-tab">Sueldos</a>
+      <a href="#impuestos" class="tool-tab">Impuestos y boletas</a>
+      <a href="#uf" class="tool-tab">UF & reajustes</a>
+      <a href="#afp-salud" class="tool-tab">AFP & salud</a>
+    </nav>
   </section>
 
   <!-- SECCIÓN DESTACADOS -->
-  <section class="shell">
+  <section class="shell blog-section" id="destacados">
     <div class="tool-title">Artículos destacados 2026</div>
     <div class="tool-subtitle">
       Un punto de partida si recién llegaste a Calculando.cl.
     </div>
-    <ul style="list-style:none;padding-left:0;display:grid;gap:10px;">
+    <ul class="blog-list">
       <li>
-        <a href="/blog/sueldo-minimo-2026.html"><strong>Sueldo mínimo 2026 en Chile: monto, fechas y tabla completa</strong></a>
-        <div class="tool-subtitle">Revisa los montos por tramo de edad y desde qué fecha aplica cada cambio.</div>
+        <a href="/blog/sueldo-minimo-2026.html">
+          <div class="blog-list-item-title">
+            Sueldo mínimo 2026 en Chile: monto, fechas y tabla completa
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Revisa los montos por tramo de edad y desde qué fecha aplica cada cambio.
+        </div>
       </li>
       <li>
-        <a href="/blog/sueldo-liquido-2026.html"><strong>Cómo calcular sueldo líquido 2026</strong></a>
-        <div class="tool-subtitle">AFP, salud, cesantía e impuesto único explicados en simple, con ejemplo numérico.</div>
+        <a href="/blog/sueldo-liquido-2026.html">
+          <div class="blog-list-item-title">
+            Cómo calcular sueldo líquido 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          AFP, salud, cesantía e impuesto único explicados en simple, con ejemplo numérico.
+        </div>
       </li>
       <li>
-        <a href="/blog/retencion-boleta-2026.html"><strong>Retención Boleta de Honorarios 2026</strong></a>
-        <div class="tool-subtitle">Tasa de retención, ejemplo rápido y acceso directo a la calculadora de boletas.</div>
+        <a href="/blog/retencion-boleta-2026.html">
+          <div class="blog-list-item-title">
+            Retención Boleta de Honorarios 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Tasa de retención, ejemplo rápido y acceso directo a la calculadora de boletas.
+        </div>
       </li>
       <li>
-        <a href="/blog/uf-2026.html"><strong>UF 2026: qué es y para qué se usa</strong></a>
-        <div class="tool-subtitle">Resumen de usos más comunes de la UF en créditos, arriendos y contratos.</div>
+        <a href="/blog/uf-2026.html">
+          <div class="blog-list-item-title">
+            UF 2026: qué es y para qué se usa
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Resumen de usos más comunes de la UF en créditos, arriendos y contratos.
+        </div>
+      </li>
+      <li>
+        <a href="/blog/boleta-vs-empresa-2026.html">
+          <div class="blog-list-item-title">
+            ¿Conviene emitir boleta o crear empresa en 2026?
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Comparación simple entre trabajar a honorarios o vía empresa.
+        </div>
       </li>
     </ul>
   </section>
 
   <!-- SUELDOS Y TRABAJO -->
-  <section class="shell">
+  <section class="shell blog-section" id="sueldos">
     <div class="tool-title">Sueldos y trabajo 2026</div>
-    <div class="tool-subtitle">Todo lo relacionado con tu sueldo, contratos y fin de la relación laboral.</div>
-    <ul style="list-style:none;padding-left:0;display:grid;gap:10px;">
+    <div class="tool-subtitle">
+      Todo lo relacionado con tu sueldo, contratos y fin de la relación laboral.
+    </div>
+    <ul class="blog-list">
       <li>
-        <a href="/blog/sueldo-minimo-2026.html"><strong>Sueldo mínimo 2026 en Chile</strong></a>
-        <div class="tool-subtitle">Montos, fechas de cambio y quiénes se benefician.</div>
+        <a href="/blog/sueldo-minimo-2026.html">
+          <div class="blog-list-item-title">Sueldo mínimo 2026 en Chile</div>
+        </a>
+        <div class="blog-list-desc">
+          Montos, fechas de cambio y quiénes se benefician.
+        </div>
       </li>
       <li>
-        <a href="/blog/sueldo-liquido-2026.html"><strong>Sueldo líquido 2026: cálculo paso a paso</strong></a>
-        <div class="tool-subtitle">Descuentos obligatorios y cómo estimar cuánto llega a tu cuenta.</div>
+        <a href="/blog/sueldo-liquido-2026.html">
+          <div class="blog-list-item-title">Sueldo líquido 2026: cálculo paso a paso</div>
+        </a>
+        <div class="blog-list-desc">
+          Descuentos obligatorios y cómo estimar cuánto llega a tu cuenta.
+        </div>
       </li>
       <li>
-        <a href="/blog/bruto-desde-liquido-2026.html"><strong>Cómo calcular el sueldo bruto desde el líquido 2026</strong></a>
-        <div class="tool-subtitle">Partes desde lo que quieres recibir y calculas el bruto aproximado.</div>
+        <a href="/blog/bruto-desde-liquido-2026.html">
+          <div class="blog-list-item-title">
+            Cómo calcular el sueldo bruto desde el líquido 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Partes desde lo que quieres recibir y calculas el bruto aproximado.
+        </div>
       </li>
       <li>
-        <a href="/blog/liquidacion-de-sueldo-2026.html"><strong>Liquidación de sueldo 2026 (explicado en simple)</strong></a>
-        <div class="tool-subtitle">Cómo leer cada parte de la liquidación: haberes, descuentos y sueldo líquido.</div>
+        <a href="/blog/liquidacion-de-sueldo-2026.html">
+          <div class="blog-list-item-title">
+            Liquidación de sueldo 2026 (explicado en simple)
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Cómo leer cada parte de la liquidación: haberes, descuentos y sueldo líquido.
+        </div>
       </li>
       <li>
-        <a href="/blog/gratificacion-legal-2026.html"><strong>Gratificación legal 2026</strong></a>
-        <div class="tool-subtitle">Fórmulas, tope legal y ejemplos numéricos.</div>
+        <a href="/blog/gratificacion-legal-2026.html">
+          <div class="blog-list-item-title">Gratificación legal 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Fórmulas, tope legal y ejemplos numéricos.
+        </div>
       </li>
       <li>
-        <a href="/blog/finiquito-2026.html"><strong>Cómo calcular finiquito 2026</strong></a>
-        <div class="tool-subtitle">Indemnización, vacaciones pendientes y otros conceptos clave.</div>
+        <a href="/blog/finiquito-2026.html">
+          <div class="blog-list-item-title">Cómo calcular finiquito 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Indemnización, vacaciones pendientes y otros conceptos clave.
+        </div>
       </li>
     </ul>
   </section>
 
   <!-- IMPUESTOS, BOLETAS Y EMPRESAS -->
-  <section class="shell">
+  <section class="shell blog-section" id="impuestos">
     <div class="tool-title">Impuestos, boletas y empresas 2026</div>
-    <div class="tool-subtitle">Impuesto Único, Global Complementario y dudas típicas de boletas.</div>
-    <ul style="list-style:none;padding-left:0;display:grid;gap:10px;">
+    <div class="tool-subtitle">
+      Impuesto Único, Global Complementario y dudas típicas de boletas.
+    </div>
+    <ul class="blog-list">
       <li>
-        <a href="/blog/impuesto-unico-2026.html"><strong>Impuesto Único a la Renta 2026 (sueldos)</strong></a>
-        <div class="tool-subtitle">Tabla de tramos y ejemplo con un sueldo real.</div>
+        <a href="/blog/impuesto-unico-2026.html">
+          <div class="blog-list-item-title">
+            Impuesto Único a la Renta 2026 (sueldos)
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Tabla de tramos y ejemplo con un sueldo real.
+        </div>
       </li>
       <li>
-        <a href="/blog/impuesto-global-complementario-2026.html"><strong>Impuesto Global Complementario 2026</strong></a>
-        <div class="tool-subtitle">Qué es, cuándo se paga y cómo se calcula en simple.</div>
+        <a href="/blog/impuesto-global-complementario-2026.html">
+          <div class="blog-list-item-title">
+            Impuesto Global Complementario 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Qué es, cuándo se paga y cómo se calcula en simple.
+        </div>
       </li>
       <li>
-        <a href="/blog/calcular-iva-2026.html"><strong>¿Cuánto pagaré de IVA en 2026?</strong></a>
-        <div class="tool-subtitle">Guía para principiantes y relación con la calculadora de IVA.</div>
+        <a href="/blog/calcular-iva-2026.html">
+          <div class="blog-list-item-title">¿Cuánto pagaré de IVA en 2026?</div>
+        </a>
+        <div class="blog-list-desc">
+          Guía para principiantes y relación con la calculadora de IVA.
+        </div>
       </li>
       <li>
-        <a href="/blog/iva-2026-guia.html"><strong>Guía rápida de IVA 2026</strong></a>
-        <div class="tool-subtitle">Neto, bruto e IVA explicado con ejemplos.</div>
+        <a href="/blog/iva-2026-guia.html">
+          <div class="blog-list-item-title">Guía rápida de IVA 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Neto, bruto e IVA explicado con ejemplos.
+        </div>
       </li>
       <li>
-        <a href="/blog/retencion-boleta-2026.html"><strong>Retención Boleta de Honorarios 2026</strong></a>
-        <div class="tool-subtitle">Tasa, ejemplo rápido y cómo usar la calculadora de boletas.</div>
+        <a href="/blog/retencion-boleta-2026.html">
+          <div class="blog-list-item-title">Retención Boleta de Honorarios 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Tasa, ejemplo rápido y cómo usar la calculadora de boletas.
+        </div>
       </li>
       <li>
-        <a href="/blog/cotizaciones-boletas-2026.html"><strong>Cotizaciones de boletas en 2026</strong></a>
-        <div class="tool-subtitle">Qué pasa con AFP y salud cuando emites boletas de honorarios.</div>
+        <a href="/blog/cotizaciones-boletas-2026.html">
+          <div class="blog-list-item-title">Cotizaciones de boletas en 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Qué pasa con AFP y salud cuando emites boletas de honorarios.
+        </div>
       </li>
       <li>
-        <a href="/blog/boleta-vs-empresa-2026.html"><strong>¿Conviene emitir boleta o crear empresa en 2026?</strong></a>
-        <div class="tool-subtitle">Comparación simple entre trabajar a honorarios o vía empresa.</div>
+        <a href="/blog/boleta-vs-empresa-2026.html">
+          <div class="blog-list-item-title">
+            ¿Conviene emitir boleta o crear empresa en 2026?
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Comparación simple entre trabajar a honorarios o vía empresa.
+        </div>
       </li>
       <li>
-        <a href="/blog/tope-imponible-2026.html"><strong>Tope imponible 2026</strong></a>
-        <div class="tool-subtitle">Hasta qué monto se descuentan AFP, salud y seguro de cesantía.</div>
+        <a href="/blog/tope-imponible-2026.html">
+          <div class="blog-list-item-title">Tope imponible 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Hasta qué monto se descuentan AFP, salud y seguro de cesantía.
+        </div>
       </li>
     </ul>
   </section>
 
   <!-- UF, ARRIENDOS Y REAJUSTES -->
-  <section class="shell">
+  <section class="shell blog-section" id="uf">
     <div class="tool-title">UF, arriendos y reajustes 2026</div>
-    <div class="tool-subtitle">Todo lo que se mueve con UF o IPC: arriendos, créditos y contratos.</div>
-    <ul style="list-style:none;padding-left:0;display:grid;gap:10px;">
+    <div class="tool-subtitle">
+      Todo lo que se mueve con UF o IPC: arriendos, créditos y contratos.
+    </div>
+    <ul class="blog-list">
       <li>
-        <a href="/blog/uf-2026.html"><strong>UF 2026: explicación general</strong></a>
-        <div class="tool-subtitle">Qué es la UF y para qué se usa en Chile.</div>
+        <a href="/blog/uf-2026.html">
+          <div class="blog-list-item-title">UF 2026: explicación general</div>
+        </a>
+        <div class="blog-list-desc">
+          Qué es la UF y para qué se usa en Chile.
+        </div>
       </li>
       <li>
-        <a href="/blog/proyeccion-uf-2026.html"><strong>¿Cuánto subirá la UF en 2026? (proyecciones simples)</strong></a>
-        <div class="tool-subtitle">Escenarios básicos para entender qué puede pasar con la UF.</div>
+        <a href="/blog/proyeccion-uf-2026.html">
+          <div class="blog-list-item-title">
+            ¿Cuánto subirá la UF en 2026? (proyecciones simples)
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Escenarios básicos para entender qué puede pasar con la UF.
+        </div>
       </li>
       <li>
-        <a href="/blog/reajuste-arriendo-uf-2026.html"><strong>Cómo calcular el reajuste de arriendo en UF 2026</strong></a>
-        <div class="tool-subtitle">Ejemplos para contratos mensuales y anuales.</div>
+        <a href="/blog/reajuste-arriendo-uf-2026.html">
+          <div class="blog-list-item-title">
+            Cómo calcular el reajuste de arriendo en UF 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Ejemplos para contratos mensuales y anuales.
+        </div>
       </li>
       <li>
-        <a href="/blog/ipc-2026.html"><strong>Inflación e IPC 2026: resumen</strong></a>
-        <div class="tool-subtitle">Qué es el IPC y cómo se relaciona con tus gastos.</div>
+        <a href="/blog/ipc-2026.html">
+          <div class="blog-list-item-title">
+            Inflación e IPC 2026: resumen
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Qué es el IPC y cómo se relaciona con tus gastos.
+        </div>
       </li>
       <li>
-        <a href="/blog/reajuste-ipc-2026.html"><strong>Cómo calcular el reajuste por IPC en 2026</strong></a>
-        <div class="tool-subtitle">Fórmula sencilla para actualizar deudas, contratos y pagos atrasados.</div>
+        <a href="/blog/reajuste-ipc-2026.html">
+          <div class="blog-list-item-title">
+            Cómo calcular el reajuste por IPC en 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Fórmula sencilla para actualizar deudas, contratos y pagos atrasados.
+        </div>
       </li>
     </ul>
   </section>
 
   <!-- AFP, SALUD Y BENEFICIOS -->
-  <section class="shell">
+  <section class="shell blog-section" id="afp-salud">
     <div class="tool-title">AFP, salud y beneficios 2026</div>
-    <div class="tool-subtitle">Descuentos previsionales y ayudas ligadas al ingreso mínimo.</div>
-    <ul style="list-style:none;padding-left:0;display:grid;gap:10px;">
+    <div class="tool-subtitle">
+      Descuentos previsionales y ayudas ligadas al ingreso mínimo.
+    </div>
+    <ul class="blog-list">
       <li>
-        <a href="/blog/afp-2026.html"><strong>Cotización AFP 2026: porcentajes y descuentos</strong></a>
-        <div class="tool-subtitle">Cómo se calcula el descuento previsional en tu liquidación.</div>
+        <a href="/blog/afp-2026.html">
+          <div class="blog-list-item-title">
+            Cotización AFP 2026: porcentajes y descuentos
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Cómo se calcula el descuento previsional en tu liquidación.
+        </div>
       </li>
       <li>
-        <a href="/blog/tasas-afp-2026.html"><strong>Tasas AFP 2026 por administradora</strong></a>
-        <div class="tool-subtitle">Tabla con las tasas totales estimadas de cada AFP.</div>
+        <a href="/blog/tasas-afp-2026.html">
+          <div class="blog-list-item-title">
+            Tasas AFP 2026 por administradora
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Tabla con las tasas totales estimadas de cada AFP.
+        </div>
       </li>
       <li>
-        <a href="/blog/salud-2026.html"><strong>Cotización de salud 2026: Fonasa e Isapre</strong></a>
-        <div class="tool-subtitle">Cómo se calcula el 7% y qué pasa si tu plan Isapre cuesta más.</div>
+        <a href="/blog/salud-2026.html">
+          <div class="blog-list-item-title">
+            Cotización de salud 2026: Fonasa e Isapre
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Cómo se calcula el 7% y qué pasa si tu plan Isapre cuesta más.
+        </div>
       </li>
       <li>
-        <a href="/blog/reajuste-isapres-2026.html"><strong>Reajuste de planes de Isapres 2026</strong></a>
-        <div class="tool-subtitle">Qué significan los porcentajes de alza y cómo te afectan.</div>
+        <a href="/blog/reajuste-isapres-2026.html">
+          <div class="blog-list-item-title">
+            Reajuste de planes de Isapres 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Qué significan los porcentajes de alza y cómo te afectan.
+        </div>
       </li>
       <li>
-        <a href="/blog/asignacion-familiar-2026.html"><strong>Asignación familiar 2026</strong></a>
-        <div class="tool-subtitle">Tramos, montos por carga y requisitos básicos.</div>
+        <a href="/blog/asignacion-familiar-2026.html">
+          <div class="blog-list-item-title">Asignación familiar 2026</div>
+        </a>
+        <div class="blog-list-desc">
+          Tramos, montos por carga y requisitos básicos.
+        </div>
       </li>
       <li>
-        <a href="/blog/ingreso-minimo-no-remuneracional-2026.html"><strong>Ingreso mínimo no remuneracional 2026</strong></a>
-        <div class="tool-subtitle">Valor de referencia usado en subsidios y beneficios estatales.</div>
+        <a href="/blog/ingreso-minimo-no-remuneracional-2026.html">
+          <div class="blog-list-item-title">
+            Ingreso mínimo no remuneracional 2026
+          </div>
+        </a>
+        <div class="blog-list-desc">
+          Valor de referencia usado en subsidios y beneficios estatales.
+        </div>
       </li>
     </ul>
   </section>
 
   <footer style="margin-top:24px;font-size:11px;color:var(--muted);text-align:center;">
-    <strong>Calculando.cl</strong> es un proyecto independiente.  
+    <strong>Calculando.cl</strong> es un proyecto independiente.<br />
     Verifica siempre montos y tasas oficiales en las instituciones correspondientes.
   </footer>
 </main>
