@@ -1,109 +1,169 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Cotizaciones obligatorias Boletas 2026</title>
-
-  <meta name="description" content="Cotizaciones obligatorias para trabajadores a honorarios en 2026. Retención, AFP, Salud, Seguro Laboral y tabla completa según ingresos.">
-
+  <meta charset="UTF-8" />
+  <title>Cotizaciones obligatorias Boletas 2026: guía simple | Calculando.cl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Cotizaciones para trabajadores a honorarios 2026: retención, AFP, salud, SIS, seguro laboral y tabla resumida para entender cuánto se descuenta."
+  />
   <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
 <main>
 
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
-      <div class="logo-text"><strong>Calculando.cl</strong><span>Calculadoras online</span></div>
-    </a>
-    <div class="theme-toggle" onclick="toggleTheme()">☀ Tema</div>
+      <div class="logo-text">
+        <strong>Calculando.cl</strong>
+        <span>Tus cálculos, sin enredos.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Cotizaciones Boletas 2026</span>
-  </nav>
-
-  <article class="blog-article">
-
+  <!-- HERO -->
+  <section class="hero">
     <h1>Cotizaciones obligatorias para boletas en 2026</h1>
-
-    <p class="intro">
-      Desde hace algunos años, los trabajadores a honorarios deben cotizar obligatoriamente.  
-      Aquí te mostramos cuánto se descuenta en 2026, cómo funciona la retención y qué porcentaje va a AFP, Salud y Seguro Laboral.
-    </p>
-
-    <h2>Retención 2026</h2>
-
-    <p class="highlight-box">
-      <strong>Retención boletas 2026: 13,25%</strong>
-    </p>
-
     <p>
-      Este monto va al SII y se usa para cubrir tus cotizaciones previsionales y de salud.
+      Si trabajas a honorarios, tus boletas generan retención que se transforma en
+      cotizaciones previsionales. Aquí te explicamos cuánto se descuenta en 2026 y
+      cómo se distribuye entre AFP, Salud y seguros obligatorios.
     </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Guía oficial para honorarios
+    </div>
+  </section>
 
-    <h2>¿Qué cotizaciones se pagan con esa retención?</h2>
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
 
-    <ul>
-      <li>AFP (pensión)</li>
-      <li>Salud (Fonasa o Isapre)</li>
-      <li>Seguro de Invalidez y Sobrevivencia (SIS)</li>
-      <li>Seguro Laboral</li>
-    </ul>
+      <h2 style="font-size:16px; color:var(--text); margin-bottom:8px;">Retención 2026</h2>
+      <p class="highlight-box">
+        <strong>Retención boletas 2026: 13,25%</strong>
+      </p>
+      <p>
+        Esta retención se descuenta automáticamente y va al SII. Luego, durante la
+        Operación Renta, se usa para cubrir tus cotizaciones previsionales y de salud.
+      </p>
 
-    <h2>Tabla resumida 2026</h2>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">¿Qué cotizaciones cubre la retención?</h2>
+      <ul style="margin-left:18px;">
+        <li>AFP (pensión).</li>
+        <li>Salud (Fonasa o Isapre).</li>
+        <li>Seguro de Invalidez y Sobrevivencia (SIS).</li>
+        <li>Seguro Laboral (accidentes).</li>
+      </ul>
 
-    <table class="data-table">
-      <tr><th>Concepto</th><th>Porcentaje</th></tr>
-      <tr><td>Retención obligatoria</td><td>13,25%</td></tr>
-      <tr><td>Cotizaciones previsionales</td><td>10% – 11%</td></tr>
-      <tr><td>Cotización Salud</td><td>7% (tope imponible)</td></tr>
-      <tr><td>SIS</td><td>1,41% aprox.</td></tr>
-      <tr><td>Seguro Laboral</td><td>0,93% aprox.</td></tr>
-    </table>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">Tabla resumida 2026</h2>
 
-    <h2>Ejemplo práctico</h2>
-    <p>Boleta emitida: <strong>$1.000.000</strong></p>
-    <ul>
-      <li>Retención (13,25%): $132.500</li>
-      <li>Tu retención se usa para pagar las cotizaciones</li>
-      <li>Si falta dinero, lo cubres en la Operación Renta</li>
-    </ul>
+      <table
+        style="
+          width:100%;
+          border-collapse:collapse;
+          margin-top:10px;
+          font-size:12px;
+        "
+      >
+        <tbody>
+          <tr><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border-subtle);">Concepto</th>
+              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border-subtle);">Porcentaje</th></tr>
 
-    <h2>¿Cómo saber si te alcanzará la retención?</h2>
-    <p>
-      Si emites pocas boletas o tienes ingresos irregulares, tu retención podría no cubrir el total.  
-      Esto genera un cobro adicional en abril.
-    </p>
+          <tr><td style="padding:6px 8px;">Retención obligatoria</td><td style="padding:6px 8px;">13,25%</td></tr>
+          <tr><td style="padding:6px 8px;">Cotización previsional AFP</td><td style="padding:6px 8px;">10% – 11%</td></tr>
+          <tr><td style="padding:6px 8px;">Cotización Salud</td><td style="padding:6px 8px;">7% (tope imponible)</td></tr>
+          <tr><td style="padding:6px 8px;">Seguro SIS</td><td style="padding:6px 8px;">1,41% aprox.</td></tr>
+          <tr><td style="padding:6px 8px;">Seguro Laboral</td><td style="padding:6px 8px;">0,93% aprox.</td></tr>
+        </tbody>
+      </table>
 
-    <p>Para un cálculo rápido, usa tu monto total anual y aplica la retención del 13,25%.</p>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">Ejemplo práctico</h2>
+      <p>Boleta emitida: <strong>$1.000.000</strong></p>
+      <ul style="margin-left:18px;">
+        <li>Retención (13,25%): $132.500</li>
+        <li>Esa retención se usa para pagar tus cotizaciones.</li>
+        <li>Si no alcanza, pagas la diferencia en abril.</li>
+      </ul>
 
-    <h2>¿Quiénes deben cotizar?</h2>
-    <ul>
-      <li>Todos los trabajadores a honorarios</li>
-      <li>Quienes emitan boletas electrónicas</li>
-      <li>Excepción: adultos mayores o personas que acrediten invalidez</li>
-    </ul>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">¿Cómo saber si te alcanzará?</h2>
+      <p>
+        Si emites pocas boletas o tus ingresos son irregulares, puede ocurrir que tu
+        retención no sea suficiente para cubrir todas las cotizaciones. En ese caso,
+        se genera un cobro adicional en Operación Renta.
+      </p>
 
-    <p class="highlight-box">
-      Mientras más boletas emitas, mayor será tu base de cálculo previsional.
-    </p>
+      <p>
+        Como regla general: <strong>mientras más boletas emitas, mayor será tu base imponible</strong>
+        para cotizar.
+      </p>
 
-  </article>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">¿Quiénes deben cotizar?</h2>
+      <ul style="margin-left:18px;">
+        <li>Todos los trabajadores a honorarios.</li>
+        <li>Quienes emiten boletas electrónicas.</li>
+        <li>Excepto adultos mayores y personas con invalidez acreditada.</li>
+      </ul>
 
-  <footer>© 2026 Calculando.cl — Explicaciones simples para honorarios</footer>
+      <div style="margin-top:20px; text-align:center;">
+        <a
+          href="/boleta/"
+          style="
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:999px;
+            background:var(--primary);
+            color:white;
+            font-size:13px;
+            text-decoration:none;
+            box-shadow:0 18px 32px rgba(15,23,42,0.6);
+          "
+        >
+          👉 Calculadora de Boletas 2026
+        </a>
+      </div>
+
+    </article>
+  </section>
+
+  <footer>
+    © 2026 Calculando.cl — Explicaciones simples para honorarios
+  </footer>
 
 </main>
 
 <script>
-function toggleTheme(){
-  const html=document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme")==="light"?"dark":"light");
-}
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
+
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
 </script>
 
 </body>
