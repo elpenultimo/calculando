@@ -554,4 +554,35 @@
     footer strong {
       font-weight: 600;
     }
-  
+  /* --------- BLOG: TIPOGRAFÍA SUAVE --------- */
+
+/* Texto base de los artículos */
+.blog-article,
+.blog-article p,
+.blog-article li,
+.blog-article ul,
+.blog-article table,
+.blog-article td,
+.blog-article th,
+.article-body,
+.article-body p,
+.article-body li,
+.article-body ul,
+.article-body table,
+.article-body td,
+.article-body th {
+  font-weight: 400;
+}
+
+/* Títulos dentro del contenido del blog */
+.blog-article h1,
+.article-body h1 {
+  font-weight: 600;
+}
+
+.blog-article h2,
+.blog-article h3,
+.article-body h2,
+.article-body h3 {
+  font-weight: 600;
+}
