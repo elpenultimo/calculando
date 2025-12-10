@@ -1,140 +1,125 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>UF 2026: Valor, cálculo, uso y proyecciones en Chile</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UF 2026: Valor, cálculo, uso y proyecciones en Chile | Calculando.cl</title>
   <meta name="description" content="UF 2026 en Chile: qué es, para qué sirve, cómo se calcula, proyecciones anuales y ejemplos prácticos para créditos, arriendos y reajustes automáticos. Actualizado 2026.">
-
-  <link rel="stylesheet" href="/css/calculando.css" />
+  <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
 <main>
 
-  <!-- HEADER DEL ARTÍCULO -->
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
-        <span>Calculadoras online</span>
+        <span>Tus cálculos, sin enredos.</span>
       </div>
-    </a>
-
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-toggle-icon">☀</span>
-      Tema
     </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
-  <!-- BREADCRUMB -->
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>UF 2026</span>
-  </nav>
-
-  <!-- CONTENIDO -->
-  <article class="blog-article">
-    <h1>UF 2026: valor, cálculo, uso y proyecciones en Chile</h1>
-
-    <p class="intro">
-      La Unidad de Fomento (UF) seguirá siendo en 2026 una de las variables económicas más importantes en Chile. Se utiliza para créditos hipotecarios, arriendos, seguros, multas y contratos de largo plazo, ya que se reajusta de acuerdo a la inflación.  
-      En este artículo encontrarás una explicación simple, con ejemplos actualizados para este año.
-    </p>
-
-    <h2>¿Qué es la UF?</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>UF 2026: valor, cálculo, uso y proyecciones</h1>
     <p>
-      La UF es una unidad de valor reajustable según la inflación. Su objetivo es mantener el poder adquisitivo estable en el tiempo, evitando que contratos y deudas pierdan valor real.
+      La Unidad de Fomento seguirá siendo clave en 2026 para créditos hipotecarios, arriendos, seguros,
+      contratos y reajustes ligados al IPC. Aquí tienes una explicación clara y actualizada.
     </p>
-
-    <ul>
-      <li><strong>Se reajusta todos los días</strong> según el IPC.</li>
-      <li><strong>No es una moneda</strong>, sino una unidad contable.</li>
-      <li>La publica diariamente el Banco Central.</li>
-    </ul>
-
-    <h2>¿Para qué se usa la UF en 2026?</h2>
-    <p>Las principales áreas donde encontrarás valores expresados en UF son:</p>
-
-    <ul>
-      <li>Créditos hipotecarios</li>
-      <li>Arriendos de viviendas</li>
-      <li>Planes de salud (Isapres)</li>
-      <li>Seguros de vida y generales</li>
-      <li>Multas y compensaciones</li>
-      <li>Presupuestos de proyectos y contratos de largo plazo</li>
-    </ul>
-
-    <h2>¿Cómo se calcula la UF?</h2>
-    <p>
-      La UF se calcula a partir de la variación mensual del IPC. Cada día dentro del mes se publica un valor interpolado entre la UF del día 9 del mes anterior y la UF del día 9 del mes actual.
-    </p>
-
-    <div class="highlight-box">
-      <p><strong>Fórmula simplificada:</strong>  
-      Se toman los valores del día 9 de cada mes, se calcula el reajuste según IPC y luego se linealiza para obtener los valores diarios.</p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Explicación simple para Chile
     </div>
+  </section>
 
-    <h2>Valor de la UF en 2026</h2>
-    <p>
-      A inicios de 2026, el valor de la UF bordea los <strong>$36.000 – $37.000</strong> dependiendo del reajuste final determinado por el IPC de diciembre del 2025.
-      Este rango se ajustará tan pronto estén las cifras oficiales.
-    </p>
+  <!-- CATEGORÍAS -->
+  <div class="blog-categories">
+    <a href="/blog/?cat=uf">UF</a>
+    <a href="/blog/?cat=ipc">IPC</a>
+    <a href="/blog/?cat=arriendos">Arriendos</a>
+    <a href="/blog/?cat=hipotecarios">Créditos</a>
+    <a href="/blog/?cat=finanzas">Finanzas</a>
+  </div>
 
-    <p>
-      Cuando el IPC sube, la UF también lo hace. Cuando el IPC baja o se mantiene estable, la UF sube menos o se estabiliza.
-    </p>
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
 
-    <h2>Ejemplos prácticos en UF para 2026</h2>
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">¿Qué es la UF?</h2>
+      <p>
+        Es una unidad reajustable según la inflación. No es una moneda, pero se usa como referencia estable
+        para contratos de mediano y largo plazo.
+      </p>
 
-    <h3>1) Crédito hipotecario</h3>
-    <p>Si tienes un dividendo de 30 UF y la UF está a $36.500:</p>
-    <p><strong>30 × 36.500 = $1.095.000</strong></p>
+      <ul style="margin-left:18px;">
+        <li>Se reajusta a diario según el IPC.</li>
+        <li>La publica el Banco Central.</li>
+        <li>Protege el valor real de pagos y contratos.</li>
+      </ul>
 
-    <h3>2) Arriendo</h3>
-    <p>Arriendo de 12 UF al mes →</p>
-    <p><strong>12 × 36.500 = $438.000</strong></p>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">¿Para qué se usa en 2026?</h2>
 
-    <h3>3) Presupuesto en UF</h3>
-    <p>Proyecto de 150 UF:</p>
-    <p><strong>150 × 36.500 = $5.475.000</strong></p>
+      <ul style="margin-left:18px;">
+        <li>Créditos hipotecarios</li>
+        <li>Arriendos</li>
+        <li>Planes de salud (Isapres)</li>
+        <li>Seguros</li>
+        <li>Multas y compensaciones</li>
+        <li>Presupuestos y contratos indexados</li>
+      </ul>
 
-    <h2>Proyección de la UF para 2026</h2>
-    <p>
-      Si la inflación durante 2026 se mantiene dentro de la meta del Banco Central (3% anual), la UF debería tener aumentos moderados y estables.  
-      Sin embargo, shocks externos o variaciones fuertes del dólar pueden influir en el IPC y, por consecuencia, en la UF.
-    </p>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">¿Cómo se calcula la UF?</h2>
+      <p>
+        Se actualiza según la variación mensual del IPC y se linealiza a valores diarios entre el día 9 del mes anterior
+        y el día 9 del mes actual.
+      </p>
 
-    <h2>¿Conviene ahorrar o endeudarse en UF en 2026?</h2>
+      <div class="highlight-box">
+        <strong>Fórmula simple:</strong> La UF sube lo mismo que la inflación (IPC).
+      </div>
 
-    <h3>Ventajas</h3>
-    <ul>
-      <li>Protege tu poder adquisitivo.</li>
-      <li>Ideal para contratos a largo plazo.</li>
-      <li>Evita que la inflación se “coma” tu dinero.</li>
-    </ul>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">Valor estimado para 2026</h2>
+      <p>
+        A comienzos de 2026, el valor ronda entre <strong>$36.000 – $37.000</strong>, dependiendo del IPC de fin de año.
+      </p>
 
-    <h3>Desventajas</h3>
-    <ul>
-      <li>Si la UF sube mucho, los pagos mensuales también lo hacen.</li>
-      <li>No sirve para compras cotidianas.</li>
-    </ul>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">Ejemplos prácticos</h2>
 
-    <h2>Conclusión</h2>
-    <p>
-      La UF seguirá teniendo un rol clave en la economía chilena durante 2026. Entender su funcionamiento te permite
-      tomar mejores decisiones en créditos, arriendos, contratos y planificación financiera.
-      Puedes revisar el valor actualizado cada día utilizando nuestra calculadora de UF.
-    </p>
+      <p><strong>1) Crédito hipotecario</strong></p>
+      <p>30 UF × $36.500 = <strong>$1.095.000</strong></p>
 
-    <div class="cta-box">
-      <a href="/uf/" class="cta-button">Ver calculadora UF 2026 →</a>
-    </div>
+      <p style="margin-top:14px;"><strong>2) Arriendo</strong></p>
+      <p>12 UF × $36.500 = <strong>$438.000</strong></p>
 
-  </article>
+      <p style="margin-top:14px;"><strong>3) Proyecto en UF</strong></p>
+      <p>150 UF × $36.500 = <strong>$5.475.000</strong></p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">Proyección 2026</h2>
+      <p>
+        Con inflación cercana a 3%, la UF debería subir de forma moderada. Shocks externos o variaciones del dólar
+        pueden modificar ese comportamiento.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">Conclusión</h2>
+      <p>
+        La UF seguirá siendo un indicador esencial. Entender cómo funciona te ayuda a tomar mejores decisiones
+        en créditos, arriendos y contratos indexados.
+      </p>
+
+      <div style="margin-top:20px; text-align:center;">
+        <a href="/uf/" class="cta-button">Ver calculadora UF 2026 →</a>
+      </div>
+
+    </article>
+  </section>
 
   <footer>
     © 2026 Calculando.cl — Herramientas simples para Chile 🇨🇱
@@ -142,12 +127,30 @@
 
 </main>
 
+<!-- JS TEMA -->
 <script>
-function toggleTheme() {
-  const html = document.documentElement;
-  const current = html.getAttribute("data-theme");
-  html.setAttribute("data-theme", current === "light" ? "dark" : "light");
-}
+  const t = document.getElementById("themeToggle");
+  const i = document.getElementById("themeIcon");
+  const l = document.getElementById("themeLabel");
+  const r = document.documentElement;
+
+  function applyTheme(th){
+    r.setAttribute("data-theme", th);
+    i.textContent = th === "dark" ? "🌙" : "☀️";
+    l.textContent = th === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function init(){
+    const s = localStorage.getItem("calculando-theme");
+    applyTheme(s === "light" ? "light" : "dark");
+  })();
+
+  t.addEventListener("click", () => {
+    const c = r.getAttribute("data-theme") || "dark";
+    const n = c === "dark" ? "light" : "dark";
+    applyTheme(n);
+    localStorage.setItem("calculando-theme", n);
+  });
 </script>
 
 </body>
