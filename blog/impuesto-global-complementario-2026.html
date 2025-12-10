@@ -10,47 +10,7 @@
   />
 
   <!-- CSS global -->
-  <link rel="stylesheet" href="/css/calculando.css" />
-
-  <!-- Mini menú estilo burbujas -->
-  <style>
-    .mini-blog-menu {
-      margin: 14px 0 22px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 12px;
-    }
-
-    .mini-link {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      background: var(--chip-bg);
-      color: var(--muted);
-      text-decoration: none;
-      transition:
-        background var(--transition-fast),
-        color var(--transition-fast),
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast),
-        transform var(--transition-fast);
-    }
-
-    .mini-link:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
-      transform: translateY(-0.5px);
-    }
-
-    .mini-link.active {
-      background: var(--primary-soft);
-      color: var(--primary);
-      border-color: var(--primary);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.45);
-    }
-  </style>
+  <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
@@ -85,8 +45,8 @@
       Actualizado 2026 · Guía para declaración anual
     </div>
 
-    <!-- MINI MENÚ DEL BLOG -->
-    <nav class="mini-blog-menu">
+    <!-- MINI MENÚ DEL BLOG (igual que en Sueldo Líquido) -->
+    <nav class="mini-blog-menu" style="margin:14px 0 22px; display:flex; flex-wrap:wrap; gap:10px; font-size:13px;">
       <a href="/blog/" class="mini-link">Destacados</a>
       <a href="/blog/#sueldos" class="mini-link">Sueldos</a>
       <a href="/blog/#impuestos" class="mini-link active">Impuestos y boletas</a>
@@ -95,6 +55,27 @@
       <a href="/blog/#beneficios" class="mini-link">Beneficios</a>
       <a href="/" class="mini-link" style="opacity:.85;">← Volver a calculadoras</a>
     </nav>
+
+    <style>
+      .mini-blog-menu .mini-link {
+        padding:6px 12px;
+        border-radius:20px;
+        background:var(--chip-bg);
+        border:1px solid var(--border-subtle);
+        color:var(--muted);
+        text-decoration:none;
+        transition:0.2s;
+      }
+      .mini-blog-menu .mini-link.active {
+        background:var(--primary-soft);
+        border-color:var(--primary);
+        color:var(--primary);
+      }
+      .mini-blog-menu .mini-link:hover {
+        transform:translateY(-1px);
+        color:var(--primary);
+      }
+    </style>
   </section>
 
   <!-- ARTÍCULO -->
