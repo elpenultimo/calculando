@@ -9,109 +9,150 @@
 
   <link rel="stylesheet" href="/css/calculando.css">
 </head>
-
 <body>
 <main>
 
-<header class="blog-header">
-  <a href="/" class="logo-block">
-    <div class="logo-mark">C</div>
-    <div class="logo-text"><strong>Calculando.cl</strong><span>Calculadoras online</span></div>
-  </a>
-  <div class="theme-toggle" onclick="toggleTheme()">☀ Tema</div>
-</header>
+  <!-- HEADER -->
+  <header class="blog-header">
+    <a href="/" class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.cl</strong>
+        <span>Calculadoras online</span>
+      </div>
+    </a>
 
-<nav class="breadcrumb">
-  <a href="/">Inicio</a> /
-  <a href="/blog/">Blog</a> /
-  <span>Asignación Familiar 2026</span>
-</nav>
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+  </header>
 
-<article class="blog-article">
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb">
+    <a href="/">Inicio</a> /
+    <a href="/blog/">Blog</a> /
+    <span>Asignación familiar 2026</span>
+  </nav>
 
-  <h1>Asignación familiar 2026: tramos y montos actualizados</h1>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Asignación familiar 2026: tramos y montos actualizados</h1>
+    <p>
+      La asignación familiar es un beneficio estatal que ayuda a trabajadores, pensionados
+      y personas con cargas acreditadas. Aquí encuentras los <strong>tramos y montos 2026</strong>
+      explicados en simple para trabajadores y empleadores.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Beneficio por carga familiar
+    </div>
+  </section>
 
-  <p class="intro">
-    La asignación familiar es un beneficio estatal que ayuda a trabajadores, pensionados y personas con cargas familiares acreditadas.  
-    Aquí tienes los <strong>tramos y montos de 2026</strong>, explicados de forma clara para trabajadores y empleadores.
-  </p>
+  <!-- ARTÍCULO -->
+  <section class="shell">
+    <article class="article-body">
 
-  <h2>¿Qué es la asignación familiar?</h2>
-  <p>
-    Es un aporte mensual entregado por carga familiar acreditada (hijos, cónyuge, madre del hijo, entre otros).  
-    El monto depende del tramo de ingresos del trabajador.
-  </p>
+      <h2>¿Qué es la asignación familiar?</h2>
+      <p>
+        Es un aporte mensual entregado por cada carga familiar acreditada
+        (hijos, cónyuge, madre del hijo, entre otros). El monto depende del tramo
+        de ingresos del trabajador o pensionado.
+      </p>
 
-  <h2>Montos asignación familiar 2026</h2>
+      <h2>Montos asignación familiar 2026</h2>
 
-  <p class="highlight-box">
-    Estos valores deben actualizarse cuando el gobierno publique los montos oficiales.
-  </p>
+      <p class="highlight-box">
+        Estos valores deben actualizarse cuando el gobierno publique los montos oficiales.
+      </p>
 
-  <table class="data-table">
-    <tr>
-      <th>Tramo</th>
-      <th>Renta mensual</th>
-      <th>Monto asignación</th>
-    </tr>
-    <tr>
-      <td>A</td>
-      <td>Hasta $[LIMITE_TRAMO_A]</td>
-      <td><strong>$[MONTO_TRAMO_A]</strong> por carga</td>
-    </tr>
-    <tr>
-      <td>B</td>
-      <td>$[LIMITE_TRAMO_A] – $[LIMITE_TRAMO_B]</td>
-      <td><strong>$[MONTO_TRAMO_B]</strong> por carga</td>
-    </tr>
-    <tr>
-      <td>C</td>
-      <td>$[LIMITE_TRAMO_B] – $[LIMITE_TRAMO_C]</td>
-      <td><strong>$[MONTO_TRAMO_C]</strong> por carga</td>
-    </tr>
-    <tr>
-      <td>D (sin derecho a pago)</td>
-      <td>Sobre $[LIMITE_TRAMO_C]</td>
-      <td>$0, pero se mantiene como carga</td>
-    </tr>
-  </table>
+      <table class="data-table">
+        <tr>
+          <th>Tramo</th>
+          <th>Renta mensual</th>
+          <th>Monto asignación</th>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>Hasta $[LIMITE_TRAMO_A]</td>
+          <td><strong>$[MONTO_TRAMO_A]</strong> por carga</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>$[LIMITE_TRAMO_A] – $[LIMITE_TRAMO_B]</td>
+          <td><strong>$[MONTO_TRAMO_B]</strong> por carga</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>$[LIMITE_TRAMO_B] – $[LIMITE_TRAMO_C]</td>
+          <td><strong>$[MONTO_TRAMO_C]</strong> por carga</td>
+        </tr>
+        <tr>
+          <td>D (sin derecho a pago)</td>
+          <td>Sobre $[LIMITE_TRAMO_C]</td>
+          <td>$0, pero se mantiene como carga</td>
+        </tr>
+      </table>
 
-  <h2>¿Quiénes pueden recibirla?</h2>
-  <ul>
-    <li>Trabajadores dependientes</li>
-    <li>Trabajadores independientes que cotizan</li>
-    <li>Pensionados</li>
-    <li>Personas que acrediten cargas familiares en la Caja de Compensación</li>
-  </ul>
+      <h2>¿Quiénes pueden recibirla?</h2>
+      <ul>
+        <li>Trabajadores dependientes.</li>
+        <li>Trabajadores independientes que cotizan.</li>
+        <li>Pensionados.</li>
+        <li>Personas que acrediten cargas familiares en la Caja de Compensación o IPS.</li>
+      </ul>
 
-  <h2>Ejemplo rápido</h2>
-  <p>
-    Una persona en el tramo B con 2 cargas recibiría:  
-    <strong>2 × monto del tramo B</strong>.
-  </p>
+      <h2>Ejemplo rápido</h2>
+      <p>
+        Una persona en el tramo B con 2 cargas recibiría:
+        <strong>2 × monto del tramo B</strong>.
+      </p>
 
-  <h2>¿Cómo acreditar una carga familiar?</h2>
-  <ul>
-    <li>Presentar certificado de nacimiento o matrimonio</li>
-    <li>Inscripción en la Caja de Compensación o IPS</li>
-    <li>Aprobación del empleador</li>
-  </ul>
+      <h2>¿Cómo acreditar una carga familiar?</h2>
+      <ul>
+        <li>Presentar certificado de nacimiento o matrimonio.</li>
+        <li>Inscribir la carga en la Caja de Compensación o en el IPS.</li>
+        <li>Esperar la aprobación del empleador o entidad pagadora.</li>
+      </ul>
 
-  <p>
-    La asignación se paga junto con el sueldo mensual y debe aparecer en la liquidación.
-  </p>
+      <p>
+        La asignación se paga junto con el sueldo mensual y debe aparecer claramente en la liquidación.
+      </p>
 
-</article>
+    </article>
+  </section>
 
-<footer>© 2026 Calculando.cl — Beneficios laborales explicados en simple</footer>
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Calculando.cl — Beneficios laborales explicados en simple
+  </footer>
 
 </main>
 
+<!-- JS TEMA CLARO/OSCURO -->
 <script>
-function toggleTheme() {
-  const html = document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme") === "light" ? "dark" : "light");
-}
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
+
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
 </script>
 
 </body>
