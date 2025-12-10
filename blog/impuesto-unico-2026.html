@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Impuesto Único a la Renta 2026: tabla, tramos y cálculo para sueldos</title>
+
+  <meta name="description" content="Tabla del Impuesto Único 2026 para trabajadores dependientes. Tramos, tasas, descuentos y ejemplos claros de cálculo mensual del impuesto. Actualizado 2026.">
+
+  <link rel="stylesheet" href="/css/calculando.css" />
+</head>
+
+<body>
+<main>
+
+  <header class="blog-header">
+    <a href="/" class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.cl</strong>
+        <span>Calculadoras online</span>
+      </div>
+    </a>
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <span class="theme-toggle-icon">☀</span>
+      Tema
+    </div>
+  </header>
+
+  <nav class="breadcrumb">
+    <a href="/">Inicio</a> /
+    <a href="/blog/">Blog</a> /
+    <span>Impuesto Único 2026</span>
+  </nav>
+
+  <article class="blog-article">
+    <h1>Impuesto Único 2026: tabla, tramos y cálculo mensual para trabajadores</h1>
+
+    <p class="intro">
+      El Impuesto Único es el impuesto mensual que se descuenta directamente del sueldo de los trabajadores dependientes en Chile.  
+      Aquí encontrarás la tabla oficial 2026, explicada de manera simple, junto a ejemplos reales.
+    </p>
+
+    <h2>¿Qué es el Impuesto Único?</h2>
+    <p>
+      Es un impuesto mensual que se aplica al sueldo imponible después de descontar AFP, salud y seguro de cesantía (si corresponde).  
+      Solo afecta a quienes superan cierto nivel de renta.
+    </p>
+
+    <h2>Tabla de Impuesto Único 2026</h2>
+
+    <p>La tabla 2026 funciona igual que la del Impuesto Global, pero aplicada mes a mes en UTM mensuales:</p>
+
+    <table class="tax-table">
+      <tr><th>Renta mensual imponible (UTM)</th><th>Tasa</th></tr>
+      <tr><td>0 a 13,5 UTM</td><td>0%</td></tr>
+      <tr><td>13,5 a 30 UTM</td><td>4%</td></tr>
+      <tr><td>30 a 50 UTM</td><td>8%</td></tr>
+      <tr><td>50 a 70 UTM</td><td>13,5%</td></tr>
+      <tr><td>70 a 90 UTM</td><td>23%</td></tr>
+      <tr><td>90 a 120 UTM</td><td>30,4%</td></tr>
+      <tr><td>120 a 310 UTM</td><td>35%</td></tr>
+      <tr><td>Más de 310 UTM</td><td>40%</td></tr>
+    </table>
+
+    <h2>Ejemplo simple (2026)</h2>
+
+    <p>Supongamos un sueldo bruto mensual de <strong>$2.000.000</strong>.</p>
+
+    <h3>Paso 1: Descuentos previsionales</h3>
+    <ul>
+      <li>AFP: 11% aprox.</li>
+      <li>Salud: 7%</li>
+      <li>Seguro Cesantía: 0,6% aprox.</li>
+    </ul>
+
+    <p>Sueldo imponible final: aprox. <strong>$1.660.000</strong></p>
+
+    <h3>Paso 2: Convertimos a UTM mensual</h3>
+    <p>Con UTM referencial de $63.000:</p>
+    <p><strong>1.660.000 ÷ 63.000 = 26,3 UTM</strong></p>
+
+    <h3>Paso 3: Buscamos el tramo</h3>
+    <p>26,3 UTM cae en el tramo <strong>13,5 a 30 UTM</strong> → tasa del <strong>4%</strong></p>
+
+    <h3>Paso 4: Calculamos</h3>
+    <p>
+      26,3 UTM × 63.000 × 4%  
+      → <strong>$66.192</strong> aprox. de Impuesto Único.
+    </p>
+
+    <h2>¿Qué trabajadores pagan Impuesto Único?</h2>
+    <ul>
+      <li>Quienes ganan sobre 13,5 UTM imponibles al mes.</li>
+      <li>Trabajadores dependientes (con contrato).</li>
+      <li>Personas con sueldos altos y beneficios imponibles.</li>
+    </ul>
+
+    <h2>Conclusión</h2>
+    <p>
+      El Impuesto Único 2026 se calcula de forma progresiva y depende directamente de tu renta imponible mensual.
+      Conocer tu tramo te permite entender por qué tu sueldo líquido baja cuando recibes bonos, aguinaldos o aumentos.
+    </p>
+
+    <div class="cta-box">
+      <a href="/sueldo-liquido/" class="cta-button">Calcular sueldo líquido 2026 →</a>
+    </div>
+
+  </article>
+
+  <footer>
+    © 2026 Calculando.cl — Herramientas simples para Chile 🇨🇱
+  </footer>
+
+</main>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  html.setAttribute("data-theme", html.getAttribute("data-theme") === "light" ? "dark" : "light");
+}
+</script>
+
+</body>
+</html>
