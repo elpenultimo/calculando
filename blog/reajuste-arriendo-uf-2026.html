@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Reajuste de arriendo en UF 2026: cómo calcularlo paso a paso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reajuste de arriendo en UF 2026: cómo calcularlo paso a paso | Calculando.cl</title>
 
   <meta name="description" content="Aprende a calcular el reajuste de arriendo en UF para 2026. Explicación simple, ejemplos prácticos y fórmula para actualizar valores según la variación de la UF.">
 
@@ -13,102 +13,115 @@
 <body>
 <main>
 
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
-        <span>Calculadoras online</span>
+        <span>Tus cálculos, sin enredos.</span>
       </div>
-    </a>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-toggle-icon">☀</span>
-      Tema
     </div>
+
+    <button id="themeToggle" class="theme-toggle">
+      <span id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Reajuste arriendo UF 2026</span>
-  </nav>
-
-  <article class="blog-article">
-
-    <h1>Reajuste de arriendo en UF 2026: cómo calcularlo paso a paso</h1>
-
-    <p class="intro">
-      Muchos contratos de arriendo en Chile están expresados en UF.  
-      Esto significa que el valor se actualiza automáticamente según la variación de la UF.  
-      Aquí te explicamos cómo calcular el reajuste en 2026 y cómo saber cuánto debes pagar.
-    </p>
-
-    <h2>¿Por qué el arriendo se reajusta en UF?</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Reajuste de arriendo en UF 2026: cálculo paso a paso</h1>
     <p>
-      La UF sigue la inflación. Si el IPC sube, la UF sube.  
-      Esto permite que el valor del arriendo mantenga su poder adquisitivo en el tiempo.
+      Muchos contratos de arriendo en Chile están expresados en UF, lo que significa que su valor se
+      actualiza automáticamente según la variación de la UF. Aquí tienes una guía clara para calcular 
+      tu arriendo en 2026.
     </p>
 
-    <h2>Fórmula para calcular el reajuste del arriendo</h2>
-    <p>
-      Si el arriendo está expresado en UF, el reajuste es directo:
-    </p>
-
-    <p class="highlight-box">
-      <strong>UF del día × UF pactadas = nuevo valor del arriendo</strong>
-    </p>
-
-    <p>
-      Si el contrato está en pesos pero reajusta según UF, se compara la UF actual con la del último reajuste.
-    </p>
-
-    <h2>Ejemplo 1: arriendo expresado en UF</h2>
-
-    <p>Contrato: <strong>12 UF</strong> mensuales</p>
-
-    <p>UF al momento del reajuste: <strong>$36.500</strong></p>
-
-    <p class="highlight-box">
-      12 × 36.500 = <strong>$438.000</strong>
-    </p>
-
-    <h2>Ejemplo 2: arriendo en pesos que reajusta por UF</h2>
-
-    <p>Arriendo pactado en 2025: <strong>$400.000</strong>, con UF de referencia: <strong>$35.000</strong></p>
-
-    <p>UF actual en 2026: <strong>$36.500</strong></p>
-
-    <h3>Cálculo:</h3>
-    <ul>
-      <li>Variación UF → 36.500 / 35.000 = 1,0428</li>
-      <li>Reajuste → 1,0428 × $400.000 = <strong>$417.120</strong></li>
-    </ul>
-
-    <p class="highlight-box">Nuevo valor del arriendo: <strong>$417.120</strong></p>
-
-    <h2>¿Cada cuánto se reajusta un arriendo?</h2>
-    <ul>
-      <li>Mensual, si está expresado en UF.</li>
-      <li>Anual, si está en pesos reajustados por UF (lo más común).</li>
-    </ul>
-
-    <h2>¿Qué pasa si la UF baja?</h2>
-    <p>
-      Si la UF disminuye (algo poco común), el arriendo pactado en UF baja en proporción.  
-      En contratos en pesos reajustados, el valor podría mantenerse o bajar según lo que diga el contrato.
-    </p>
-
-    <h2>Conclusión</h2>
-    <p>
-      El reajuste del arriendo en UF es simple: basta conocer el valor actual de la UF y multiplicarlo por las UF pactadas o aplicar la variación.  
-      Puedes revisar el valor diario y hacer tus cálculos fácilmente en nuestra calculadora de UF.
-    </p>
-
-    <div class="cta-box">
-      <a href="/uf/" class="cta-button">Calcular reajuste con UF actual →</a>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Explicado en simple
     </div>
+  </section>
 
-  </article>
+  <!-- CATEGORÍAS -->
+  <div class="blog-categories">
+    <a href="/blog/?cat=uf">UF</a>
+    <a href="/blog/?cat=arriendos" class="active">Arriendos</a>
+    <a href="/blog/?cat=ipc">IPC</a>
+    <a href="/blog/?cat=finanzas">Finanzas</a>
+  </div>
+
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
+
+      <h2 style="font-size:16px;margin-bottom:8px;color:var(--text);">¿Por qué se reajusta en UF?</h2>
+      <p>
+        La UF sigue la inflación. Si el IPC sube, la UF sube.  
+        Así, el arriendo mantiene su valor real en el tiempo.
+      </p>
+
+      <h2 style="font-size:16px;margin:22px 0 8px;color:var(--text);">Fórmula para calcular el reajuste</h2>
+      <p>Si el arriendo está expresado directamente en UF, el cálculo es:</p>
+
+      <div class="highlight-box">
+        <strong>UF del día × UF pactadas = nuevo valor del arriendo</strong>
+      </div>
+
+      <p>
+        En contratos en pesos reajustados según UF, se calcula la variación entre la UF actual y la del último reajuste.
+      </p>
+
+      <h2 style="font-size:16px;margin:22px 0 8px;color:var(--text);">Ejemplo 1: arriendo expresado en UF</h2>
+
+      <p>Contrato: <strong>12 UF</strong></p>
+      <p>UF actual: <strong>$36.500</strong></p>
+
+      <div class="highlight-box">
+        12 × 36.500 = <strong>$438.000</strong>
+      </div>
+
+      <h2 style="font-size:16px;margin:22px 0 8px;color:var(--text);">Ejemplo 2: arriendo en pesos que reajusta por UF</h2>
+
+      <p>Arriendo 2025: <strong>$400.000</strong> (UF: $35.000)</p>
+      <p>UF 2026: <strong>$36.500</strong></p>
+
+      <ul style="margin-left:18px;">
+        <li>Variación → 36.500 / 35.000 = 1,0428</li>
+        <li>Reajuste → 1,0428 × 400.000 = <strong>$417.120</strong></li>
+      </ul>
+
+      <div class="highlight-box">
+        Nuevo arriendo: <strong>$417.120</strong>
+      </div>
+
+      <h2 style="font-size:16px;margin:22px 0 8px;color:var(--text);">Frecuencia del reajuste</h2>
+
+      <ul style="margin-left:18px;">
+        <li>Mensual si está expresado en UF.</li>
+        <li>Anual si está en pesos reajustados según UF.</li>
+      </ul>
+
+      <h2 style="font-size:16px;margin:22px 0 8px;color:var(--text);">¿Qué pasa si la UF baja?</h2>
+
+      <p>
+        Si la UF disminuye (poco común), el arriendo expresado en UF baja proporcionalmente.
+        En contratos en pesos, depende de lo que estipule el contrato.
+      </p>
+
+      <h2 style="font-size:16px;margin:22px 0 8px;color:var(--text);">Conclusión</h2>
+      <p>
+        Conocer el valor de la UF y cómo varía permite calcular fácilmente el reajuste del arriendo.
+        Puedes hacerlo rápido usando la calculadora UF de Calculando.cl.
+      </p>
+
+      <div style="margin-top:20px;text-align:center;">
+        <a href="/uf/" class="cta-button">Calcular con UF actual →</a>
+      </div>
+
+    </article>
+  </section>
 
   <footer>
     © 2026 Calculando.cl — Herramientas simples para Chile 🇨🇱
@@ -116,11 +129,30 @@
 
 </main>
 
+<!-- JS -->
 <script>
-function toggleTheme() {
-  const html = document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme") === "light" ? "dark" : "light");
-}
+  const t = document.getElementById("themeToggle");
+  const i = document.getElementById("themeIcon");
+  const l = document.getElementById("themeLabel");
+  const r = document.documentElement;
+
+  function applyTheme(th){
+    r.setAttribute("data-theme", th);
+    i.textContent = th === "dark" ? "🌙" : "☀️";
+    l.textContent = th === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function init(){
+    const s = localStorage.getItem("calculando-theme");
+    applyTheme(s === "light" ? "light" : "dark");
+  })();
+
+  t.addEventListener("click", () => {
+    const c = r.getAttribute("data-theme") || "dark";
+    const n = c === "dark" ? "light" : "dark";
+    applyTheme(n);
+    localStorage.setItem("calculando-theme", n);
+  });
 </script>
 
 </body>
