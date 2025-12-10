@@ -1,102 +1,180 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Tope imponible AFP y Salud 2026 en Chile</title>
+  <meta charset="UTF-8" />
+  <title>Tope imponible AFP y Salud 2026 en Chile | Calculando.cl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="description" content="Tabla del tope imponible AFP y Salud para 2026 en Chile. Monto en UF, valores en pesos, ejemplos prácticos y cómo afecta tu sueldo líquido.">
+  <meta
+    name="description"
+    content="Tabla del tope imponible AFP y Salud para 2026 en Chile. Monto en UF, valores en pesos, ejemplos prácticos y cómo afecta tu sueldo líquido."
+  />
 
+  <!-- CSS global -->
   <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
 <main>
 
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
-      <div class="logo-text"><strong>Calculando.cl</strong><span>Calculadoras online</span></div>
-    </a>
-    <div class="theme-toggle" onclick="toggleTheme()">☀ Tema</div>
-  </header>
-
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Tope imponible 2026</span>
-  </nav>
-
-  <article class="blog-article">
-
-    <h1>Tope imponible AFP y Salud 2026 en Chile</h1>
-
-    <p class="intro">
-      Cada año se actualiza el <strong>tope imponible</strong>, que es el monto máximo sobre el cual se calculan las cotizaciones de <strong>AFP, Salud y Seguro de Cesantía</strong>.  
-      Aquí tienes los valores estimados para 2026, explicados de forma clara y con ejemplos.
-    </p>
-
-    <h2>¿Qué es el tope imponible?</h2>
-    <p>
-      Es el límite máximo de sueldo sobre el cual se calculan tus cotizaciones previsionales.  
-      Aunque ganes más, solo cotizas hasta ese tope.
-    </p>
-
-    <h2>Tope imponible AFP 2026</h2>
-
-    <p class="highlight-box">
-      <strong>Tope AFP 2026: 81,6 UF</strong>  
-      (valor estimado, actualiza cuando salga el decreto)
-    </p>
-
-    <h2>Tope imponible Salud 2026</h2>
-
-    <p class="highlight-box">
-      <strong>Tope Salud 2026: 81,6 UF</strong>
-    </p>
-
-    <h2>Tabla resumida</h2>
-
-    <table class="data-table">
-      <tr><th>Concepto</th><th>UF</th></tr>
-      <tr><td>Tope imponible AFP</td><td>81,6 UF</td></tr>
-      <tr><td>Tope imponible Salud</td><td>81,6 UF</td></tr>
-      <tr><td>Tope imponible Seguro Cesantía</td><td>81,6 UF</td></tr>
-    </table>
-
-    <h2>Ejemplo práctico</h2>
-    <p>
-      Si una persona gana <strong>$4.500.000</strong> mensuales, sus cotizaciones se calculan solo hasta el tope.  
-      Por lo tanto, no paga AFP ni Salud por el excedente sobre 81,6 UF.
-    </p>
-
-    <h2>¿A quién afecta?</h2>
-    <ul>
-      <li>Trabajadores con sueldos altos</li>
-      <li>Ejecutivos y profesionales senior</li>
-      <li>Empleadores al calcular costo empresa</li>
-    </ul>
-
-    <p>
-      Si necesitas calcular tu sueldo líquido con tope imponible, usa nuestra calculadora:
-    </p>
-
-    <div class="cta-box">
-      <a href="/sueldo-liquido/" class="cta-button">Calculadora de sueldo →</a>
+      <div class="logo-text">
+        <strong>Calculando.cl</strong>
+        <span>Tus cálculos, sin enredos.</span>
+      </div>
     </div>
 
-  </article>
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+  </header>
 
-  <footer>© 2026 Calculando.cl — Información laboral clara</footer>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Tope imponible AFP y Salud 2026 en Chile</h1>
+    <p>
+      Cada año se actualiza el <strong>tope imponible</strong>, es decir, el monto máximo sobre el cual se calculan
+      tus cotizaciones de AFP, Salud y Seguro de Cesantía. Aquí tienes los valores estimados para 2026 explicados
+      en simple y con ejemplos.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Valores referenciales en UF
+    </div>
+  </section>
+
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
+
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">
+        ¿Qué es el tope imponible?
+      </h2>
+      <p>
+        Es el límite máximo de sueldo sobre el cual se calculan tus cotizaciones previsionales.
+        Aunque ganes más, solo cotizas hasta ese tope.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tope imponible AFP 2026
+      </h2>
+
+      <p class="highlight-box">
+        <strong>Tope AFP 2026: 81,6 UF</strong><br>
+        <span style="font-size:12px;">
+          Valor estimado, actualiza cuando salga el decreto oficial.
+        </span>
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tope imponible Salud 2026
+      </h2>
+
+      <p class="highlight-box">
+        <strong>Tope Salud 2026: 81,6 UF</strong>
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tabla resumida 2026
+      </h2>
+
+      <table class="data-table">
+        <tr>
+          <th>Concepto</th>
+          <th>UF</th>
+        </tr>
+        <tr>
+          <td>Tope imponible AFP</td>
+          <td>81,6 UF</td>
+        </tr>
+        <tr>
+          <td>Tope imponible Salud</td>
+          <td>81,6 UF</td>
+        </tr>
+        <tr>
+          <td>Tope imponible Seguro Cesantía</td>
+          <td>81,6 UF</td>
+        </tr>
+      </table>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo práctico
+      </h2>
+      <p>
+        Si una persona gana <strong>$4.500.000</strong> mensuales, sus cotizaciones se calculan solo hasta el tope.
+        Por lo tanto, no paga AFP ni Salud por el excedente sobre 81,6 UF.
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿A quién afecta?
+      </h2>
+      <ul style="margin-left:18px;">
+        <li>Trabajadores con sueldos altos.</li>
+        <li>Ejecutivos y profesionales senior.</li>
+        <li>Empleadores al calcular el costo total de la empresa.</li>
+      </ul>
+
+      <p style="margin-top:10px;">
+        Si necesitas calcular tu sueldo líquido considerando el tope imponible, puedes usar nuestra herramienta:
+      </p>
+
+      <div style="margin-top:14px; text-align:center;">
+        <a
+          href="/sueldo-liquido/"
+          style="
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:999px;
+            background:var(--primary);
+            color:white;
+            font-size:13px;
+            text-decoration:none;
+            box-shadow:0 18px 32px rgba(15,23,42,0.6);
+          "
+        >
+          Calculadora de sueldo 2026 →
+        </a>
+      </div>
+
+    </article>
+  </section>
+
+  <footer>
+    <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
+    relación con el SII ni con ningún organismo del Estado.
+    Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
+  </footer>
 
 </main>
 
+<!-- JS para tema claro/oscuro -->
 <script>
-function toggleTheme(){
-  const html=document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme")==="light"?"dark":"light");
-}
-</script>
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
 
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
+</script>
 </body>
 </html>
