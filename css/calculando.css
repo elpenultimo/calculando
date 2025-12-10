@@ -592,7 +592,8 @@ footer strong {
    MINI MENÚ DEL BLOG (burbujas estilizadas)
 ------------------------------------------*/
 
-.mini-blog-menu {
+.mini-blog-menu,
+nav.mini-blog-menu {
   margin: 14px 0 22px;
   display: flex;
   flex-wrap: wrap;
@@ -600,7 +601,8 @@ footer strong {
   font-size: 13px;
 }
 
-.mini-blog-menu .mini-link {
+.mini-blog-menu .mini-link,
+nav.mini-blog-menu .mini-link {
   padding: 6px 12px;
   border-radius: 20px;
   background: var(--chip-bg);
@@ -608,15 +610,19 @@ footer strong {
   color: var(--muted);
   text-decoration: none;
   transition: 0.2s ease;
+  display: inline-flex;
+  align-items: center;
 }
 
-.mini-blog-menu .mini-link.active {
+.mini-blog-menu .mini-link.active,
+nav.mini-blog-menu .mini-link.active {
   background: var(--primary-soft);
   border-color: var(--primary);
   color: var(--primary);
 }
 
-.mini-blog-menu .mini-link:hover {
+.mini-blog-menu .mini-link:hover,
+nav.mini-blog-menu .mini-link:hover {
   transform: translateY(-1px);
   color: var(--primary);
 }
