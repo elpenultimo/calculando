@@ -12,6 +12,8 @@
 
 <body>
 <main>
+
+  <!-- HEADER -->
   <header class="blog-header">
     <a href="/" class="logo-block">
       <div class="logo-mark">C</div>
@@ -20,98 +22,118 @@
         <span>Calculadoras online</span>
       </div>
     </a>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-toggle-icon">☀</span>
-      Tema
-    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
+  <!-- BREADCRUMB -->
   <nav class="breadcrumb">
     <a href="/">Inicio</a> /
     <a href="/blog/">Blog</a> /
     <span>Reajuste Isapres 2026</span>
   </nav>
 
-  <article class="blog-article">
-
+  <!-- HERO -->
+  <section class="hero">
     <h1>Reajuste de planes de Isapres 2026: qué significa y cómo te afecta</h1>
-
-    <p class="intro">
-      Cada año, las Isapres realizan ajustes en el precio de los planes de salud.  
-      En 2026 el proceso vuelve a ser tema central, especialmente por los costos médicos acumulados y los ajustes regulatorios.  
-      Aquí te explicamos en simple qué es el reajuste, por qué ocurre y cuánto podría cambiar tu plan.
-    </p>
-
-    <h2>¿Qué es exactamente el reajuste de Isapres?</h2>
     <p>
-      Es la actualización anual del precio base de tu plan de salud.  
-      La Isapre puede subirlo, mantenerlo o —en casos muy poco frecuentes— bajarlo.  
-      Este ajuste debe justificarlo la aseguradora y enviarse a la Superintendencia de Salud.
+      En 2026 vuelve el proceso anual de adecuación de planes. Aquí te explicamos por qué suben, qué factores influyen y cómo podría variar tu plan este año.
     </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Explicación simple
+    </div>
+  </section>
 
-    <h2>¿Por qué suben los planes?</h2>
-    <ul>
-      <li>Aumento del costo de las prestaciones médicas.</li>
-      <li>Mayor uso del sistema (consultas, exámenes, licencias).</li>
-      <li>Variación del IPC en salud.</li>
-      <li>Cambios normativos que obligan a las Isapres a cubrir nuevas prestaciones.</li>
-    </ul>
+  <!-- ARTÍCULO -->
+  <section class="shell">
+    <article class="article-body">
 
-    <h2>¿Cuánto podría ser el reajuste en 2026?</h2>
-    <p>
-      No existe una cifra oficial al inicio del año, pero históricamente los rangos han sido:
-    </p>
+      <h2>¿Qué es exactamente el reajuste de Isapres?</h2>
+      <p>
+        Es la actualización anual del precio base de tu plan de salud.  
+        La Isapre puede subirlo, mantenerlo o—muy pocas veces—bajarlo.  
+        Este ajuste debe estar justificado y ser informado a la Superintendencia de Salud.
+      </p>
 
-    <p class="highlight-box">
-      <strong>Entre 4% y 10% anual (referencia histórica del sistema)</strong>
-    </p>
+      <h2>¿Por qué suben los planes?</h2>
+      <ul>
+        <li>Aumento del costo de las prestaciones médicas.</li>
+        <li>Mayor uso del sistema (consultas, exámenes, licencias).</li>
+        <li>Variación del IPC en salud.</li>
+        <li>Cambios regulatorios que obligan a cubrir nuevas prestaciones.</li>
+      </ul>
 
-    <p>
-      Cada Isapre presenta su propio porcentaje, por lo que tu reajuste puede ser distinto al de otros afiliados.
-    </p>
+      <h2>¿Cuánto podría ser el reajuste en 2026?</h2>
+      <p>No existe un valor oficial al inicio del año, pero históricamente los rangos son:</p>
 
-    <h2>Ojo con la prima GES (AUGE)</h2>
-    <p>
-      Además del precio del plan, existe la prima GES, que se reajusta por separado.  
-      Este valor también puede subir y se paga por persona afiliada, incluyendo cargas.
-    </p>
+      <div class="highlight-box">
+        <strong>Entre 4% y 10% anual</strong>
+      </div>
 
-    <h2>Ejemplo simple</h2>
-    <p>Plan actual: <strong>$85.000</strong></p>
-    <p>Reajuste anual: <strong>7%</strong></p>
+      <p>El porcentaje varía por Isapre, por lo que tu ajuste puede ser distinto al de otros afiliados.</p>
 
-    <p class="highlight-box">
-      Nuevo valor → $85.000 × 1,07 = <strong>$90.950</strong>
-    </p>
+      <h2>Ojo con la prima GES (AUGE)</h2>
+      <p>
+        Aparte del precio del plan, existe la prima GES, que se reajusta de forma independiente.  
+        Se paga por cada integrante afiliado, incluyendo cargas.
+      </p>
 
-    <h2>¿Puedo cambiar mi plan si sube mucho?</h2>
-    <p>
-      Sí. Durante el período de adecuación puedes:
-    </p>
-    <ul>
-      <li>Aceptar el nuevo valor.</li>
-      <li>Cambiarte a otro plan dentro de la misma Isapre.</li>
-      <li>Migrar a otra Isapre o a Fonasa.</li>
-    </ul>
+      <h2>Ejemplo simple</h2>
+      <p>Plan actual: <strong>$85.000</strong></p>
+      <p>Reajuste anual: <strong>7%</strong></p>
 
-    <h2>Conclusión</h2>
-    <p>
-      El reajuste 2026 de las Isapres dependerá del costo de la atención médica y las decisiones regulatorias.  
-      Infórmate del porcentaje que aplique tu aseguradora y revisa alternativas si el aumento es muy alto.
-    </p>
+      <div class="highlight-box">
+        Nuevo valor → $85.000 × 1,07 = <strong>$90.950</strong>
+      </div>
 
-  </article>
+      <h2>¿Puedo cambiar mi plan si sube demasiado?</h2>
+      <p>Sí. Durante el período de adecuación puedes:</p>
+      <ul>
+        <li>Aceptar el nuevo valor.</li>
+        <li>Cambiarte a otro plan dentro de la misma Isapre.</li>
+        <li>Migrar a otra Isapre o a Fonasa.</li>
+      </ul>
 
+      <h2>Conclusión</h2>
+      <p>
+        El reajuste 2026 dependerá de los costos médicos y decisiones regulatorias.  
+        Infórmate del porcentaje aplicado por tu Isapre y evalúa alternativas si el aumento es muy alto.
+      </p>
+
+    </article>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     © 2026 Calculando.cl — Información en simple 🇨🇱
   </footer>
+
 </main>
 
+<!-- JS TEMA -->
 <script>
-function toggleTheme(){
-  const html=document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme")==="light"?"dark":"light");
-}
+  const root = document.documentElement;
+  const icon = document.getElementById("themeIcon");
+  const label = document.getElementById("themeLabel");
+
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    icon.textContent = t === "dark" ? "🌙" : "☀️";
+    label.textContent = t === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  const stored = localStorage.getItem("calculando-theme");
+  applyTheme(stored || "light");
+
+  document.getElementById("themeToggle").onclick = () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  };
 </script>
 
 </body>
