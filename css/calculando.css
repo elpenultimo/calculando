@@ -586,3 +586,35 @@
 .article-body h3 {
   font-weight: 600;
 }
+/* -----------------------------------------
+   MINI MENÚ DEL BLOG (burbujas estilizadas)
+------------------------------------------*/
+
+.mini-blog-menu {
+  margin: 14px 0 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.mini-blog-menu .mini-link {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: var(--chip-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--muted);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.mini-blog-menu .mini-link.active {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.mini-blog-menu .mini-link:hover {
+  transform: translateY(-1px);
+  color: var(--primary);
+}
