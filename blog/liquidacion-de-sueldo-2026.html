@@ -7,11 +7,23 @@
   <link rel="stylesheet" href="/css/calculando.css" />
 </head>
 <body>
-<main>
-  <header>
+<main class="blog-main">
+
+  <!-- Top: volver al inicio -->
+  <header class="blog-top">
     <a href="/" class="back-link">← Volver al inicio</a>
   </header>
 
+  <!-- Categoría de este artículo (para marcarla en el header) -->
+  <script>
+    // Puedes cambiar "sueldos" por "impuestos", "uf", etc. según corresponda
+    window.CALCULANDO_POST_CATEGORY = "sueldos";
+  </script>
+
+  <!-- Aquí se inyecta el mini-header del blog -->
+  <div id="blogHeader"></div>
+
+  <!-- CONTENIDO DEL ARTÍCULO -->
   <article class="blog-article">
     <h1>Liquidación de sueldo 2026 en Chile (explicado en simple)</h1>
 
@@ -61,5 +73,41 @@
     <p>La liquidación de sueldo 2026 mantiene los mismos principios que años anteriores: sueldo bruto, descuentos legales y sueldo líquido. Comprender este documento te ayuda a negociar, estimar ingresos y verificar que tus cotizaciones estén correctamente pagadas.</p>
   </article>
 </main>
+
+<!-- Script para cargar el mini-header y marcar categoría activa -->
+<script>
+  (function () {
+    function markActiveCategory() {
+      const currentCat =
+        window.CALCULANDO_POST_CATEGORY ||
+        new URLSearchParams(window.location.search).get("cat");
+
+      if (!currentCat) return;
+
+      document.querySelectorAll(".blog-header-cats a").forEach(link => {
+        const url = new URL(link.href, window.location.origin);
+        const catParam = url.searchParams.get("cat");
+        if (catParam === currentCat) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    function loadBlogHeader() {
+      const container = document.getElementById("blogHeader");
+      if (!container) return;
+
+      fetch("/blog/blog-header.html")
+        .then(r => r.text())
+        .then(html => {
+          container.innerHTML = html;
+          markActiveCategory();
+        })
+        .catch(err => console.error("No se pudo cargar el header del blog:", err));
+    }
+
+    document.addEventListener("DOMContentLoaded", loadBlogHeader);
+  })();
+</script>
 </body>
 </html>
