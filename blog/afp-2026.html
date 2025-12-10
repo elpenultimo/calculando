@@ -13,6 +13,7 @@
 <body>
 <main>
 
+  <!-- HEADER -->
   <header class="blog-header">
     <a href="/" class="logo-block">
       <div class="logo-mark">C</div>
@@ -21,105 +22,98 @@
         <span>Calculadoras online</span>
       </div>
     </a>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-toggle-icon">☀</span>
-      Tema
-    </div>
+
+    <button id="themeToggle" class="theme-toggle">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
+  <!-- BREADCRUMB -->
   <nav class="breadcrumb">
     <a href="/">Inicio</a> /
     <a href="/blog/">Blog</a> /
     <span>Cotización AFP 2026</span>
   </nav>
 
-  <article class="blog-article">
-
-    <h1>Cotización AFP 2026: porcentajes, descuentos y cálculo explicado en simple</h1>
-
-    <p class="intro">
-      En 2026, las cotizaciones previsionales mantienen su estructura base: un porcentaje obligatorio para tu cuenta de capitalización individual, comisiones de administración y un tope imponible mensual.  
-      Aquí tienes todos los valores actualizados y ejemplos claros para entender tu descuento real.
-    </p>
-
-    <h2>Porcentaje AFP obligatorio en 2026</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Cotización AFP 2026: porcentajes y cálculo explicado en simple</h1>
     <p>
-      El porcentaje de cotización obligatoria para tu cuenta individual se mantiene en:
+      Conoce los porcentajes de AFP, comisiones, tope imponible y ejemplos claros para entender cuánto te descuentan realmente en tu sueldo 2026.
     </p>
-
-    <p class="highlight-box">
-      <strong>10% del sueldo imponible</strong>
-    </p>
-
-    <p>Además, cada AFP cobra una comisión que varía según la administradora.</p>
-
-    <h2>Comisiones por AFP (2026)</h2>
-    <p>Valores referenciales (pueden variar durante el año):</p>
-
-    <table class="tax-table">
-      <tr><th>AFP</th><th>Comisión</th></tr>
-      <tr><td>AFP Habitat</td><td>1,27%</td></tr>
-      <tr><td>AFP Modelo</td><td>0,58%</td></tr>
-      <tr><td>AFP Capital</td><td>1,44%</td></tr>
-      <tr><td>AFP Provida</td><td>1,45%</td></tr>
-      <tr><td>AFP Cuprum</td><td>1,44%</td></tr>
-      <tr><td>AFP PlanVital</td><td>0,58%</td></tr>
-    </table>
-
-    <h2>Total de descuento previsional por AFP</h2>
-    <p>
-      El descuento total corresponde a:
-    </p>
-
-    <p class="highlight-box">
-      <strong>10% + comisión AFP = entre 10,58% y 11,45%</strong>  
-      según la administradora donde estés afiliado.
-    </p>
-
-    <h2>Tope imponible 2026</h2>
-    <p>
-      El tope imponible para 2026 se mantiene alrededor de:
-    </p>
-
-    <p class="highlight-box">
-      <strong>UF 81,6 mensuales</strong>  
-      (valor exacto se ajusta en enero según el SII).
-    </p>
-
-    <p>Si ganas más de ese monto imponible, tus cotizaciones se calculan solo hasta ese límite.</p>
-
-    <h2>Ejemplo práctico (2026)</h2>
-
-    <p>Sueldo bruto mensual: <strong>$1.500.000</strong></p>
-
-    <h3>1. Determinar sueldo imponible</h3>
-    <p>En la mayoría de los casos, coincide con el sueldo bruto.</p>
-
-    <h3>2. Calcular 10% AFP</h3>
-    <p><strong>10% → $150.000</strong></p>
-
-    <h3>3. Sumar comisión AFP (ejemplo: 1,27%)</h3>
-    <p><strong>1,27% → $19.050</strong></p>
-
-    <h3>Total descuento AFP:</h3>
-    <p class="highlight-box"><strong>$169.050</strong></p>
-
-    <h2>¿Qué pasa si tengo varios empleadores?</h2>
-    <p>
-      Todos deben descontar cotizaciones, pero si superas el tope imponible anual, puedes solicitar devolución por exceso de cotización.
-    </p>
-
-    <h2>Conclusión</h2>
-    <p>
-      En 2026, la estructura de AFP sigue igual: un 10% obligatorio más la comisión.  
-      Conocer tu descuento real ayuda a estimar tu sueldo líquido y planificar mejor tus finanzas.
-    </p>
-
-    <div class="cta-box">
-      <a href="/sueldo-liquido/" class="cta-button">Calcular sueldo líquido 2026 →</a>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Explicado fácil
     </div>
+  </section>
 
-  </article>
+  <!-- CONTENIDO -->
+  <section class="shell" style="margin-top:16px;">
+    <article class="blog-article">
+
+      <h2>Porcentaje AFP obligatorio en 2026</h2>
+      <p>La cotización obligatoria se mantiene en:</p>
+
+      <p class="highlight-box">
+        <strong>10% del sueldo imponible</strong>
+      </p>
+
+      <p>Además, cada AFP cobra una comisión distinta según la administradora.</p>
+
+      <h2>Comisiones por AFP (2026)</h2>
+      <p>Valores referenciales, pueden variar durante el año:</p>
+
+      <table class="data-table">
+        <tr><th>AFP</th><th>Comisión</th></tr>
+        <tr><td>AFP Habitat</td><td>1,27%</td></tr>
+        <tr><td>AFP Modelo</td><td>0,58%</td></tr>
+        <tr><td>AFP Capital</td><td>1,44%</td></tr>
+        <tr><td>AFP Provida</td><td>1,45%</td></tr>
+        <tr><td>AFP Cuprum</td><td>1,44%</td></tr>
+        <tr><td>AFP PlanVital</td><td>0,58%</td></tr>
+      </table>
+
+      <h2>Total de descuento previsional</h2>
+      <p>
+        Al sumar el 10% obligatorio + la comisión AFP, el descuento real queda entre:
+      </p>
+
+      <p class="highlight-box">
+        <strong>10,58% y 11,45%</strong>
+      </p>
+
+      <h2>Tope imponible 2026</h2>
+      <p>El tope imponible se mantiene alrededor de:</p>
+
+      <p class="highlight-box"><strong>UF 81,6 mensuales</strong></p>
+
+      <p>
+        Si ganas más que ese monto imponible, los descuentos se calculan solo hasta ese límite.
+      </p>
+
+      <h2>Ejemplo práctico</h2>
+
+      <p><strong>Sueldo bruto:</strong> $1.500.000</p>
+
+      <ul>
+        <li>10% AFP → $150.000</li>
+        <li>Comisión 1,27% → $19.050</li>
+      </ul>
+
+      <p class="highlight-box"><strong>Total descuento AFP: $169.050</strong></p>
+
+      <h2>¿Qué pasa si tengo varios empleadores?</h2>
+      <p>
+        Te descontarán en cada trabajo, pero si superas el tope anual puedes pedir devolución por exceso de cotizaciones.
+      </p>
+
+      <div class="cta-box">
+        <a href="/sueldo-liquido/" class="cta-button">Calcular sueldo líquido 2026 →</a>
+      </div>
+
+    </article>
+  </section>
 
   <footer>
     © 2026 Calculando.cl — Herramientas simples para Chile 🇨🇱
@@ -128,10 +122,28 @@
 </main>
 
 <script>
-function toggleTheme() {
-  const html = document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme") === "light" ? "dark" : "light");
-}
+  const themeToggle=document.getElementById("themeToggle");
+  const themeIcon=document.getElementById("themeIcon");
+  const themeLabel=document.getElementById("themeLabel");
+  const root=document.documentElement;
+
+  function applyTheme(t){
+    root.setAttribute("data-theme",t);
+    themeIcon.textContent=t==="dark"?"🌙":"☀️";
+    themeLabel.textContent=t==="dark"?"Modo oscuro":"Modo claro";
+  }
+
+  (function(){
+    const saved=localStorage.getItem("calc-theme");
+    applyTheme(saved?saved:"light");
+  })();
+
+  themeToggle.addEventListener("click",()=>{
+    const current=root.getAttribute("data-theme");
+    const next=current==="dark"?"light":"dark";
+    applyTheme(next);
+    localStorage.setItem("calc-theme",next);
+  });
 </script>
 
 </body>
