@@ -42,20 +42,40 @@
       <span class="pill-dot"></span>
       Actualizado 2026 · Guía simple para trabajadores dependientes
     </div>
+      <!-- MINI MENÚ DEL BLOG -->
+<nav class="mini-blog-menu" style="margin:14px 0 22px; display:flex; flex-wrap:wrap; gap:10px; font-size:13px;">
+  <a href="/blog/" class="mini-link">Destacados</a>
+  <a href="/blog/#sueldos" class="mini-link active">Sueldos</a>
+  <a href="/blog/#impuestos" class="mini-link">Impuestos y boletas</a>
+  <a href="/blog/#uf" class="mini-link">UF & reajustes</a>
+  <a href="/blog/#afp" class="mini-link">AFP & salud</a>
+  <a href="/blog/#beneficios" class="mini-link">Beneficios</a>
+  <a href="/" class="mini-link" style="opacity:.85;">← Volver a calculadoras</a>
+</nav>
+
+<style>
+  .mini-blog-menu .mini-link {
+    padding:6px 12px;
+    border-radius:20px;
+    background:var(--chip-bg);
+    border:1px solid var(--border-subtle);
+    color:var(--muted);
+    text-decoration:none;
+    transition:0.2s;
+  }
+  .mini-blog-menu .mini-link.active {
+    background:var(--primary-soft);
+    border-color:var(--primary);
+    color:var(--primary);
+  }
+  .mini-blog-menu .mini-link:hover {
+    transform:translateY(-1px);
+    color:var(--primary);
+  }
+</style>
   </section>
 
-  <!-- CATEGORÍAS -->
-  <nav class="blog-category-bar">
-    <button class="blog-category-pill" data-category="sueldos">Sueldos</button>
-    <button class="blog-category-pill" data-category="impuestos">Impuestos</button>
-    <button class="blog-category-pill" data-category="uf">UF</button>
-    <button class="blog-category-pill" data-category="boletas">Boletas</button>
-    <button class="blog-category-pill" data-category="salud">Salud</button>
-    <button class="blog-category-pill" data-category="afp">AFP</button>
-    <button class="blog-category-pill" data-category="ipc">IPC</button>
-    <button class="blog-category-pill" data-category="beneficios">Beneficios</button>
-  </nav>
-
+ 
   <!-- ARTÍCULO -->
   <section class="shell" style="margin-top:16px;">
     <article style="font-size:13px; line-height:1.6; color:var(--muted);">
