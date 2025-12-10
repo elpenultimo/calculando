@@ -1,122 +1,288 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Impuesto Global Complementario 2026: tabla, tramos y cálculo explicado en simple</title>
+  <title>Impuesto Global Complementario 2026: tabla y explicación simple | Calculando.cl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Impuesto Global Complementario 2026 en Chile explicado en simple: qué es, quién debe declarar, cómo funciona la tabla de tramos y ejemplos básicos."
+  />
 
-  <meta name="description" content="Impuesto Global Complementario 2026: tabla oficial, tramos, porcentajes y ejemplos simples para entender cuánto debes pagar según tu renta anual. Actualizado 2026.">
-
-  <link rel="stylesheet" href="/css/calculando.css" />
+  <!-- CSS global -->
+  <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
 <main>
 
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
-        <span>Calculadoras online</span>
+        <span>Tus cálculos, sin enredos.</span>
       </div>
-    </a>
-    <div class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-toggle-icon">☀</span>
-      Tema
     </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
   </header>
 
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Impuesto Global Complementario 2026</span>
-  </nav>
-
-  <article class="blog-article">
-    <h1>Impuesto Global Complementario 2026: tabla, tramos y cálculo explicado en simple</h1>
-
-    <p class="intro">
-      El Impuesto Global Complementario (IGC) es un impuesto anual que deben pagar las personas con ingresos altos o ingresos mixtos (sueldos + boletas + otros).  
-      Aquí encontrarás la tabla oficial 2026, explicada de forma clara, y ejemplos fáciles para calcular cuánto deberías pagar.
-    </p>
-
-    <h2>¿Qué es el Impuesto Global Complementario?</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Impuesto Global Complementario 2026: tabla y explicación en simple</h1>
     <p>
-      Es un impuesto <strong>progresivo</strong> aplicado a tus ingresos totales del año. Mientras más ganas, mayor es el porcentaje de impuesto.
+      El Impuesto Global Complementario es el impuesto anual que se calcula en la
+      Operación Renta, sumando todos tus ingresos del año. Aquí lo explicamos paso
+      a paso para 2026, con una tabla referencial y ejemplos.
     </p>
-    <p>
-      Se determina cuando haces tu declaración de renta (abril de cada año).
-    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Guía para declaración anual
+    </div>
+  </section>
 
-    <h2>Tabla de Impuesto Global Complementario 2026</h2>
-    <p>Los tramos se expresan en <strong>UTM</strong> anuales:</p>
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
 
-    <table class="tax-table">
-      <tr><th>Tramo (UTM anuales)</th><th>Tasa</th></tr>
-      <tr><td>0 a 13,5 UTM</td><td>0%</td></tr>
-      <tr><td>13,5 a 30 UTM</td><td>4%</td></tr>
-      <tr><td>30 a 50 UTM</td><td>8%</td></tr>
-      <tr><td>50 a 70 UTM</td><td>13,5%</td></tr>
-      <tr><td>70 a 90 UTM</td><td>23%</td></tr>
-      <tr><td>90 a 120 UTM</td><td>30,4%</td></tr>
-      <tr><td>120 a 310 UTM</td><td>35%</td></tr>
-      <tr><td>Más de 310 UTM</td><td>40%</td></tr>
-    </table>
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">
+        ¿Qué es el Impuesto Global Complementario?
+      </h2>
+      <p>
+        Es un impuesto <strong>anual y progresivo</strong> que se calcula en la
+        declaración de renta (formulario 22). A diferencia del Impuesto Único,
+        que se descuenta mes a mes del sueldo, el Global Complementario considera
+        <strong>todos tus ingresos del año</strong>, por ejemplo:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>Sueldos (trabajo dependiente).</li>
+        <li>Boletas de honorarios.</li>
+        <li>Arriendos.</li>
+        <li>Intereses, dividendos u otros ingresos afectos.</li>
+      </ul>
 
-    <p>Estos valores se actualizan cada año con la UTM. Aquí usamos las tasas vigentes para 2026.</p>
+      <p>
+        El SII suma esos ingresos, los ajusta por unidades tributarias y aplica
+        la <strong>tabla de Impuesto Global Complementario 2026</strong>.
+      </p>
 
-    <h2>Ejemplo simple de cálculo</h2>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿Quiénes deben declarar Global Complementario?
+      </h2>
+      <p>De forma general, deben declarar quienes:</p>
+      <ul style="margin-left:18px;">
+        <li>
+          Tienen ingresos anuales sobre el tramo exento (en UTA/UTM, según la tabla 2026).
+        </li>
+        <li>
+          Emiten boletas de honorarios por sobre el mínimo exento o deciden reliquidar.
+        </li>
+        <li>
+          Reciben rentas de arriendo u otras rentas que el SII exige declarar.
+        </li>
+      </ul>
+      <p>
+        Si tus ingresos son bajos, puedes quedar dentro del <strong>tramo exento</strong>
+        y no pagar impuesto adicional.
+      </p>
 
-    <p>Supongamos que tus ingresos anuales totales fueron:</p>
-    <p><strong>$18.000.000</strong></p>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Tabla simplificada Impuesto Global Complementario 2026 (referencial)
+      </h2>
+      <p>
+        La tabla oficial se publica en UTA/UTM. Aquí va una versión
+        <strong>simplificada y genérica</strong> solo para entender el concepto.
+        Reemplaza los valores con la tabla oficial una vez que el SII la publique.
+      </p>
 
-    <p>Cálculo:</p>
-    <ul>
-      <li>Convertimos a UTM según el valor promedio anual (aprox. referencial).</li>
-      <li>Verificamos el tramo donde cae.</li>
-      <li>Aplicamos la tasa correspondiente.</li>
-    </ul>
+      <table
+        style="
+          width:100%;
+          border-collapse:collapse;
+          margin-top:10px;
+          font-size:12px;
+        "
+      >
+        <thead>
+          <tr>
+            <th
+              style="
+                text-align:left;
+                padding:8px;
+                border-bottom:1px solid var(--border-subtle);
+              "
+            >
+              Tramo anual (en UTA/UTM)
+            </th>
+            <th
+              style="
+                text-align:left;
+                padding:8px;
+                border-bottom:1px solid var(--border-subtle);
+              "
+            >
+              Tasa marginal aprox.
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Hasta <strong>[TRAMO EXENTO]</strong>
+            </td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              0% (exento)
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Sobre [TRAMO EXENTO] y hasta [TRAMO 2]
+            </td>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              ~4%–8% aprox.
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px; border-bottom:1px solid rgba(148,163,184,.15);">
+              Tramos superiores
+            </td>
+            <td style="padding:6px 8px;">
+              Tasa creciente (por ejemplo 13,5%, 23%, 30%, 35%, etc.)
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-    <p class="highlight-box">
-      Resultado referencial: este nivel de ingreso cae en el tramo de 13,5–30 UTM → tasa del 4%.
-    </p>
+      <p style="margin-top:10px;">
+        🔎 <em>Ojo:</em> el Global Complementario es progresivo:
+        mientras más alta la renta, mayor la tasa marginal del tramo superior.
+      </p>
 
-    <p>
-      El monto exacto depende de tus rebajas, créditos, boletas, cotizaciones previsionales, intereses hipotecarios y otros factores.
-    </p>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        ¿Cómo se relaciona con el Impuesto Único y las retenciones?
+      </h2>
+      <p>
+        Durante el año ya te retuvieron impuestos, por ejemplo:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>Impuesto Único en tu sueldo mensual.</li>
+        <li>Retención del 13%–14,5% en boletas de honorarios.</li>
+      </ul>
 
-    <h2>¿Quiénes deben pagarlo?</h2>
-    <ul>
-      <li>Personas con ingresos altos por sueldo.</li>
-      <li>Personas que mezclan boletas + sueldos.</li>
-      <li>Quienes reciben rentas de arriendo.</li>
-      <li>Dueños de empresas que retiran utilidades.</li>
-    </ul>
+      <p>
+        Al hacer la declaración anual:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>Se calcula tu impuesto Global Complementario total.</li>
+        <li>Se descuentan las retenciones e impuestos que ya pagaste.</li>
+      </ul>
 
-    <h2>¿Puedo recibir devolución si ya pagué mucho?</h2>
-    <p>Sí. Si durante el año te retuvieron más de lo que corresponde según tu tramo final, en abril el SII te devuelve la diferencia.</p>
+      <p>
+        Si te retuvieron <strong>más</strong> de lo que corresponde → obtienes
+        <strong>devolución</strong>.  
+        Si te retuvieron <strong>menos</strong> → debes pagar la diferencia.
+      </p>
 
-    <h2>Conclusión</h2>
-    <p>
-      El Impuesto Global Complementario puede sonar complejo, pero su lógica es simple: mientras más ganas, más pagas.
-      Conocer tus tramos te permite planificar mejor tu renta y evitar sorpresas en abril.
-    </p>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo básico (muy simplificado)
+      </h2>
+      <p>
+        Imagina que en todo 2026 recibes:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>Sueldos imponibles que ya pagaron Impuesto Único.</li>
+        <li>Boletas de honorarios con retención.</li>
+      </ul>
+      <p>
+        El SII suma esos ingresos, los lleva a UTA/UTM, aplica la tabla de Global
+        Complementario 2026 y calcula tu impuesto anual total. Luego:
+      </p>
+      <ul style="margin-left:18px;">
+        <li>Resta lo que ya pagaste por Impuesto Único.</li>
+        <li>Resta las retenciones de boletas.</li>
+      </ul>
+      <p>
+        El resultado final puede ser:
+        <strong>“a favor del contribuyente”</strong> (te devuelven),
+        o <strong>“a pagar”</strong> (debes completar).
+      </p>
 
-  </article>
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Consejos prácticos para 2026
+      </h2>
+      <ul style="margin-left:18px;">
+        <li>
+          Revisa tus <strong>certificados de renta</strong> en el portal del SII
+          antes de declarar.
+        </li>
+        <li>
+          Si tienes sueldos y boletas, entiende que las retenciones son
+          <strong>anticipos del Global Complementario</strong>.
+        </li>
+        <li>
+          Si tus ingresos se disparan durante el año (bonos, retiros, etc.),
+          es normal que el Global Complementario suba.
+        </li>
+      </ul>
+
+      <div style="margin-top:20px; text-align:center;">
+        <a
+          href="/"
+          style="
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:999px;
+            background:var(--primary);
+            color:white;
+            font-size:13px;
+            text-decoration:none;
+            box-shadow:0 18px 32px rgba(15,23,42,0.6);
+          "
+        >
+          👉 Volver a las calculadoras
+        </a>
+      </div>
+
+    </article>
+  </section>
 
   <footer>
-    © 2026 Calculando.cl — Herramientas simples para Chile 🇨🇱
+    <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
+    relación con el SII ni con ningún organismo del Estado.
+    Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 
 </main>
 
+<!-- JS para tema claro/oscuro -->
 <script>
-function toggleTheme() {
-  const html = document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme") === "light" ? "dark" : "light");
-}
-</script>
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
 
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
+</script>
 </body>
 </html>
