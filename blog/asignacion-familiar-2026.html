@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Asignación familiar 2026: tramos y montos actualizados</title>
 
-  <meta name="description" content="Tabla simple de asignación familiar 2026: montos por tramo, requisitos y cómo calcular el beneficio. Explicado en simple para trabajadores y empleadores.">
+  <meta name="description" content="Tramos y montos actualizados de la asignación familiar 2026 en Chile. Explicación simple para trabajadores y empleadores.">
 
-  <link rel="stylesheet" href="/css/calculando.css">
+  <link rel="stylesheet" href="/css/calculando.css" />
+
+  <style>
+    /* FIX PARA QUE EL TEXTO NO SE VEA GRUESO */
+    .article-body, .article-body * {
+      font-weight: 400 !important;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+    .article-body h2 {
+      font-size: 16px;
+      font-weight: 600 !important;
+      color: var(--text);
+      margin: 20px 0 8px;
+    }
+  </style>
 </head>
+
 <body>
 <main>
 
@@ -23,7 +39,7 @@
     </a>
 
     <button id="themeToggle" class="theme-toggle" type="button">
-      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeIcon">🌙</span>
       <span id="themeLabel">Modo oscuro</span>
     </button>
   </header>
@@ -38,121 +54,81 @@
   <!-- HERO -->
   <section class="hero">
     <h1>Asignación familiar 2026: tramos y montos actualizados</h1>
-    <p>
-      La asignación familiar es un beneficio estatal que ayuda a trabajadores, pensionados
-      y personas con cargas acreditadas. Aquí encuentras los <strong>tramos y montos 2026</strong>
-      explicados en simple para trabajadores y empleadores.
-    </p>
+    <p>La asignación familiar es un beneficio estatal para trabajadores y pensionados con cargas acreditadas. Revisa aquí los montos 2026 explicados en simple.</p>
     <div class="pill">
       <span class="pill-dot"></span>
       Actualizado 2026 · Beneficio por carga familiar
     </div>
   </section>
 
-  <!-- ARTÍCULO -->
+  <!-- CONTENIDO -->
   <section class="shell">
     <article class="article-body">
 
       <h2>¿Qué es la asignación familiar?</h2>
       <p>
-        Es un aporte mensual entregado por cada carga familiar acreditada
-        (hijos, cónyuge, madre del hijo, entre otros). El monto depende del tramo
-        de ingresos del trabajador o pensionado.
+        Es un aporte mensual por cada carga familiar acreditada (hijos, cónyuge, madre del hijo, entre otros). 
+        El monto depende del tramo de ingresos del trabajador o pensionado.
       </p>
 
       <h2>Montos asignación familiar 2026</h2>
+      <p>Estos valores deben actualizarse cuando el gobierno publique los montos oficiales.</p>
 
-      <p class="highlight-box">
-        Estos valores deben actualizarse cuando el gobierno publique los montos oficiales.
-      </p>
-
-      <table class="data-table">
-        <tr>
-          <th>Tramo</th>
-          <th>Renta mensual</th>
-          <th>Monto asignación</th>
-        </tr>
-        <tr>
-          <td>A</td>
-          <td>Hasta $[LIMITE_TRAMO_A]</td>
-          <td><strong>$[MONTO_TRAMO_A]</strong> por carga</td>
-        </tr>
-        <tr>
-          <td>B</td>
-          <td>$[LIMITE_TRAMO_A] – $[LIMITE_TRAMO_B]</td>
-          <td><strong>$[MONTO_TRAMO_B]</strong> por carga</td>
-        </tr>
-        <tr>
-          <td>C</td>
-          <td>$[LIMITE_TRAMO_B] – $[LIMITE_TRAMO_C]</td>
-          <td><strong>$[MONTO_TRAMO_C]</strong> por carga</td>
-        </tr>
-        <tr>
-          <td>D (sin derecho a pago)</td>
-          <td>Sobre $[LIMITE_TRAMO_C]</td>
-          <td>$0, pero se mantiene como carga</td>
-        </tr>
-      </table>
+      <pre>
+Tramo | Renta mensual                 | Monto asignación
+A     | Hasta $[LIMITE_TRAMO_A]       | $[MONTO_TRAMO_A] por carga
+B     | $[LIMITE_TRAMO_A] – $[LIMITE_TRAMO_B] | $[MONTO_TRAMO_B] por carga
+C     | $[LIMITE_TRAMO_B] – $[LIMITE_TRAMO_C] | $[MONTO_TRAMO_C] por carga
+D     | Sobre $[LIMITE_TRAMO_C]       | $0 (pero se mantiene como carga)
+      </pre>
 
       <h2>¿Quiénes pueden recibirla?</h2>
       <ul>
         <li>Trabajadores dependientes.</li>
-        <li>Trabajadores independientes que cotizan.</li>
+        <li>Independientes que cotizan.</li>
         <li>Pensionados.</li>
-        <li>Personas que acrediten cargas familiares en la Caja de Compensación o IPS.</li>
+        <li>Personas con cargas acreditadas en la Caja de Compensación o IPS.</li>
       </ul>
 
       <h2>Ejemplo rápido</h2>
-      <p>
-        Una persona en el tramo B con 2 cargas recibiría:
-        <strong>2 × monto del tramo B</strong>.
-      </p>
+      <p>Una persona en el tramo B con 2 cargas recibe: <strong>2 × monto del tramo B</strong>.</p>
 
       <h2>¿Cómo acreditar una carga familiar?</h2>
       <ul>
         <li>Presentar certificado de nacimiento o matrimonio.</li>
-        <li>Inscribir la carga en la Caja de Compensación o en el IPS.</li>
-        <li>Esperar la aprobación del empleador o entidad pagadora.</li>
+        <li>Inscribir la carga en Caja de Compensación o IPS.</li>
+        <li>Esperar aprobación del empleador o entidad pagadora.</li>
       </ul>
 
-      <p>
-        La asignación se paga junto con el sueldo mensual y debe aparecer claramente en la liquidación.
-      </p>
+      <p>La asignación se paga junto con el sueldo mensual y debe aparecer en la liquidación.</p>
 
     </article>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    © 2026 Calculando.cl — Beneficios laborales explicados en simple
+    © 2026 Calculando.cl — Beneficios laborales explicados en simple 🇨🇱
   </footer>
 
 </main>
 
-<!-- JS TEMA CLARO/OSCURO -->
 <script>
-  const themeToggle = document.getElementById("themeToggle");
-  const themeIcon = document.getElementById("themeIcon");
-  const themeLabel = document.getElementById("themeLabel");
-  const rootEl = document.documentElement;
+  const root = document.documentElement;
+  const icon = document.getElementById("themeIcon");
+  const label = document.getElementById("themeLabel");
 
-  function applyTheme(theme) {
-    rootEl.setAttribute("data-theme", theme);
-    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
-    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  function applyTheme(t){
+    root.setAttribute("data-theme", t);
+    icon.textContent = t==="dark" ? "🌙" : "☀️";
+    label.textContent = t==="dark" ? "Modo oscuro" : "Modo claro";
   }
 
-  (function initTheme() {
-    const stored = localStorage.getItem("calculando-theme");
-    applyTheme(stored === "light" ? "light" : "dark");
-  })();
+  applyTheme(localStorage.getItem("calculando-theme") || "light");
 
-  themeToggle.addEventListener("click", () => {
-    const current = rootEl.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
+  document.getElementById("themeToggle").onclick = () => {
+    const next = root.getAttribute("data-theme")==="dark" ? "light" : "dark";
     applyTheme(next);
     localStorage.setItem("calculando-theme", next);
-  });
+  }
 </script>
 
 </body>
