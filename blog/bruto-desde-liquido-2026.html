@@ -1,104 +1,175 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Cómo calcular el sueldo bruto desde el líquido (2026)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="description" content="Guía rápida para calcular el sueldo bruto desde el sueldo líquido en 2026. Fórmulas simples, porcentajes de descuentos y ejemplos prácticos.">
+  <title>Cómo calcular el sueldo bruto desde el líquido (2026) | Calculando.cl</title>
+  <meta name="description" content="Guía rápida para calcular el sueldo bruto desde el sueldo líquido en 2026. Fórmulas simples, ejemplos y descuentos explicados.">
 
-  <link rel="stylesheet" href="/css/calculando.css" />
+  <link rel="stylesheet" href="/css/calculando.css">
 </head>
 
 <body>
 <main>
 
-  <header class="blog-header">
-    <a href="/" class="logo-block">
+  <!-- HEADER -->
+  <header>
+    <div class="logo-block">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
-        <span>Calculadoras online</span>
+        <span>Tus cálculos, sin enredos.</span>
       </div>
-    </a>
-    <div class="theme-toggle" onclick="toggleTheme()">☀ Tema</div>
-  </header>
-
-  <nav class="breadcrumb">
-    <a href="/">Inicio</a> /
-    <a href="/blog/">Blog</a> /
-    <span>Bruto desde líquido 2026</span>
-  </nav>
-
-  <article class="blog-article">
-
-    <h1>Cómo calcular el sueldo bruto desde el líquido (2026)</h1>
-
-    <p class="intro">
-      Muchas veces te ofrecen un sueldo “líquido a pagar”, pero necesitas saber cuánto es el bruto para calcular cotizaciones, impuestos o negociar mejor.  
-      Aquí tienes una explicación simple para estimarlo en 2026.
-    </p>
-
-    <h2>Descuentos que se aplican al sueldo bruto</h2>
-
-    <ul>
-      <li>AFP: ~11% (varía según la AFP)</li>
-      <li>Salud: 7% (Fonasa) o plan pactado (Isapre)</li>
-      <li>Seguro de Cesantía: 0,6% trabajador contratado indefinido</li>
-    </ul>
-
-    <p class="highlight-box">
-      <strong>Descuento promedio total: 18% – 20%</strong>
-    </p>
-
-    <h2>Fórmula simple</h2>
-
-    <p class="highlight-box">
-      <strong>Bruto = Líquido ÷ (1 − porcentaje de descuentos)</strong>
-    </p>
-
-    <h2>Ejemplo práctico 2026</h2>
-
-    <p>Líquido ofrecido: <strong>$900.000</strong></p>
-    <p>Descuento estimado: 19%</p>
-
-    <p class="highlight-box">
-      Bruto = $900.000 ÷ 0,81 = <strong>$1.111.111</strong>
-    </p>
-
-    <h2>Ejemplo con Fonasa vs Isapre</h2>
-
-    <h3>Fonasa</h3>
-    <p>AFP 11% + Salud 7% + Cesantía 0,6% = 18,6%</p>
-
-    <p>Bruto = líquido ÷ 0,814</p>
-
-    <h3>Isapre</h3>
-    <p>Plan de salud puede ser 8%, 9% o más.</p>
-
-    <p>Bruto = líquido ÷ (1 − (AFP + Isapre + Cesantía))</p>
-
-    <h2>Conclusión</h2>
-    <p>
-      Para un cálculo rápido, divide el líquido por 0,80 u 0,81.  
-      Para un cálculo exacto, usa los porcentajes reales de tu AFP y plan de salud.
-    </p>
-
-    <div class="cta-box">
-      <a href="/sueldo-liquido/" class="cta-button">Calculadora de sueldo →</a>
     </div>
 
-  </article>
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+  </header>
 
-  <footer>© 2026 Calculando.cl — Sueldos explicados en simple 🇨🇱</footer>
+  <!-- HERO / TITULAR -->
+  <section class="hero">
+    <h1>Cómo calcular el sueldo bruto desde el líquido (2026)</h1>
+    <p>
+      Si te ofrecen un monto “líquido a pagar”, puedes calcular el sueldo bruto aproximado con una fórmula simple.
+      Aquí te explicamos paso a paso cómo hacerlo.
+    </p>
+
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Guía rápida para negociar sueldos
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <div class="blog-categories" style="margin-top:-8px;">
+    <a href="/blog/?cat=sueldo">Sueldos</a>
+    <a href="/blog/?cat=impuestos">Impuestos</a>
+    <a href="/blog/?cat=uf">UF</a>
+    <a href="/blog/?cat=boletas">Boletas</a>
+    <a href="/blog/?cat=salud">Salud</a>
+    <a href="/blog/?cat=afp">AFP</a>
+    <a href="/blog/?cat=ipc">IPC</a>
+    <a href="/blog/?cat=beneficios">Beneficios</a>
+  </div>
+
+  <!-- ARTÍCULO -->
+  <section class="shell" style="margin-top:16px;">
+    <article style="font-size:13px; line-height:1.6; color:var(--muted);">
+
+      <h2 style="font-size:16px; margin-bottom:8px; color:var(--text);">
+        Descuentos que se aplican al sueldo bruto
+      </h2>
+
+      <p>
+        Para estimar el sueldo bruto desde el líquido, se consideran los descuentos
+        obligatorios habituales:
+      </p>
+
+      <ul style="margin-left:18px;">
+        <li>AFP: alrededor del 11% (según administradora)</li>
+        <li>Salud: 7% en Fonasa o plan pactado en Isapre</li>
+        <li>Seguro de Cesantía: 0,6% trabajador contrato indefinido</li>
+      </ul>
+
+      <p class="highlight-box">
+        <strong>Descuento promedio total: 18% – 20%</strong>
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Fórmula simple
+      </h2>
+
+      <p class="highlight-box">
+        <strong>Bruto = Líquido ÷ (1 − porcentaje de descuentos)</strong>
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo práctico 2026
+      </h2>
+
+      <p><strong>Líquido ofrecido:</strong> $900.000</p>
+      <p><strong>Descuento estimado:</strong> 19%</p>
+
+      <p class="highlight-box">
+        Bruto = $900.000 ÷ 0.81 = <strong>$1.111.111</strong> (aprox.)
+      </p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Ejemplo: Fonasa vs Isapre
+      </h2>
+
+      <h3 style="font-size:14px; margin-bottom:4px; color:var(--text);">Fonasa</h3>
+      <p>AFP 11% + Salud 7% + Cesantía 0,6% = 18,6%</p>
+      <p><strong>Bruto = líquido ÷ 0,814</strong></p>
+
+      <h3 style="font-size:14px; margin-bottom:4px; margin-top:14px; color:var(--text);">Isapre</h3>
+      <p>El plan de salud puede ser 8%, 9% o más.</p>
+      <p><strong>Bruto = líquido ÷ (1 − (AFP + Isapre + Cesantía))</strong></p>
+
+      <h2 style="font-size:16px; margin:22px 0 8px; color:var(--text);">
+        Conclusión
+      </h2>
+
+      <p>
+        Para estimar rápido, divide tu sueldo líquido por **0,80 – 0,81**.  
+        Para un cálculo exacto, usa tus porcentajes reales de AFP, salud y cesantía.
+      </p>
+
+      <div style="margin-top:20px; text-align:center;">
+        <a
+          href="/sueldo-liquido/"
+          style="
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:999px;
+            background:var(--primary);
+            color:white;
+            font-size:13px;
+            text-decoration:none;
+            box-shadow:0 18px 32px rgba(15,23,42,0.6);
+          "
+        >
+          👉 Calculadora de Sueldo Líquido 2026
+        </a>
+      </div>
+
+    </article>
+  </section>
+
+  <footer>
+    <strong>Calculando.cl</strong> es un proyecto independiente y no tiene relación con el SII ni con organismos del Estado.
+    Usa estas herramientas como guía general.
+  </footer>
 
 </main>
 
+<!-- JS TEMA -->
 <script>
-function toggleTheme(){
-  const html=document.documentElement;
-  html.setAttribute("data-theme", html.getAttribute("data-theme")==="light"?"dark":"light");
-}
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
+
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    themeIcon.textContent = theme === "dark" ? "🌙" : "☀️";
+    themeLabel.textContent = theme === "dark" ? "Modo oscuro" : "Modo claro";
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    applyTheme(stored === "light" ? "light" : "dark");
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
 </script>
 
 </body>
