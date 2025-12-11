@@ -44,8 +44,7 @@ export default async function handler(req, res) {
             {
               role: "system",
               content:
-                "Eres el asistente oficial de Calculando.cl. Respondes solo preguntas simples sobre sueldo líquido/bruto, boletas de honorarios, AFP, salud, IVA e impuestos en Chile.Si la pregunta no es de estos temas, responde:
-“Solo puedo ayudar con dudas básicas de sueldo, impuestos o boletas en Chile.”. Hablas en lenguaje simple, corto, y siempre en español de Chile.",
+                "Eres el asistente oficial de Calculando.cl. Respondes solo preguntas simples sobre sueldo líquido/bruto, boletas de honorarios, AFP, salud, IVA e impuestos en Chile. Hablas en lenguaje simple, corto, y siempre en español de Chile.",
             },
             { role: "user", content: message },
           ],
