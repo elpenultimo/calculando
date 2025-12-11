@@ -16,29 +16,46 @@ export default async function handler(req, res) {
         .json({ error: "IA no configurada en el servidor." });
     }
 
-    // --- Parsear body correctamente (puede venir como string) ---
-    let body = req.body;
+    // -------- LEER BODY DE FORMA SÚPER TOLERANTE --------
+    let rawBody = req.body;
+    let data = null;
 
-    if (typeof body === "string") {
+    // Puede venir como string o como objeto
+    if (typeof rawBody === "string") {
       try {
-        body = JSON.parse(body);
-      } catch (e) {
-        console.error("❌ No se pudo parsear JSON:", e);
-        return res.status(400).json({ error: "Mensaje inválido." });
+        data = JSON.parse(rawBody);
+      } catch {
+        // Si no es JSON, ignoramos y seguimos
+        data = {};
       }
+    } else if (typeof rawBody === "object" && rawBody !== null) {
+      data = rawBody;
+    } else {
+      data = {};
     }
 
-    if (!body || typeof body !== "object") {
-      return res.status(400).json({ error: "Mensaje inválido." });
+    // Aceptamos varias claves posibles
+    let message =
+      data.message ||
+      data.text ||
+      data.prompt ||
+      data.input ||
+      "";
+
+    if (typeof message !== "string") {
+      message = String(message || "");
     }
 
-    const { message } = body;
+    message = message.trim();
 
-    if (!message || typeof message !== "string") {
-      return res.status(400).json({ error: "Mensaje inválido." });
+    if (!message) {
+      return res.status(400).json({
+        error:
+          'Mensaje inválido. Envía por ejemplo: { "message": "Qué es el IVA en Chile?" }',
+      });
     }
 
-    // --- Llamada a Groq (compatible OpenAI) ---
+    // -------- LLAMADA A GROQ (OpenAI compatible) --------
     const groqResponse = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
@@ -66,7 +83,6 @@ export default async function handler(req, res) {
     const rawText = await groqResponse.text();
 
     if (!groqResponse.ok) {
-      // IMPORTANTE: log para ver estado exacto en Vercel
       console.error(
         "❌ Groq error:",
         groqResponse.status,
@@ -78,9 +94,9 @@ export default async function handler(req, res) {
         .json({ error: "Error al consultar la IA. (Groq no OK)" });
     }
 
-    let data;
+    let groqData;
     try {
-      data = JSON.parse(rawText);
+      groqData = JSON.parse(rawText);
     } catch (e) {
       console.error("❌ No se pudo parsear respuesta Groq:", e, rawText);
       return res
@@ -89,7 +105,7 @@ export default async function handler(req, res) {
     }
 
     const reply =
-      data?.choices?.[0]?.message?.content?.trim() ||
+      groqData?.choices?.[0]?.message?.content?.trim() ||
       "Lo siento, esta vez no pude generar una respuesta útil.";
 
     return res.status(200).json({ reply });
