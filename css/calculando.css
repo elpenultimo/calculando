@@ -101,7 +101,13 @@ header {
   width: 36px;
   height: 36px;
   border-radius: 14px;
-  background: radial-gradient(circle at 30% 20%, #f9fafb 0, #e5e7eb 24%, #0ea5e9 50%, #4f46e5 100%);
+  background: radial-gradient(
+    circle at 30% 20%,
+    #f9fafb 0,
+    #e5e7eb 24%,
+    #0ea5e9 50%,
+    #4f46e5 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -335,7 +341,12 @@ html[data-theme="light"] .theme-toggle-icon {
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-strong);
   outline: none;
-  background: radial-gradient(circle at top, #fef9c3 0, #fef3c7 45%, #fefce8 100%);
+  background: radial-gradient(
+    circle at top,
+    #fef9c3 0,
+    #fef3c7 45%,
+    #fefce8 100%
+  );
   color: #111827;
   text-align: right;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
@@ -356,7 +367,12 @@ html[data-theme="light"] .theme-toggle-icon {
 }
 
 html[data-theme="light"] .amount-input {
-  background: radial-gradient(circle at top, #eef2ff 0, #e0f2fe 45%, #eff6ff 100%);
+  background: radial-gradient(
+    circle at top,
+    #eef2ff 0,
+    #e0f2fe 45%,
+    #eff6ff 100%
+  );
 }
 
 /* TASA / RATE & HELPERS */
@@ -557,7 +573,6 @@ footer strong {
 
 /* --------- BLOG: TIPOGRAFÍA SUAVE --------- */
 
-/* Texto base de los artículos */
 .blog-article,
 .blog-article p,
 .blog-article li,
@@ -575,7 +590,6 @@ footer strong {
   font-weight: 400;
 }
 
-/* Títulos dentro del contenido del blog */
 .blog-article h1,
 .article-body h1 {
   font-weight: 600;
@@ -626,74 +640,6 @@ nav.mini-blog-menu .mini-link:hover {
   transform: translateY(-1px);
   color: var(--primary);
 }
-body {
-  background: #111;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 40px 10px;
-}
-
-h1 {
-  font-size: 42px;
-  margin-bottom: 5px;
-}
-
-.sub {
-  opacity: 0.7;
-  margin-bottom: 30px;
-}
-
-.input-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #222;
-  padding: 12px 15px;
-  border-radius: 10px;
-  width: 92%;
-  max-width: 420px;
-  margin: auto;
-  font-size: 30px;
-}
-
-.input-box input {
-  background: transparent;
-  border: none;
-  outline: none;
-  margin-left: 10px;
-  width: 100%;
-  color: #fff;
-  font-size: 30px;
-}
-
-.rates {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  font-size: 20px;
-}
-
-.rates label {
-  margin: 0 15px;
-  cursor: pointer;
-}
-
-.result {
-  margin-top: 35px;
-  font-size: 22px;
-}
-
-.result h2 {
-  font-size: 26px;
-  margin-top: 25px;
-}
-
-.result p {
-  margin: 10px 0;
-  background: #222;
-  padding: 10px;
-  border-radius: 8px;
-}
 
 /* === ASISTENTE CALCULANDO === */
 
@@ -702,7 +648,8 @@ h1 {
   bottom: 20px;
   right: 20px;
   z-index: 9999;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
 /* Burbuja flotante */
