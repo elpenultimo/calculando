@@ -10,19 +10,34 @@ export default async function handler(req, res) {
     const apiKey = process.env.GROQ_API_KEY;
 
     if (!apiKey) {
-      console.error("Falta GROQ_API_KEY en las variables de entorno");
-      return res
-        .status(500)
-        .json({ error: "Falta configuración del servidor (API Key)." });
+      console.error("❌ Falta GROQ_API_KEY en Vercel");
+      return res.status(500).json({ error: "Server misconfigured" });
     }
 
-    const { message } = req.body || {};
+    // --- IMPORTANTE: parsear bien el body ---
+    let body = req.body;
+
+    // En Vercel, a veces llega como string:
+    if (typeof body === "string") {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        console.error("❌ No se pudo parsear JSON:", e);
+        return res.status(400).json({ error: "Mensaje inválido." });
+      }
+    }
+
+    if (!body || typeof body !== "object") {
+      return res.status(400).json({ error: "Mensaje inválido." });
+    }
+
+    const { message } = body;
 
     if (!message || typeof message !== "string") {
       return res.status(400).json({ error: "Mensaje inválido." });
     }
 
-    // Llamada a la API de Groq (formato compatible con OpenAI)
+    // --- Llamada a Groq ---
     const groqResponse = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
@@ -39,35 +54,29 @@ export default async function handler(req, res) {
             {
               role: "system",
               content:
-                "Eres el asistente de Calculando.cl. Respondes dudas básicas sobre sueldo líquido, sueldo bruto, boletas de honorarios, AFP, salud, impuestos e IVA en Chile. Usa un tono simple, chileno y cercano. Si la pregunta no tiene que ver con estos temas, responde brevemente y sugiere usar las calculadoras de Calculando.cl.",
+                "Eres el asistente oficial de Calculando.cl. Respondes dudas simples sobre sueldo líquido, sueldo bruto, boletas de honorarios, AFP, salud, IVA e impuestos en Chile. Usa lenguaje simple, chileno y cercano. Si la pregunta no es de estos temas, contesta breve y sugiere usar las calculadoras del sitio.",
             },
-            {
-              role: "user",
-              content: message,
-            },
+            { role: "user", content: message },
           ],
         }),
       }
     );
 
     if (!groqResponse.ok) {
-      const errorText = await groqResponse.text();
-      console.error("Error Groq:", groqResponse.status, errorText);
-
-      return res
-        .status(500)
-        .json({ error: "Error al consultar el modelo de IA." });
+      const txt = await groqResponse.text();
+      console.error("❌ Error Groq:", groqResponse.status, txt);
+      return res.status(500).json({ error: "Error al consultar la IA." });
     }
 
     const data = await groqResponse.json();
 
     const reply =
       data?.choices?.[0]?.message?.content?.trim() ||
-      "Lo siento, no pude generar una respuesta útil esta vez.";
+      "Lo siento, esta vez no pude generar una respuesta útil.";
 
     return res.status(200).json({ reply });
   } catch (err) {
-    console.error("Error en /api/calc-ai-chat:", err);
-    return res.status(500).json({ error: "Error interno del servidor." });
+    console.error("❌ Error en /api/calc-ai-chat:", err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
