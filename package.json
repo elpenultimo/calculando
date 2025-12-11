@@ -1,0 +1,7 @@
+{
+  "name": "calculando",
+  "version": "1.0.0",
+  "dependencies": {
+    "groq-sdk": "^0.6.0"
+  }
+}
