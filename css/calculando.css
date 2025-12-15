@@ -778,3 +778,13 @@ nav.mini-blog-menu .mini-link:hover {
   color: #6b7280;
   background: #020617;
 }
+.ad-shell{
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.ad-label{
+  font-size: 12px;
+  opacity: .7;
+  margin-bottom: 8px;
+}
