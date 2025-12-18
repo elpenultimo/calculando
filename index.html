@@ -42,18 +42,21 @@
     </div>
 
    <div class="tool-nav" id="toolNav">
-      <button class="tool-tab tool-tab-active" data-tool="boleta" type="button">
+      <a class="tool-tab" data-page="home" data-tool="boleta" href="/">
+        <span>🏠</span> Inicio
+      </a>
+      <a class="tool-tab" data-page="boleta" data-tool="boleta" href="/boleta/">
         <span>🧾</span> Boleta de honorarios
-      </button>
-      <button class="tool-tab" data-tool="sueldo" type="button">
+      </a>
+      <a class="tool-tab" data-page="sueldo" data-tool="sueldo" href="/sueldo-liquido/">
     <span>💼</span> Sueldo Líquido
-      </button>
-      <button class="tool-tab" data-tool="uf" type="button">
+      </a>
+      <a class="tool-tab" data-page="uf" data-tool="uf" href="/uf/">
         <span>💱</span> Calculadora UF
-      </button>
-      <button class="tool-tab" data-tool="iva" type="button">
+      </a>
+      <a class="tool-tab" data-page="iva" data-tool="iva" href="/iva/">
         <span>🧮</span> Calculadora IVA
-      </button>
+      </a>
     </div>
   </section>
 
@@ -411,23 +414,20 @@
   const ufSection = document.getElementById("tool-uf");
   const ivaSection = document.getElementById("tool-iva");
 
-  function activateTool(tool) {
+  function setActiveNav(page) {
     toolTabs.forEach(tab => {
-      const isActive = tab.dataset.tool === tool;
+      const isActive = tab.dataset.page === page;
       tab.classList.toggle("tool-tab-active", isActive);
     });
+  }
 
+  function activateTool(tool) {
     boletaSection.classList.toggle("tool-shell-active", tool === "boleta");
     sueldoSection.classList.toggle("tool-shell-active", tool === "sueldo");
     ufSection.classList.toggle("tool-shell-active", tool === "uf");
     ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
-  toolTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      activateTool(tab.dataset.tool);
-    });
-  });
   // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
   (function selectToolFromPath() {
     // Normalizamos el path (sin slash final)
@@ -436,18 +436,24 @@
       path = path.slice(0, -1);
     }
 
+    let page = "home";
     let tool = "boleta"; // por defecto
 
     if (path.endsWith("/boleta")) {
+      page = "boleta";
       tool = "boleta";
     } else if (path.endsWith("/sueldo-liquido")) {
+      page = "sueldo";
       tool = "sueldo";
     } else if (path.endsWith("/uf")) {
+      page = "uf";
       tool = "uf";
     } else if (path.endsWith("/iva")) {
+      page = "iva";
       tool = "iva";
     }
 
+    setActiveNav(page);
     activateTool(tool);
   })();
   // ---------- UTILS ----------

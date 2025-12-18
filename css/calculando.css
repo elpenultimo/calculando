@@ -249,6 +249,7 @@ html[data-theme="light"] .theme-toggle-icon {
   gap: 6px;
   transition: background var(--transition-fast), color var(--transition-fast),
     transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-decoration: none;
 }
 
 .tool-tab span {

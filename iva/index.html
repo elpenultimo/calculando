@@ -23,9 +23,6 @@
   <meta name="twitter:title" content="Calculadora IVA 19% – Chile">
   <meta name="twitter:description" content="Herramienta rápida para calcular IVA, neto y bruto en Chile.">
 
-  <!-- tu <style> igual que en el index principal -->
-  ...
-</head>
   <style>
     /* --------- TIPOGRAFÍA Y RESET --------- */
     * {
@@ -272,6 +269,7 @@
       gap: 6px;
       transition: background var(--transition-fast), color var(--transition-fast),
         transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
     }
 
     .tool-tab span {
@@ -624,8 +622,21 @@
     footer strong {
       font-weight: 600;
     }
+
+    /* BLOG LIST LINKS */
+    #blogLatestList a {
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    #blogLatestList a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
 <main>
   <header>
@@ -643,30 +654,33 @@
     </button>
   </header>
 
-    <section class="hero">
-      <h1>Calculadora IVA Chile 2026: neto, bruto e IVA 19%</h1>
-      <p>
-        Convierte entre precios con y sin impuesto usando la tasa oficial del 19%.
-        Pensada para cotizaciones rápidas desde el móvil o el escritorio.
-      </p>
-      <div class="pill">
-        <span class="pill-dot"></span>
-        BETA 2026 · Sumando nuevas calculadoras pronto
-      </div>
+  <section class="hero">
+    <h1>Calculadora IVA Chile 2026: neto, bruto e IVA 19%</h1>
+    <p>
+      Convierte entre precios con y sin impuesto usando la tasa oficial del 19%.
+      Pensada para cotizaciones rápidas desde el móvil o el escritorio.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      BETA 2026 · Sumando nuevas calculadoras pronto
+    </div>
 
- <div class="tool-nav" id="toolNav">
-      <button class="tool-tab tool-tab-active" data-tool="boleta" type="button">
+    <div class="tool-nav" id="toolNav">
+      <a class="tool-tab" data-page="home" data-tool="boleta" href="/">
+        <span>🏠</span> Inicio
+      </a>
+      <a class="tool-tab" data-page="boleta" data-tool="boleta" href="/boleta/">
         <span>🧾</span> Boleta de honorarios
-      </button>
-      <button class="tool-tab" data-tool="sueldo" type="button">
-    <span>💼</span> Sueldo Líquido
-      </button>
-      <button class="tool-tab" data-tool="uf" type="button">
+      </a>
+      <a class="tool-tab" data-page="sueldo" data-tool="sueldo" href="/sueldo-liquido/">
+        <span>💼</span> Sueldo Líquido
+      </a>
+      <a class="tool-tab" data-page="uf" data-tool="uf" href="/uf/">
         <span>💱</span> Calculadora UF
-      </button>
-      <button class="tool-tab" data-tool="iva" type="button">
+      </a>
+      <a class="tool-tab" data-page="iva" data-tool="iva" href="/iva/">
         <span>🧮</span> Calculadora IVA
-      </button>
+      </a>
     </div>
   </section>
 
@@ -678,12 +692,13 @@
       si el monto es <strong>en líquido</strong> o <strong>en bruto</strong>,
       con la retención aproximada que se va al SII.
     </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de Boleta de Honorarios de Calculando.cl te permite obtener el valor bruto, el valor
-  neto y la retención automática según la tasa vigente del SII para 2026. Es una herramienta rápida
-  para profesionales independientes que necesitan emitir o revisar una boleta electrónica sin errores.
-  Ingresa un monto y obtén el desglose listo para usar.
-</div>
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de Boleta de Honorarios de Calculando.cl te permite obtener el valor bruto, el valor
+      neto y la retención automática según la tasa vigente del SII para 2026. Es una herramienta rápida
+      para profesionales independientes que necesitan emitir o revisar una boleta electrónica sin errores.
+      Ingresa un monto y obtén el desglose listo para usar.
+    </div>
+
     <div class="pill" style="margin-top:0;margin-bottom:12px;">
       <span class="pill-dot"></span>
       Tasa por defecto: 14,5% · Resultados referenciales, verifica siempre en SII.cl
@@ -750,84 +765,85 @@
       </div>
     </div>
   </section>
-<!-- ------------- TOOL 2: SUELDO ------------- -->
 
-<section id="tool-sueldo" class="shell tool-shell">
-  <div class="tool-title">Calculadora de Sueldo Líquido 2026 (Simplificada)</div>
-  <div class="tool-subtitle">
-    Ingresa tu sueldo bruto y calculamos tus descuentos estimados:
-    AFP, salud, cesantía e impuesto simplificado.
-  </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de Sueldo Líquido de Calculando.cl convierte tu sueldo bruto a neto usando los
-  descuentos obligatorios vigentes en Chile: AFP, salud, seguro de cesantía y cotizaciones legales.
-  Es ideal para comparar ofertas laborales, estimar tu ingreso real y calcular cuánto recibirás cada
-  mes en tu cuenta.
-</div>
-  <div class="input-row">
-    <div class="input-label">Sueldo bruto</div>
-    <div class="amount-wrap">
-      <span class="amount-prefix">$</span>
-      <input
-        id="sl-bruto"
-        class="amount-input"
-        type="number"
-        inputmode="numeric"
-        min="0"
-        step="1000"
-        placeholder="Ej: 1200000"
-      />
+  <!-- ------------- TOOL 2: SUELDO ------------- -->
+  <section id="tool-sueldo" class="shell tool-shell">
+    <div class="tool-title">Calculadora de Sueldo Líquido 2026 (Simplificada)</div>
+    <div class="tool-subtitle">
+      Ingresa tu sueldo bruto y calculamos tus descuentos estimados:
+      AFP, salud, cesantía e impuesto simplificado.
     </div>
-  </div>
-
-  <div class="input-row">
-    <div class="input-label">AFP (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-afp" class="amount-input" type="number" step="0.01" value="11.44" />
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de Sueldo Líquido de Calculando.cl convierte tu sueldo bruto a neto usando los
+      descuentos obligatorios vigentes en Chile: AFP, salud, seguro de cesantía y cotizaciones legales.
+      Es ideal para comparar ofertas laborales, estimar tu ingreso real y calcular cuánto recibirás cada
+      mes en tu cuenta.
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">Salud (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-salud" class="amount-input" type="number" step="0.1" value="7" />
+    <div class="input-row">
+      <div class="input-label">Sueldo bruto</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="sl-bruto"
+          class="amount-input"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1000"
+          placeholder="Ej: 1200000"
+        />
+      </div>
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">Cesantía (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-cesantia" class="amount-input" type="number" step="0.1" value="0.6" />
+    <div class="input-row">
+      <div class="input-label">AFP (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-afp" class="amount-input" type="number" step="0.01" value="11.44" />
+      </div>
     </div>
-  </div>
 
-  <div id="sl-error" class="error"></div>
+    <div class="input-row">
+      <div class="input-label">Salud (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-salud" class="amount-input" type="number" step="0.1" value="7" />
+      </div>
+    </div>
 
-  <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
-  <div class="result-card">
-    <div class="result-title">Descuentos obligatorios</div>
+    <div class="input-row">
+      <div class="input-label">Cesantía (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-cesantia" class="amount-input" type="number" step="0.1" value="0.6" />
+      </div>
+    </div>
 
-    <div class="result-main-label">AFP:</div>
-    <div id="sl-afp-val" class="result-value">$0</div>
+    <div id="sl-error" class="error"></div>
 
-    <div class="result-main-label" style="margin-top:10px;">Salud:</div>
-    <div id="sl-salud-val" class="result-value">$0</div>
+    <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
+      <div class="result-card">
+        <div class="result-title">Descuentos obligatorios</div>
 
-    <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
-    <div id="sl-cesantia-val" class="result-value">$0</div>
-  </div>
+        <div class="result-main-label">AFP:</div>
+        <div id="sl-afp-val" class="result-value">$0</div>
 
-  <div class="result-card">
-    <div class="result-title">Resultado final</div>
+        <div class="result-main-label" style="margin-top:10px;">Salud:</div>
+        <div id="sl-salud-val" class="result-value">$0</div>
 
-    <div class="result-main-label">Impuesto (simple):</div>
-    <div id="sl-impuesto-val" class="result-value">$0</div>
+        <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
+        <div id="sl-cesantia-val" class="result-value">$0</div>
+      </div>
 
-    <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
-    <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
-  </div>
-</div>
-</section>
+      <div class="result-card">
+        <div class="result-title">Resultado final</div>
+
+        <div class="result-main-label">Impuesto (simple):</div>
+        <div id="sl-impuesto-val" class="result-value">$0</div>
+
+        <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
+        <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
+      </div>
+    </div>
+  </section>
 
   <!-- ------------- TOOL 3: UF ------------- -->
   <section id="tool-uf" class="shell tool-shell">
@@ -836,14 +852,13 @@
       Ingresa el monto y el valor de la UF que quieras usar.
       Puedes convertir de pesos a UF o de UF a pesos.
     </div>
-    <!-- Texto explicativo extra -->
-  <div class="tool-subtitle tool-extra">
-  La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
-  usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
-  dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
-  en pesos o en UF y obtendrás su equivalente al instante.
-</div>
 
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
+      usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
+      dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
+      en pesos o en UF y obtendrás su equivalente al instante.
+    </div>
 
     <div class="input-row">
       <div class="input-label">Monto</div>
@@ -904,11 +919,13 @@
     <div class="tool-subtitle">
       Convierte entre valores netos y brutos o calcula sólo el IVA, usando la tasa estándar del 19% en Chile.
     </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de IVA de Calculando.cl te permite obtener el monto neto, el monto bruto y el valor
-  del IVA aplicando la tasa del 19% usada en Chile. Es una herramienta útil para cotizaciones,
-  presupuestos, ventas y cualquier cálculo rápido relacionado con precios con o sin IVA.
-</div>
+
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de IVA de Calculando.cl te permite obtener el monto neto, el monto bruto y el valor
+      del IVA aplicando la tasa del 19% usada en Chile. Es una herramienta útil para cotizaciones,
+      presupuestos, ventas y cualquier cálculo rápido relacionado con precios con o sin IVA.
+    </div>
+
     <div class="input-row">
       <div class="input-label">Monto</div>
       <div class="amount-wrap">
@@ -950,6 +967,27 @@
       Ingresa un monto para calcular su IVA, valor neto y bruto.
     </div>
   </section>
+
+  <!-- ========== BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+  <section class="shell" style="margin-top:26px;">
+    <div class="tool-title">Últimos artículos del Blog 2026</div>
+    <div class="tool-subtitle">
+      Explicaciones simples sobre sueldos, impuestos, UF y cálculos laborales en Chile.
+    </div>
+
+    <ul id="blogLatestList"
+        style="list-style:none;padding-left:0;display:grid;gap:14px;margin-top:14px;">
+      <li class="tool-subtitle">Cargando artículos del blog…</li>
+    </ul>
+
+    <div style="margin-top:18px;">
+      <a href="/blog/"
+         style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Ver todos los artículos del blog →
+      </a>
+    </div>
+  </section>
+  <!-- ========== FIN BLOG DESTACADO 2026 (DINÁMICO) ========== -->
 
   <section class="shell faq-section" aria-labelledby="faq-iva-title">
     <h2 class="faq-title" id="faq-iva-title">Preguntas frecuentes sobre el IVA 19% en Chile</h2>
@@ -995,6 +1033,8 @@
     Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
+
+<script src="/blog/posts.js"></script>
 
 <script type="application/ld+json">
 {
@@ -1092,7 +1132,6 @@
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
-
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
   const themeLabel = document.getElementById("themeLabel");
@@ -1111,11 +1150,8 @@
 
   (function initTheme() {
     const stored = localStorage.getItem("calculando-theme");
-    if (stored === "light" || stored === "dark") {
-      applyTheme(stored);
-    } else {
-      applyTheme("dark");
-    }
+    if (stored === "light" || stored === "dark") applyTheme(stored);
+    else applyTheme("dark");
   })();
 
   themeToggle.addEventListener("click", () => {
@@ -1126,7 +1162,6 @@
   });
 
   // ---------- NAV ENTRE HERRAMIENTAS ----------
-
   const toolNav = document.getElementById("toolNav");
   const toolTabs = toolNav.querySelectorAll(".tool-tab");
   const boletaSection = document.getElementById("tool-boleta");
@@ -1134,47 +1169,35 @@
   const ufSection = document.getElementById("tool-uf");
   const ivaSection = document.getElementById("tool-iva");
 
-  function activateTool(tool) {
-    toolTabs.forEach(tab => {
-      const isActive = tab.dataset.tool === tool;
-      tab.classList.toggle("tool-tab-active", isActive);
-    });
+  function setActiveNav(page) {
+    toolTabs.forEach(tab => tab.classList.toggle("tool-tab-active", tab.dataset.page === page));
+  }
 
+  function activateTool(tool) {
     boletaSection.classList.toggle("tool-shell-active", tool === "boleta");
     sueldoSection.classList.toggle("tool-shell-active", tool === "sueldo");
     ufSection.classList.toggle("tool-shell-active", tool === "uf");
     ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
-  toolTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      activateTool(tab.dataset.tool);
-    });
-  });
   // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
   (function selectToolFromPath() {
-    // Normalizamos el path (sin slash final)
     let path = window.location.pathname || "/";
-    if (path.length > 1 && path.endsWith("/")) {
-      path = path.slice(0, -1);
-    }
+    if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1);
 
-    let tool = "boleta"; // por defecto
+    let page = "home";
+    let tool = "boleta";
 
-    if (path.endsWith("/boleta")) {
-      tool = "boleta";
-    } else if (path.endsWith("/sueldo-liquido")) {
-      tool = "sueldo";
-    } else if (path.endsWith("/uf")) {
-      tool = "uf";
-    } else if (path.endsWith("/iva")) {
-      tool = "iva";
-    }
+    if (path.endsWith("/boleta")) { page = "boleta"; tool = "boleta"; }
+    else if (path.endsWith("/sueldo-liquido")) { page = "sueldo"; tool = "sueldo"; }
+    else if (path.endsWith("/uf")) { page = "uf"; tool = "uf"; }
+    else if (path.endsWith("/iva")) { page = "iva"; tool = "iva"; }
 
+    setActiveNav(page);
     activateTool(tool);
   })();
-  // ---------- UTILS ----------
 
+  // ---------- UTILS ----------
   function formatCLP(value) {
     if (!isFinite(value)) return "$0";
     try {
@@ -1189,7 +1212,6 @@
   }
 
   // ---------- CALCULADORA BOLETA ----------
-
   const montoInput = document.getElementById("monto");
   const errorBox = document.getElementById("error");
   const resultsEl = document.getElementById("results");
@@ -1209,7 +1231,7 @@
   }
 
   function recalculateBoleta() {
-    const raw = montoInput.value.trim();
+    const raw = (montoInput.value || "").trim();
     errorBox.textContent = "";
 
     if (!raw) {
@@ -1257,14 +1279,12 @@
     const pills = rateGroup.querySelectorAll(".rate-pill");
     pills.forEach(pill => {
       const input = pill.querySelector("input");
-      pill.classList.toggle("active", input.checked);
+      pill.classList.toggle("active", !!input && input.checked);
     });
     recalculateBoleta();
   });
 
-// ---------- CALCULADORA SUELDO ----------
   // ---------- CALCULADORA SUELDO ----------
-
   const slBrutoInput = document.getElementById("sl-bruto");
   const slAfpInput = document.getElementById("sl-afp");
   const slSaludInput = document.getElementById("sl-salud");
@@ -1287,7 +1307,6 @@
 
     err.textContent = "";
 
-    // Si no hay sueldo bruto válido, dejamos todo en cero
     if (!bruto || bruto <= 0) {
       row.style.opacity = 0.45;
       vAfp.textContent = "$0";
@@ -1298,43 +1317,34 @@
       return;
     }
 
-    // Descuentos
     const dAfp = bruto * afpPct;
     const dSalud = bruto * saludPct;
     const dCes = bruto * cesPct;
 
-    // Base imponible simple (bruto menos AFP y salud)
     const imponible = bruto - dAfp - dSalud;
 
-    // Impuesto súper simplificado por tramos
     let impuesto = 0;
     if (imponible > 2052302) impuesto = imponible * 0.08;
     else if (imponible > 923537) impuesto = imponible * 0.04;
 
     const liquido = bruto - dAfp - dSalud - dCes - impuesto;
 
-    const f = n => n.toLocaleString("es-CL");
-
-    vAfp.textContent = "$" + f(Math.round(dAfp));
-    vSalud.textContent = "$" + f(Math.round(dSalud));
-    vCes.textContent = "$" + f(Math.round(dCes));
-    vImp.textContent = "$" + f(Math.round(impuesto));
-    vLiq.textContent = "$" + f(Math.round(liquido));
+    vAfp.textContent = formatCLP(dAfp);
+    vSalud.textContent = formatCLP(dSalud);
+    vCes.textContent = formatCLP(dCes);
+    vImp.textContent = formatCLP(impuesto);
+    vLiq.textContent = formatCLP(liquido);
 
     row.style.opacity = 1;
   }
 
-  // Escuchar cambios en los 4 inputs
   ["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", calcularSueldo);
   });
-
-  // Llamada inicial por si ya hay valores por defecto
   calcularSueldo();
 
   // ---------- CALCULADORA UF ----------
-
   const ufMontoInput = document.getElementById("ufMonto");
   const ufValorInput = document.getElementById("ufValor");
   const ufDirectionGroup = document.getElementById("ufDirectionGroup");
@@ -1342,14 +1352,13 @@
   const ufResults = document.getElementById("ufResults");
   const ufLegend = document.getElementById("ufLegend");
 
-  // UF automática desde API pública
   async function autoFillUF() {
     try {
       const res = await fetch("https://mindicador.cl/api");
       if (!res.ok) throw new Error("HTTP " + res.status);
 
       const data = await res.json();
-      const ufData = data?.uf;
+      const ufData = data && data.uf ? data.uf : null;
       if (!ufData || ufData.valor == null) return;
 
       const valorNum = Number(String(ufData.valor).replace(",", "."));
@@ -1361,10 +1370,10 @@
         const fechaObj = new Date(ufData.fecha);
         const dia = String(fechaObj.getDate()).padStart(2, "0");
         const mes = String(fechaObj.getMonth() + 1).padStart(2, "0");
-        const año = fechaObj.getFullYear();
+        const anio = fechaObj.getFullYear();
 
         ufLegend.textContent =
-          `UF automática del día ${dia}-${mes}-${año} (mindicador.cl). ` +
+          `UF automática del día ${dia}-${mes}-${anio} (mindicador.cl). ` +
           `Puedes editarla si necesitas otra fecha.`;
       }
 
@@ -1377,7 +1386,6 @@
       }
     }
   }
-
   autoFillUF();
 
   function formatUF(value) {
@@ -1395,8 +1403,8 @@
   }
 
   function recalculateUF() {
-    const rawMonto = ufMontoInput.value.trim();
-    const rawValor = ufValorInput.value.trim();
+    const rawMonto = (ufMontoInput.value || "").trim();
+    const rawValor = (ufValorInput.value || "").trim();
     ufErrorBox.textContent = "";
 
     if (!rawMonto || !rawValor) {
@@ -1440,13 +1448,12 @@
     const pills = ufDirectionGroup.querySelectorAll(".direction-pill");
     pills.forEach(pill => {
       const input = pill.querySelector("input");
-      pill.classList.toggle("direction-pill-active", input.checked);
+      pill.classList.toggle("direction-pill-active", !!input && input.checked);
     });
     recalculateUF();
   });
 
   // ---------- CALCULADORA IVA (19%) ----------
-
   const ivaMontoInput = document.getElementById("ivaMonto");
   const ivaModeGroup = document.getElementById("ivaModeGroup");
   const ivaError = document.getElementById("ivaError");
@@ -1454,7 +1461,7 @@
   const IVA_RATE = 0.19;
 
   function recalculateIVA() {
-    const raw = ivaMontoInput.value.trim();
+    const raw = (ivaMontoInput.value || "").trim();
     ivaError.textContent = "";
 
     if (!raw) {
@@ -1506,18 +1513,49 @@
     const pills = ivaModeGroup.querySelectorAll(".direction-pill");
     pills.forEach(pill => {
       const input = pill.querySelector("input");
-      pill.classList.toggle("direction-pill-active", input.checked);
+      pill.classList.toggle("direction-pill-active", !!input && input.checked);
     });
     recalculateIVA();
   });
-</script>
-<script src="https://cdn.counter.dev/script.js" data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458" data-utcoffset="-3"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', function () {
-    var tab = document.querySelector('[data-tool="iva"]');
-    if (tab) tab.click();
+
+  // ---------- BLOG: CARGAR ÚLTIMOS ARTÍCULOS ----------
+  function renderLatestBlogPosts(limit = 5) {
+    const list = document.getElementById("blogLatestList");
+    if (!list) return;
+
+    if (!window.CALCULANDO_POSTS_2026 || !Array.isArray(window.CALCULANDO_POSTS_2026)) {
+      list.innerHTML = "<li class='tool-subtitle'>No se pudieron cargar los artículos.</li>";
+      return;
+    }
+
+    const posts = [...window.CALCULANDO_POSTS_2026].sort((a, b) =>
+      (b.date || "").localeCompare(a.date || "")
+    );
+
+    const latest = posts.slice(0, limit);
+
+    list.innerHTML = "";
+    latest.forEach(post => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="${post.slug}">
+          <strong>${post.title}</strong>
+        </a>
+        <div class="tool-subtitle">${post.description || ""}</div>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // fuerza que en /iva/ se vea IVA (aunque el default sea boleta)
+    renderLatestBlogPosts(5);
+    recalculateBoleta();
+    recalculateUF();
+    recalculateIVA();
   });
 </script>
-</body>
+
+<script src="https://cdn.counter.dev/script.js" data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458" data-utcoffset="-3"></script>
 </body>
 </html>
