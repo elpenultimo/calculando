@@ -270,6 +270,7 @@
       gap: 6px;
       transition: background var(--transition-fast), color var(--transition-fast),
         transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
     }
 
     .tool-tab span {
@@ -612,18 +613,21 @@
       </div>
 
   <div class="tool-nav" id="toolNav">
-      <button class="tool-tab tool-tab-active" data-tool="boleta" type="button">
+      <a class="tool-tab" data-page="home" data-tool="boleta" href="/">
+        <span>🏠</span> Inicio
+      </a>
+      <a class="tool-tab" data-page="boleta" data-tool="boleta" href="/boleta/">
         <span>🧾</span> Boleta de honorarios
-      </button>
-      <button class="tool-tab" data-tool="sueldo" type="button">
+      </a>
+      <a class="tool-tab" data-page="sueldo" data-tool="sueldo" href="/sueldo-liquido/">
     <span>💼</span> Sueldo Líquido
-      </button>
-      <button class="tool-tab" data-tool="uf" type="button">
+      </a>
+      <a class="tool-tab" data-page="uf" data-tool="uf" href="/uf/">
         <span>💱</span> Calculadora UF
-      </button>
-      <button class="tool-tab" data-tool="iva" type="button">
+      </a>
+      <a class="tool-tab" data-page="iva" data-tool="iva" href="/iva/">
         <span>🧮</span> Calculadora IVA
-      </button>
+      </a>
     </div>
   </section>
 
@@ -908,12 +912,35 @@
     </div>
   </section>
 
+  <!-- ========== BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+<section class="shell" style="margin-top:26px;">
+  <div class="tool-title">Últimos artículos del Blog 2026</div>
+  <div class="tool-subtitle">
+    Explicaciones simples sobre sueldos, impuestos, UF y cálculos laborales en Chile.
+  </div>
+
+  <ul id="blogLatestList"
+      style="list-style:none;padding-left:0;display:grid;gap:14px;margin-top:14px;">
+    <li class="tool-subtitle">Cargando artículos del blog…</li>
+  </ul>
+
+  <div style="margin-top:18px;">
+    <a href="/blog/"
+       style="font-size:13px;color:var(--primary);text-decoration:underline;">
+      Ver todos los artículos del blog →
+    </a>
+  </div>
+</section>
+<!-- ========== FIN BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
     Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
+
+<script src="/blog/posts.js"></script>
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
@@ -959,23 +986,20 @@
   const ufSection = document.getElementById("tool-uf");
   const ivaSection = document.getElementById("tool-iva");
 
-  function activateTool(tool) {
+  function setActiveNav(page) {
     toolTabs.forEach(tab => {
-      const isActive = tab.dataset.tool === tool;
+      const isActive = tab.dataset.page === page;
       tab.classList.toggle("tool-tab-active", isActive);
     });
+  }
 
+  function activateTool(tool) {
     boletaSection.classList.toggle("tool-shell-active", tool === "boleta");
     sueldoSection.classList.toggle("tool-shell-active", tool === "sueldo");
     ufSection.classList.toggle("tool-shell-active", tool === "uf");
     ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
-  toolTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      activateTool(tab.dataset.tool);
-    });
-  });
   // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
   (function selectToolFromPath() {
     // Normalizamos el path (sin slash final)
@@ -984,18 +1008,24 @@
       path = path.slice(0, -1);
     }
 
+    let page = "home";
     let tool = "boleta"; // por defecto
 
     if (path.endsWith("/boleta")) {
+      page = "boleta";
       tool = "boleta";
     } else if (path.endsWith("/sueldo-liquido")) {
+      page = "sueldo";
       tool = "sueldo";
     } else if (path.endsWith("/uf")) {
+      page = "uf";
       tool = "uf";
     } else if (path.endsWith("/iva")) {
+      page = "iva";
       tool = "iva";
     }
 
+    setActiveNav(page);
     activateTool(tool);
   })();
   // ---------- UTILS ----------
@@ -1335,14 +1365,35 @@
     });
     recalculateIVA();
   });
+
+  // ---------- BLOG: CARGAR ÚLTIMOS ARTÍCULOS ----------
+   function renderLatestBlogPosts(limit = 5) {
+     const list = document.getElementById("blogLatestList");
+     if (!list || !window.CALCULANDO_POSTS_2026) return;
+
+     const posts = [...window.CALCULANDO_POSTS_2026].sort((a, b) =>
+       (b.date || "").localeCompare(a.date || "")
+     );
+
+     const latest = posts.slice(0, limit);
+
+     list.innerHTML = "";
+     latest.forEach(post => {
+       const li = document.createElement("li");
+       li.innerHTML = `
+         <a href="${post.slug}">
+           <strong>${post.title}</strong>
+         </a>
+         <div class="tool-subtitle">${post.description}</div>
+       `;
+       list.appendChild(li);
+     });
+   }
+
+   document.addEventListener("DOMContentLoaded", () => {
+     renderLatestBlogPosts(5);
+   });
 </script>
 <script src="https://cdn.counter.dev/script.js" data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458" data-utcoffset="-3"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', function () {
-    var tab = document.querySelector('[data-tool="sueldo"]');
-    if (tab) tab.click();
-  });
-</script>
-</body>
 </body>
 </html>
