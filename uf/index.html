@@ -23,7 +23,7 @@
   <meta name="twitter:title" content="UF Hoy – Calculadora UF ⇄ CLP">
   <meta name="twitter:description" content="Calculadora rápida para convertir entre UF y pesos chilenos.">
 
-</head>
+  <!-- ✅ FIX: el <style> debe ir dentro del <head> (antes estaba fuera por un </head> extra) -->
   <style>
     /* --------- TIPOGRAFÍA Y RESET --------- */
     * {
@@ -97,18 +97,11 @@
     }
 
     @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* --------- HEADER --------- */
-
     header {
       display: flex;
       align-items: center;
@@ -122,6 +115,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: inherit;
     }
 
     .logo-mark {
@@ -187,14 +182,8 @@
       font-size: 12px;
     }
 
-    html[data-theme="dark"] .theme-toggle-icon {
-      background: #0f172a;
-    }
-
-    html[data-theme="light"] .theme-toggle-icon {
-      background: #facc15;
-      color: #1f2933;
-    }
+    html[data-theme="dark"] .theme-toggle-icon { background: #0f172a; }
+    html[data-theme="light"] .theme-toggle-icon { background: #facc15; color: #1f2933; }
 
     .theme-toggle:hover {
       border-color: var(--primary);
@@ -204,23 +193,9 @@
     }
 
     /* --------- HERO --------- */
-
-    .hero {
-      text-align: left;
-      margin-bottom: 14px;
-    }
-
-    .hero h1 {
-      font-size: clamp(22px, 4.2vw, 26px);
-      margin-bottom: 6px;
-    }
-
-    .hero p {
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.45;
-    }
+    .hero { text-align: left; margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(22px, 4.2vw, 26px); margin-bottom: 6px; }
+    .hero p { font-size: 13px; color: var(--muted); max-width: 560px; line-height: 1.45; }
 
     .pill {
       display: inline-flex;
@@ -244,7 +219,6 @@
     }
 
     /* --------- NAV DE HERRAMIENTAS --------- */
-
     .tool-nav {
       display: inline-flex;
       padding: 3px;
@@ -273,9 +247,7 @@
       text-decoration: none;
     }
 
-    .tool-tab span {
-      font-size: 14px;
-    }
+    .tool-tab span { font-size: 14px; }
 
     .tool-tab-active {
       background: var(--primary-soft);
@@ -285,7 +257,6 @@
     }
 
     /* --------- SHELL / CONTENEDORES --------- */
-
     .shell {
       margin-top: 14px;
       background: var(--shell);
@@ -297,64 +268,30 @@
     }
 
     @media (min-width: 768px) {
-      .shell {
-        padding: 20px 22px 24px;
-      }
+      .shell { padding: 20px 22px 24px; }
     }
 
-    .tool-shell {
-      display: none;
-    }
+    .tool-shell { display: none; }
+    .tool-shell-active { display: block; }
 
-    .tool-shell-active {
-      display: block;
-    }
-
-    .tool-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .tool-subtitle {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
+    .tool-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .tool-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
 
     /* INPUT MONTO */
-
     .input-row {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin-bottom: 16px;
     }
-
     @media (min-width: 640px) {
-      .input-row {
-        flex-direction: row;
-        align-items: center;
-      }
+      .input-row { flex-direction: row; align-items: center; }
     }
 
-    .input-label {
-      font-size: 13px;
-      color: var(--muted);
-      min-width: 130px;
-    }
+    .input-label { font-size: 13px; color: var(--muted); min-width: 130px; }
 
-    .amount-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .amount-prefix {
-      font-size: 24px;
-      font-weight: 700;
-    }
+    .amount-wrap { flex: 1; display: flex; align-items: center; gap: 8px; }
+    .amount-prefix { font-size: 24px; font-weight: 700; }
 
     .amount-input {
       flex: 1;
@@ -371,15 +308,11 @@
         border-color var(--transition-fast), background 0.35s ease-out;
     }
 
-    .amount-input::placeholder {
-      color: rgba(15, 23, 42, 0.45);
-    }
+    .amount-input::placeholder { color: rgba(15, 23, 42, 0.45); }
 
     .amount-input:focus {
       border-color: var(--accent);
-      box-shadow:
-        0 0 0 1px rgba(250, 204, 21, 0.45),
-        0 18px 32px rgba(250, 204, 21, 0.28);
+      box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.45), 0 18px 32px rgba(250, 204, 21, 0.28);
       transform: translateY(-1px);
     }
 
@@ -388,7 +321,6 @@
     }
 
     /* TASA / RATE & HELPERS */
-
     .rate-row {
       display: flex;
       flex-wrap: wrap;
@@ -398,11 +330,7 @@
       margin-bottom: 10px;
     }
 
-    .rate-group {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .rate-group { display: inline-flex; flex-wrap: wrap; gap: 6px; }
 
     .rate-pill {
       padding: 4px 10px;
@@ -420,10 +348,7 @@
         transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
-    .rate-pill input {
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
+    .rate-pill input { accent-color: var(--accent); cursor: pointer; }
 
     .rate-pill.active {
       border-color: var(--accent);
@@ -433,10 +358,7 @@
       transform: translateY(-0.5px);
     }
 
-    .helper {
-      font-size: 11px;
-      color: var(--muted);
-    }
+    .helper { font-size: 11px; color: var(--muted); }
 
     .error {
       min-height: 16px;
@@ -446,7 +368,6 @@
     }
 
     /* RESULTADOS BOLETA */
-
     .results-row {
       margin-top: 18px;
       display: grid;
@@ -455,29 +376,21 @@
     }
 
     @media (min-width: 720px) {
-      .results-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .results-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     .result-card {
       border-radius: var(--radius-md);
       padding: 14px 14px 16px;
       border: 1px solid var(--border-subtle);
-      background: linear-gradient(
-        145deg,
-        rgba(15, 23, 42, 0.98),
-        rgba(30, 64, 175, 0.85)
-      );
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 64, 175, 0.85));
       box-shadow: var(--shadow-card);
       transform: translateY(0);
       transition: transform var(--transition-med), box-shadow var(--transition-med),
         border-color var(--transition-fast), background 0.35s ease-out;
     }
 
-    html[data-theme="light"] .result-card {
-      background: linear-gradient(145deg, #ffffff, #e0edff);
-    }
+    html[data-theme="light"] .result-card { background: linear-gradient(145deg, #ffffff, #e0edff); }
 
     .result-card:hover {
       transform: translateY(-1px);
@@ -493,30 +406,12 @@
       margin-bottom: 6px;
     }
 
-    .result-main-label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .result-value {
-      font-size: 21px;
-      font-weight: 700;
-    }
-
-    .result-sub {
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .result-highlight {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .result-main-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .result-value { font-size: 21px; font-weight: 700; }
+    .result-sub { margin-top: 6px; font-size: 12px; color: var(--muted); }
+    .result-highlight { color: var(--accent); font-weight: 600; }
 
     /* --------- UF & IVA: CAJAS Y RESULTADOS --------- */
-
     .direction-row {
       display: flex;
       flex-wrap: wrap;
@@ -540,9 +435,7 @@
         transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
-    .direction-pill input {
-      accent-color: var(--primary);
-    }
+    .direction-pill input { accent-color: var(--primary); }
 
     .direction-pill-active {
       border-color: var(--primary);
@@ -552,8 +445,7 @@
       transform: translateY(-0.5px);
     }
 
-    .uf-results,
-    .iva-results {
+    .uf-results, .iva-results {
       margin-top: 16px;
       border-radius: var(--radius-md);
       padding: 12px 14px;
@@ -564,13 +456,29 @@
       line-height: 1.5;
     }
 
-    .uf-results strong,
-    .iva-results strong {
-      color: var(--accent);
+    .uf-results strong, .iva-results strong { color: var(--accent); }
+
+    /* --------- FAQ --------- */
+    .faq-section { margin-top: 20px; }
+    .faq-title { font-size: 18px; margin-bottom: 10px; }
+
+    .faq-grid { display: grid; gap: 12px; }
+    @media (min-width: 768px) {
+      .faq-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* FOOTER */
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
 
+    .faq-question { font-size: 14px; margin-bottom: 6px; }
+    .faq-answer { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* FOOTER */
     footer {
       margin-top: 20px;
       font-size: 11px;
@@ -578,22 +486,21 @@
       text-align: center;
       line-height: 1.5;
     }
-
-    footer strong {
-      font-weight: 600;
-    }
+    footer strong { font-weight: 600; }
   </style>
 </head>
+
 <body>
 <main>
   <header>
-    <div class="logo-block">
+    <!-- ✅ FIX opcional: hacerlo link a inicio (mejora UX). Si no quieres, cambia <a> por <div>. -->
+    <a class="logo-block" href="/">
       <div class="logo-mark">C</div>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
         <span>Tus cálculos, sin enredos.</span>
       </div>
-    </div>
+    </a>
 
     <button id="themeToggle" class="theme-toggle" type="button">
       <span class="theme-toggle-icon" id="themeIcon">🌙</span>
@@ -601,18 +508,18 @@
     </button>
   </header>
 
-    <section class="hero">
-      <h1>Calculadora UF hoy: pasa de UF a pesos y de CLP a UF</h1>
-      <p>
-        Consulta el valor actualizado de la UF y convierte montos para arriendos, créditos o reajustes.
-        Optimizada para usarse rápido desde el teléfono o el computador.
-      </p>
-      <div class="pill">
-        <span class="pill-dot"></span>
-        BETA 2026 · Sumando nuevas calculadoras pronto
-      </div>
+  <section class="hero">
+    <h1>Calculadora UF hoy: pasa de UF a pesos y de CLP a UF</h1>
+    <p>
+      Consulta el valor actualizado de la UF y convierte montos para arriendos, créditos o reajustes.
+      Optimizada para usarse rápido desde el teléfono o el computador.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      BETA 2026 · Sumando nuevas calculadoras pronto
+    </div>
 
-  <div class="tool-nav" id="toolNav">
+    <div class="tool-nav" id="toolNav">
       <a class="tool-tab" data-page="home" data-tool="boleta" href="/">
         <span>🏠</span> Inicio
       </a>
@@ -620,7 +527,7 @@
         <span>🧾</span> Boleta de honorarios
       </a>
       <a class="tool-tab" data-page="sueldo" data-tool="sueldo" href="/sueldo-liquido/">
-    <span>💼</span> Sueldo Líquido
+        <span>💼</span> Sueldo Líquido
       </a>
       <a class="tool-tab" data-page="uf" data-tool="uf" href="/uf/">
         <span>💱</span> Calculadora UF
@@ -639,12 +546,12 @@
       si el monto es <strong>en líquido</strong> o <strong>en bruto</strong>,
       con la retención aproximada que se va al SII.
     </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de Boleta de Honorarios de Calculando.cl te permite obtener el valor bruto, el valor
-  neto y la retención automática según la tasa vigente del SII para 2026. Es una herramienta rápida
-  para profesionales independientes que necesitan emitir o revisar una boleta electrónica sin errores.
-  Ingresa un monto y obtén el desglose listo para usar.
-</div>
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de Boleta de Honorarios de Calculando.cl te permite obtener el valor bruto, el valor
+      neto y la retención automática según la tasa vigente del SII para 2026. Es una herramienta rápida
+      para profesionales independientes que necesitan emitir o revisar una boleta electrónica sin errores.
+      Ingresa un monto y obtén el desglose listo para usar.
+    </div>
     <div class="pill" style="margin-top:0;margin-bottom:12px;">
       <span class="pill-dot"></span>
       Tasa por defecto: 14,5% · Resultados referenciales, verifica siempre en SII.cl
@@ -711,84 +618,85 @@
       </div>
     </div>
   </section>
-<!-- ------------- TOOL 2: SUELDO ------------- -->
 
-<section id="tool-sueldo" class="shell tool-shell">
-  <div class="tool-title">Calculadora de Sueldo Líquido 2026 (Simplificada)</div>
-  <div class="tool-subtitle">
-    Ingresa tu sueldo bruto y calculamos tus descuentos estimados:
-    AFP, salud, cesantía e impuesto simplificado.
-  </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de Sueldo Líquido de Calculando.cl convierte tu sueldo bruto a neto usando los
-  descuentos obligatorios vigentes en Chile: AFP, salud, seguro de cesantía y cotizaciones legales.
-  Es ideal para comparar ofertas laborales, estimar tu ingreso real y calcular cuánto recibirás cada
-  mes en tu cuenta.
-</div>
-  <div class="input-row">
-    <div class="input-label">Sueldo bruto</div>
-    <div class="amount-wrap">
-      <span class="amount-prefix">$</span>
-      <input
-        id="sl-bruto"
-        class="amount-input"
-        type="number"
-        inputmode="numeric"
-        min="0"
-        step="1000"
-        placeholder="Ej: 1200000"
-      />
+  <!-- ------------- TOOL 2: SUELDO ------------- -->
+  <section id="tool-sueldo" class="shell tool-shell">
+    <div class="tool-title">Calculadora de Sueldo Líquido 2026 (Simplificada)</div>
+    <div class="tool-subtitle">
+      Ingresa tu sueldo bruto y calculamos tus descuentos estimados:
+      AFP, salud, cesantía e impuesto simplificado.
     </div>
-  </div>
-
-  <div class="input-row">
-    <div class="input-label">AFP (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-afp" class="amount-input" type="number" step="0.01" value="11.44" />
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de Sueldo Líquido de Calculando.cl convierte tu sueldo bruto a neto usando los
+      descuentos obligatorios vigentes en Chile: AFP, salud, seguro de cesantía y cotizaciones legales.
+      Es ideal para comparar ofertas laborales, estimar tu ingreso real y calcular cuánto recibirás cada
+      mes en tu cuenta.
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">Salud (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-salud" class="amount-input" type="number" step="0.1" value="7" />
+    <div class="input-row">
+      <div class="input-label">Sueldo bruto</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="sl-bruto"
+          class="amount-input"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1000"
+          placeholder="Ej: 1200000"
+        />
+      </div>
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">Cesantía (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-cesantia" class="amount-input" type="number" step="0.1" value="0.6" />
+    <div class="input-row">
+      <div class="input-label">AFP (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-afp" class="amount-input" type="number" step="0.01" value="11.44" />
+      </div>
     </div>
-  </div>
 
-  <div id="sl-error" class="error"></div>
+    <div class="input-row">
+      <div class="input-label">Salud (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-salud" class="amount-input" type="number" step="0.1" value="7" />
+      </div>
+    </div>
 
-  <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
-  <div class="result-card">
-    <div class="result-title">Descuentos obligatorios</div>
+    <div class="input-row">
+      <div class="input-label">Cesantía (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-cesantia" class="amount-input" type="number" step="0.1" value="0.6" />
+      </div>
+    </div>
 
-    <div class="result-main-label">AFP:</div>
-    <div id="sl-afp-val" class="result-value">$0</div>
+    <div id="sl-error" class="error"></div>
 
-    <div class="result-main-label" style="margin-top:10px;">Salud:</div>
-    <div id="sl-salud-val" class="result-value">$0</div>
+    <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
+      <div class="result-card">
+        <div class="result-title">Descuentos obligatorios</div>
 
-    <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
-    <div id="sl-cesantia-val" class="result-value">$0</div>
-  </div>
+        <div class="result-main-label">AFP:</div>
+        <div id="sl-afp-val" class="result-value">$0</div>
 
-  <div class="result-card">
-    <div class="result-title">Resultado final</div>
+        <div class="result-main-label" style="margin-top:10px;">Salud:</div>
+        <div id="sl-salud-val" class="result-value">$0</div>
 
-    <div class="result-main-label">Impuesto (simple):</div>
-    <div id="sl-impuesto-val" class="result-value">$0</div>
+        <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
+        <div id="sl-cesantia-val" class="result-value">$0</div>
+      </div>
 
-    <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
-    <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
-  </div>
-</div>
-</section>
+      <div class="result-card">
+        <div class="result-title">Resultado final</div>
+
+        <div class="result-main-label">Impuesto (simple):</div>
+        <div id="sl-impuesto-val" class="result-value">$0</div>
+
+        <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
+        <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
+      </div>
+    </div>
+  </section>
 
   <!-- ------------- TOOL 3: UF ------------- -->
   <section id="tool-uf" class="shell tool-shell">
@@ -797,14 +705,13 @@
       Ingresa el monto y el valor de la UF que quieras usar.
       Puedes convertir de pesos a UF o de UF a pesos.
     </div>
-    <!-- Texto explicativo extra -->
-  <div class="tool-subtitle tool-extra">
-  La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
-  usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
-  dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
-  en pesos o en UF y obtendrás su equivalente al instante.
-</div>
 
+    <div class="tool-subtitle tool-extra">
+      La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
+      usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
+      dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
+      en pesos o en UF y obtendrás su equivalente al instante.
+    </div>
 
     <div class="input-row">
       <div class="input-label">Monto</div>
@@ -865,11 +772,12 @@
     <div class="tool-subtitle">
       Convierte entre valores netos y brutos o calcula sólo el IVA, usando la tasa estándar del 19% en Chile.
     </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de IVA de Calculando.cl te permite obtener el monto neto, el monto bruto y el valor
-  del IVA aplicando la tasa del 19% usada en Chile. Es una herramienta útil para cotizaciones,
-  presupuestos, ventas y cualquier cálculo rápido relacionado con precios con o sin IVA.
-</div>
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de IVA de Calculando.cl te permite obtener el monto neto, el monto bruto y el valor
+      del IVA aplicando la tasa del 19% usada en Chile. Es una herramienta útil para cotizaciones,
+      presupuestos, ventas y cualquier cálculo rápido relacionado con precios con o sin IVA.
+    </div>
+
     <div class="input-row">
       <div class="input-label">Monto</div>
       <div class="amount-wrap">
@@ -913,25 +821,63 @@
   </section>
 
   <!-- ========== BLOG DESTACADO 2026 (DINÁMICO) ========== -->
-<section class="shell" style="margin-top:26px;">
-  <div class="tool-title">Últimos artículos del Blog 2026</div>
-  <div class="tool-subtitle">
-    Explicaciones simples sobre sueldos, impuestos, UF y cálculos laborales en Chile.
-  </div>
+  <section class="shell" style="margin-top:26px;">
+    <div class="tool-title">Últimos artículos del Blog 2026</div>
+    <div class="tool-subtitle">
+      Explicaciones simples sobre sueldos, impuestos, UF y cálculos laborales en Chile.
+    </div>
 
-  <ul id="blogLatestList"
-      style="list-style:none;padding-left:0;display:grid;gap:14px;margin-top:14px;">
-    <li class="tool-subtitle">Cargando artículos del blog…</li>
-  </ul>
+    <ul id="blogLatestList"
+        style="list-style:none;padding-left:0;display:grid;gap:14px;margin-top:14px;">
+      <li class="tool-subtitle">Cargando artículos del blog…</li>
+    </ul>
 
-  <div style="margin-top:18px;">
-    <a href="/blog/"
-       style="font-size:13px;color:var(--primary);text-decoration:underline;">
-      Ver todos los artículos del blog →
-    </a>
-  </div>
-</section>
-<!-- ========== FIN BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+    <div style="margin-top:18px;">
+      <a href="/blog/"
+         style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Ver todos los artículos del blog →
+      </a>
+    </div>
+  </section>
+  <!-- ========== FIN BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+
+  <section class="shell faq-section" aria-labelledby="faq-uf-title">
+    <h2 class="faq-title" id="faq-uf-title">Preguntas frecuentes sobre la UF en Chile</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Quién fija el valor diario de la UF y a qué hora se publica?</h3>
+        <p class="faq-answer">El Banco Central calcula la UF usando la variación del IPC y publica su valor cada día hábil. El monto rige para todas las operaciones del día siguiente calendario.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo convierto un dividendo pactado en UF a pesos?</h3>
+        <p class="faq-answer">Multiplica las UF del dividendo por la UF vigente el día del pago. Los bancos suelen usar la UF del día anterior hábil, así que revisa la cartola de tu crédito para confirmar el valor aplicado.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Dónde puedo ver la UF histórica para reajustar contratos?</h3>
+        <p class="faq-answer">Puedes revisar la serie histórica en mindicador.cl o directamente en el sitio del Banco Central. Ahí encuentras valores diarios y mensuales para reajustes de arriendos, colegiaturas o planes de salud.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿La UF se usa para calcular sueldos o impuestos?</h3>
+        <p class="faq-answer">Los sueldos se pagan en pesos, pero varios topes legales están expresados en UF (por ejemplo, salud, AFP o crédito con aval del Estado). Los impuestos como IVA o retenciones de boletas se calculan en pesos, sólo pueden reajustarse usando la UF pactada en el contrato.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo reajusto un arriendo pactado en UF?</h3>
+        <p class="faq-answer">Multiplica la renta en UF por la UF vigente al momento del pago. Si el contrato indica reajuste anual, aplica la diferencia de UF entre las fechas definidas y notifica por escrito al arrendatario.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Puedo usar una UF estimada en una promesa de compraventa?</h3>
+        <p class="faq-answer">Las promesas suelen fijar el monto en UF pero se liquidan con la UF efectiva del día de pago. Usar una UF estimada es sólo referencial y no reemplaza el valor oficial publicado por el Banco Central.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa si la API de UF no responde?</h3>
+        <p class="faq-answer">Puedes ingresar manualmente el valor que publica el Banco Central o el que te informó tu banco. La calculadora funciona igual mientras el número sea el valor UF vigente para la fecha que necesites.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿La UF sube todos los días?</h3>
+        <p class="faq-answer">La UF suele subir gradualmente cuando el IPC es positivo, pero también puede mantenerse o bajar en periodos con inflación negativa. Cada variación refleja la inflación acumulada del mes en curso.</p>
+      </article>
+    </div>
+  </section>
 
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
@@ -940,11 +886,96 @@
   </footer>
 </main>
 
-<script src="/blog/posts.js"></script>
+<!-- ✅ FIX: JSON-LD idealmente en <head>, pero válido aquí. Lo dejo acá para no romper tu estructura -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Quién fija el valor diario de la UF y a qué hora se publica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El Banco Central calcula la UF usando la variación del IPC y publica su valor cada día hábil, con vigencia para las operaciones del día siguiente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo convierto un dividendo pactado en UF a pesos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica las UF del dividendo por la UF vigente el día del pago; los bancos suelen usar la UF del día hábil anterior para liquidar la cuota."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde puedo ver la UF histórica para reajustar contratos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La serie diaria se consulta en mindicador.cl o directamente en BancoCentral.cl, donde puedes descargar valores para reajustar arriendos, planes de salud o colegiaturas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La UF se usa para calcular sueldos o impuestos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los sueldos se pagan en pesos, pero topes legales como salud, AFP o CAE se expresan en UF. Impuestos como IVA o retenciones se calculan en pesos, aunque los contratos pueden reajustarse en UF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo reajusto un arriendo pactado en UF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica la renta en UF por la UF vigente al momento del pago. Si el contrato indica reajuste anual, aplica la variación de UF entre las fechas pactadas y comunica el cambio por escrito."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar una UF estimada en una promesa de compraventa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La promesa suele expresarse en UF, pero el pago final se liquida con la UF oficial del día de cierre. Una UF estimada es referencial y no reemplaza el valor publicado por el Banco Central."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si la API de UF no responde?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes ingresar manualmente el valor publicado por el Banco Central o el banco. La conversión se mantiene correcta siempre que uses la UF vigente para la fecha que necesitas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La UF sube todos los días?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La UF refleja la inflación del mes. Suele subir de forma gradual, pero puede mantenerse o bajar en periodos con inflación negativa."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://calculando.cl/" },
+        { "@type": "ListItem", "position": 2, "name": "UF", "item": "https://calculando.cl/uf/" }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- ✅ FIX: si posts.js a veces carga lento, esto evita "no cargó" en el listado -->
+<script defer src="/blog/posts.js"></script>
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
-
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
   const themeLabel = document.getElementById("themeLabel");
@@ -963,11 +994,8 @@
 
   (function initTheme() {
     const stored = localStorage.getItem("calculando-theme");
-    if (stored === "light" || stored === "dark") {
-      applyTheme(stored);
-    } else {
-      applyTheme("dark");
-    }
+    if (stored === "light" || stored === "dark") applyTheme(stored);
+    else applyTheme("dark");
   })();
 
   themeToggle.addEventListener("click", () => {
@@ -978,7 +1006,6 @@
   });
 
   // ---------- NAV ENTRE HERRAMIENTAS ----------
-
   const toolNav = document.getElementById("toolNav");
   const toolTabs = toolNav.querySelectorAll(".tool-tab");
   const boletaSection = document.getElementById("tool-boleta");
@@ -987,10 +1014,7 @@
   const ivaSection = document.getElementById("tool-iva");
 
   function setActiveNav(page) {
-    toolTabs.forEach(tab => {
-      const isActive = tab.dataset.page === page;
-      tab.classList.toggle("tool-tab-active", isActive);
-    });
+    toolTabs.forEach(tab => tab.classList.toggle("tool-tab-active", tab.dataset.page === page));
   }
 
   function activateTool(tool) {
@@ -1000,36 +1024,23 @@
     ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
-  // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
   (function selectToolFromPath() {
-    // Normalizamos el path (sin slash final)
     let path = window.location.pathname || "/";
-    if (path.length > 1 && path.endsWith("/")) {
-      path = path.slice(0, -1);
-    }
+    if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1);
 
     let page = "home";
-    let tool = "boleta"; // por defecto
+    let tool = "boleta";
 
-    if (path.endsWith("/boleta")) {
-      page = "boleta";
-      tool = "boleta";
-    } else if (path.endsWith("/sueldo-liquido")) {
-      page = "sueldo";
-      tool = "sueldo";
-    } else if (path.endsWith("/uf")) {
-      page = "uf";
-      tool = "uf";
-    } else if (path.endsWith("/iva")) {
-      page = "iva";
-      tool = "iva";
-    }
+    if (path.endsWith("/boleta")) { page = "boleta"; tool = "boleta"; }
+    else if (path.endsWith("/sueldo-liquido")) { page = "sueldo"; tool = "sueldo"; }
+    else if (path.endsWith("/uf")) { page = "uf"; tool = "uf"; }
+    else if (path.endsWith("/iva")) { page = "iva"; tool = "iva"; }
 
     setActiveNav(page);
     activateTool(tool);
   })();
-  // ---------- UTILS ----------
 
+  // ---------- UTILS ----------
   function formatCLP(value) {
     if (!isFinite(value)) return "$0";
     try {
@@ -1044,7 +1055,6 @@
   }
 
   // ---------- CALCULADORA BOLETA ----------
-
   const montoInput = document.getElementById("monto");
   const errorBox = document.getElementById("error");
   const resultsEl = document.getElementById("results");
@@ -1064,7 +1074,7 @@
   }
 
   function recalculateBoleta() {
-    const raw = montoInput.value.trim();
+    const raw = (montoInput.value || "").trim();
     errorBox.textContent = "";
 
     if (!raw) {
@@ -1109,17 +1119,14 @@
   montoInput.addEventListener("input", recalculateBoleta);
 
   rateGroup.addEventListener("change", () => {
-    const pills = rateGroup.querySelectorAll(".rate-pill");
-    pills.forEach(pill => {
+    rateGroup.querySelectorAll(".rate-pill").forEach(pill => {
       const input = pill.querySelector("input");
       pill.classList.toggle("active", input.checked);
     });
     recalculateBoleta();
   });
 
-// ---------- CALCULADORA SUELDO ----------
   // ---------- CALCULADORA SUELDO ----------
-
   const slBrutoInput = document.getElementById("sl-bruto");
   const slAfpInput = document.getElementById("sl-afp");
   const slSaludInput = document.getElementById("sl-salud");
@@ -1142,7 +1149,6 @@
 
     err.textContent = "";
 
-    // Si no hay sueldo bruto válido, dejamos todo en cero
     if (!bruto || bruto <= 0) {
       row.style.opacity = 0.45;
       vAfp.textContent = "$0";
@@ -1153,15 +1159,12 @@
       return;
     }
 
-    // Descuentos
     const dAfp = bruto * afpPct;
     const dSalud = bruto * saludPct;
     const dCes = bruto * cesPct;
 
-    // Base imponible simple (bruto menos AFP y salud)
     const imponible = bruto - dAfp - dSalud;
 
-    // Impuesto súper simplificado por tramos
     let impuesto = 0;
     if (imponible > 2052302) impuesto = imponible * 0.08;
     else if (imponible > 923537) impuesto = imponible * 0.04;
@@ -1169,7 +1172,6 @@
     const liquido = bruto - dAfp - dSalud - dCes - impuesto;
 
     const f = n => n.toLocaleString("es-CL");
-
     vAfp.textContent = "$" + f(Math.round(dAfp));
     vSalud.textContent = "$" + f(Math.round(dSalud));
     vCes.textContent = "$" + f(Math.round(dCes));
@@ -1179,17 +1181,13 @@
     row.style.opacity = 1;
   }
 
-  // Escuchar cambios en los 4 inputs
   ["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", calcularSueldo);
   });
-
-  // Llamada inicial por si ya hay valores por defecto
   calcularSueldo();
 
   // ---------- CALCULADORA UF ----------
-
   const ufMontoInput = document.getElementById("ufMonto");
   const ufValorInput = document.getElementById("ufValor");
   const ufDirectionGroup = document.getElementById("ufDirectionGroup");
@@ -1197,18 +1195,17 @@
   const ufResults = document.getElementById("ufResults");
   const ufLegend = document.getElementById("ufLegend");
 
-  // UF automática desde API pública
   async function autoFillUF() {
     try {
-      const res = await fetch("https://mindicador.cl/api");
+      const res = await fetch("https://mindicador.cl/api", { cache: "no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
 
       const data = await res.json();
-      const ufData = data?.uf;
+      const ufData = data && data.uf;
       if (!ufData || ufData.valor == null) return;
 
       const valorNum = Number(String(ufData.valor).replace(",", "."));
-      if (isNaN(valorNum) || valorNum <= 0) return;
+      if (!isFinite(valorNum) || valorNum <= 0) return;
 
       ufValorInput.value = valorNum.toFixed(2);
 
@@ -1232,26 +1229,23 @@
       }
     }
   }
-
   autoFillUF();
 
   function formatUF(value) {
     if (!isFinite(value)) return "0 UF";
     try {
-      return (
-        new Intl.NumberFormat("es-CL", {
-          minimumFractionDigits: 4,
-          maximumFractionDigits: 4
-        }).format(value) + " UF"
-      );
+      return new Intl.NumberFormat("es-CL", {
+        minimumFractionDigits: 4,
+        maximumFractionDigits: 4
+      }).format(value) + " UF";
     } catch (e) {
       return value.toFixed(4) + " UF";
     }
   }
 
   function recalculateUF() {
-    const rawMonto = ufMontoInput.value.trim();
-    const rawValor = ufValorInput.value.trim();
+    const rawMonto = (ufMontoInput.value || "").trim();
+    const rawValor = (ufValorInput.value || "").trim();
     ufErrorBox.textContent = "";
 
     if (!rawMonto || !rawValor) {
@@ -1263,13 +1257,14 @@
     const monto = Number(rawMonto);
     const valorUF = Number(rawValor);
 
-    if (isNaN(monto) || monto <= 0 || isNaN(valorUF) || valorUF <= 0) {
+    if (!isFinite(monto) || monto <= 0 || !isFinite(valorUF) || valorUF <= 0) {
       ufErrorBox.textContent = "Monto y valor UF deben ser números mayores a 0.";
       ufResults.style.opacity = 0.45;
       return;
     }
 
-    const direction = ufDirectionGroup.querySelector("input[name='ufDirection']:checked").value;
+    const directionEl = ufDirectionGroup.querySelector("input[name='ufDirection']:checked");
+    const direction = directionEl ? directionEl.value : "clpToUf";
 
     let texto = "";
     if (direction === "clpToUf") {
@@ -1292,8 +1287,7 @@
   ufValorInput.addEventListener("input", recalculateUF);
 
   ufDirectionGroup.addEventListener("change", () => {
-    const pills = ufDirectionGroup.querySelectorAll(".direction-pill");
-    pills.forEach(pill => {
+    ufDirectionGroup.querySelectorAll(".direction-pill").forEach(pill => {
       const input = pill.querySelector("input");
       pill.classList.toggle("direction-pill-active", input.checked);
     });
@@ -1301,7 +1295,6 @@
   });
 
   // ---------- CALCULADORA IVA (19%) ----------
-
   const ivaMontoInput = document.getElementById("ivaMonto");
   const ivaModeGroup = document.getElementById("ivaModeGroup");
   const ivaError = document.getElementById("ivaError");
@@ -1309,7 +1302,7 @@
   const IVA_RATE = 0.19;
 
   function recalculateIVA() {
-    const raw = ivaMontoInput.value.trim();
+    const raw = (ivaMontoInput.value || "").trim();
     ivaError.textContent = "";
 
     if (!raw) {
@@ -1319,13 +1312,14 @@
     }
 
     const monto = Number(raw);
-    if (isNaN(monto) || monto <= 0) {
+    if (!isFinite(monto) || monto <= 0) {
       ivaError.textContent = "El monto debe ser un número mayor a 0.";
       ivaResults.style.opacity = 0.45;
       return;
     }
 
-    const mode = ivaModeGroup.querySelector("input[name='ivaMode']:checked").value;
+    const modeEl = ivaModeGroup.querySelector("input[name='ivaMode']:checked");
+    const mode = modeEl ? modeEl.value : "netoBruto";
 
     let texto = "";
     if (mode === "netoBruto") {
@@ -1346,9 +1340,7 @@
         `y el IVA (19%) es <strong>${formatCLP(iva)}</strong>.`;
     } else {
       const iva = monto * IVA_RATE;
-      texto =
-        `El IVA (19%) de ${formatCLP(monto)} es ` +
-        `<strong>${formatCLP(iva)}</strong>.`;
+      texto = `El IVA (19%) de ${formatCLP(monto)} es <strong>${formatCLP(iva)}</strong>.`;
     }
 
     ivaResults.innerHTML = texto;
@@ -1358,8 +1350,7 @@
   ivaMontoInput.addEventListener("input", recalculateIVA);
 
   ivaModeGroup.addEventListener("change", () => {
-    const pills = ivaModeGroup.querySelectorAll(".direction-pill");
-    pills.forEach(pill => {
+    ivaModeGroup.querySelectorAll(".direction-pill").forEach(pill => {
       const input = pill.querySelector("input");
       pill.classList.toggle("direction-pill-active", input.checked);
     });
@@ -1367,33 +1358,53 @@
   });
 
   // ---------- BLOG: CARGAR ÚLTIMOS ARTÍCULOS ----------
-   function renderLatestBlogPosts(limit = 5) {
-     const list = document.getElementById("blogLatestList");
-     if (!list || !window.CALCULANDO_POSTS_2026) return;
+  function renderLatestBlogPosts(limit = 5) {
+    const list = document.getElementById("blogLatestList");
+    if (!list) return;
 
-     const posts = [...window.CALCULANDO_POSTS_2026].sort((a, b) =>
-       (b.date || "").localeCompare(a.date || "")
-     );
+    const postsArr = window.CALCULANDO_POSTS_2026;
+    if (!Array.isArray(postsArr) || postsArr.length === 0) return;
 
-     const latest = posts.slice(0, limit);
+    const posts = [...postsArr].sort((a, b) =>
+      (b.date || "").localeCompare(a.date || "")
+    );
 
-     list.innerHTML = "";
-     latest.forEach(post => {
-       const li = document.createElement("li");
-       li.innerHTML = `
-         <a href="${post.slug}">
-           <strong>${post.title}</strong>
-         </a>
-         <div class="tool-subtitle">${post.description}</div>
-       `;
-       list.appendChild(li);
-     });
-   }
+    const latest = posts.slice(0, limit);
 
-   document.addEventListener("DOMContentLoaded", () => {
-     renderLatestBlogPosts(5);
-   });
+    list.innerHTML = "";
+    latest.forEach(post => {
+      const li = document.createElement("li");
+      const safeTitle = post.title || "Artículo";
+      const safeDesc = post.description || "";
+      const safeSlug = post.slug || "/blog/";
+
+      li.innerHTML = `
+        <a href="${safeSlug}" style="color:var(--primary);text-decoration:underline;">
+          <strong>${safeTitle}</strong>
+        </a>
+        <div class="tool-subtitle">${safeDesc}</div>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  // ✅ FIX: como posts.js ahora está defer, esperamos DOM y además reintentamos un par de veces
+  document.addEventListener("DOMContentLoaded", () => {
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries += 1;
+      if (window.CALCULANDO_POSTS_2026) {
+        renderLatestBlogPosts(5);
+        clearInterval(timer);
+      } else if (tries >= 10) {
+        clearInterval(timer);
+      }
+    }, 150);
+  });
 </script>
-<script src="https://cdn.counter.dev/script.js" data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458" data-utcoffset="-3"></script>
+
+<script src="https://cdn.counter.dev/script.js"
+        data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458"
+        data-utcoffset="-3"></script>
 </body>
 </html>
