@@ -569,6 +569,47 @@
       color: var(--accent);
     }
 
+    /* --------- FAQ --------- */
+
+    .faq-section {
+      margin-top: 20px;
+    }
+
+    .faq-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* FOOTER */
 
     footer {
@@ -909,12 +950,144 @@
     </div>
   </section>
 
+  <section class="shell faq-section" aria-labelledby="faq-boleta-title">
+    <h2 class="faq-title" id="faq-boleta-title">Preguntas frecuentes sobre boletas de honorarios</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuál es la retención de boleta el 2026?</h3>
+        <p class="faq-answer">Para 2026 la retención es de 14,5% sobre el bruto. El porcentaje sube gradualmente hasta llegar a 17% según la Ley 21.133.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Debo emitir boleta por cada servicio?</h3>
+        <p class="faq-answer">Sí. Cada vez que prestas un servicio independiente debes emitir la boleta electrónica en sii.cl o desde tu software autorizado, indicando el monto y la retención.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo obtengo un monto líquido específico?</h3>
+        <p class="faq-answer">Para recibir un líquido determinado debes “brutalizar” el monto: dividir el líquido por (1 - retención). La calculadora lo hace automáticamente al elegir el modo líquido.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa con mis retenciones en la Operación Renta?</h3>
+        <p class="faq-answer">Las retenciones se imputan al impuesto anual. Si tus retenciones superan el impuesto calculado, puedes recibir devolución. Si faltan cotizaciones obligatorias, se pagan con ese saldo.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Necesito iniciar actividades para emitir boletas?</h3>
+        <p class="faq-answer">Sí. Debes tener inicio de actividades en el SII, contar con RUT y clave, y estar habilitado para boleta de honorarios electrónica. Sin inicio, el sistema no permite emitir.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Las boletas de honorarios pagan IVA?</h3>
+        <p class="faq-answer">No. Las boletas de honorarios gravan impuesto a la renta con retención, no IVA. Si tu servicio está afecto a IVA, corresponde emitir factura afecta en vez de boleta de honorarios.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿La retención cubre mis cotizaciones previsionales?</h3>
+        <p class="faq-answer">La retención sirve como base para cotizar. Si optas por la cobertura total (80% de cotización), el SII destina parte de la devolución a AFP, salud y seguro laboral.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Puedo anular una boleta emitida con error?</h3>
+        <p class="faq-answer">Sí, puedes anularla en el portal del SII el mismo día o emitir una nota de crédito electrónica si ya fue aceptada. Luego emites una boleta nueva con el monto correcto.</p>
+      </article>
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
     Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la retención de boleta el 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La retención vigente es 14,5% sobre el bruto y aumenta gradualmente hasta 17% según la Ley 21.133."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debo emitir boleta por cada servicio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada servicio independiente debe documentarse con su boleta electrónica en sii.cl o software autorizado, indicando monto y retención."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo obtengo un monto líquido específico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para llegar a un líquido objetivo divide ese monto por (1 - retención). Así obtienes el bruto que debes emitir en la boleta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa con mis retenciones en la Operación Renta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las retenciones se imputan al impuesto anual; si superan el impuesto determinado, el saldo puede devolverse o destinarse a cotizaciones obligatorias."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito iniciar actividades para emitir boletas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, debes tener inicio de actividades, RUT y clave en el SII y estar habilitado para boleta de honorarios electrónica."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las boletas de honorarios pagan IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No llevan IVA; corresponden a impuesto a la renta con retención. Si el servicio está afecto a IVA, se emite factura afecta en lugar de boleta de honorarios."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La retención cubre mis cotizaciones previsionales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las retenciones sirven para financiar cotizaciones. Si optas por cobertura total, el SII aplica parte de tu devolución a AFP, salud y seguro laboral."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo anular una boleta emitida con error?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes anularla en el portal del SII el mismo día o emitir una nota de crédito electrónica si ya fue aceptada, y luego generar la boleta correcta."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://calculando.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Boleta de honorarios",
+          "item": "https://calculando.cl/boleta/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
