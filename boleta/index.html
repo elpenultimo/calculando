@@ -1,30 +1,28 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es-CL" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Calculadora Boleta de Honorarios 2025 – Bruto, Neto y Retención SII</title>
+  <title>Calculadora Boleta de Honorarios 2026 – Bruto, Neto y Retención SII</title>
 
-  <meta name="description" content="Calcula bruto, neto y retención de boletas de honorarios según la tasa vigente del SII en 2025. Herramienta rápida para profesionales independientes en Chile.">
-  <meta name="keywords" content="boleta de honorarios, calculadora boleta, SII 2025, retención boleta, bruto a neto, neto a bruto, emitir boleta honorarios">
+  <meta name="description" content="Calcula bruto, neto y retención de boletas de honorarios según la tasa vigente del SII en 2026. Herramienta rápida para profesionales independientes en Chile.">
+  <meta name="keywords" content="boleta de honorarios, calculadora boleta, SII 2026, retención boleta, bruto a neto, neto a bruto, emitir boleta honorarios">
   <meta name="author" content="Calculando.cl">
   <meta name="robots" content="index,follow">
 
   <link rel="canonical" href="https://calculando.cl/boleta/">
 
-  <meta property="og:title" content="Calculadora Boleta de Honorarios – Calculando.cl">
+  <meta property="og:title" content="Calculadora Boleta de Honorarios 2026 – Calculando.cl">
   <meta property="og:description" content="Calcula bruto, neto y retención de boletas de honorarios según la tasa vigente del SII en Chile.">
   <meta property="og:url" content="https://calculando.cl/boleta/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Calculando.cl">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Boleta de Honorarios – Calculadora SII 2025">
+  <meta name="twitter:title" content="Boleta de Honorarios – Calculadora SII 2026">
   <meta name="twitter:description" content="Calculadora rápida para boletas de honorarios en Chile: bruto, neto y retención.">
 
-  
-</head>
   <style>
     /* --------- TIPOGRAFÍA Y RESET --------- */
     * {
@@ -109,7 +107,6 @@
     }
 
     /* --------- HEADER --------- */
-
     header {
       display: flex;
       align-items: center;
@@ -205,7 +202,6 @@
     }
 
     /* --------- HERO --------- */
-
     .hero {
       text-align: left;
       margin-bottom: 14px;
@@ -245,7 +241,6 @@
     }
 
     /* --------- NAV DE HERRAMIENTAS --------- */
-
     .tool-nav {
       display: inline-flex;
       padding: 3px;
@@ -271,6 +266,7 @@
       gap: 6px;
       transition: background var(--transition-fast), color var(--transition-fast),
         transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
     }
 
     .tool-tab span {
@@ -285,7 +281,6 @@
     }
 
     /* --------- SHELL / CONTENEDORES --------- */
-
     .shell {
       margin-top: 14px;
       background: var(--shell);
@@ -323,7 +318,6 @@
     }
 
     /* INPUT MONTO */
-
     .input-row {
       display: flex;
       flex-direction: column;
@@ -388,7 +382,6 @@
     }
 
     /* TASA / RATE & HELPERS */
-
     .rate-row {
       display: flex;
       flex-wrap: wrap;
@@ -446,7 +439,6 @@
     }
 
     /* RESULTADOS BOLETA */
-
     .results-row {
       margin-top: 18px;
       display: grid;
@@ -516,7 +508,6 @@
     }
 
     /* --------- UF & IVA: CAJAS Y RESULTADOS --------- */
-
     .direction-row {
       display: flex;
       flex-wrap: wrap;
@@ -569,8 +560,47 @@
       color: var(--accent);
     }
 
-    /* FOOTER */
+    /* --------- FAQ --------- */
+    .faq-section {
+      margin-top: 20px;
+    }
 
+    .faq-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
     footer {
       margin-top: 20px;
       font-size: 11px;
@@ -582,8 +612,23 @@
     footer strong {
       font-weight: 600;
     }
+
+    /* Blog list: micro-estilo para que se vea decente sin tocar tu CSS base */
+    #blogLatestList a {
+      color: var(--primary);
+      text-decoration: underline;
+      font-size: 14px;
+    }
+    #blogLatestList li {
+      padding: 12px 14px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
   </style>
 </head>
+
 <body>
 <main>
   <header>
@@ -602,46 +647,51 @@
   </header>
 
   <section class="hero">
-    <h1>Calculadoras rápidas para tu día a día en Chile</h1>
+    <h1>Calculadora de boleta de honorarios 2026: bruto, neto y retención</h1>
     <p>
-      Comienza con la calculadora de boletas de honorarios, el conversor UF↔CLP
-      o la calculadora de IVA. Herramientas simples, sin publicidad invasiva y pensadas para el celular.
+      Obtén rápidamente el desglose bruto, líquido y la retención SII según la tasa vigente.
+      Pensada para emitir boletas sin errores, desde el celular o el computador.
     </p>
     <div class="pill">
       <span class="pill-dot"></span>
-      BETA 2025 · Sumando nuevas calculadoras pronto
+      BETA 2026 · Sumando nuevas calculadoras pronto
     </div>
 
- <div class="tool-nav" id="toolNav">
-      <button class="tool-tab tool-tab-active" data-tool="boleta" type="button">
+    <div class="tool-nav" id="toolNav">
+      <a class="tool-tab" data-page="home" data-tool="boleta" href="/">
+        <span>🏠</span> Inicio
+      </a>
+      <a class="tool-tab" data-page="boleta" data-tool="boleta" href="/boleta/">
         <span>🧾</span> Boleta de honorarios
-      </button>
-      <button class="tool-tab" data-tool="sueldo" type="button">
-    <span>💼</span> Sueldo Líquido
-      </button>
-      <button class="tool-tab" data-tool="uf" type="button">
+      </a>
+      <a class="tool-tab" data-page="sueldo" data-tool="sueldo" href="/sueldo-liquido/">
+        <span>💼</span> Sueldo Líquido
+      </a>
+      <a class="tool-tab" data-page="uf" data-tool="uf" href="/uf/">
         <span>💱</span> Calculadora UF
-      </button>
-      <button class="tool-tab" data-tool="iva" type="button">
+      </a>
+      <a class="tool-tab" data-page="iva" data-tool="iva" href="/iva/">
         <span>🧮</span> Calculadora IVA
-      </button>
+      </a>
     </div>
   </section>
 
   <!-- ------------- TOOL 1: BOLETA ------------- -->
   <section id="tool-boleta" class="shell tool-shell tool-shell-active">
-    <div class="tool-title">Calculadora de Boletas de Honorarios 2025</div>
+    <div class="tool-title">Calculadora de Boletas de Honorarios 2026</div>
     <div class="tool-subtitle">
       Ingresa un monto en pesos chilenos y te mostramos dos escenarios:
       si el monto es <strong>en líquido</strong> o <strong>en bruto</strong>,
       con la retención aproximada que se va al SII.
     </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de Boleta de Honorarios de Calculando.cl te permite obtener el valor bruto, el valor
-  neto y la retención automática según la tasa vigente del SII para 2025. Es una herramienta rápida
-  para profesionales independientes que necesitan emitir o revisar una boleta electrónica sin errores.
-  Ingresa un monto y obtén el desglose listo para usar.
-</div>
+
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de Boleta de Honorarios de Calculando.cl te permite obtener el valor bruto, el valor
+      neto y la retención automática según la tasa vigente del SII para 2026. Es una herramienta rápida
+      para profesionales independientes que necesitan emitir o revisar una boleta electrónica sin errores.
+      Ingresa un monto y obtén el desglose listo para usar.
+    </div>
+
     <div class="pill" style="margin-top:0;margin-bottom:12px;">
       <span class="pill-dot"></span>
       Tasa por defecto: 14,5% · Resultados referenciales, verifica siempre en SII.cl
@@ -667,7 +717,7 @@
       <div class="rate-group" id="rateGroup">
         <label class="rate-pill active">
           <input type="radio" name="rate" value="0.145" checked />
-          14,5% <span style="font-size:10px;opacity:.8;">(actual 2025)</span>
+          14,5% <span style="font-size:10px;opacity:.8;">(actual 2026)</span>
         </label>
         <label class="rate-pill">
           <input type="radio" name="rate" value="0.1375" />
@@ -708,84 +758,86 @@
       </div>
     </div>
   </section>
-<!-- ------------- TOOL 2: SUELDO ------------- -->
 
-<section id="tool-sueldo" class="shell tool-shell">
-  <div class="tool-title">Calculadora de Sueldo Líquido 2025 (Simplificada)</div>
-  <div class="tool-subtitle">
-    Ingresa tu sueldo bruto y calculamos tus descuentos estimados:
-    AFP, salud, cesantía e impuesto simplificado.
-  </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de Sueldo Líquido de Calculando.cl convierte tu sueldo bruto a neto usando los
-  descuentos obligatorios vigentes en Chile: AFP, salud, seguro de cesantía y cotizaciones legales.
-  Es ideal para comparar ofertas laborales, estimar tu ingreso real y calcular cuánto recibirás cada
-  mes en tu cuenta.
-</div>
-  <div class="input-row">
-    <div class="input-label">Sueldo bruto</div>
-    <div class="amount-wrap">
-      <span class="amount-prefix">$</span>
-      <input
-        id="sl-bruto"
-        class="amount-input"
-        type="number"
-        inputmode="numeric"
-        min="0"
-        step="1000"
-        placeholder="Ej: 1200000"
-      />
+  <!-- ------------- TOOL 2: SUELDO ------------- -->
+  <section id="tool-sueldo" class="shell tool-shell">
+    <div class="tool-title">Calculadora de Sueldo Líquido 2026 (Simplificada)</div>
+    <div class="tool-subtitle">
+      Ingresa tu sueldo bruto y calculamos tus descuentos estimados:
+      AFP, salud, cesantía e impuesto simplificado.
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">AFP (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-afp" class="amount-input" type="number" step="0.01" value="11.44" />
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de Sueldo Líquido de Calculando.cl convierte tu sueldo bruto a neto usando los
+      descuentos obligatorios vigentes en Chile: AFP, salud, seguro de cesantía y cotizaciones legales.
+      Es ideal para comparar ofertas laborales, estimar tu ingreso real y calcular cuánto recibirás cada
+      mes en tu cuenta.
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">Salud (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-salud" class="amount-input" type="number" step="0.1" value="7" />
+    <div class="input-row">
+      <div class="input-label">Sueldo bruto</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="sl-bruto"
+          class="amount-input"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1000"
+          placeholder="Ej: 1200000"
+        />
+      </div>
     </div>
-  </div>
 
-  <div class="input-row">
-    <div class="input-label">Cesantía (%)</div>
-    <div class="amount-wrap">
-      <input id="sl-cesantia" class="amount-input" type="number" step="0.1" value="0.6" />
+    <div class="input-row">
+      <div class="input-label">AFP (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-afp" class="amount-input" type="number" step="0.01" value="11.44" />
+      </div>
     </div>
-  </div>
 
-  <div id="sl-error" class="error"></div>
+    <div class="input-row">
+      <div class="input-label">Salud (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-salud" class="amount-input" type="number" step="0.1" value="7" />
+      </div>
+    </div>
 
-  <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
-  <div class="result-card">
-    <div class="result-title">Descuentos obligatorios</div>
+    <div class="input-row">
+      <div class="input-label">Cesantía (%)</div>
+      <div class="amount-wrap">
+        <input id="sl-cesantia" class="amount-input" type="number" step="0.1" value="0.6" />
+      </div>
+    </div>
 
-    <div class="result-main-label">AFP:</div>
-    <div id="sl-afp-val" class="result-value">$0</div>
+    <div id="sl-error" class="error"></div>
 
-    <div class="result-main-label" style="margin-top:10px;">Salud:</div>
-    <div id="sl-salud-val" class="result-value">$0</div>
+    <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
+      <div class="result-card">
+        <div class="result-title">Descuentos obligatorios</div>
 
-    <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
-    <div id="sl-cesantia-val" class="result-value">$0</div>
-  </div>
+        <div class="result-main-label">AFP:</div>
+        <div id="sl-afp-val" class="result-value">$0</div>
 
-  <div class="result-card">
-    <div class="result-title">Resultado final</div>
+        <div class="result-main-label" style="margin-top:10px;">Salud:</div>
+        <div id="sl-salud-val" class="result-value">$0</div>
 
-    <div class="result-main-label">Impuesto (simple):</div>
-    <div id="sl-impuesto-val" class="result-value">$0</div>
+        <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
+        <div id="sl-cesantia-val" class="result-value">$0</div>
+      </div>
 
-    <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
-    <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
-  </div>
-</div>
-</section>
+      <div class="result-card">
+        <div class="result-title">Resultado final</div>
+
+        <div class="result-main-label">Impuesto (simple):</div>
+        <div id="sl-impuesto-val" class="result-value">$0</div>
+
+        <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
+        <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
+      </div>
+    </div>
+  </section>
 
   <!-- ------------- TOOL 3: UF ------------- -->
   <section id="tool-uf" class="shell tool-shell">
@@ -794,14 +846,13 @@
       Ingresa el monto y el valor de la UF que quieras usar.
       Puedes convertir de pesos a UF o de UF a pesos.
     </div>
-    <!-- Texto explicativo extra -->
-  <div class="tool-subtitle tool-extra">
-  La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
-  usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
-  dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
-  en pesos o en UF y obtendrás su equivalente al instante.
-</div>
 
+    <div class="tool-subtitle tool-extra" style="margin-top:12px;">
+      La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
+      usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
+      dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
+      en pesos o en UF y obtendrás su equivalente al instante.
+    </div>
 
     <div class="input-row">
       <div class="input-label">Monto</div>
@@ -862,11 +913,13 @@
     <div class="tool-subtitle">
       Convierte entre valores netos y brutos o calcula sólo el IVA, usando la tasa estándar del 19% en Chile.
     </div>
-<div class="tool-subtitle" style="margin-top:12px;">
-  La calculadora de IVA de Calculando.cl te permite obtener el monto neto, el monto bruto y el valor
-  del IVA aplicando la tasa del 19% usada en Chile. Es una herramienta útil para cotizaciones,
-  presupuestos, ventas y cualquier cálculo rápido relacionado con precios con o sin IVA.
-</div>
+
+    <div class="tool-subtitle" style="margin-top:12px;">
+      La calculadora de IVA de Calculando.cl te permite obtener el monto neto, el monto bruto y el valor
+      del IVA aplicando la tasa del 19% usada en Chile. Es una herramienta útil para cotizaciones,
+      presupuestos, ventas y cualquier cálculo rápido relacionado con precios con o sin IVA.
+    </div>
+
     <div class="input-row">
       <div class="input-label">Monto</div>
       <div class="amount-wrap">
@@ -909,6 +962,65 @@
     </div>
   </section>
 
+  <!-- ========== BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+  <section class="shell" style="margin-top:26px;">
+    <div class="tool-title">Últimos artículos del Blog 2026</div>
+    <div class="tool-subtitle">
+      Explicaciones simples sobre sueldos, impuestos, UF y cálculos laborales en Chile.
+    </div>
+
+    <ul id="blogLatestList"
+        style="list-style:none;padding-left:0;display:grid;gap:14px;margin-top:14px;">
+      <li class="tool-subtitle">Cargando artículos del blog…</li>
+    </ul>
+
+    <div style="margin-top:18px;">
+      <a href="/blog/"
+         style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Ver todos los artículos del blog →
+      </a>
+    </div>
+  </section>
+  <!-- ========== FIN BLOG DESTACADO 2026 (DINÁMICO) ========== -->
+
+  <section class="shell faq-section" aria-labelledby="faq-boleta-title">
+    <h2 class="faq-title" id="faq-boleta-title">Preguntas frecuentes sobre boletas de honorarios</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuál es la retención de boleta el 2026?</h3>
+        <p class="faq-answer">Para 2026 la retención es de 14,5% sobre el bruto. El porcentaje sube gradualmente hasta llegar a 17% según la Ley 21.133.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Debo emitir boleta por cada servicio?</h3>
+        <p class="faq-answer">Sí. Cada vez que prestas un servicio independiente debes emitir la boleta electrónica en sii.cl o desde tu software autorizado, indicando el monto y la retención.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo obtengo un monto líquido específico?</h3>
+        <p class="faq-answer">Para recibir un líquido determinado debes “brutalizar” el monto: dividir el líquido por (1 - retención). La calculadora lo hace automáticamente al elegir el modo líquido.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa con mis retenciones en la Operación Renta?</h3>
+        <p class="faq-answer">Las retenciones se imputan al impuesto anual. Si tus retenciones superan el impuesto calculado, puedes recibir devolución. Si faltan cotizaciones obligatorias, se pagan con ese saldo.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Necesito iniciar actividades para emitir boletas?</h3>
+        <p class="faq-answer">Sí. Debes tener inicio de actividades en el SII, contar con RUT y clave, y estar habilitado para boleta de honorarios electrónica. Sin inicio, el sistema no permite emitir.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Las boletas de honorarios pagan IVA?</h3>
+        <p class="faq-answer">No. Las boletas de honorarios gravan impuesto a la renta con retención, no IVA. Si tu servicio está afecto a IVA, corresponde emitir factura afecta en vez de boleta de honorarios.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿La retención cubre mis cotizaciones previsionales?</h3>
+        <p class="faq-answer">La retención sirve como base para cotizar. Si optas por la cobertura total (80% de cotización), el SII destina parte de la devolución a AFP, salud y seguro laboral.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Puedo anular una boleta emitida con error?</h3>
+        <p class="faq-answer">Sí, puedes anularla en el portal del SII el mismo día o emitir una nota de crédito electrónica si ya fue aceptada. Luego emites una boleta nueva con el monto correcto.</p>
+      </article>
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
@@ -916,9 +1028,104 @@
   </footer>
 </main>
 
+<script src="/blog/posts.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la retención de boleta el 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La retención vigente es 14,5% sobre el bruto y aumenta gradualmente hasta 17% según la Ley 21.133."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debo emitir boleta por cada servicio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada servicio independiente debe documentarse con su boleta electrónica en sii.cl o software autorizado, indicando monto y retención."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo obtengo un monto líquido específico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para llegar a un líquido objetivo divide ese monto por (1 - retención). Así obtienes el bruto que debes emitir en la boleta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa con mis retenciones en la Operación Renta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las retenciones se imputan al impuesto anual; si superan el impuesto determinado, el saldo puede devolverse o destinarse a cotizaciones obligatorias."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito iniciar actividades para emitir boletas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, debes tener inicio de actividades, RUT y clave en el SII y estar habilitado para boleta de honorarios electrónica."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las boletas de honorarios pagan IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No llevan IVA; corresponden a impuesto a la renta con retención. Si el servicio está afecto a IVA, se emite factura afecta en lugar de boleta de honorarios."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La retención cubre mis cotizaciones previsionales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las retenciones sirven para financiar cotizaciones. Si optas por cobertura total, el SII aplica parte de tu devolución a AFP, salud y seguro laboral."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo anular una boleta emitida con error?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes anularla en el portal del SII el mismo día o emitir una nota de crédito electrónica si ya fue aceptada, y luego generar la boleta correcta."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://calculando.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Boleta de honorarios",
+          "item": "https://calculando.cl/boleta/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
-
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
   const themeLabel = document.getElementById("themeLabel");
@@ -952,7 +1159,6 @@
   });
 
   // ---------- NAV ENTRE HERRAMIENTAS ----------
-
   const toolNav = document.getElementById("toolNav");
   const toolTabs = toolNav.querySelectorAll(".tool-tab");
   const boletaSection = document.getElementById("tool-boleta");
@@ -960,47 +1166,49 @@
   const ufSection = document.getElementById("tool-uf");
   const ivaSection = document.getElementById("tool-iva");
 
-  function activateTool(tool) {
+  function setActiveNav(page) {
     toolTabs.forEach(tab => {
-      const isActive = tab.dataset.tool === tool;
+      const isActive = tab.dataset.page === page;
       tab.classList.toggle("tool-tab-active", isActive);
     });
+  }
 
+  function activateTool(tool) {
     boletaSection.classList.toggle("tool-shell-active", tool === "boleta");
     sueldoSection.classList.toggle("tool-shell-active", tool === "sueldo");
     ufSection.classList.toggle("tool-shell-active", tool === "uf");
     ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
-  toolTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      activateTool(tab.dataset.tool);
-    });
-  });
   // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
   (function selectToolFromPath() {
-    // Normalizamos el path (sin slash final)
     let path = window.location.pathname || "/";
     if (path.length > 1 && path.endsWith("/")) {
       path = path.slice(0, -1);
     }
 
+    let page = "home";
     let tool = "boleta"; // por defecto
 
     if (path.endsWith("/boleta")) {
+      page = "boleta";
       tool = "boleta";
     } else if (path.endsWith("/sueldo-liquido")) {
+      page = "sueldo";
       tool = "sueldo";
     } else if (path.endsWith("/uf")) {
+      page = "uf";
       tool = "uf";
     } else if (path.endsWith("/iva")) {
+      page = "iva";
       tool = "iva";
     }
 
+    setActiveNav(page);
     activateTool(tool);
   })();
-  // ---------- UTILS ----------
 
+  // ---------- UTILS ----------
   function formatCLP(value) {
     if (!isFinite(value)) return "$0";
     try {
@@ -1015,7 +1223,6 @@
   }
 
   // ---------- CALCULADORA BOLETA ----------
-
   const montoInput = document.getElementById("monto");
   const errorBox = document.getElementById("error");
   const resultsEl = document.getElementById("results");
@@ -1035,7 +1242,7 @@
   }
 
   function recalculateBoleta() {
-    const raw = montoInput.value.trim();
+    const raw = (montoInput.value || "").trim();
     errorBox.textContent = "";
 
     if (!raw) {
@@ -1088,9 +1295,7 @@
     recalculateBoleta();
   });
 
-// ---------- CALCULADORA SUELDO ----------
   // ---------- CALCULADORA SUELDO ----------
-
   const slBrutoInput = document.getElementById("sl-bruto");
   const slAfpInput = document.getElementById("sl-afp");
   const slSaludInput = document.getElementById("sl-salud");
@@ -1113,7 +1318,6 @@
 
     err.textContent = "";
 
-    // Si no hay sueldo bruto válido, dejamos todo en cero
     if (!bruto || bruto <= 0) {
       row.style.opacity = 0.45;
       vAfp.textContent = "$0";
@@ -1124,15 +1328,12 @@
       return;
     }
 
-    // Descuentos
     const dAfp = bruto * afpPct;
     const dSalud = bruto * saludPct;
     const dCes = bruto * cesPct;
 
-    // Base imponible simple (bruto menos AFP y salud)
     const imponible = bruto - dAfp - dSalud;
 
-    // Impuesto súper simplificado por tramos
     let impuesto = 0;
     if (imponible > 2052302) impuesto = imponible * 0.08;
     else if (imponible > 923537) impuesto = imponible * 0.04;
@@ -1150,17 +1351,13 @@
     row.style.opacity = 1;
   }
 
-  // Escuchar cambios en los 4 inputs
   ["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", calcularSueldo);
   });
-
-  // Llamada inicial por si ya hay valores por defecto
   calcularSueldo();
 
   // ---------- CALCULADORA UF ----------
-
   const ufMontoInput = document.getElementById("ufMonto");
   const ufValorInput = document.getElementById("ufValor");
   const ufDirectionGroup = document.getElementById("ufDirectionGroup");
@@ -1168,7 +1365,6 @@
   const ufResults = document.getElementById("ufResults");
   const ufLegend = document.getElementById("ufLegend");
 
-  // UF automática desde API pública
   async function autoFillUF() {
     try {
       const res = await fetch("https://mindicador.cl/api");
@@ -1203,7 +1399,6 @@
       }
     }
   }
-
   autoFillUF();
 
   function formatUF(value) {
@@ -1221,8 +1416,8 @@
   }
 
   function recalculateUF() {
-    const rawMonto = ufMontoInput.value.trim();
-    const rawValor = ufValorInput.value.trim();
+    const rawMonto = (ufMontoInput.value || "").trim();
+    const rawValor = (ufValorInput.value || "").trim();
     ufErrorBox.textContent = "";
 
     if (!rawMonto || !rawValor) {
@@ -1272,7 +1467,6 @@
   });
 
   // ---------- CALCULADORA IVA (19%) ----------
-
   const ivaMontoInput = document.getElementById("ivaMonto");
   const ivaModeGroup = document.getElementById("ivaModeGroup");
   const ivaError = document.getElementById("ivaError");
@@ -1280,7 +1474,7 @@
   const IVA_RATE = 0.19;
 
   function recalculateIVA() {
-    const raw = ivaMontoInput.value.trim();
+    const raw = (ivaMontoInput.value || "").trim();
     ivaError.textContent = "";
 
     if (!raw) {
@@ -1336,14 +1530,39 @@
     });
     recalculateIVA();
   });
-</script>
-<script src="https://cdn.counter.dev/script.js" data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458" data-utcoffset="-3"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', function () {
-    var tab = document.querySelector('[data-tool="boleta"]');
-    if (tab) tab.click();
+
+  // ---------- BLOG: CARGAR ÚLTIMOS ARTÍCULOS ----------
+  function renderLatestBlogPosts(limit = 5) {
+    const list = document.getElementById("blogLatestList");
+    if (!list || !window.CALCULANDO_POSTS_2026) return;
+
+    const posts = [...window.CALCULANDO_POSTS_2026].sort((a, b) =>
+      (b.date || "").localeCompare(a.date || "")
+    );
+
+    const latest = posts.slice(0, limit);
+
+    list.innerHTML = "";
+    latest.forEach(post => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="${post.slug}">
+          <strong>${post.title}</strong>
+        </a>
+        <div class="tool-subtitle">${post.description}</div>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderLatestBlogPosts(5);
   });
 </script>
-</body>
+
+<script src="https://cdn.counter.dev/script.js"
+  data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458"
+  data-utcoffset="-3"></script>
+
 </body>
 </html>

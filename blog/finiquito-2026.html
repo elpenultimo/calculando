@@ -9,6 +9,8 @@
 
   <!-- CSS global -->
   <link rel="stylesheet" href="/css/calculando.css" />
+  <link rel="canonical" href="https://calculando.cl/blog/finiquito-2026.html" />
+
 </head>
 
 <body data-category="sueldos">
@@ -71,6 +73,45 @@
   .mini-blog-menu .mini-link:hover {
     transform:translateY(-1px);
     color:var(--primary);
+  }
+
+  .faq-section {
+    margin-top: 24px;
+  }
+
+  .faq-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 14px;
+  }
+
+  @media (min-width: 768px) {
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .faq-item {
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    background: var(--card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .faq-question {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .faq-answer {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
   }
 </style>
   </section>
@@ -205,6 +246,44 @@
         </a>
       </div>
 
+      <section class="faq-section" aria-labelledby="faq-finiquito-title">
+        <h2 class="faq-title" id="faq-finiquito-title">Preguntas frecuentes sobre finiquito en Chile</h2>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3 class="faq-question">¿Qué conceptos debe incluir un finiquito?</h3>
+            <p class="faq-answer">Usualmente considera remuneraciones pendientes, vacaciones proporcionales, indemnización sustitutiva de aviso previo e indemnización por años de servicio si corresponde la causal.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿Cuál es el plazo para firmar y pagar el finiquito?</h3>
+            <p class="faq-answer">La ley exige firmarlo dentro de los 10 días hábiles siguientes al término de la relación laboral. El pago debe realizarse al momento de la firma.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿Debe firmarse ante ministro de fe?</h3>
+            <p class="faq-answer">Sí. Debe suscribirse ante un inspector del trabajo, notario público, oficial del Registro Civil o presidente del sindicato cuando actúe como ministro de fe.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿Cómo se calculan las vacaciones proporcionales?</h3>
+            <p class="faq-answer">Se reconocen 1,25 días por mes trabajado. Se paga el valor día (sueldo mensual / 30) multiplicado por los días proporcionales adeudados.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿Cuándo corresponde indemnización por años de servicio?</h3>
+            <p class="faq-answer">Procede en causales como necesidades de la empresa o desahucio del empleador, con tope de 11 años. La base de cálculo no puede exceder 90 UF al mes.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿La indemnización paga impuesto a la renta?</h3>
+            <p class="faq-answer">La indemnización por años de servicio está exenta hasta el equivalente a un mes de remuneración por año trabajado con tope de 330 UF. Los montos que excedan ese límite se suman a la base imponible.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿Qué pasa si renuncio voluntariamente?</h3>
+            <p class="faq-answer">En una renuncia no hay indemnización por años de servicio, salvo que exista un acuerdo o cláusula de indemnización a todo evento. Sí deben pagarse vacaciones proporcionales y sueldos pendientes.</p>
+          </article>
+          <article class="faq-item">
+            <h3 class="faq-question">¿Pueden descontar anticipos en el finiquito?</h3>
+            <p class="faq-answer">El empleador puede descontar anticipos de sueldo u otros préstamos con respaldo y autorización escrita. También debe enterar cotizaciones previsionales antes de pagar el saldo al trabajador.</p>
+          </article>
+        </div>
+      </section>
+
     </article>
   </section>
 
@@ -215,6 +294,106 @@
   </footer>
 
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué conceptos debe incluir un finiquito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Normalmente incluye remuneraciones pendientes, vacaciones proporcionales, indemnización sustitutiva de aviso previo e indemnización por años de servicio cuando corresponde." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el plazo para firmar y pagar el finiquito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Debe firmarse dentro de los 10 días hábiles siguientes al término del contrato y el pago se realiza al momento de la firma." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Debe firmarse ante ministro de fe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, se firma ante inspector del trabajo, notario, oficial del Registro Civil o presidente del sindicato que actúe como ministro de fe." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calculan las vacaciones proporcionales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se reconocen 1,25 días por mes trabajado; se paga el valor día (sueldo mensual dividido por 30) multiplicado por los días adeudados." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo corresponde indemnización por años de servicio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Procede en causales como necesidades de la empresa o desahucio del empleador, con un máximo de 11 años y base de cálculo limitada a 90 UF." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La indemnización paga impuesto a la renta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La indemnización por años de servicio está exenta hasta un mes de remuneración por año trabajado con tope total de 330 UF; los excesos se suman a la base imponible." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si renuncio voluntariamente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En la renuncia no hay indemnización por años de servicio salvo acuerdos especiales; sí se pagan vacaciones proporcionales y remuneraciones pendientes." 
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Pueden descontar anticipos en el finiquito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se pueden descontar anticipos o préstamos autorizados por escrito y se deben enterar cotizaciones previsionales antes de pagar el saldo." 
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://calculando.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://calculando.cl/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Finiquito 2026",
+          "item": "https://calculando.cl/blog/finiquito-2026.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <!-- JS: tema claro/oscuro + categoría activa -->
 <script>
