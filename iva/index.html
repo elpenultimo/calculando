@@ -570,6 +570,47 @@
       color: var(--accent);
     }
 
+    /* --------- FAQ --------- */
+
+    .faq-section {
+      margin-top: 20px;
+    }
+
+    .faq-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* FOOTER */
 
     footer {
@@ -910,12 +951,144 @@
     </div>
   </section>
 
+  <section class="shell faq-section" aria-labelledby="faq-iva-title">
+    <h2 class="faq-title" id="faq-iva-title">Preguntas frecuentes sobre el IVA 19% en Chile</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuál es la tasa de IVA vigente?</h3>
+        <p class="faq-answer">En Chile el IVA general es de 19% para bienes y servicios afectos. No hay una tasa reducida, pero existen operaciones exentas o no gravadas.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué ventas o servicios están exentos de IVA?</h3>
+        <p class="faq-answer">Están exentos, entre otros, los arriendos de viviendas, servicios de salud y educación reconocidos, pasajes de transporte público y ciertos honorarios profesionales regulados por ley.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo paso de precio neto a precio bruto?</h3>
+        <p class="faq-answer">Multiplica el neto por 1,19. Si tienes el precio con IVA incluido y quieres el neto, divide el monto bruto por 1,19 y la diferencia es el IVA.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuándo debo emitir factura afecta o exenta?</h3>
+        <p class="faq-answer">Emites factura afecta cuando tu giro está gravado con IVA. Si prestas un servicio exento, debes emitir factura exenta o boleta no afecta según el documento que corresponda a tu actividad.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo funciona el crédito fiscal de IVA?</h3>
+        <p class="faq-answer">El IVA que pagas en compras y gastos relacionados a tu giro puede usarse como crédito fiscal y se descuenta del débito fiscal que generas en ventas. Se declara en el Formulario 29 del mismo periodo.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Las boletas de honorarios llevan IVA?</h3>
+        <p class="faq-answer">Las boletas de honorarios no llevan IVA; aplican retenciones de impuesto a la renta. Si tu servicio está afecto a IVA, debes iniciar actividades y facturar electrónicamente como contribuyente de primera categoría.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuál es el plazo para declarar y pagar IVA?</h3>
+        <p class="faq-answer">Se declara mensualmente en el Formulario 29. El pago electrónico suele vencer entre el día 12 y 20 del mes siguiente, dependiendo de si tienes opción de postergar o usar pago con débito automático.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Las plataformas digitales pagan IVA?</h3>
+        <p class="faq-answer">Sí. Servicios digitales prestados desde el exterior (streaming, apps, publicidad) pagan IVA. El proveedor extranjero lo recauda o, si no lo hace, el usuario debe pagar mediante el mecanismo de importación digital.</p>
+      </article>
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
     Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la tasa de IVA vigente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La tasa general es 19% para bienes y servicios afectos; no hay una tasa reducida, aunque existen actividades exentas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué ventas o servicios están exentos de IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Entre las exenciones habituales están los arriendos de viviendas, servicios de salud y educación reconocidos, transporte de pasajeros y ciertos honorarios profesionales regulados."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo paso de precio neto a precio bruto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica el neto por 1,19 para obtener el precio con IVA. Para separar un precio con IVA incluido, divide el bruto por 1,19 y la diferencia es el impuesto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo debo emitir factura afecta o exenta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Emites factura afecta si tu giro está gravado; si prestas un servicio exento debes emitir factura exenta o boleta no afecta, según corresponda a tu actividad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo funciona el crédito fiscal de IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El IVA pagado en compras vinculadas a tu giro se usa como crédito fiscal y se descuenta del débito fiscal generado en ventas en la declaración mensual del Formulario 29."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las boletas de honorarios llevan IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las boletas de honorarios no llevan IVA porque son retenciones de renta. Si el servicio está afecto a IVA, debe emitirse factura electrónica como contribuyente de primera categoría."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el plazo para declarar y pagar IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El IVA se declara mensualmente en el Formulario 29 y el pago electrónico suele vencer entre el día 12 y 20 del mes siguiente, según tus opciones de postergación o pago automático."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las plataformas digitales pagan IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Servicios digitales prestados desde el exterior (streaming, software, publicidad) están gravados con IVA; el proveedor lo recauda o el usuario paga mediante el mecanismo de importación digital."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://calculando.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "IVA",
+          "item": "https://calculando.cl/iva/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------

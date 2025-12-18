@@ -568,6 +568,47 @@
       color: var(--accent);
     }
 
+    /* --------- FAQ --------- */
+
+    .faq-section {
+      margin-top: 20px;
+    }
+
+    .faq-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* FOOTER */
 
     footer {
@@ -908,12 +949,144 @@
     </div>
   </section>
 
+  <section class="shell faq-section" aria-labelledby="faq-sueldo-title">
+    <h2 class="faq-title" id="faq-sueldo-title">Preguntas frecuentes sobre sueldo bruto y líquido</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué descuentos obligatorios se aplican al sueldo bruto?</h3>
+        <p class="faq-answer">Se descuentan cotización AFP, salud (7% o el plan pactado), seguro de cesantía para contratos indefinidos y, si corresponde, impuesto único de segunda categoría.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuál es el tope imponible mensual?</h3>
+        <p class="faq-answer">El tope imponible se expresa en UF y se actualiza cada año por la Superintendencia de Pensiones. Si tu sueldo supera ese tope, las cotizaciones obligatorias se calculan sólo hasta el límite vigente.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo se calcula el impuesto a la renta mensual?</h3>
+        <p class="faq-answer">El empleador aplica la tabla progresiva del SII para el mes. La base es el sueldo imponible luego de AFP y salud; dependiendo del tramo, se descuenta un porcentaje y una rebaja fija.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa si mi plan de salud es mayor al 7%?</h3>
+        <p class="faq-answer">En Fonasa se descuenta 7%. En Isapre, si el plan es mayor, se descuenta el porcentaje o monto pactado en UF, lo que reduce el líquido disponible.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Quién paga el seguro de cesantía?</h3>
+        <p class="faq-answer">Para contratos indefinidos el trabajador aporta 0,6% y el empleador 2,4%. En contratos a plazo fijo sólo aporta el empleador. Las trabajadoras de casa particular no cotizan en este seguro.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Los bonos de colación y movilización son imponibles?</h3>
+        <p class="faq-answer">Normalmente se pactan como asignaciones no imponibles y no afectan el cálculo de AFP o salud. Sí se suman al líquido, pero no generan gratificación ni horas extra.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo influye la gratificación legal en mi líquido?</h3>
+        <p class="faq-answer">Si la empresa paga gratificación legal, puede ser mensual (25% del sueldo con tope) o anual. Ese monto es imponible, por lo que aumenta la base para cotizaciones e impuestos.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué ocurre si ya estoy pensionado y sigo trabajando?</h3>
+        <p class="faq-answer">Un pensionado puede solicitar exención de cotización AFP en su administradora, pero sigue aportando a salud y, si corresponde, al seguro de cesantía e impuestos.</p>
+      </article>
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
     Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué descuentos obligatorios se aplican al sueldo bruto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se descuentan AFP, salud, seguro de cesantía cuando corresponde e impuesto único de segunda categoría según la tabla mensual del SII."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es el tope imponible mensual?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El tope imponible se fija en UF y se actualiza cada año. Si el sueldo supera ese límite, las cotizaciones obligatorias se calculan sólo hasta el tope vigente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el impuesto a la renta mensual?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se aplica la tabla progresiva del SII sobre la base imponible después de AFP y salud; cada tramo tiene una tasa y una rebaja fija."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si mi plan de salud es mayor al 7%?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En Isapre se descuenta el monto pactado en UF si supera el 7%, lo que reduce el líquido disponible. En Fonasa siempre es 7%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Quién paga el seguro de cesantía?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En contratos indefinidos el trabajador aporta 0,6% y el empleador 2,4%; en contratos a plazo el aporte es sólo del empleador."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los bonos de colación y movilización son imponibles?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Suelen pactarse como asignaciones no imponibles, por lo que no aumentan AFP ni salud, aunque sí se suman al líquido que recibes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo influye la gratificación legal en mi líquido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La gratificación es imponible. Si se paga mensualmente o anual, aumenta la base para cotizaciones y puede subir el impuesto mensual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué ocurre si ya estoy pensionado y sigo trabajando?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un pensionado puede solicitar exención de AFP, pero debe seguir cotizando en salud y, de corresponder, en seguro de cesantía e impuestos."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://calculando.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sueldo líquido",
+          "item": "https://calculando.cl/sueldo-liquido/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------

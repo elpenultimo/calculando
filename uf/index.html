@@ -568,6 +568,47 @@
       color: var(--accent);
     }
 
+    /* --------- FAQ --------- */
+
+    .faq-section {
+      margin-top: 20px;
+    }
+
+    .faq-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* FOOTER */
 
     footer {
@@ -908,12 +949,144 @@
     </div>
   </section>
 
+  <section class="shell faq-section" aria-labelledby="faq-uf-title">
+    <h2 class="faq-title" id="faq-uf-title">Preguntas frecuentes sobre la UF en Chile</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Quién fija el valor diario de la UF y a qué hora se publica?</h3>
+        <p class="faq-answer">El Banco Central calcula la UF usando la variación del IPC y publica su valor cada día hábil. El monto rige para todas las operaciones del día siguiente calendario.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo convierto un dividendo pactado en UF a pesos?</h3>
+        <p class="faq-answer">Multiplica las UF del dividendo por la UF vigente el día del pago. Los bancos suelen usar la UF del día anterior hábil, así que revisa la cartola de tu crédito para confirmar el valor aplicado.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Dónde puedo ver la UF histórica para reajustar contratos?</h3>
+        <p class="faq-answer">Puedes revisar la serie histórica en mindicador.cl o directamente en el sitio del Banco Central. Ahí encuentras valores diarios y mensuales para reajustes de arriendos, colegiaturas o planes de salud.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿La UF se usa para calcular sueldos o impuestos?</h3>
+        <p class="faq-answer">Los sueldos se pagan en pesos, pero varios topes legales están expresados en UF (por ejemplo, salud, AFP o crédito con aval del Estado). Los impuestos como IVA o retenciones de boletas se calculan en pesos, sólo pueden reajustarse usando la UF pactada en el contrato.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo reajusto un arriendo pactado en UF?</h3>
+        <p class="faq-answer">Multiplica la renta en UF por la UF vigente al momento del pago. Si el contrato indica reajuste anual, aplica la diferencia de UF entre las fechas definidas y notifica por escrito al arrendatario.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Puedo usar una UF estimada en una promesa de compraventa?</h3>
+        <p class="faq-answer">Las promesas suelen fijar el monto en UF pero se liquidan con la UF efectiva del día de pago. Usar una UF estimada es sólo referencial y no reemplaza el valor oficial publicado por el Banco Central.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa si la API de UF no responde?</h3>
+        <p class="faq-answer">Puedes ingresar manualmente el valor que publica el Banco Central o el que te informó tu banco. La calculadora funciona igual mientras el número sea el valor UF vigente para la fecha que necesites.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿La UF sube todos los días?</h3>
+        <p class="faq-answer">La UF suele subir gradualmente cuando el IPC es positivo, pero también puede mantenerse o bajar en periodos con inflación negativa. Cada variación refleja la inflación acumulada del mes en curso.</p>
+      </article>
+    </div>
+  </section>
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
     Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
   </footer>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Quién fija el valor diario de la UF y a qué hora se publica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El Banco Central calcula la UF usando la variación del IPC y publica su valor cada día hábil, con vigencia para las operaciones del día siguiente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo convierto un dividendo pactado en UF a pesos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica las UF del dividendo por la UF vigente el día del pago; los bancos suelen usar la UF del día hábil anterior para liquidar la cuota."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde puedo ver la UF histórica para reajustar contratos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La serie diaria se consulta en mindicador.cl o directamente en BancoCentral.cl, donde puedes descargar valores para reajustar arriendos, planes de salud o colegiaturas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La UF se usa para calcular sueldos o impuestos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los sueldos se pagan en pesos, pero topes legales como salud, AFP o CAE se expresan en UF. Impuestos como IVA o retenciones se calculan en pesos, aunque los contratos pueden reajustarse en UF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo reajusto un arriendo pactado en UF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica la renta en UF por la UF vigente al momento del pago. Si el contrato indica reajuste anual, aplica la variación de UF entre las fechas pactadas y comunica el cambio por escrito."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo usar una UF estimada en una promesa de compraventa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La promesa suele expresarse en UF, pero el pago final se liquida con la UF oficial del día de cierre. Una UF estimada es referencial y no reemplaza el valor publicado por el Banco Central."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si la API de UF no responde?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes ingresar manualmente el valor publicado por el Banco Central o el banco. La conversión se mantiene correcta siempre que uses la UF vigente para la fecha que necesitas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿La UF sube todos los días?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La UF refleja la inflación del mes. Suele subir de forma gradual, pero puede mantenerse o bajar en periodos con inflación negativa."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://calculando.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "UF",
+          "item": "https://calculando.cl/uf/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
