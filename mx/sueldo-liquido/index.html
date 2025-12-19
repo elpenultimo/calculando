@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculando México – Sueldo neto (beta)</title>
+  <meta name="description" content="Vista previa de la experiencia para calcular sueldo neto en México. Navega entre Inicio MX, IVA y sueldo neto." />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando México</strong>
+          <span>Beta de calculadoras para MX</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a Chile
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Sueldo neto México (beta)</h1>
+      <p>
+        Plantilla en construcción para calcular salario líquido en pesos mexicanos.
+        Úsala como referencia de diseño mientras afinamos la fórmula local.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Beta · Próximamente con datos oficiales
+      </div>
+
+      <div class="tool-nav">
+        <a class="tool-tab" href="/mx/">
+          <span>🏠</span> Inicio MX
+        </a>
+        <a class="tool-tab" href="/mx/iva/">
+          <span>🧮</span> IVA México
+        </a>
+        <a class="tool-tab tool-tab-active" href="/mx/sueldo-liquido/">
+          <span>💼</span> Sueldo neto MX
+        </a>
+      </div>
+    </section>
+
+    <section class="shell tool-shell">
+      <div class="tool-title">¿Qué podrás hacer aquí?</div>
+      <div class="tool-subtitle">
+        Prueba la navegación de Calculando México mientras preparamos el simulador de sueldo neto. Conecta rápidamente con las otras herramientas.
+      </div>
+
+      <ul style="margin-top:12px;display:grid;gap:12px;padding-left:0;list-style:none;">
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">Simulación de sueldo neto</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">La lógica de descuentos y aportes está en desarrollo. Este bloque valida la ruta y el flujo de la herramienta.</div>
+          <a class="pill" href="/mx/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Volver a inicio MX
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">IVA México (16%)</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">Accede a la calculadora activa de IVA para México y confirma el flujo entre herramientas.</div>
+          <a class="pill" href="/mx/iva/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de IVA MX
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Calculando México</strong> está en construcción. La versión oficial de Chile sigue disponible en <a href="/" style="color:var(--primary);text-decoration:underline;">Calculando.cl</a>.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+</body>
+</html>
