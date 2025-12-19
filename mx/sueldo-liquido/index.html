@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Calculadora de Sueldo Neto México 2026</title>
+  <meta name="description" content="Calcula sueldo neto mensual en México. Estima ISR, aportaciones IMSS y total de descuentos para conocer tu sueldo líquido en 2026." />
+  <meta name="keywords" content="sueldo neto mexico, sueldo liquido mx, calculadora isr, imss trabajador, sueldo bruto a neto" />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/sueldo-liquido" />
+
+  <meta property="og:title" content="Calculadora de Sueldo Neto en México" />
+  <meta property="og:description" content="Ingresa tu sueldo bruto mensual y obtén ISR, IMSS y sueldo líquido estimado para 2026." />
+  <meta property="og:url" content="https://calculando.cl/mx/sueldo-liquido" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora Sueldo Neto México 2026" />
+  <meta name="twitter:description" content="Cálculo rápido de ISR, IMSS y sueldo líquido mensual en MXN." />
+
+  <link rel="stylesheet" href="/css/calculando.css" />
+  <style>
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .result-figure {
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .muted-text { color: var(--muted); }
+
+    .breakdown-list {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .breakdown-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .calc-note {
+      border-radius: var(--radius-md);
+      background: var(--accent-soft);
+      color: var(--text);
+      padding: 12px 14px;
+      border: 1px solid var(--border-subtle);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando México</strong>
+          <span>Beta de calculadoras para MX</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a Chile
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de Sueldo Neto en México</h1>
+      <p>
+        Ingresa tu sueldo bruto mensual y obtén un estimado de ISR, aportaciones al IMSS y el sueldo neto que recibirías en 2026.
+        Es una referencia rápida: valida cifras oficiales con tu nómina o contador.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Muestra resultados en vivo · ISR progresivo + IMSS trabajador.
+      </div>
+
+      <div class="tool-nav" id="toolNav">
+        <a class="tool-tab" href="/mx/" data-page="home">
+          <span>🏠</span> Inicio MX
+        </a>
+        <a class="tool-tab" href="/mx/iva/" data-page="iva">
+          <span>🧮</span> IVA México (beta)
+        </a>
+        <a class="tool-tab tool-tab-active" href="/mx/sueldo-liquido" data-page="sueldoLiquido">
+          <span>💰</span> Sueldo neto MX
+        </a>
+      </div>
+    </section>
+
+    <section class="shell tool-shell">
+      <div class="tool-title">Ingresa tu sueldo bruto mensual (MXN)</div>
+      <div class="tool-subtitle">Calculamos ISR estimado con tabla simplificada y las cuotas de trabajador al IMSS.</div>
+
+      <div class="input-grid" style="margin-top:12px;">
+        <div class="input-card">
+          <label for="brutoInput" class="input-label">Sueldo bruto mensual</label>
+          <div class="input-field">
+            <span class="input-addon">$</span>
+            <input id="brutoInput" type="number" inputmode="decimal" placeholder="Ej: 25000" aria-describedby="brutoHelp brutoError" />
+          </div>
+          <div id="brutoHelp" class="muted-text" style="margin-top:6px;">Usamos MXN y aplicamos cálculo mensual.</div>
+          <div id="brutoError" class="error"></div>
+        </div>
+
+        <div class="result-card" style="padding:14px 16px;">
+          <div class="muted-text" style="margin-bottom:6px;">Sueldo neto mensual</div>
+          <div id="netResult" class="result-figure">$0</div>
+          <div class="muted-text" style="margin-top:4px;">Después de ISR e IMSS trabajador.</div>
+        </div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-card">
+          <div class="result-card-label">ISR mensual estimado</div>
+          <div id="isrResult" class="result-card-value">$0</div>
+          <div class="result-card-subvalue" id="isrDetail">Según tabla progresiva mensual.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-label">IMSS trabajador estimado</div>
+          <div id="imssResult" class="result-card-value">$0</div>
+          <div class="result-card-subvalue" id="imssDetail">Incluye enfermedades, invalidez y cesantía.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-label">Total descuentos</div>
+          <div id="totalResult" class="result-card-value">$0</div>
+          <div class="result-card-subvalue">ISR + IMSS</div>
+        </div>
+      </div>
+
+      <div class="calc-note" id="calcNote">
+        Ingresa un monto para mostrar el detalle de cálculo.
+      </div>
+
+      <div class="result-card" style="margin-top:12px;">
+        <div class="result-card-label" style="margin-bottom:6px;">Detalle de IMSS</div>
+        <ul class="breakdown-list" id="imssBreakdown">
+          <li><span>Enfermedades y maternidad</span><strong>$0</strong></li>
+          <li><span>Invalidez y vida</span><strong>$0</strong></li>
+          <li><span>Cesantía y vejez</span><strong>$0</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="shell" style="margin-top:14px;">
+      <div class="tool-title">¿Qué considerar al calcular tu sueldo?</div>
+      <p class="tool-subtitle">
+        El cálculo usa la tarifa mensual simplificada de ISR y cuotas de trabajador al IMSS. No contempla subsidio al empleo,
+        prestaciones exentas, tope de UMA o particularidades de tu nómina.
+      </p>
+      <div class="calc-note">
+        Resultado referencial. Verifica retenciones reales con tu recibo, contrato y asesoría fiscal.
+      </div>
+    </section>
+
+    <section class="shell" style="margin-top:14px;">
+      <div class="tool-title">Preguntas frecuentes</div>
+      <div class="faq-grid">
+        <article class="faq-item">
+          <h3 class="faq-question">¿Se descuenta primero IMSS o ISR?</h3>
+          <p class="faq-answer">Normalmente se descuenta IMSS sobre el salario base y luego se calcula ISR. Aquí estimamos ISR sobre el sueldo bruto mensual.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Incluye subsidio al empleo?</h3>
+          <p class="faq-answer">No. Es un estimado general; subsidios, exenciones y deducciones personales pueden modificar el resultado.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Las cuotas IMSS tienen tope?</h3>
+          <p class="faq-answer">Sí, las bases suelen limitarse por UMA o veces salario mínimo. Aquí usamos una referencia simplificada con UMA 2025.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Sirve para pago semanal o quincenal?</h3>
+          <p class="faq-answer">La tabla está mensualizada. Para otros periodos, ajusta el monto proporcional antes de calcular.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Calculando.mx</strong> es un proyecto independiente.
+      Usa estas herramientas como guía rápida y valida la normativa fiscal vigente con tu nómina.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    import { ISR_MONTHLY_TABLE_2026 } from '/src/countries/mx/data/isrTable.js';
+    import { IMSS_WORKER_RATES_2026, UMA_2025 } from '/src/countries/mx/data/imssRates.js';
+
+    bootstrapPage('sueldoLiquido');
+
+    const brutoInput = document.getElementById('brutoInput');
+    const brutoError = document.getElementById('brutoError');
+    const netResult = document.getElementById('netResult');
+    const isrResult = document.getElementById('isrResult');
+    const imssResult = document.getElementById('imssResult');
+    const totalResult = document.getElementById('totalResult');
+    const isrDetail = document.getElementById('isrDetail');
+    const imssDetail = document.getElementById('imssDetail');
+    const imssBreakdown = document.getElementById('imssBreakdown');
+    const calcNote = document.getElementById('calcNote');
+
+    function formatMXN(value) {
+      if (!isFinite(value)) return '$0';
+      try {
+        return new Intl.NumberFormat('es-MX', {
+          style: 'currency',
+          currency: 'MXN',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(value);
+      } catch (e) {
+        const safeValue = Number(value) || 0;
+        return '$' + safeValue.toLocaleString('es-MX', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+    }
+
+    function parseAmount(value) {
+      if (!value) return NaN;
+      const normalized = String(value).replace(/[^0-9.,-]/g, '');
+      const cleaned = normalized.includes(',') && !normalized.includes('.')
+        ? normalized.replace(/\./g, '').replace(',', '.')
+        : normalized.replace(/,/g, '');
+      return parseFloat(cleaned);
+    }
+
+    function calculateISR(taxable) {
+      if (!isFinite(taxable) || taxable <= 0) return 0;
+      const bracket = ISR_MONTHLY_TABLE_2026.find(
+        (row) => taxable >= row.lowerLimit && taxable <= row.upperLimit
+      );
+      if (!bracket) return 0;
+      const excedente = taxable - bracket.lowerLimit;
+      const tax = bracket.fixedFee + excedente * bracket.rate;
+      return Math.max(0, tax);
+    }
+
+    function calculateIMSS(baseSalary) {
+      if (!isFinite(baseSalary) || baseSalary <= 0) {
+        return { enfermedades: 0, invalidezVida: 0, cesantiaVejez: 0, total: 0 };
+      }
+
+      const umaCap = (IMSS_WORKER_RATES_2026.enfermedadesMaternidad.exceedingFactor || 3) * UMA_2025;
+      const excedente = Math.max(0, baseSalary - umaCap);
+      const enfermedades = excedente * IMSS_WORKER_RATES_2026.enfermedadesMaternidad.rate;
+      const invalidezVida = baseSalary * IMSS_WORKER_RATES_2026.invalidezVida;
+      const cesantiaVejez = baseSalary * IMSS_WORKER_RATES_2026.cesantiaVejez;
+      const total = enfermedades + invalidezVida + cesantiaVejez;
+
+      return { enfermedades, invalidezVida, cesantiaVejez, total };
+    }
+
+    function updateCalculations() {
+      const raw = brutoInput.value;
+      brutoError.textContent = '';
+
+      if (!raw) {
+        netResult.textContent = '$0';
+        isrResult.textContent = '$0';
+        imssResult.textContent = '$0';
+        totalResult.textContent = '$0';
+        isrDetail.textContent = 'Según tabla progresiva mensual.';
+        imssDetail.textContent = 'Incluye enfermedades, invalidez y cesantía.';
+        calcNote.textContent = 'Ingresa un monto para mostrar el detalle de cálculo.';
+        imssBreakdown.innerHTML = `
+          <li><span>Enfermedades y maternidad</span><strong>$0</strong></li>
+          <li><span>Invalidez y vida</span><strong>$0</strong></li>
+          <li><span>Cesantía y vejez</span><strong>$0</strong></li>
+        `;
+        return;
+      }
+
+      const bruto = parseAmount(raw);
+      if (!isFinite(bruto) || bruto <= 0) {
+        brutoError.textContent = 'Ingresa un sueldo bruto mensual mayor a 0.';
+        netResult.textContent = '$0';
+        isrResult.textContent = '$0';
+        imssResult.textContent = '$0';
+        totalResult.textContent = '$0';
+        return;
+      }
+
+      const imss = calculateIMSS(bruto);
+      const isr = calculateISR(bruto);
+      const totalDescuentos = isr + imss.total;
+      const neto = bruto - totalDescuentos;
+
+      netResult.textContent = formatMXN(neto);
+      isrResult.textContent = formatMXN(isr);
+      imssResult.textContent = formatMXN(imss.total);
+      totalResult.textContent = formatMXN(totalDescuentos);
+
+      isrDetail.textContent = `Tarifa simplificada 2026 con cuota fija y ${Math.round(bruto)} de base.`;
+      imssDetail.textContent = 'Cálculo referencial sobre salario mensual (UMA 2025).';
+      calcNote.textContent = 'Cifras aproximadas. Revisa tu recibo de nómina para valores definitivos.';
+
+      imssBreakdown.innerHTML = `
+        <li><span>Enfermedades y maternidad</span><strong>${formatMXN(imss.enfermedades)}</strong></li>
+        <li><span>Invalidez y vida</span><strong>${formatMXN(imss.invalidezVida)}</strong></li>
+        <li><span>Cesantía y vejez</span><strong>${formatMXN(imss.cesantiaVejez)}</strong></li>
+      `;
+    }
+
+    brutoInput.addEventListener('input', updateCalculations);
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCalculations();
+    });
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Se descuenta primero IMSS o ISR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En nómina se descuenta IMSS sobre el salario base y luego se calcula ISR. La calculadora toma el sueldo bruto mensual como referencia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Incluye subsidio al empleo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No incluye subsidio ni deducciones personales. Sirve como estimación rápida; tus retenciones reales pueden variar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las cuotas IMSS tienen tope?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las bases de cotización suelen limitarse por UMA. Este resultado usa una referencia simplificada con UMA 2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve para pago semanal o quincenal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La tarifa se muestra mensual. Ajusta proporcionalmente tu ingreso para otros periodos."
+          }
+        }
+      ]
+    }
+  </script>
+</body>
+</html>
