@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora IVA México (beta)</title>
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>IVA México</strong>
+          <span>Plantilla en construcción</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a inicio MX
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de IVA México (beta)</h1>
+      <p>
+        Esta es la plantilla base para calcular IVA en México. Usamos la misma interfaz que Chile, pero el cálculo real con tasa del 16% se añadirá después.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Próximamente con cálculo oficial · Datos de ejemplo por ahora
+      </div>
+    </section>
+
+    <section class="shell tool-shell">
+      <div class="tool-title">Ingresa un monto de prueba</div>
+      <div class="tool-subtitle">Mostramos resultados de ejemplo mientras definimos la fórmula definitiva.</div>
+
+      <div class="input-row">
+        <div class="input-label">Monto MXN</div>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="montoMx" class="amount-input" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej: 1200" />
+        </div>
+      </div>
+
+      <div class="results-row" id="results" style="opacity:0.65;">
+        <div class="result-card">
+          <div class="result-title">Resultado referencial</div>
+          <div class="result-main-label">Monto con IVA (demo)</div>
+          <div id="iva-demo-total" class="result-value">$0</div>
+          <div class="result-sub">Toma este dato solo como vista previa visual.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Nota</div>
+          <div class="result-main-label">Tasa pendiente</div>
+          <div class="result-value">16% (por aplicar)</div>
+          <div class="result-sub">Implementaremos el cálculo real en el siguiente paso.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" style="margin-top:18px;">
+      <div class="tool-title">¿Qué sigue?</div>
+      <ul style="list-style:disc;color:var(--muted);padding-left:20px;margin-top:8px;">
+        <li>Agregar cálculo real de IVA al 16%.</li>
+        <li>Alinear textos y ejemplos con lineamientos fiscales de MX.</li>
+        <li>Conectar navegación con otras calculadoras (sueldo neto, ISR, finiquito).</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script>
+    const montoMxInput = document.getElementById('montoMx');
+    const ivaTotal = document.getElementById('iva-demo-total');
+
+    function renderDemo() {
+      const value = parseFloat(montoMxInput.value || '0');
+      if (Number.isNaN(value) || value <= 0) {
+        ivaTotal.textContent = '$0';
+        return;
+      }
+      const demoTotal = value * 1.16;
+      ivaTotal.textContent = `$${demoTotal.toLocaleString('es-MX', { maximumFractionDigits: 0 })}`;
+    }
+
+    montoMxInput.addEventListener('input', renderDemo);
+  </script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    bootstrapPage('iva');
+  </script>
+</body>
+</html>
