@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora de sueldo neto en México (beta)</title>
+  <meta name="description" content="Convierte sueldo bruto a sueldo neto estimando ISR e IMSS del trabajador. Cálculo referencial en MXN." />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="/css/calculando.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <a class="logo-block" href="/mx/" aria-label="Inicio Calculando México">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando México</strong>
+          <span>Beta de calculadoras</span>
+        </div>
+      </a>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de sueldo neto (MX)</h1>
+      <p>
+        Ingresa tu sueldo bruto mensual en pesos mexicanos para estimar el ISR, el aporte del IMSS del trabajador
+        y cuánto recibirías en líquido.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo referencial basado en una lógica simplificada.
+      </div>
+
+      <div class="tool-nav" id="toolNav">
+        <a class="tool-tab" href="/mx/" data-page="home">
+          <span>🏠</span> Inicio MX
+        </a>
+        <a class="tool-tab" href="/mx/iva/" data-page="iva">
+          <span>🧮</span> IVA México
+        </a>
+        <a class="tool-tab tool-tab-active" href="/mx/sueldo-liquido/" data-page="sueldo">
+          <span>💼</span> Sueldo neto MX
+        </a>
+      </div>
+    </section>
+
+    <section class="shell tool-shell tool-shell-active">
+      <div class="tool-title">De sueldo bruto a sueldo neto en MXN</div>
+      <div class="tool-subtitle">
+        Estimamos ISR e IMSS del trabajador con un modelo simplificado para darte una referencia rápida de tu ingreso mensual.
+      </div>
+
+      <div class="input-row" style="margin-top:14px;">
+        <div class="input-label">Sueldo bruto mensual (MXN)</div>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input
+            id="salarioBruto"
+            class="amount-input"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            step="100"
+            placeholder="Ej: 35000"
+          />
+        </div>
+      </div>
+
+      <div class="results-row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;">
+        <div class="result-card">
+          <div class="result-title">ISR estimado</div>
+          <div id="isrEstimado" class="result-value">$0.00</div>
+          <div class="result-sub">Retención aproximada por Impuesto Sobre la Renta.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">IMSS trabajador</div>
+          <div id="imssTrabajador" class="result-value">$0.00</div>
+          <div class="result-sub">Cuota laboral estimada al Instituto Mexicano del Seguro Social.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Total descuentos</div>
+          <div id="totalDescuentos" class="result-value">$0.00</div>
+          <div class="result-sub">Suma de ISR e IMSS retenidos.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Sueldo neto</div>
+          <div id="sueldoNeto" class="result-value">$0.00</div>
+          <div class="result-sub">Monto aproximado a recibir en tu cuenta.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" style="margin-top:16px;">
+      <div class="tool-title">Notas rápidas</div>
+      <ul style="margin-top:8px;display:grid;gap:10px;padding-left:16px;">
+        <li>El cálculo es referencial y puede variar según subsidios, prestaciones y tablas oficiales.</li>
+        <li>Usamos redondeo a dos decimales y evitamos resultados negativos.</li>
+        <li>Vaciar el campo de sueldo reinicia los montos a $0.00.</li>
+      </ul>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Calculando México</strong> es una versión beta. Valida siempre con tu recibo oficial o con tu contador.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script src="/mx/sueldo-liquido/calculadora.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    bootstrapPage('sueldoLiquido');
+  </script>
+</body>
+</html>
