@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora de sueldo líquido México (beta)</title>
+  <meta name="description" content="Convierte tu sueldo bruto mensual de México a sueldo neto estimado. Calcula ISR, IMSS y descuentos en vivo." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://calculando.cl/mx/sueldo-liquido/" />
+  <meta property="og:title" content="Calculadora de sueldo líquido México" />
+  <meta property="og:description" content="Ingresa tu sueldo bruto mensual y obtén una estimación rápida de ISR, IMSS y sueldo neto." />
+  <meta property="og:url" content="https://calculando.cl/mx/sueldo-liquido/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando México" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora de sueldo líquido MX" />
+  <meta name="twitter:description" content="Calcula ISR, IMSS y sueldo neto aproximado en México." />
+
+  <link rel="stylesheet" href="/css/calculando.css" />
+
+  <style>
+    .hero {
+      margin-bottom: 10px;
+    }
+
+    .faq-section {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: var(--shell);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-item h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-item p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .calc-card {
+      padding: 14px 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(37, 99, 235, 0.72));
+      box-shadow: var(--shadow-card);
+    }
+
+    html[data-theme="light"] .calc-card {
+      background: linear-gradient(145deg, #ffffff, #dbeafe);
+    }
+
+    .calc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .calc-chip {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      font-size: 11px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .result-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--border-subtle);
+    }
+
+    html[data-theme="light"] .result-item {
+      background: rgba(219, 234, 254, 0.45);
+    }
+
+    .result-item span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .result-item strong {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando México</strong>
+          <span>Beta sueldo líquido</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a Chile
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de sueldo líquido México (beta)</h1>
+      <p class="tool-subtitle" style="max-width:640px;">
+        Ingresa tu sueldo bruto mensual en MXN y obtén una estimación rápida de ISR, IMSS del trabajador y
+        descuentos totales. Los valores son referenciales y buscan ayudarte a tener una idea de tu sueldo neto.
+      </p>
+      <div class="tool-nav" id="toolNav">
+        <a class="tool-tab" href="/mx/" data-page="home"><span>🏠</span> Inicio MX</a>
+        <a class="tool-tab" href="/mx/iva/" data-page="iva"><span>🧮</span> IVA México</a>
+        <a class="tool-tab tool-tab-active" href="/mx/sueldo-liquido/" data-page="sueldo"><span>💰</span> Sueldo
+          líquido MX</a>
+      </div>
+    </section>
+
+    <section class="shell tool-shell tool-shell-active" aria-labelledby="calc-title">
+      <div class="tool-title" id="calc-title">Calculadora</div>
+      <div class="tool-subtitle">
+        Sueldo bruto mensual (MXN) y resultados en vivo. Evitamos valores negativos y vacíos para que los cálculos
+        sean claros.
+      </div>
+
+      <div class="calc-card" id="mxSueldoCalc">
+        <div class="calc-header">
+          <div>
+            <div style="font-size:13px;font-weight:600;">Sueldo bruto mensual (MXN)</div>
+            <div style="font-size:12px;color:var(--muted);">Escribe sin puntos ni comas</div>
+          </div>
+          <div class="calc-chip">
+            <span>⚡</span>
+            <span>Cálculo en vivo</span>
+          </div>
+        </div>
+
+        <div class="input-row" style="margin-bottom:10px;">
+          <div class="amount-wrap">
+            <span class="amount-prefix">$</span>
+            <input
+              class="amount-input"
+              type="number"
+              inputmode="numeric"
+              min="0"
+              step="100"
+              placeholder="Ej: 20000"
+              data-role="bruto-input"
+            />
+          </div>
+        </div>
+
+        <div class="error" data-role="error"></div>
+
+        <ul class="result-list" data-role="results-box" aria-live="polite">
+          <li class="result-item">
+            <span>ISR estimado</span>
+            <strong data-result="isr">$0.00</strong>
+          </li>
+          <li class="result-item">
+            <span>IMSS trabajador estimado</span>
+            <strong data-result="imss">$0.00</strong>
+          </li>
+          <li class="result-item">
+            <span>Total descuentos</span>
+            <strong data-result="total">$0.00</strong>
+          </li>
+          <li class="result-item">
+            <span>Sueldo neto</span>
+            <strong data-result="neto">$0.00</strong>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="shell" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="tool-title">FAQ: sueldo bruto vs sueldo líquido en México</h2>
+      <div class="tool-subtitle">
+        Guía rápida con supuestos simplificados: consulta a tu empresa o a un contador para cálculos oficiales.
+      </div>
+      <div class="faq-section">
+        <article class="faq-item">
+          <h3>¿Qué incluye el descuento de IMSS del trabajador?</h3>
+          <p>Se descuenta la parte del trabajador por seguro de enfermedades y maternidad, invalidez y vida, cesantía en edad
+            avanzada y vejez. En esta calculadora lo resumimos en un porcentaje referencial para mostrar cómo impacta en el
+            neto.</p>
+        </article>
+        <article class="faq-item">
+          <h3>¿Cómo estimamos el ISR?</h3>
+          <p>Usamos tramos simplificados para estimar el Impuesto Sobre la Renta mensual. El resultado es orientativo y puede
+            variar según deducciones, subsidios y tablas oficiales del SAT.</p>
+        </article>
+        <article class="faq-item">
+          <h3>¿Por qué mi neto puede cambiar?</h3>
+          <p>Los montos reales dependen de factores como prestaciones, vales, cajas de ahorro o topes de seguridad social. Si tu
+            empresa aplica beneficios adicionales, los descuentos pueden ser menores o mayores.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Calculando México</strong> es una vista beta. Revisa las cifras oficiales antes de tomar decisiones.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    import { initMxSueldoCalculator } from '/js/mx-sueldo.js';
+
+    bootstrapPage('sueldo');
+    initMxSueldoCalculator();
+  </script>
+</body>
+</html>
