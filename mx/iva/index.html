@@ -3,99 +3,747 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calculadora IVA México (beta)</title>
-  <link rel="stylesheet" href="/css/calculando.css">
-</head>
-<body>
-  <main>
-    <header>
-      <div class="logo-block">
-        <div class="logo-mark">C</div>
-        <div class="logo-text">
-          <strong>IVA México</strong>
-          <span>Plantilla en construcción</span>
-        </div>
-      </div>
 
-      <button id="themeToggle" class="theme-toggle" type="button">
-        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-        <span id="themeLabel">Modo oscuro</span>
-      </button>
+  <title>Calculadora IVA México – Neto, Bruto e IVA 16%</title>
 
-      <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
-        Volver a inicio MX
-      </a>
-    </header>
+  <meta name="description" content="Calcula el IVA al 16% en México. Convierte entre monto neto, monto bruto y valor del IVA rápidamente para cotizaciones con o sin impuesto." />
+  <meta name="keywords" content="calcular IVA, IVA 16%, neto a bruto, bruto a neto, calculadora IVA México, precio con IVA, precio sin IVA" />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
 
-    <section class="hero">
-      <h1>Calculadora de IVA México (beta)</h1>
-      <p>
-        Esta es la plantilla base para calcular IVA en México. Usamos la misma interfaz que Chile, pero el cálculo real con tasa del 16% se añadirá después.
-      </p>
-      <div class="pill">
-        <span class="pill-dot"></span>
-        Próximamente con cálculo oficial · Datos de ejemplo por ahora
-      </div>
-    </section>
+  <link rel="canonical" href="https://calculando.cl/mx/iva/" />
 
-    <section class="shell tool-shell">
-      <div class="tool-title">Ingresa un monto de prueba</div>
-      <div class="tool-subtitle">Mostramos resultados de ejemplo mientras definimos la fórmula definitiva.</div>
+  <meta property="og:title" content="Calculadora IVA México – 16%" />
+  <meta property="og:description" content="Convierte entre neto, bruto e IVA usando la tasa del 16% en México." />
+  <meta property="og:url" content="https://calculando.cl/mx/iva/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
 
-      <div class="input-row">
-        <div class="input-label">Monto MXN</div>
-        <div class="amount-wrap">
-          <span class="amount-prefix">$</span>
-          <input id="montoMx" class="amount-input" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej: 1200" />
-        </div>
-      </div>
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora IVA 16% – México" />
+  <meta name="twitter:description" content="Herramienta rápida para calcular IVA, neto y bruto en México." />
 
-      <div class="results-row" id="results" style="opacity:0.65;">
-        <div class="result-card">
-          <div class="result-title">Resultado referencial</div>
-          <div class="result-main-label">Monto con IVA (demo)</div>
-          <div id="iva-demo-total" class="result-value">$0</div>
-          <div class="result-sub">Toma este dato solo como vista previa visual.</div>
-        </div>
-        <div class="result-card">
-          <div class="result-title">Nota</div>
-          <div class="result-main-label">Tasa pendiente</div>
-          <div class="result-value">16% (por aplicar)</div>
-          <div class="result-sub">Implementaremos el cálculo real en el siguiente paso.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell" style="margin-top:18px;">
-      <div class="tool-title">¿Qué sigue?</div>
-      <ul style="list-style:disc;color:var(--muted);padding-left:20px;margin-top:8px;">
-        <li>Agregar cálculo real de IVA al 16%.</li>
-        <li>Alinear textos y ejemplos con lineamientos fiscales de MX.</li>
-        <li>Conectar navegación con otras calculadoras (sueldo neto, ISR, finiquito).</li>
-      </ul>
-    </section>
-  </main>
-
-  <script src="/js/theme-toggle.js"></script>
-  <script>
-    const montoMxInput = document.getElementById('montoMx');
-    const ivaTotal = document.getElementById('iva-demo-total');
-
-    function renderDemo() {
-      const value = parseFloat(montoMxInput.value || '0');
-      if (Number.isNaN(value) || value <= 0) {
-        ivaTotal.textContent = '$0';
-        return;
-      }
-      const demoTotal = value * 1.16;
-      ivaTotal.textContent = `$${demoTotal.toLocaleString('es-MX', { maximumFractionDigits: 0 })}`;
+  <style>
+    /* --------- TIPOGRAFÍA Y RESET --------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
     }
 
-    montoMxInput.addEventListener('input', renderDemo);
-  </script>
-  <script type="module">
-    import { bootstrapPage } from '/js/country-bootstrap.js';
-    bootstrapPage('iva');
-  </script>
+    :root {
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    html[data-theme="dark"] {
+      --bg: radial-gradient(circle at top, #0f172a 0, #020617 52%, #020617 100%);
+      --shell: rgba(15, 23, 42, 0.9);
+      --card: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.12);
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.85);
+      --shadow-card: 0 18px 42px rgba(15, 23, 42, 0.95);
+      --header-glow: 0 0 40px rgba(56, 189, 248, 0.35);
+      --chip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    html[data-theme="light"] {
+      --bg: radial-gradient(circle at top, #e0edff 0, #f4f7fb 45%, #ffffff 100%);
+      --shell: rgba(255, 255, 255, 0.9);
+      --card: #ffffff;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #0f172a;
+      --muted: #6b7280;
+      --accent: #eab308;
+      --accent-soft: rgba(234, 179, 8, 0.12);
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.15);
+      --shadow-card: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --header-glow: 0 0 0 rgba(0, 0, 0, 0);
+      --chip-bg: #f9fafb;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      transition: background 0.4s ease-out, color 0.25s ease-out;
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+      padding: 22px 16px 34px;
+      margin: 0 auto;
+      animation: fade-in 0.6s ease-out;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --------- HEADER --------- */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb 0, #e5e7eb 24%, #0ea5e9 50%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0b1120;
+      box-shadow: var(--header-glow);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .logo-block:hover .logo-mark {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 0 55px rgba(56, 189, 248, 0.55);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), color var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .theme-toggle-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-icon {
+      background: #0f172a;
+    }
+
+    html[data-theme="light"] .theme-toggle-icon {
+      background: #facc15;
+      color: #1f2933;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- HERO --------- */
+
+    .hero {
+      background: linear-gradient(145deg, rgba(14, 165, 233, 0.16), rgba(59, 130, 246, 0.08));
+      padding: 18px 18px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 16px;
+      backdrop-filter: blur(18px);
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
+    }
+
+    /* --------- SHELL / CONTENEDORES --------- */
+
+    .shell {
+      margin-top: 14px;
+      background: var(--shell);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(24px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 20px 22px 24px;
+      }
+    }
+
+    .tool-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tool-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* INPUT MONTO */
+
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .input-row {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .input-label {
+      font-size: 13px;
+      color: var(--muted);
+      min-width: 130px;
+    }
+
+    .amount-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .amount-prefix {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .amount-input {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 20px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-strong);
+      outline: none;
+      background: radial-gradient(circle at top, #fef9c3 0, #fef3c7 45%, #fefce8 100%);
+      color: #111827;
+      text-align: right;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+      transition: box-shadow var(--transition-med), transform var(--transition-med),
+        border-color var(--transition-fast), background 0.35s ease-out;
+    }
+
+    .amount-input:focus {
+      box-shadow: 0 14px 35px rgba(14, 165, 233, 0.45);
+      border-color: var(--primary);
+      transform: translateY(-0.5px);
+    }
+
+    .amount-input::placeholder {
+      color: rgba(17, 24, 39, 0.55);
+      font-size: 14px;
+    }
+
+    .direction-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .direction-pill {
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      font-size: 13px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .direction-pill input {
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .direction-pill-active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
+      transform: translateY(-0.5px);
+    }
+
+    .helper {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .error {
+      min-height: 16px;
+      font-size: 12px;
+      color: #f97373;
+      margin-top: 4px;
+    }
+
+    .iva-results {
+      margin-top: 14px;
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      border: 1px solid var(--border-subtle);
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .iva-results strong {
+      color: var(--accent);
+    }
+
+    /* --------- FAQ --------- */
+
+    .faq-section {
+      margin-top: 20px;
+    }
+
+    .faq-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    footer strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.mx</strong>
+        <span>Calculadoras simples y claras.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+
+    <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+      Volver a inicio MX
+    </a>
+  </header>
+
+  <section class="hero">
+    <h1>Calculadora IVA México 2026: neto, bruto e IVA 16%</h1>
+    <p>
+      Convierte entre precios con y sin impuesto usando la tasa general del 16%.
+      Diseñada para cotizaciones rápidas desde el móvil o el escritorio, con montos en MXN.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      IVA general 16% · Incluye cálculo de neto, bruto y solo impuesto
+    </div>
+  </section>
+
+  <section id="tool-iva" class="shell tool-shell">
+    <div class="tool-title">Calculadora IVA (16%)</div>
+    <div class="tool-subtitle">
+      Convierte entre valores netos y brutos o calcula sólo el IVA, usando la tasa estándar del 16% en México.
+    </div>
+
+    <div class="tool-subtitle" style="margin-top:12px;">
+      Ingresa un monto en pesos mexicanos y elige si corresponde a precio neto (sin IVA) o bruto (con IVA).
+      La herramienta mostrará el impuesto y el valor final automáticamente.
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Monto</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="ivaMonto"
+          class="amount-input"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="100"
+          placeholder="Ej: 1000"
+        />
+      </div>
+    </div>
+
+    <div class="direction-row" id="ivaModeGroup">
+      <label class="direction-pill direction-pill-active">
+        <input type="radio" name="ivaMode" value="netoBruto" checked />
+        De neto a bruto
+      </label>
+      <label class="direction-pill">
+        <input type="radio" name="ivaMode" value="brutoNeto" />
+        De bruto a neto
+      </label>
+      <label class="direction-pill">
+        <input type="radio" name="ivaMode" value="soloIVA" />
+        Calcular sólo IVA
+      </label>
+    </div>
+
+    <div class="helper">
+      Tip: usa neto cuando el precio es “sin IVA” y bruto cuando incluye IVA.
+    </div>
+
+    <div id="ivaError" class="error"></div>
+
+    <div id="ivaResults" class="iva-results" style="opacity:0.45;">
+      Ingresa un monto para calcular su IVA, valor neto y bruto.
+    </div>
+  </section>
+
+  <section class="shell faq-section" aria-labelledby="faq-iva-title">
+    <h2 class="faq-title" id="faq-iva-title">Preguntas frecuentes sobre el IVA 16% en México</h2>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuál es la tasa de IVA vigente en México?</h3>
+        <p class="faq-answer">La tasa general es 16% para bienes y servicios gravados. En la franja fronteriza norte aplica una tasa reducida de 8% en ciertos casos.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué operaciones están exentas de IVA?</h3>
+        <p class="faq-answer">Entre las exenciones más comunes están la enajenación de casa habitación, servicios médicos, educación con validez oficial y transporte público terrestre de personas.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo paso de precio neto a precio bruto?</h3>
+        <p class="faq-answer">Multiplica el monto neto por 1.16 para obtener el precio con IVA incluido. Si tienes el precio bruto y quieres el neto, divídelo entre 1.16; la diferencia es el impuesto.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿El IVA se redondea?</h3>
+        <p class="faq-answer">Normalmente se muestran dos decimales en MXN. El cálculo puede redondearse al centavo más cercano según las políticas de tu facturación o comercio electrónico.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo se declara el IVA?</h3>
+        <p class="faq-answer">Los contribuyentes presentan declaraciones mensuales ante el SAT. El IVA acreditable (compras) se resta del IVA trasladado (ventas) y el resultado puede ser a cargo o a favor.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Las facturas de honorarios llevan IVA?</h3>
+        <p class="faq-answer">Depende del servicio. Si está gravado, se factura con IVA al 16% (o 8% en la frontera norte). Algunos servicios profesionales pueden estar exentos según la actividad.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Calculando.mx</strong> es un proyecto independiente.
+    Usa estas herramientas como guía rápida y valida la normativa fiscal vigente con tu contador.
+  </footer>
+</main>
+
+<script src="/js/theme-toggle.js"></script>
+
+<script>
+  const ivaMontoInput = document.getElementById("ivaMonto");
+  const ivaModeGroup = document.getElementById("ivaModeGroup");
+  const ivaError = document.getElementById("ivaError");
+  const ivaResults = document.getElementById("ivaResults");
+
+  const IVA_RATE = 0.16;
+
+  function formatMXN(value) {
+    if (!isFinite(value)) return "$0.00";
+    try {
+      return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    } catch (e) {
+      const safeValue = Number(value) || 0;
+      return "$" + safeValue.toLocaleString("es-MX", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+  }
+
+  function recalculateIVA() {
+    const raw = (ivaMontoInput.value || "").trim();
+    ivaError.textContent = "";
+
+    if (!raw) {
+      ivaResults.style.opacity = 0.45;
+      ivaResults.textContent = "Ingresa un monto para calcular su IVA, valor neto y bruto.";
+      return;
+    }
+
+    const monto = Number(raw);
+    if (!isFinite(monto) || monto <= 0) {
+      ivaResults.style.opacity = 0.45;
+      ivaResults.textContent = "Ingresa un monto para calcular su IVA, valor neto y bruto.";
+      ivaError.textContent = "El monto debe ser un número mayor a 0.";
+      return;
+    }
+
+    const mode = ivaModeGroup.querySelector("input[name='ivaMode']:checked").value;
+
+    let texto = "";
+    if (mode === "netoBruto") {
+      const neto = monto;
+      const iva = neto * IVA_RATE;
+      const bruto = neto + iva;
+      texto =
+        `Si el monto <strong>neto</strong> es ${formatMXN(neto)}, ` +
+        `el IVA (16%) es <strong>${formatMXN(iva)}</strong> ` +
+        `y el total <strong>bruto</strong> es ${formatMXN(bruto)}.`;
+    } else if (mode === "brutoNeto") {
+      const bruto = monto;
+      const neto = bruto / (1 + IVA_RATE);
+      const iva = bruto - neto;
+      texto =
+        `Si el monto <strong>bruto</strong> es ${formatMXN(bruto)}, ` +
+        `el valor <strong>neto</strong> es ${formatMXN(neto)} ` +
+        `y el IVA (16%) es <strong>${formatMXN(iva)}</strong>.`;
+    } else {
+      const iva = monto * IVA_RATE;
+      texto =
+        `El IVA (16%) de ${formatMXN(monto)} es ` +
+        `<strong>${formatMXN(iva)}</strong>.`;
+    }
+
+    ivaResults.innerHTML = texto;
+    ivaResults.style.opacity = 1;
+  }
+
+  ivaMontoInput.addEventListener("input", recalculateIVA);
+
+  ivaModeGroup.addEventListener("change", () => {
+    const pills = ivaModeGroup.querySelectorAll(".direction-pill");
+    pills.forEach(pill => {
+      const input = pill.querySelector("input");
+      pill.classList.toggle("direction-pill-active", !!input && input.checked);
+    });
+    recalculateIVA();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    recalculateIVA();
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la tasa de IVA vigente en México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La tasa general es 16% para bienes y servicios gravados, con reducción a 8% en la frontera norte en ciertos supuestos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué operaciones están exentas de IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Algunas operaciones exentas son la enajenación de casa habitación, servicios de educación con validez oficial, transporte público terrestre de personas y servicios médicos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo paso de precio neto a precio bruto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica el monto neto por 1.16 para obtener el precio con IVA. Si el monto incluye IVA, divídelo entre 1.16 para obtener el neto y la diferencia es el impuesto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El IVA se redondea?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los importes suelen mostrarse con dos decimales en MXN. El redondeo al centavo más cercano depende de las políticas de facturación del comercio o sistema."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se declara el IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El IVA se declara de forma mensual ante el SAT. El contribuyente resta el IVA acreditable de sus compras al IVA trasladado en ventas y paga o compensa según el resultado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las facturas de honorarios llevan IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si el servicio está gravado, los honorarios se facturan con IVA al 16% (o 8% en frontera norte). Algunos servicios profesionales pueden estar exentos según la actividad."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Calculadora IVA 16% – México",
+      "url": "https://calculando.cl/mx/iva/",
+      "description": "Convierte entre neto, bruto e IVA usando la tasa del 16% en México.",
+      "inLanguage": "es-MX"
+    }
+  ]
+}
+</script>
+
+<script type="module">
+  import { bootstrapPage } from '/js/country-bootstrap.js';
+  bootstrapPage('iva');
+</script>
 </body>
 </html>
