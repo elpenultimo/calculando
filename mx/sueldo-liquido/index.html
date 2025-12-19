@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Calculadora Sueldo Neto México – ISR, IMSS y descuentos</title>
+
+  <meta name="description" content="Calcula tu sueldo neto mensual en México. Estima ISR, IMSS del trabajador y descuentos totales a partir del sueldo bruto en MXN." />
+  <meta name="keywords" content="sueldo neto mexico, calcular isr, descuento imss, sueldo bruto a neto" />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/sueldo-liquido/" />
+
+  <meta property="og:title" content="Calculadora Sueldo Neto México" />
+  <meta property="og:description" content="Ingresa tu sueldo bruto y obtén ISR estimado, IMSS trabajador y sueldo neto en MXN." />
+  <meta property="og:url" content="https://calculando.cl/mx/sueldo-liquido/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sueldo neto México – Calculadora" />
+  <meta name="twitter:description" content="Calcula ISR, IMSS y sueldo neto mensual en pesos mexicanos." />
+
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando.mx</strong>
+          <span>Calculadoras simples y claras.</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a inicio MX
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de sueldo neto México</h1>
+      <p>
+        Ingresa el sueldo bruto mensual en pesos mexicanos y revisa los descuentos
+        estimados por ISR e IMSS. El cálculo se actualiza al instante mientras escribes.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Vista beta · Resultados referenciales en MXN.
+      </div>
+
+      <div class="tool-nav" id="toolNav" style="margin-top:14px;">
+        <a class="tool-tab" href="/mx/" data-page="home">
+          <span>🏠</span> Inicio MX
+        </a>
+        <a class="tool-tab" href="/mx/iva/" data-page="iva">
+          <span>🧮</span> IVA México
+        </a>
+        <a class="tool-tab tool-tab-active" href="/mx/sueldo-liquido/" data-page="sueldo">
+          <span>💰</span> Sueldo neto MX
+        </a>
+      </div>
+    </section>
+
+    <section id="tool-sueldo" class="shell tool-shell">
+      <div class="tool-title">Calcula tu sueldo neto mensual</div>
+      <div class="tool-subtitle">
+        Escribe el sueldo bruto y obtén el ISR estimado, la cotización de IMSS para el trabajador
+        y el total de descuentos. Los resultados se muestran en pesos mexicanos.
+      </div>
+
+      <div class="input-row">
+        <div class="input-label">Sueldo bruto mensual</div>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input
+            id="mxSueldoBruto"
+            class="amount-input"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="500"
+            placeholder="Ej: 35000"
+          />
+        </div>
+      </div>
+
+      <div class="tool-subtitle" style="margin-bottom:10px;">
+        El cálculo es referencial y muestra montos aproximados de ISR e IMSS.
+      </div>
+
+      <div class="iva-results" style="display:grid;gap:10px;">
+        <div class="result-card" style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="result-label">ISR estimado</div>
+          <div id="mxIsr" class="result-value">$0.00</div>
+        </div>
+        <div class="result-card" style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="result-label">IMSS trabajador</div>
+          <div id="mxImss" class="result-value">$0.00</div>
+        </div>
+        <div class="result-card" style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="result-label">Total descuentos</div>
+          <div id="mxDescuentos" class="result-value">$0.00</div>
+        </div>
+        <div class="result-card" style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="result-label">Sueldo neto</div>
+          <div id="mxNeto" class="result-value" style="color:var(--accent);font-weight:700;">$0.00</div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Calculando México</strong> está en beta. Los cálculos son referenciales y pueden cambiar con futuras actualizaciones.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    bootstrapPage('sueldo');
+  </script>
+  <script>
+    const grossInput = document.getElementById('mxSueldoBruto');
+    const isrNode = document.getElementById('mxIsr');
+    const imssNode = document.getElementById('mxImss');
+    const descuentosNode = document.getElementById('mxDescuentos');
+    const netoNode = document.getElementById('mxNeto');
+
+    const formatter = new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function resetValues() {
+      isrNode.textContent = '$0.00';
+      imssNode.textContent = '$0.00';
+      descuentosNode.textContent = '$0.00';
+      netoNode.textContent = '$0.00';
+    }
+
+    function calcularSueldoNeto() {
+      const bruto = parseFloat(grossInput.value);
+
+      if (!bruto || bruto <= 0) {
+        resetValues();
+        return;
+      }
+
+      const isrEstimado = bruto * 0.18;
+      const imssTrabajador = bruto * 0.03;
+      const totalDescuentos = isrEstimado + imssTrabajador;
+      const neto = Math.max(bruto - totalDescuentos, 0);
+
+      isrNode.textContent = formatter.format(isrEstimado);
+      imssNode.textContent = formatter.format(imssTrabajador);
+      descuentosNode.textContent = formatter.format(totalDescuentos);
+      netoNode.textContent = formatter.format(neto);
+    }
+
+    grossInput.addEventListener('input', calcularSueldoNeto);
+    calcularSueldoNeto();
+  </script>
+</body>
+</html>
