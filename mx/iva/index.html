@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calculadora IVA México (beta)</title>
-  <link rel="stylesheet" href="/css/calculando.css">
+  <title>Calculadora de IVA (16%) México</title>
+  <meta
+    name="description"
+    content="Calcula IVA 16% en México: convierte precio con IVA a sin IVA y viceversa, y obtén el monto de IVA."
+  />
+  <link rel="stylesheet" href="/css/calculando.css" />
 </head>
 <body>
   <main>
@@ -12,8 +16,8 @@
       <div class="logo-block">
         <div class="logo-mark">C</div>
         <div class="logo-text">
-          <strong>IVA México</strong>
-          <span>Plantilla en construcción</span>
+          <strong>Calculando México</strong>
+          <span>IVA 16% en MXN</span>
         </div>
       </div>
 
@@ -28,74 +32,305 @@
     </header>
 
     <section class="hero">
-      <h1>Calculadora de IVA México (beta)</h1>
+      <h1>Calculadora de IVA México (16%)</h1>
       <p>
-        Esta es la plantilla base para calcular IVA en México. Usamos la misma interfaz que Chile, pero el cálculo real con tasa del 16% se añadirá después.
+        Convierte precios sin IVA a totales con IVA (16%) y desde montos con IVA a valores base en MXN.
+        Ejemplo rápido: $1,000 sin IVA → $1,160 con IVA; $1,160 con IVA → $1,000 sin IVA.
+        También puedes obtener el monto de IVA de cualquier cifra en segundos.
       </p>
       <div class="pill">
         <span class="pill-dot"></span>
-        Próximamente con cálculo oficial · Datos de ejemplo por ahora
+        Tasa fija 16% · Formato MXN con separador de miles
       </div>
     </section>
 
-    <section class="shell tool-shell">
-      <div class="tool-title">Ingresa un monto de prueba</div>
-      <div class="tool-subtitle">Mostramos resultados de ejemplo mientras definimos la fórmula definitiva.</div>
+    <section class="shell tool-shell" id="tool-iva-mx">
+      <div class="tool-title">Calculadora IVA (16%)</div>
+      <div class="tool-subtitle">
+        Ingresa un monto en pesos mexicanos y elige si es sin IVA, con IVA o si solo quieres conocer el impuesto.
+        Usamos la misma interfaz de la calculadora de IVA de Chile, adaptada a la tasa estándar de México.
+      </div>
+
+      <div class="tool-subtitle" style="margin-top:12px;">
+        Esta herramienta sirve para cotizar, facturar o revisar precios rápidamente. El cálculo es referencial y
+        considera IVA del 16% para todo México.
+      </div>
 
       <div class="input-row">
-        <div class="input-label">Monto MXN</div>
+        <div class="input-label">Monto</div>
         <div class="amount-wrap">
           <span class="amount-prefix">$</span>
-          <input id="montoMx" class="amount-input" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej: 1200" />
+          <input
+            id="ivaMxMonto"
+            class="amount-input"
+            type="text"
+            inputmode="decimal"
+            pattern="[0-9.,]*"
+            min="0"
+            placeholder="Ej: 1200,50"
+          />
         </div>
       </div>
 
-      <div class="results-row" id="results" style="opacity:0.65;">
+      <div class="direction-row" id="ivaMxModeGroup">
+        <label class="direction-pill direction-pill-active">
+          <input type="radio" name="ivaMxMode" value="sinIVA" checked />
+          De precio sin IVA a precio con IVA
+        </label>
+        <label class="direction-pill">
+          <input type="radio" name="ivaMxMode" value="conIVA" />
+          De precio con IVA a precio sin IVA
+        </label>
+        <label class="direction-pill">
+          <input type="radio" name="ivaMxMode" value="soloIVA" />
+          Calcular solo el IVA
+        </label>
+      </div>
+
+      <div class="helper">
+        Tip: puedes escribir con comas o puntos. La calculadora normaliza el número y evita valores negativos.
+      </div>
+
+      <div id="ivaMxError" class="error"></div>
+
+      <div class="results-row" id="ivaMxResults" style="opacity:0.45;">
         <div class="result-card">
-          <div class="result-title">Resultado referencial</div>
-          <div class="result-main-label">Monto con IVA (demo)</div>
-          <div id="iva-demo-total" class="result-value">$0</div>
-          <div class="result-sub">Toma este dato solo como vista previa visual.</div>
+          <div class="result-title">Precio sin IVA</div>
+          <div class="result-main-label" id="ivaMxBaseLabel">Monto base</div>
+          <div id="ivaMxBase" class="result-value">$0.00</div>
+          <div class="result-sub" id="ivaMxBaseSub">Valor sin impuesto según el modo seleccionado.</div>
         </div>
         <div class="result-card">
-          <div class="result-title">Nota</div>
-          <div class="result-main-label">Tasa pendiente</div>
-          <div class="result-value">16% (por aplicar)</div>
-          <div class="result-sub">Implementaremos el cálculo real en el siguiente paso.</div>
+          <div class="result-title">IVA 16%</div>
+          <div class="result-main-label">Impuesto calculado</div>
+          <div id="ivaMxIVA" class="result-value">$0.00</div>
+          <div class="result-sub" id="ivaMxIVASub">Se calcula con la tasa fija de 16% para México.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Precio con IVA</div>
+          <div class="result-main-label" id="ivaMxTotalLabel">Total final</div>
+          <div id="ivaMxTotal" class="result-value">$0.00</div>
+          <div class="result-sub" id="ivaMxTotalSub">Total con IVA incluido o equivalente.</div>
         </div>
       </div>
     </section>
 
-    <section class="shell" style="margin-top:18px;">
-      <div class="tool-title">¿Qué sigue?</div>
-      <ul style="list-style:disc;color:var(--muted);padding-left:20px;margin-top:8px;">
-        <li>Agregar cálculo real de IVA al 16%.</li>
-        <li>Alinear textos y ejemplos con lineamientos fiscales de MX.</li>
-        <li>Conectar navegación con otras calculadoras (sueldo neto, ISR, finiquito).</li>
-      </ul>
+    <section class="shell faq-section" aria-labelledby="faq-iva-mx-title">
+      <h2 class="faq-title" id="faq-iva-mx-title">Preguntas frecuentes sobre el IVA 16% en México</h2>
+      <div class="faq-grid">
+        <article class="faq-item">
+          <h3 class="faq-question">¿Cuál es la tasa general de IVA en México?</h3>
+          <p class="faq-answer">La tasa estándar es 16% en la mayoría del país. En zonas fronterizas puede aplicar una tasa
+          reducida del 8% cuando se cumplen requisitos específicos.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Cómo paso de un precio sin IVA a un precio con IVA?</h3>
+          <p class="faq-answer">Multiplica el valor neto por 1.16. Por ejemplo, $1,000 sin IVA se vuelve $1,160 con IVA al 16%.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Qué hago si solo tengo el precio con IVA?</h3>
+          <p class="faq-answer">Divide el monto con IVA entre 1.16 para conocer la base y resta el resultado para obtener el
+          impuesto. Así, $1,160 con IVA corresponde a $1,000 neto y $160 de IVA.</p>
+        </article>
+      </div>
     </section>
+
+    <footer>
+      Calculadora referencial para México. Confirma requisitos fiscales específicos con tu contador o con el SAT.
+    </footer>
   </main>
 
   <script src="/js/theme-toggle.js"></script>
-  <script>
-    const montoMxInput = document.getElementById('montoMx');
-    const ivaTotal = document.getElementById('iva-demo-total');
-
-    function renderDemo() {
-      const value = parseFloat(montoMxInput.value || '0');
-      if (Number.isNaN(value) || value <= 0) {
-        ivaTotal.textContent = '$0';
-        return;
-      }
-      const demoTotal = value * 1.16;
-      ivaTotal.textContent = `$${demoTotal.toLocaleString('es-MX', { maximumFractionDigits: 0 })}`;
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la tasa general de IVA en México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La tasa estándar es 16% en la mayoría del país. En zonas fronterizas puede aplicar una tasa reducida del 8% cuando se cumplen requisitos específicos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo paso de un precio sin IVA a un precio con IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiplica el valor neto por 1.16. Por ejemplo, $1,000 sin IVA se vuelve $1,160 con IVA al 16%."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué hago si solo tengo el precio con IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Divide el monto con IVA entre 1.16 para conocer la base y resta el resultado para obtener el impuesto. Así, $1,160 con IVA corresponde a $1,000 neto y $160 de IVA."
+          }
+        }
+      ]
     }
-
-    montoMxInput.addEventListener('input', renderDemo);
   </script>
   <script type="module">
+    import { vatRate } from '/src/countries/mx/data/vat.js';
     import { bootstrapPage } from '/js/country-bootstrap.js';
+
+    const montoInput = document.getElementById('ivaMxMonto');
+    const modeGroup = document.getElementById('ivaMxModeGroup');
+    const errorBox = document.getElementById('ivaMxError');
+    const resultsWrap = document.getElementById('ivaMxResults');
+    const baseEl = document.getElementById('ivaMxBase');
+    const ivaEl = document.getElementById('ivaMxIVA');
+    const totalEl = document.getElementById('ivaMxTotal');
+    const baseSub = document.getElementById('ivaMxBaseSub');
+    const totalSub = document.getElementById('ivaMxTotalSub');
+    const baseLabel = document.getElementById('ivaMxBaseLabel');
+    const totalLabel = document.getElementById('ivaMxTotalLabel');
+
+    function formatMXN(value) {
+      if (!isFinite(value)) return '$0.00';
+      try {
+        return new Intl.NumberFormat('es-MX', {
+          style: 'currency',
+          currency: 'MXN',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(value);
+      } catch (e) {
+        const safeNumber = Number.isFinite(value) ? Number(value) : 0;
+        return `$${safeNumber.toFixed(2)}`;
+      }
+    }
+
+    function parseAmount(raw) {
+      if (!raw) return NaN;
+
+      const cleaned = raw.replace(/\s+/g, '').replace(/[^0-9.,-]/g, '');
+      if (!cleaned) return NaN;
+
+      let sign = 1;
+      let numeric = cleaned;
+      if (numeric.startsWith('-')) {
+        sign = -1;
+        numeric = numeric.slice(1);
+      }
+
+      const hasComma = numeric.includes(',');
+      const hasDot = numeric.includes('.');
+
+      let normalized = numeric;
+      if (hasComma && hasDot) {
+        const lastSep = Math.max(numeric.lastIndexOf(','), numeric.lastIndexOf('.'));
+        const integerPart = numeric.slice(0, lastSep).replace(/[.,]/g, '');
+        const decimalPart = numeric.slice(lastSep + 1).replace(/[.,]/g, '');
+        normalized = `${integerPart}.${decimalPart}`;
+      } else if (hasComma || hasDot) {
+        const sep = hasComma ? ',' : '.';
+        const lastIndex = numeric.lastIndexOf(sep);
+        const decimalCandidate = numeric.slice(lastIndex + 1);
+        if (decimalCandidate.length > 0 && decimalCandidate.length <= 2) {
+          const integerPart = numeric.slice(0, lastIndex).replace(/[.,]/g, '');
+          normalized = `${integerPart}.${decimalCandidate.replace(/[.,]/g, '')}`;
+        } else {
+          normalized = numeric.replace(/[.,]/g, '');
+        }
+      }
+
+      return sign * parseFloat(normalized);
+    }
+
+    function updateModePills() {
+      const pills = modeGroup.querySelectorAll('.direction-pill');
+      pills.forEach(pill => {
+        const input = pill.querySelector('input');
+        pill.classList.toggle('direction-pill-active', !!input && input.checked);
+      });
+    }
+
+    function setResults(base, iva, total, mode) {
+      baseEl.textContent = formatMXN(base);
+      ivaEl.textContent = formatMXN(iva);
+      totalEl.textContent = formatMXN(total);
+
+      if (mode === 'conIVA') {
+        baseLabel.textContent = 'Monto sin IVA calculado';
+        baseSub.textContent = 'Valor neto obtenido desde un precio que ya incluye IVA.';
+        totalLabel.textContent = 'Monto con IVA ingresado';
+        totalSub.textContent = 'Resultado original con IVA, útil para facturas o comprobantes.';
+      } else if (mode === 'soloIVA') {
+        baseLabel.textContent = 'Base para calcular IVA';
+        baseSub.textContent = 'Valor usado como referencia para obtener el impuesto.';
+        totalLabel.textContent = 'Base + IVA (referencial)';
+        totalSub.textContent = 'Suma de la base más el IVA por si necesitas el total final.';
+      } else {
+        baseLabel.textContent = 'Monto sin IVA ingresado';
+        baseSub.textContent = 'Precio neto antes del impuesto.';
+        totalLabel.textContent = 'Total con IVA';
+        totalSub.textContent = 'Precio final con el 16% incluido.';
+      }
+
+      resultsWrap.style.opacity = 1;
+    }
+
+    function resetResults() {
+      setResults(0, 0, 0, modeGroup.querySelector("input[name='ivaMxMode']:checked")?.value || 'sinIVA');
+      resultsWrap.style.opacity = 0.45;
+    }
+
+    function recalculateIVA() {
+      const raw = (montoInput.value || '').trim();
+      errorBox.textContent = '';
+
+      if (!raw) {
+        resetResults();
+        return;
+      }
+
+      const amount = parseAmount(raw);
+
+      if (!Number.isFinite(amount)) {
+        errorBox.textContent = 'Ingresa un número válido usando comas o puntos para los decimales.';
+        resetResults();
+        return;
+      }
+
+      if (amount < 0) {
+        errorBox.textContent = 'El monto no puede ser negativo.';
+        resetResults();
+        return;
+      }
+
+      const mode = modeGroup.querySelector("input[name='ivaMxMode']:checked")?.value || 'sinIVA';
+
+      let base = 0;
+      let iva = 0;
+      let total = 0;
+
+      if (mode === 'conIVA') {
+        total = amount;
+        base = total / (1 + vatRate);
+        iva = total - base;
+      } else {
+        base = amount;
+        iva = base * vatRate;
+        total = base + iva;
+      }
+
+      setResults(base, iva, total, mode);
+    }
+
+    montoInput.addEventListener('input', recalculateIVA);
+
+    modeGroup.addEventListener('change', () => {
+      updateModePills();
+      recalculateIVA();
+    });
+
     bootstrapPage('iva');
+    updateModePills();
+    recalculateIVA();
   </script>
 </body>
 </html>

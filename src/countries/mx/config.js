@@ -22,17 +22,17 @@ export const mxConfig = {
     iva: {
       path: '/mx/iva/',
       seo: {
-        title: 'Calculadora IVA México (beta)',
+        title: 'Calculadora de IVA (16%) México',
         description:
-          'Plantilla inicial para cálculo de IVA en México. Resultado referencial y pendiente de tasas oficiales.',
+          'Calcula IVA 16% en México: convierte precio con IVA a sin IVA y viceversa, y obtén el monto de IVA.',
         canonical: 'https://calculando.cl/mx/iva/',
-        ogTitle: 'Calculadora IVA México (beta)',
+        ogTitle: 'Calculadora de IVA (16%) México',
         ogDescription:
-          'Prueba la experiencia de cálculo de IVA pensada para México. Cálculo real pendiente.',
+          'Convierte precios sin IVA a con IVA (16%) y al revés, además del monto de IVA.',
         ogUrl: 'https://calculando.cl/mx/iva/',
-        twitterTitle: 'IVA México – Calculadora beta',
+        twitterTitle: 'Calculadora de IVA (16%) México',
         twitterDescription:
-          'Vista previa de la calculadora de IVA para México. Próximamente cálculo con tasa 16%.',
+          'Calcula precios netos, brutos y el IVA al 16% en México con una sola herramienta.',
       },
     },
   },
