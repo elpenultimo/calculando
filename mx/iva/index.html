@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calculadora IVA México (beta)</title>
-  <link rel="stylesheet" href="/css/calculando.css">
+
+  <title>Calculadora IVA México – Neto, Bruto e IVA 16%</title>
+  <meta name="description" content="Calcula el IVA al 16% en México. Convierte entre monto neto, monto bruto y valor del IVA en pesos mexicanos de forma rápida." />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/iva/" />
+  <link rel="stylesheet" href="/css/calculando.css" />
 </head>
 <body>
   <main>
@@ -13,7 +18,7 @@
         <div class="logo-mark">C</div>
         <div class="logo-text">
           <strong>IVA México</strong>
-          <span>Plantilla en construcción</span>
+          <span>Calculadora 16% neto y bruto</span>
         </div>
       </div>
 
@@ -28,70 +33,210 @@
     </header>
 
     <section class="hero">
-      <h1>Calculadora de IVA México (beta)</h1>
+      <h1>Calculadora de IVA México</h1>
       <p>
-        Esta es la plantilla base para calcular IVA en México. Usamos la misma interfaz que Chile, pero el cálculo real con tasa del 16% se añadirá después.
+        Convierte entre monto neto y monto bruto aplicando la tasa general de IVA del 16% en México. Calcula
+        también el impuesto (IVA) de cualquier cifra en pesos mexicanos.
       </p>
       <div class="pill">
         <span class="pill-dot"></span>
-        Próximamente con cálculo oficial · Datos de ejemplo por ahora
+        Actualizado para tasa 16% · Formato MXN
       </div>
     </section>
 
-    <section class="shell tool-shell">
-      <div class="tool-title">Ingresa un monto de prueba</div>
-      <div class="tool-subtitle">Mostramos resultados de ejemplo mientras definimos la fórmula definitiva.</div>
+    <section id="tool-iva" class="shell tool-shell">
+      <div class="tool-title">Calculadora IVA (16%)</div>
+      <div class="tool-subtitle">
+        Ingresa un monto y elige si parte desde neto o bruto. Te mostramos el IVA, el total con impuesto y la base sin
+        IVA en pesos mexicanos.
+      </div>
 
-      <div class="input-row">
-        <div class="input-label">Monto MXN</div>
+      <div class="input-row" style="margin-top:14px;">
+        <div class="input-label">Monto</div>
         <div class="amount-wrap">
           <span class="amount-prefix">$</span>
-          <input id="montoMx" class="amount-input" type="number" inputmode="numeric" min="0" step="1000" placeholder="Ej: 1200" />
+          <input
+            id="ivaMontoMx"
+            class="amount-input"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="0.01"
+            placeholder="Ej: 1000"
+          />
         </div>
       </div>
 
-      <div class="results-row" id="results" style="opacity:0.65;">
+      <div class="direction-row" id="ivaModeGroup">
+        <label class="direction-pill direction-pill-active">
+          <input type="radio" name="ivaMode" value="netoBruto" checked />
+          De neto a bruto
+        </label>
+        <label class="direction-pill">
+          <input type="radio" name="ivaMode" value="brutoNeto" />
+          De bruto a neto
+        </label>
+        <label class="direction-pill">
+          <input type="radio" name="ivaMode" value="soloIVA" />
+          Calcular sólo IVA
+        </label>
+      </div>
+
+      <div class="helper">Tip: usa neto cuando el precio es sin IVA y bruto cuando ya lo incluye.</div>
+      <div id="ivaError" class="error"></div>
+
+      <div
+        id="ivaResults"
+        class="results-row"
+        style="opacity:0.45;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));"
+      >
         <div class="result-card">
-          <div class="result-title">Resultado referencial</div>
-          <div class="result-main-label">Monto con IVA (demo)</div>
-          <div id="iva-demo-total" class="result-value">$0</div>
-          <div class="result-sub">Toma este dato solo como vista previa visual.</div>
+          <div class="result-title">Base sin IVA</div>
+          <div class="result-value" id="ivaResultNeto">$0.00</div>
+          <div class="result-sub" id="ivaResultNetoLabel">Ingresa un monto para comenzar.</div>
         </div>
         <div class="result-card">
-          <div class="result-title">Nota</div>
-          <div class="result-main-label">Tasa pendiente</div>
-          <div class="result-value">16% (por aplicar)</div>
-          <div class="result-sub">Implementaremos el cálculo real en el siguiente paso.</div>
+          <div class="result-title">IVA 16%</div>
+          <div class="result-value" id="ivaResultImpuesto">$0.00</div>
+          <div class="result-sub" id="ivaResultImpuestoLabel">Selecciona el modo de cálculo.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Monto con IVA</div>
+          <div class="result-value" id="ivaResultBruto">$0.00</div>
+          <div class="result-sub" id="ivaResultBrutoLabel">Verás aquí el total.</div>
         </div>
       </div>
     </section>
 
-    <section class="shell" style="margin-top:18px;">
-      <div class="tool-title">¿Qué sigue?</div>
-      <ul style="list-style:disc;color:var(--muted);padding-left:20px;margin-top:8px;">
-        <li>Agregar cálculo real de IVA al 16%.</li>
-        <li>Alinear textos y ejemplos con lineamientos fiscales de MX.</li>
-        <li>Conectar navegación con otras calculadoras (sueldo neto, ISR, finiquito).</li>
-      </ul>
+    <section class="shell faq-section" aria-labelledby="faq-iva-mx-title">
+      <h2 class="faq-title" id="faq-iva-mx-title">Preguntas frecuentes sobre IVA en México</h2>
+      <div class="faq-grid">
+        <article class="faq-item">
+          <h3 class="faq-question">¿Cuál es la tasa general de IVA?</h3>
+          <p class="faq-answer">En la mayoría del país la tasa es 16%. En zonas fronterizas puede aplicar una tasa reducida del 8% según decreto.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Qué operaciones están exentas?</h3>
+          <p class="faq-answer">Entre las exenciones habituales están alimentos básicos no preparados, servicios médicos, educación y el arrendamiento de casa habitación.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Cómo paso de neto a bruto?</h3>
+          <p class="faq-answer">Multiplica el monto neto por 1.16 para obtener el total con IVA. Si tienes el bruto, divídelo entre 1.16 para obtener el neto y la diferencia es el impuesto.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Dónde se declara el IVA?</h3>
+          <p class="faq-answer">Los contribuyentes presentan sus pagos mensuales o bimestrales mediante el portal del SAT, usando declaraciones de pagos provisionales y definitivos.</p>
+        </article>
+      </div>
     </section>
   </main>
 
   <script src="/js/theme-toggle.js"></script>
   <script>
-    const montoMxInput = document.getElementById('montoMx');
-    const ivaTotal = document.getElementById('iva-demo-total');
+    const ivaMontoInput = document.getElementById('ivaMontoMx');
+    const ivaModeGroup = document.getElementById('ivaModeGroup');
+    const ivaError = document.getElementById('ivaError');
+    const ivaResults = document.getElementById('ivaResults');
 
-    function renderDemo() {
-      const value = parseFloat(montoMxInput.value || '0');
-      if (Number.isNaN(value) || value <= 0) {
-        ivaTotal.textContent = '$0';
-        return;
+    const ivaResultNeto = document.getElementById('ivaResultNeto');
+    const ivaResultImpuesto = document.getElementById('ivaResultImpuesto');
+    const ivaResultBruto = document.getElementById('ivaResultBruto');
+
+    const ivaResultNetoLabel = document.getElementById('ivaResultNetoLabel');
+    const ivaResultImpuestoLabel = document.getElementById('ivaResultImpuestoLabel');
+    const ivaResultBrutoLabel = document.getElementById('ivaResultBrutoLabel');
+
+    const IVA_RATE = 0.16;
+
+    function formatMXN(value) {
+      if (!isFinite(value)) return '$0.00';
+      try {
+        return new Intl.NumberFormat('es-MX', {
+          style: 'currency',
+          currency: 'MXN',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(value);
+      } catch (e) {
+        return '$' + Number(value || 0).toFixed(2);
       }
-      const demoTotal = value * 1.16;
-      ivaTotal.textContent = `$${demoTotal.toLocaleString('es-MX', { maximumFractionDigits: 0 })}`;
     }
 
-    montoMxInput.addEventListener('input', renderDemo);
+    function setInitialState() {
+      ivaResults.style.opacity = 0.45;
+      ivaResultNeto.textContent = '$0.00';
+      ivaResultImpuesto.textContent = '$0.00';
+      ivaResultBruto.textContent = '$0.00';
+
+      ivaResultNetoLabel.textContent = 'Ingresa un monto para comenzar.';
+      ivaResultImpuestoLabel.textContent = 'Selecciona el modo de cálculo.';
+      ivaResultBrutoLabel.textContent = 'Verás aquí el total.';
+    }
+
+    function recalculateIVA() {
+      const raw = (ivaMontoInput.value || '').trim();
+      ivaError.textContent = '';
+
+      if (!raw) {
+        setInitialState();
+        return;
+      }
+
+      const monto = Number(raw);
+      if (Number.isNaN(monto) || monto <= 0) {
+        ivaError.textContent = 'El monto debe ser un número mayor a 0.';
+        setInitialState();
+        return;
+      }
+
+      const mode = ivaModeGroup.querySelector("input[name='ivaMode']:checked").value;
+
+      let neto = 0;
+      let iva = 0;
+      let bruto = 0;
+
+      if (mode === 'netoBruto') {
+        neto = monto;
+        iva = neto * IVA_RATE;
+        bruto = neto + iva;
+        ivaResultNetoLabel.textContent = 'Ingresaste un monto neto (sin IVA).';
+        ivaResultImpuestoLabel.textContent = 'IVA calculado al 16% sobre el neto.';
+        ivaResultBrutoLabel.textContent = 'Total con IVA incluido.';
+      } else if (mode === 'brutoNeto') {
+        bruto = monto;
+        neto = bruto / (1 + IVA_RATE);
+        iva = bruto - neto;
+        ivaResultNetoLabel.textContent = 'Neto obtenido dividiendo el bruto entre 1.16.';
+        ivaResultImpuestoLabel.textContent = 'IVA es la diferencia entre bruto y neto.';
+        ivaResultBrutoLabel.textContent = 'Ingresaste un monto con IVA incluido.';
+      } else {
+        neto = monto;
+        iva = neto * IVA_RATE;
+        bruto = neto + iva;
+        ivaResultNetoLabel.textContent = 'Base sobre la cual calculamos el IVA.';
+        ivaResultImpuestoLabel.textContent = 'IVA al 16% de la base indicada.';
+        ivaResultBrutoLabel.textContent = 'Base más IVA (referencia).';
+      }
+
+      ivaResultNeto.textContent = formatMXN(neto);
+      ivaResultImpuesto.textContent = formatMXN(iva);
+      ivaResultBruto.textContent = formatMXN(bruto);
+
+      ivaResults.style.opacity = 1;
+    }
+
+    ivaMontoInput.addEventListener('input', recalculateIVA);
+
+    ivaModeGroup.addEventListener('change', () => {
+      const pills = ivaModeGroup.querySelectorAll('.direction-pill');
+      pills.forEach(pill => {
+        const input = pill.querySelector('input');
+        pill.classList.toggle('direction-pill-active', !!input && input.checked);
+      });
+      recalculateIVA();
+    });
+
+    setInitialState();
   </script>
   <script type="module">
     import { bootstrapPage } from '/js/country-bootstrap.js';
