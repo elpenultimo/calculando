@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculando México – Beta</title>
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando México</strong>
+          <span>Beta de calculadoras para MX</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a Chile
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadoras para México (beta)</h1>
+      <p>
+        Estamos levantando la versión mexicana de Calculando. Por ahora verás
+        plantillas y navegación base mientras definimos cálculos y textos locales.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Vista previa · Ayúdanos probando las rutas y el flujo.
+      </div>
+
+      <div class="tool-nav" id="toolNav">
+        <a class="tool-tab tool-tab-active" href="/mx/" data-page="home">
+          <span>🏠</span> Inicio MX
+        </a>
+        <a class="tool-tab" href="/mx/iva/" data-page="iva">
+          <span>🧮</span> IVA México (beta)
+        </a>
+      </div>
+    </section>
+
+    <section class="shell tool-shell">
+      <div class="tool-title">Lo que podrás hacer aquí</div>
+      <div class="tool-subtitle">
+        Reutilizamos el diseño de Calculando para que puedas previsualizar cómo se verán las calculadoras con datos de México.
+      </div>
+
+      <ul style="margin-top:12px;display:grid;gap:12px;padding-left:0;list-style:none;">
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">IVA México</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">Plantilla activa. Usa el botón para abrirla y revisar la experiencia.</div>
+          <a class="pill" href="/mx/iva/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de IVA MX (beta)
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">Sueldo neto MX</div>
+          <div class="tool-subtitle">Pendiente de implementación. Este bloque sirve como placeholder para próximas calculadoras.</div>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">ISR e impuestos</div>
+          <div class="tool-subtitle">Espacio reservado para guías e impuestos locales. Próximamente conectaremos datos reales.</div>
+        </li>
+      </ul>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Calculando México</strong> está en construcción. La versión oficial de Chile sigue disponible en <a href="/" style="color:var(--primary);text-decoration:underline;">Calculando.cl</a>.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    bootstrapPage('home');
+  </script>
+</body>
+</html>
