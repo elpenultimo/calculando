@@ -248,6 +248,47 @@
       box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
     }
 
+    /* --------- NAV DE HERRAMIENTAS --------- */
+
+    .tool-nav {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tool-tab {
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .tool-tab span {
+      font-size: 14px;
+    }
+
+    .tool-tab-active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
+    }
+
     /* --------- SHELL / CONTENEDORES --------- */
 
     .shell {
@@ -490,6 +531,8 @@
       <span class="pill-dot"></span>
       IVA general 16% · Incluye cálculo de neto, bruto y solo impuesto
     </div>
+
+    <div id="mxNav"></div>
   </section>
 
   <section id="tool-iva" class="shell tool-shell">
@@ -743,7 +786,10 @@
 
 <script type="module">
   import { bootstrapPage } from '/js/country-bootstrap.js';
+  import { injectMxNav } from '/js/mx-nav.js';
+
   bootstrapPage('iva');
+  injectMxNav('#mxNav', 'iva');
 </script>
 </body>
 </html>
