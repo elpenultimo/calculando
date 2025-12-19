@@ -35,6 +35,22 @@ export const mxConfig = {
           'Vista previa de la calculadora de IVA para México. Próximamente cálculo con tasa 16%.',
       },
     },
+    sueldoLiquido: {
+      path: '/mx/sueldo-liquido/',
+      seo: {
+        title: 'Calculadora de sueldo neto México (beta)',
+        description:
+          'Convierte sueldo bruto a sueldo neto estimando ISR e IMSS del trabajador. Cálculo referencial en pesos mexicanos.',
+        canonical: 'https://calculando.cl/mx/sueldo-liquido/',
+        ogTitle: 'Calculadora de sueldo neto México (beta)',
+        ogDescription:
+          'Ingresa tu sueldo bruto mensual en MXN y revisa el ISR, IMSS y sueldo neto estimado con una lógica simplificada.',
+        ogUrl: 'https://calculando.cl/mx/sueldo-liquido/',
+        twitterTitle: 'Sueldo neto México – Calculadora beta',
+        twitterDescription:
+          'Estimación rápida de ISR, IMSS y sueldo líquido en pesos mexicanos.',
+      },
+    },
   },
 };
 
