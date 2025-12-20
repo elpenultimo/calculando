@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Calculadora de Aguinaldo en México 2026 | Calculando.mx</title>
+
+  <meta name="description" content="Calcula tu aguinaldo en México de forma rápida. Estima aguinaldo bruto y proporcional según tu sueldo y días trabajados." />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/aguinaldo/" />
+
+  <meta property="og:title" content="Calculadora de Aguinaldo en México" />
+  <meta property="og:description" content="Ingresa tu sueldo mensual, días trabajados y días de aguinaldo para ver montos brutos y proporcionales en MXN." />
+  <meta property="og:url" content="https://calculando.cl/mx/aguinaldo/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora de Aguinaldo MX" />
+  <meta name="twitter:description" content="Calcula aguinaldo bruto y proporcional en pesos mexicanos en segundos." />
+
+  <style>
+    /* --------- TIPOGRAFÍA Y RESET --------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    :root {
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    html[data-theme="dark"] {
+      --bg: radial-gradient(circle at top, #0f172a 0, #020617 52%, #020617 100%);
+      --shell: rgba(15, 23, 42, 0.9);
+      --card: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.12);
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.85);
+      --shadow-card: 0 18px 42px rgba(15, 23, 42, 0.95);
+      --header-glow: 0 0 40px rgba(56, 189, 248, 0.35);
+      --chip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    html[data-theme="light"] {
+      --bg: radial-gradient(circle at top, #e0edff 0, #f4f7fb 45%, #ffffff 100%);
+      --shell: rgba(255, 255, 255, 0.9);
+      --card: #ffffff;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #0f172a;
+      --muted: #6b7280;
+      --accent: #eab308;
+      --accent-soft: rgba(234, 179, 8, 0.12);
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.15);
+      --shadow-card: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --header-glow: 0 0 0 rgba(0, 0, 0, 0);
+      --chip-bg: #f9fafb;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      transition: background 0.4s ease-out, color 0.25s ease-out;
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+      padding: 22px 16px 34px;
+      margin: 0 auto;
+      animation: fade-in 0.6s ease-out;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --------- HEADER --------- */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb 0, #e5e7eb 24%, #0ea5e9 50%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0b1120;
+      box-shadow: var(--header-glow);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .logo-block:hover .logo-mark {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 0 55px rgba(56, 189, 248, 0.55);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), color var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .theme-toggle-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-icon {
+      background: #0f172a;
+    }
+
+    html[data-theme="light"] .theme-toggle-icon {
+      background: #facc15;
+      color: #1f2933;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- HERO --------- */
+
+    .hero {
+      background: linear-gradient(145deg, rgba(14, 165, 233, 0.16), rgba(59, 130, 246, 0.08));
+      padding: 18px 18px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 16px;
+      backdrop-filter: blur(18px);
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
+    }
+
+    /* --------- NAV DE HERRAMIENTAS --------- */
+
+    .tool-nav {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tool-tab {
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .tool-tab span {
+      font-size: 14px;
+    }
+
+    .tool-tab-active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- SHELL / CONTENEDORES --------- */
+
+    .shell {
+      margin-top: 14px;
+      background: var(--shell);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(24px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 20px 22px 24px;
+      }
+    }
+
+    .tool-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tool-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* INPUTS */
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .input-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 12px 14px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .input-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-strong);
+      background: radial-gradient(circle at top, #fef9c3 0, #fef3c7 45%, #fefce8 100%);
+      color: #111827;
+      font-size: 16px;
+      text-align: right;
+      outline: none;
+      transition: box-shadow var(--transition-med), transform var(--transition-med),
+        border-color var(--transition-fast), background 0.35s ease-out;
+    }
+
+    .input-field:focus {
+      box-shadow: 0 14px 35px rgba(14, 165, 233, 0.45);
+      border-color: var(--primary);
+      transform: translateY(-0.5px);
+    }
+
+    .input-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* RESULTS */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .result-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    footer strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.mx</strong>
+        <span>Calculadoras simples y claras.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+
+    <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+      Volver a inicio MX
+    </a>
+  </header>
+
+  <section class="hero">
+    <h1>Calculadora de Aguinaldo en México</h1>
+    <p>
+      Estima tu aguinaldo anual ingresando tu sueldo mensual en MXN, los días trabajados en el año y los días de aguinaldo que te corresponden.
+      El cálculo es referencial para entender montos brutos y proporcionales.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Aguinaldo bruto y proporcional · Cálculo en vivo
+    </div>
+
+    <div id="mxNav"></div>
+  </section>
+
+  <section class="shell tool-shell">
+    <div class="tool-title">Ingresa los datos de tu aguinaldo</div>
+    <div class="tool-subtitle">
+      Usa tu sueldo mensual y ajusta los días trabajados o de aguinaldo si corresponden. El resultado se actualiza al escribir.
+    </div>
+
+    <div class="input-grid">
+      <div class="input-card">
+        <div class="input-label">Sueldo mensual (MXN)</div>
+        <input
+          id="sueldoInput"
+          class="input-field"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="100"
+          placeholder="Ej: 20000"
+          aria-label="Sueldo mensual en pesos mexicanos"
+        />
+        <div class="input-hint">Obligatorio para calcular el aguinaldo.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días trabajados en el año</div>
+        <input
+          id="diasTrabajadosInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="365"
+          step="1"
+          value="365"
+          aria-label="Días trabajados durante el año"
+        />
+        <div class="input-hint">Opcional. Se usa 365 días por defecto.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días de aguinaldo</div>
+        <input
+          id="diasAguinaldoInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1"
+          value="15"
+          aria-label="Días de aguinaldo asignados"
+        />
+        <div class="input-hint">Opcional. La ley marca un mínimo de 15 días.</div>
+      </div>
+    </div>
+
+    <div class="helper-text" id="helperText">Escribe tu sueldo mensual para ver el cálculo.</div>
+
+    <div class="result-grid" aria-live="polite">
+      <div class="result-card">
+        <div class="result-label">Aguinaldo bruto</div>
+        <div class="result-value" id="aguinaldoBruto">$0.00</div>
+        <div class="result-note">Sueldo mensual / 30 × días de aguinaldo.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Aguinaldo proporcional</div>
+        <div class="result-value" id="aguinaldoProporcional">$0.00</div>
+        <div class="result-note">Aguinaldo bruto × (días trabajados / 365).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="tool-title">Preguntas rápidas sobre el aguinaldo</div>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué es el aguinaldo en México?</h3>
+        <p class="faq-answer">Es una prestación anual obligatoria que paga el empleador a sus personas trabajadoras, usualmente en diciembre, equivalente al menos a una parte del sueldo.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cuántos días de aguinaldo marca la ley?</h3>
+        <p class="faq-answer">La Ley Federal del Trabajo establece un mínimo de 15 días de salario por año trabajado, aunque algunas empresas otorgan más.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa si no trabajé todo el año?</h3>
+        <p class="faq-answer">El aguinaldo se paga de forma proporcional a los días trabajados en el año. La calculadora ajusta el monto automáticamente.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿El aguinaldo paga impuestos?</h3>
+        <p class="faq-answer">Puede estar sujeto a ISR según el monto exento y las reglas vigentes. Este cálculo es referencial y no reemplaza un cálculo fiscal detallado.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Calculando.mx</strong> es un proyecto independiente.
+    Usa estas herramientas como guía rápida y valida la normativa vigente con tu asesoría laboral o fiscal.
+  </footer>
+</main>
+
+<script src="/js/theme-toggle.js"></script>
+
+<script>
+  const sueldoInput = document.getElementById("sueldoInput");
+  const diasTrabajadosInput = document.getElementById("diasTrabajadosInput");
+  const diasAguinaldoInput = document.getElementById("diasAguinaldoInput");
+  const helperText = document.getElementById("helperText");
+  const aguinaldoBrutoValue = document.getElementById("aguinaldoBruto");
+  const aguinaldoProporcionalValue = document.getElementById("aguinaldoProporcional");
+
+  function formatMXN(value) {
+    if (!isFinite(value)) return "$0.00";
+    try {
+      return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    } catch (e) {
+      const safeValue = Number(value) || 0;
+      return "$" + safeValue.toLocaleString("es-MX", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+  }
+
+  function sanitizeNumber(raw, fallback) {
+    const parsed = Number(raw);
+    if (!isFinite(parsed) || parsed < 0) return fallback;
+    return parsed;
+  }
+
+  function recalculateAguinaldo() {
+    const sueldoRaw = (sueldoInput.value || "").trim();
+    const diasTrabajadosRaw = (diasTrabajadosInput.value || "").trim();
+    const diasAguinaldoRaw = (diasAguinaldoInput.value || "").trim();
+
+    const diasTrabajados = sanitizeNumber(diasTrabajadosRaw, 365);
+    const diasAguinaldo = sanitizeNumber(diasAguinaldoRaw, 15);
+
+    if (!sueldoRaw) {
+      helperText.textContent = "Escribe un sueldo mensual para calcular tu aguinaldo.";
+      aguinaldoBrutoValue.textContent = "$0.00";
+      aguinaldoProporcionalValue.textContent = "$0.00";
+      return;
+    }
+
+    const sueldoMensual = sanitizeNumber(sueldoRaw, 0);
+    if (sueldoMensual <= 0) {
+      helperText.textContent = "Ingresa un sueldo mensual mayor a 0.";
+      aguinaldoBrutoValue.textContent = "$0.00";
+      aguinaldoProporcionalValue.textContent = "$0.00";
+      return;
+    }
+
+    const aguinaldoDiario = sueldoMensual / 30;
+    const aguinaldoBruto = Math.max(aguinaldoDiario * diasAguinaldo, 0);
+    const proporcion = Math.max(aguinaldoBruto * (diasTrabajados / 365), 0);
+
+    helperText.textContent = "Cálculo referencial en MXN. Los montos muestran dos decimales.";
+    aguinaldoBrutoValue.textContent = formatMXN(aguinaldoBruto);
+    aguinaldoProporcionalValue.textContent = formatMXN(proporcion);
+  }
+
+  sueldoInput.addEventListener("input", recalculateAguinaldo);
+  diasTrabajadosInput.addEventListener("input", recalculateAguinaldo);
+  diasAguinaldoInput.addEventListener("input", recalculateAguinaldo);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    recalculateAguinaldo();
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el aguinaldo en México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una prestación anual obligatoria pagada por el empleador, generalmente en diciembre, equivalente al menos a una parte del sueldo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántos días de aguinaldo marca la ley?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Ley Federal del Trabajo establece un mínimo de 15 días de salario por año trabajado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si no trabajé todo el año?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El pago se calcula de forma proporcional a los días trabajados en el año, tomando como base los días de aguinaldo que correspondan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El aguinaldo paga impuestos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puede estar sujeto a ISR según los límites exentos. Esta herramienta es referencial y no sustituye un cálculo fiscal oficial."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Calculadora de Aguinaldo en México",
+      "url": "https://calculando.cl/mx/aguinaldo/",
+      "description": "Calcula aguinaldo bruto y proporcional ingresando sueldo mensual, días trabajados y días de aguinaldo.",
+      "inLanguage": "es-MX"
+    }
+  ]
+}
+</script>
+
+<script type="module">
+  import { bootstrapPage } from '/js/country-bootstrap.js';
+  import { injectMxNav } from '/js/mx-nav.js';
+
+  bootstrapPage('aguinaldo');
+  injectMxNav('#mxNav', 'aguinaldo');
+</script>
+</body>
+</html>
