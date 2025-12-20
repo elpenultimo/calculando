@@ -5,7 +5,7 @@ export function createMxNav(activeKey = 'home') {
   const links = [
     { key: 'home', href: '/mx/', label: 'Inicio MX', icon: '🏠' },
     { key: 'iva', href: '/mx/iva/', label: 'IVA México', icon: '🧮' },
-    { key: 'sueldo', href: '/mx/sueldo-liquido/', label: 'Sueldo neto MX', icon: '💸' },
+    { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto MX', icon: '💸' },
   ];
 
   links.forEach(link => {

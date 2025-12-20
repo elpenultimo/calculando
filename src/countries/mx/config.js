@@ -36,19 +36,19 @@ export const mxConfig = {
       },
     },
     sueldo: {
-      path: '/mx/sueldo-liquido/',
+      path: '/mx/sueldo-neto/',
       seo: {
         title: 'Sueldo neto México – Calculadora rápida',
         description:
           'Calcula sueldo neto estimado en México considerando ISR e IMSS a partir de tu sueldo bruto mensual en MXN.',
-        canonical: 'https://calculando.cl/mx/sueldo-liquido/',
+        canonical: 'https://calculando.cl/mx/sueldo-neto/',
         ogTitle: 'Calculadora sueldo neto México',
         ogDescription:
-          'Ingresa tu sueldo bruto mensual y obtén ISR, IMSS y sueldo líquido estimado para México.',
-        ogUrl: 'https://calculando.cl/mx/sueldo-liquido/',
+          'Ingresa tu sueldo bruto mensual y obtén ISR, IMSS y sueldo neto estimado para México.',
+        ogUrl: 'https://calculando.cl/mx/sueldo-neto/',
         twitterTitle: 'Sueldo neto MX – Calculadora',
         twitterDescription:
-          'Herramienta para estimar sueldo líquido en México con descuentos de ISR e IMSS.',
+          'Herramienta para estimar sueldo neto en México con descuentos de ISR e IMSS.',
       },
     },
   },
