@@ -51,6 +51,22 @@ export const mxConfig = {
           'Herramienta para estimar sueldo neto en México con descuentos de ISR e IMSS.',
       },
     },
+    aguinaldo: {
+      path: '/mx/aguinaldo/',
+      seo: {
+        title: 'Calculadora de Aguinaldo en México 2026 | Calculando.mx',
+        description:
+          'Calcula tu aguinaldo en México de forma rápida. Estima aguinaldo bruto y proporcional según tu sueldo y días trabajados.',
+        canonical: 'https://calculando.cl/mx/aguinaldo/',
+        ogTitle: 'Calculadora de Aguinaldo en México',
+        ogDescription:
+          'Ingresa sueldo mensual, días trabajados y días de aguinaldo para ver montos brutos y proporcionales en MXN.',
+        ogUrl: 'https://calculando.cl/mx/aguinaldo/',
+        twitterTitle: 'Calculadora de Aguinaldo MX',
+        twitterDescription:
+          'Calcula aguinaldo bruto y proporcional en pesos mexicanos en segundos.',
+      },
+    },
   },
 };
 
