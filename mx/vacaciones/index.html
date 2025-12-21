@@ -308,7 +308,7 @@
   <script src="/js/theme-toggle.js"></script>
   <script type="module">
     import { bootstrapPage } from '/js/country-bootstrap.js';
-    import { injectMxNav } from '/js/mx-nav.js';
+    import { injectMxNav } from '/components/mx/mx-nav.js';
 
     const salaryInput = document.getElementById('salaryInput');
     const daysInput = document.getElementById('daysInput');
@@ -372,7 +372,7 @@
     });
 
     bootstrapPage('vacaciones');
-    injectMxNav('#mxNav', 'vacaciones');
+    injectMxNav('#mxNav');
     calculate();
   </script>
 </body>

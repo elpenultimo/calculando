@@ -258,27 +258,63 @@
     }
 
     .tool-nav {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 8px;
-      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      width: 100%;
+      box-sizing: border-box;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .tool-nav::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .tool-nav::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: 999px;
+    }
+
+    @media (min-width: 768px) {
+      .tool-nav {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        scroll-snap-type: none;
+      }
     }
 
     .tool-tab {
-      padding: 8px 12px;
+      padding: 6px 14px;
       border-radius: var(--radius-pill);
-      border: 1px solid var(--border-subtle);
-      background: var(--chip-bg);
+      border: none;
+      background: transparent;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       text-align: center;
-      transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
     }
 
     .tool-tab-active {
-      border-color: var(--primary);
       color: var(--primary);
       background: var(--primary-soft);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
     }
 
     .shell {
@@ -804,10 +840,10 @@
 
 <script type="module">
   import { bootstrapPage } from '/js/country-bootstrap.js';
-  import { injectMxNav } from '/js/mx-nav.js';
+  import { injectMxNav } from '/components/mx/mx-nav.js';
 
   bootstrapPage('ptu');
-  injectMxNav('#mxNav', 'ptu');
+  injectMxNav('#mxNav');
 </script>
 </body>
 </html>
