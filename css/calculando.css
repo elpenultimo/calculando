@@ -232,8 +232,12 @@ html[data-theme="light"] .theme-toggle-icon {
   border: 1px solid var(--border-subtle);
   margin-top: 16px;
   margin-bottom: 6px;
-  flex-wrap: wrap;
   gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tool-tab {
@@ -250,6 +254,7 @@ html[data-theme="light"] .theme-toggle-icon {
   transition: background var(--transition-fast), color var(--transition-fast),
     transform var(--transition-fast), box-shadow var(--transition-fast);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .tool-tab span {

@@ -459,9 +459,7 @@
       <span id="themeLabel">Modo oscuro</span>
     </button>
 
-    <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
-      Volver a inicio MX
-    </a>
+
   </header>
 
   <section class="hero">
@@ -705,10 +703,10 @@
 
 <script type="module">
   import { bootstrapPage } from '/js/country-bootstrap.js';
-  import { injectMxNav } from '/js/mx-nav.js';
+  import { autoMountMxNav } from '/js/mx-nav.js';
 
   bootstrapPage('aguinaldo');
-  injectMxNav('#mxNav', 'aguinaldo');
+  autoMountMxNav();
 </script>
 </body>
 </html>
