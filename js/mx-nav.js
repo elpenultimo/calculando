@@ -1,15 +1,16 @@
 export function createMxNav(activeKey = 'home') {
-  const nav = document.createElement('div');
+  const nav = document.createElement('nav');
   nav.className = 'tool-nav';
+  nav.setAttribute('aria-label', 'Navegación de calculadoras México');
 
   const links = [
     { key: 'home', href: '/mx/', label: 'Inicio MX', icon: '🏠' },
-    { key: 'iva', href: '/mx/iva/', label: 'IVA México', icon: '🧮' },
-    { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto MX', icon: '💸' },
-    { key: 'aguinaldo', href: '/mx/aguinaldo/', label: 'Aguinaldo MX', icon: '🎁' },
+    { key: 'iva', href: '/mx/iva/', label: 'IVA', icon: '🧮' },
+    { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto', icon: '💸' },
+    { key: 'aguinaldo', href: '/mx/aguinaldo/', label: 'Aguinaldo', icon: '🎁' },
+    { key: 'vacaciones', href: '/mx/vacaciones/', label: 'Vacaciones', icon: '🏖️' },
     { key: 'ptu', href: '/mx/ptu/', label: 'PTU', icon: '📊' },
     { key: 'finiquito', href: '/mx/finiquito/', label: 'Finiquito', icon: '📄' },
-    { key: 'vacaciones', href: '/mx/vacaciones/', label: 'Vacaciones MX', icon: '🏖️' },
   ];
 
   links.forEach(link => {
@@ -20,6 +21,7 @@ export function createMxNav(activeKey = 'home') {
     a.innerHTML = `<span>${link.icon}</span> ${link.label}`;
     if (activeKey === link.key) {
       a.classList.add('tool-tab-active');
+      a.setAttribute('aria-current', 'page');
     }
     nav.appendChild(a);
   });
