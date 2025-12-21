@@ -1,4 +1,8 @@
 (function setupThemeToggle() {
+  if (window.tcCountry?.addChangeCountryLink) {
+    window.tcCountry.addChangeCountryLink();
+  }
+
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
   const themeLabel = document.getElementById('themeLabel');

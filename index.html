@@ -10,6 +10,18 @@
   />
   <link rel="canonical" href="https://calculando.cl/" />
   <link rel="stylesheet" href="/css/calculando.css">
+  <script src="/js/country-preference.js"></script>
+  <script>
+    if (window.tcCountry?.handleRootCountryRedirect) {
+      window.tcCountry.handleRootCountryRedirect();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.tcCountry?.addChangeCountryLink) {
+        window.tcCountry.addChangeCountryLink();
+      }
+    });
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6081924342681092"
      crossorigin="anonymous"></script>
 </head>
