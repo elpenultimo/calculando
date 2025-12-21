@@ -83,6 +83,22 @@ export const mxConfig = {
           'Ingresa utilidades totales, número de trabajadores y sueldo mensual para estimar la PTU en MXN.',
       },
     },
+    vacaciones: {
+      path: '/mx/vacaciones/',
+      seo: {
+        title: 'Calculadora de Vacaciones y Prima Vacacional en México | Calculando.mx',
+        description:
+          'Estima el pago de vacaciones pendientes, la prima vacacional y el total en pesos mexicanos con cálculo referencial.',
+        canonical: 'https://calculando.cl/mx/vacaciones/',
+        ogTitle: 'Calculadora de Vacaciones y Prima Vacacional en México',
+        ogDescription:
+          'Ingresa tu sueldo mensual, días de vacaciones pendientes y la prima vacacional para ver montos estimados en MXN.',
+        ogUrl: 'https://calculando.cl/mx/vacaciones/',
+        twitterTitle: 'Vacaciones y prima vacacional MX – Calculadora',
+        twitterDescription:
+          'Calcula vacaciones pendientes y prima vacacional con actualización en vivo y montos referenciales en MXN.',
+      },
+    },
   },
 };
 
