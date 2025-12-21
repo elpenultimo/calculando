@@ -198,25 +198,6 @@
 </head>
 <body>
   <main>
-    <header>
-      <div class="logo-block">
-        <div class="logo-mark">C</div>
-        <div class="logo-text">
-          <strong>Calculando México</strong>
-          <span>Beta de calculadoras para MX</span>
-        </div>
-      </div>
-
-      <button id="themeToggle" class="theme-toggle" type="button">
-        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-        <span id="themeLabel">Modo oscuro</span>
-      </button>
-
-      <a href="/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
-        Volver a Chile
-      </a>
-    </header>
-
     <section class="hero">
       <h1>Calculadora de Vacaciones y Prima Vacacional en México</h1>
       <p>Estima cuánto recibirías por vacaciones pendientes y la prima vacacional con un cálculo referencial en MXN.</p>
@@ -224,7 +205,6 @@
         <span class="pill-dot"></span>
         Cálculo en vivo · MXN · Referencial
       </div>
-      <div id="mxNav"></div>
     </section>
 
     <section class="layout-grid">
@@ -308,7 +288,7 @@
   <script src="/js/theme-toggle.js"></script>
   <script type="module">
     import { bootstrapPage } from '/js/country-bootstrap.js';
-    import { injectMxNav } from '/js/mx-nav.js';
+    import { renderMXLayout } from '/layouts/MXLayout.js';
 
     const salaryInput = document.getElementById('salaryInput');
     const daysInput = document.getElementById('daysInput');
@@ -372,7 +352,7 @@
     });
 
     bootstrapPage('vacaciones');
-    injectMxNav('#mxNav', 'vacaciones');
+    renderMXLayout({ activePage: 'vacaciones' });
     calculate();
   </script>
 </body>

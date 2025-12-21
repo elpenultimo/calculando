@@ -502,25 +502,6 @@
 
 <body>
 <main>
-  <header>
-    <div class="logo-block">
-      <div class="logo-mark">C</div>
-      <div class="logo-text">
-        <strong>Calculando.mx</strong>
-        <span>Calculadoras simples y claras.</span>
-      </div>
-    </div>
-
-    <button id="themeToggle" class="theme-toggle" type="button">
-      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-      <span id="themeLabel">Modo oscuro</span>
-    </button>
-
-    <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
-      Volver a inicio MX
-    </a>
-  </header>
-
   <section class="hero">
     <h1>Calculadora IVA México 2026: neto, bruto e IVA 16%</h1>
     <p>
@@ -531,8 +512,6 @@
       <span class="pill-dot"></span>
       IVA general 16% · Incluye cálculo de neto, bruto y solo impuesto
     </div>
-
-    <div id="mxNav"></div>
   </section>
 
   <section id="tool-iva" class="shell tool-shell">
@@ -786,10 +765,10 @@
 
 <script type="module">
   import { bootstrapPage } from '/js/country-bootstrap.js';
-  import { injectMxNav } from '/js/mx-nav.js';
+  import { renderMXLayout } from '/layouts/MXLayout.js';
 
   bootstrapPage('iva');
-  injectMxNav('#mxNav', 'iva');
+  renderMXLayout({ activePage: 'iva' });
 </script>
 </body>
 </html>
