@@ -445,25 +445,6 @@
 
 <body>
 <main>
-  <header>
-    <div class="logo-block">
-      <div class="logo-mark">C</div>
-      <div class="logo-text">
-        <strong>Calculando.mx</strong>
-        <span>Calculadoras simples y claras.</span>
-      </div>
-    </div>
-
-    <button id="themeToggle" class="theme-toggle" type="button">
-      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-      <span id="themeLabel">Modo oscuro</span>
-    </button>
-
-    <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
-      Volver a inicio MX
-    </a>
-  </header>
-
   <section class="hero">
     <h1>Calculadora de Aguinaldo en México</h1>
     <p>
@@ -474,8 +455,6 @@
       <span class="pill-dot"></span>
       Aguinaldo bruto y proporcional · Cálculo en vivo
     </div>
-
-    <div id="mxNav"></div>
   </section>
 
   <section class="shell tool-shell">
@@ -705,10 +684,10 @@
 
 <script type="module">
   import { bootstrapPage } from '/js/country-bootstrap.js';
-  import { injectMxNav } from '/js/mx-nav.js';
+  import { renderMXLayout } from '/layouts/MXLayout.js';
 
   bootstrapPage('aguinaldo');
-  injectMxNav('#mxNav', 'aguinaldo');
+  renderMXLayout({ activePage: 'aguinaldo' });
 </script>
 </body>
 </html>
