@@ -236,6 +236,22 @@ html[data-theme="light"] .theme-toggle-icon {
   gap: 4px;
 }
 
+.mx-nav-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+  margin-top: 16px;
+}
+
+.mx-nav {
+  flex-wrap: nowrap;
+  width: max-content;
+  gap: 6px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .tool-tab {
   border-radius: var(--radius-pill);
   padding: 6px 14px;
