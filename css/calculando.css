@@ -225,15 +225,38 @@ html[data-theme="light"] .theme-toggle-icon {
 /* --------- NAV DE HERRAMIENTAS --------- */
 
 .tool-nav {
-  display: inline-flex;
-  padding: 3px;
+  display: flex;
+  align-items: center;
+  padding: 6px;
   border-radius: var(--radius-pill);
   background: var(--chip-bg);
   border: 1px solid var(--border-subtle);
   margin-top: 16px;
   margin-bottom: 6px;
-  flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.tool-nav::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tool-nav::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 999px;
+}
+
+@media (min-width: 768px) {
+  .tool-nav {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
 }
 
 .tool-tab {
@@ -250,6 +273,8 @@ html[data-theme="light"] .theme-toggle-icon {
   transition: background var(--transition-fast), color var(--transition-fast),
     transform var(--transition-fast), box-shadow var(--transition-fast);
   text-decoration: none;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
 }
 
 .tool-tab span {
