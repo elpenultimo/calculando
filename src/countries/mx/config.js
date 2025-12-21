@@ -67,6 +67,22 @@ export const mxConfig = {
           'Calcula aguinaldo bruto y proporcional en pesos mexicanos en segundos.',
       },
     },
+    ptu: {
+      path: '/mx/ptu/',
+      seo: {
+        title: 'Calculadora de PTU en México | Calculando.mx',
+        description:
+          'Estima la Participación de Utilidades (PTU) con tus utilidades totales, número de trabajadores y sueldo mensual.',
+        canonical: 'https://calculando.cl/mx/ptu/',
+        ogTitle: 'Calculadora de PTU en México',
+        ogDescription:
+          'Calcula tu PTU por días, por salario y el total estimado en MXN con dos decimales.',
+        ogUrl: 'https://calculando.cl/mx/ptu/',
+        twitterTitle: 'PTU México – Calculadora rápida',
+        twitterDescription:
+          'Ingresa utilidades totales, número de trabajadores y sueldo mensual para estimar la PTU en MXN.',
+      },
+    },
   },
 };
 
