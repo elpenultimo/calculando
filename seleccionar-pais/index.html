@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elige tu país – Calculando</title>
+  <link rel="stylesheet" href="/css/calculando.css">
+  <script src="/js/country-preference.js"></script>
+</head>
+<body>
+  <main style="max-width:520px;margin:40px auto;padding:0 16px;">
+    <header style="display:flex;align-items:center;gap:12px;justify-content:space-between;">
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando</strong>
+          <span>Elige dónde quieres navegar</span>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="shell" style="margin-top:18px;">
+      <div class="tool-title">Elige tu país</div>
+      <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
+
+      <div style="display:grid;gap:12px;margin-top:16px;">
+        <button id="btnChile" class="pill" style="justify-content:center;">
+          🇨🇱 Chile
+        </button>
+        <button id="btnMexico" class="pill" style="justify-content:center;">
+          🇲🇽 México
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script>
+    (function setupCountrySelection() {
+      const chile = document.getElementById('btnChile');
+      const mexico = document.getElementById('btnMexico');
+
+      if (window.tcCountry?.addChangeCountryLink) {
+        window.tcCountry.addChangeCountryLink();
+      }
+
+      function choose(region) {
+        if (!window.tcCountry) return;
+        window.tcCountry.storeRegion(region);
+        window.tcCountry.redirectForRegion(region);
+      }
+
+      chile?.addEventListener('click', () => choose('cl'));
+      mexico?.addEventListener('click', () => choose('mx'));
+    })();
+  </script>
+</body>
+</html>
