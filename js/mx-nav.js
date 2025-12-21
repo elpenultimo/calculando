@@ -1,18 +1,35 @@
-export function createMxNav(activeKey = 'home') {
+const navLinks = [
+  { key: 'home', href: '/mx/', label: 'Inicio', icon: '🏠' },
+  { key: 'iva', href: '/mx/iva/', label: 'IVA', icon: '🧮' },
+  { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto', icon: '💸' },
+  { key: 'aguinaldo', href: '/mx/aguinaldo/', label: 'Aguinaldo', icon: '🎁' },
+  { key: 'ptu', href: '/mx/ptu/', label: 'PTU', icon: '📊' },
+  { key: 'finiquito', href: '/mx/finiquito/', label: 'Finiquito', icon: '📄' },
+  { key: 'vacaciones', href: '/mx/vacaciones/', label: 'Vacaciones', icon: '🏖️' },
+];
+
+export function resolveMxNavKey(pathname = '') {
+  if (!pathname) {
+    pathname = typeof window !== 'undefined' ? window.location.pathname : '/mx/';
+  }
+
+  const normalizedPath = pathname.replace(/\/$/, '') || '/mx';
+
+  const directMatch = navLinks.find(
+    link => link.href.replace(/\/$/, '') === normalizedPath,
+  );
+  if (directMatch) return directMatch.key;
+
+  if (normalizedPath.startsWith('/mx/sueldo-liquido')) return 'sueldo';
+
+  return 'home';
+}
+
+export function createMxNav(activeKey = resolveMxNavKey()) {
   const nav = document.createElement('div');
   nav.className = 'tool-nav';
 
-  const links = [
-    { key: 'home', href: '/mx/', label: 'Inicio MX', icon: '🏠' },
-    { key: 'iva', href: '/mx/iva/', label: 'IVA México', icon: '🧮' },
-    { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto MX', icon: '💸' },
-    { key: 'aguinaldo', href: '/mx/aguinaldo/', label: 'Aguinaldo MX', icon: '🎁' },
-    { key: 'ptu', href: '/mx/ptu/', label: 'PTU', icon: '📊' },
-    { key: 'finiquito', href: '/mx/finiquito/', label: 'Finiquito', icon: '📄' },
-    { key: 'vacaciones', href: '/mx/vacaciones/', label: 'Vacaciones MX', icon: '🏖️' },
-  ];
-
-  links.forEach(link => {
+  navLinks.forEach(link => {
     const a = document.createElement('a');
     a.href = link.href;
     a.className = 'tool-tab';
@@ -27,7 +44,7 @@ export function createMxNav(activeKey = 'home') {
   return nav;
 }
 
-export function injectMxNav(target, activeKey = 'home') {
+export function injectMxNav(target, activeKey = resolveMxNavKey()) {
   const container =
     typeof target === 'string' ? document.querySelector(target) : target;
 
@@ -37,4 +54,30 @@ export function injectMxNav(target, activeKey = 'home') {
   const nav = createMxNav(activeKey);
   container.appendChild(nav);
   return nav;
+}
+
+export function autoMountMxNav(targetSelector = '#mxNav') {
+  if (typeof document === 'undefined') return null;
+
+  const targets = Array.from(
+    typeof targetSelector === 'string'
+      ? document.querySelectorAll(targetSelector)
+      : [targetSelector],
+  ).filter(Boolean);
+
+  const activeKey = resolveMxNavKey();
+
+  let mounted = null;
+  targets.forEach(target => {
+    const nav = injectMxNav(target, activeKey);
+    if (nav && !mounted) mounted = nav;
+  });
+
+  return mounted;
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('DOMContentLoaded', () => {
+    autoMountMxNav('[data-mx-nav], #mxNav');
+  });
 }
