@@ -12,6 +12,7 @@
   <meta name="robots" content="index,follow" />
 
   <link rel="canonical" href="https://calculando.cl/mx/sueldo-neto/" />
+  <meta http-equiv="refresh" content="0; url=/mx/sueldo-neto/" />
 
   <meta property="og:title" content="Sueldo Neto México – Calculadora rápida" />
   <meta property="og:description" content="Convierte sueldo bruto a sueldo neto estimando ISR e IMSS en pesos mexicanos." />
@@ -450,7 +451,16 @@
 </head>
 
 <body>
-<main>
+  <script>
+    (function () {
+      const target = '/mx/sueldo-neto/';
+      if (window.location && window.location.replace) {
+        const { search = '', hash = '' } = window.location;
+        window.location.replace(`${target}${search}${hash}`);
+      }
+    })();
+  </script>
+  <main>
   <header>
     <div class="logo-block">
       <div class="logo-mark">C</div>
