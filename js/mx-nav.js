@@ -7,6 +7,7 @@ export function createMxNav(activeKey = 'home') {
     { key: 'iva', href: '/mx/iva/', label: 'IVA México', icon: '🧮' },
     { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto MX', icon: '💸' },
     { key: 'aguinaldo', href: '/mx/aguinaldo/', label: 'Aguinaldo MX', icon: '🎁' },
+    { key: 'finiquito', href: '/mx/finiquito/', label: 'Finiquito', icon: '📄' },
   ];
 
   links.forEach(link => {
