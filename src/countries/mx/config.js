@@ -67,6 +67,38 @@ export const mxConfig = {
           'Calcula aguinaldo bruto y proporcional en pesos mexicanos en segundos.',
       },
     },
+    finiquito: {
+      path: '/mx/finiquito/',
+      seo: {
+        title: 'Calculadora de Finiquito en México 2026 | Calculando.mx',
+        description:
+          'Calcula un finiquito estimado en México considerando aguinaldo proporcional, vacaciones pendientes y prima vacacional.',
+        canonical: 'https://calculando.cl/mx/finiquito/',
+        ogTitle: 'Calculadora de Finiquito en México',
+        ogDescription:
+          'Ingresa tu sueldo mensual, días trabajados, vacaciones pendientes y prima vacacional para estimar un finiquito en MXN.',
+        ogUrl: 'https://calculando.cl/mx/finiquito/',
+        twitterTitle: 'Calculadora de Finiquito MX',
+        twitterDescription:
+          'Herramienta para estimar un finiquito básico en pesos mexicanos.',
+      },
+    },
+    ptu: {
+      path: '/mx/ptu/',
+      seo: {
+        title: 'Calculadora de PTU en México | Participación de utilidades',
+        description:
+          'Calcula una PTU referencial en México repartiendo utilidades 50% por días trabajados y 50% por salario.',
+        canonical: 'https://calculando.cl/mx/ptu/',
+        ogTitle: 'Calculadora de PTU en México',
+        ogDescription:
+          'Estima tu participación en utilidades considerando utilidades totales, trabajadores, días trabajados y salario.',
+        ogUrl: 'https://calculando.cl/mx/ptu/',
+        twitterTitle: 'PTU México – Calculadora simple',
+        twitterDescription:
+          'Herramienta rápida para estimar tu reparto de utilidades (PTU) en pesos mexicanos.',
+      },
+    },
   },
 };
 

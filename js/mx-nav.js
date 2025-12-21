@@ -8,6 +8,7 @@ export function createMxNav(activeKey = 'home') {
     { key: 'sueldo', href: '/mx/sueldo-neto/', label: 'Sueldo neto MX', icon: '💸' },
     { key: 'aguinaldo', href: '/mx/aguinaldo/', label: 'Aguinaldo MX', icon: '🎁' },
     { key: 'finiquito', href: '/mx/finiquito/', label: 'Finiquito', icon: '📄' },
+    { key: 'ptu', href: '/mx/ptu/', label: 'PTU MX', icon: '🏢' },
   ];
 
   links.forEach(link => {

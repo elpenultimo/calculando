@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Calculadora de PTU en México | Calculando.mx</title>
+  <meta name="description" content="Calcula tu PTU estimada en México repartiendo utilidades por días trabajados y salario." />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://calculando.cl/mx/ptu/" />
+
+  <meta property="og:title" content="Calculadora de PTU en México" />
+  <meta property="og:description" content="Ingresa utilidades, trabajadores, días y salario para estimar tu reparto de utilidades (PTU) en MXN." />
+  <meta property="og:url" content="https://calculando.cl/mx/ptu/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PTU México – Calculadora simple" />
+  <meta name="twitter:description" content="Modelo referencial para calcular tu PTU mezclando días trabajados y salario." />
+
+  <link rel="stylesheet" href="/css/calculando.css" />
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando.mx</strong>
+          <span>Calculadora rápida de PTU.</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+      <a href="/mx/" style="font-size:13px;color:var(--primary);text-decoration:underline;">
+        Volver a inicio MX
+      </a>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de PTU en México</h1>
+      <p>
+        Estima tu Participación de los Trabajadores en las Utilidades (PTU) con un modelo simplificado: 50% por días trabajados y 50% por salario.
+        Ingresa las utilidades a repartir, las personas trabajadoras y tus datos para ver un cálculo referencial en MXN.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo en vivo · Formato móvil
+      </div>
+
+      <div id="mxNav"></div>
+    </section>
+
+    <section class="shell tool-shell">
+      <div class="tool-title">Ingresa los datos de utilidades</div>
+      <div class="tool-subtitle">
+        Completa los campos obligatorios para ver tu PTU estimada. Los valores se calculan al escribir y se muestran en pesos mexicanos.
+      </div>
+
+      <div class="input-grid">
+        <div class="input-card">
+          <div class="input-label">Monto total de utilidades a repartir (MXN)</div>
+          <input
+            id="utilidadesInput"
+            class="input-field"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="100"
+            placeholder="100000"
+            aria-label="Utilidades totales en pesos mexicanos"
+          />
+          <div class="input-hint">Obligatorio. Es el monto a repartir entre todas las personas.</div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-label">Número total de trabajadores que participan</div>
+          <input
+            id="trabajadoresInput"
+            class="input-field"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            step="1"
+            placeholder="10"
+            aria-label="Número de personas trabajadoras que reciben PTU"
+          />
+          <div class="input-hint">Obligatorio. Considera solo a quienes tienen derecho a PTU.</div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-label">Tu salario mensual promedio (MXN)</div>
+          <input
+            id="salarioInput"
+            class="input-field"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="100"
+            placeholder="20000"
+            aria-label="Salario mensual promedio del trabajador"
+          />
+          <div class="input-hint">Obligatorio. Se usa para estimar tu parte por salario.</div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-label">Días trabajados por ti en el año</div>
+          <input
+            id="diasUsuarioInput"
+            class="input-field"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            step="1"
+            value="365"
+            placeholder="365"
+            aria-label="Días trabajados por la persona"
+          />
+          <div class="input-hint">Opcional. Se usa 365 días por defecto.</div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-label">Días trabajados totales en la empresa</div>
+          <input
+            id="diasEmpresaInput"
+            class="input-field"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            step="1"
+            placeholder="3650"
+            aria-label="Suma de días trabajados por todo el personal"
+          />
+          <div class="input-hint">Opcional. Si no se ingresa, se asume trabajadores × 365.</div>
+        </div>
+
+        <div class="input-card">
+          <div class="input-label">Suma de salarios anuales base PTU (empresa)</div>
+          <input
+            id="salariosEmpresaInput"
+            class="input-field"
+            type="number"
+            inputmode="decimal"
+            min="0"
+            step="100"
+            placeholder="2400000"
+            aria-label="Suma de salarios anuales considerados para PTU"
+          />
+          <div class="input-hint">Opcional. Si no hay dato, se estima con tu salario × 365 × trabajadores.</div>
+        </div>
+      </div>
+
+      <div class="helper-text" id="helperText">Ingresa utilidades, trabajadores y tu salario para calcular.</div>
+
+      <div class="result-grid" aria-live="polite">
+        <div class="result-card">
+          <div class="result-label">PTU por días</div>
+          <div class="result-value" id="ptuDias">$0.00</div>
+          <div class="result-note">50% del pool × (tus días trabajados / días totales de la empresa).</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">PTU por salario</div>
+          <div class="result-value" id="ptuSalario">$0.00</div>
+          <div class="result-note">50% del pool × (tu salario anual estimado / salario anual total).</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">PTU total estimada</div>
+          <div class="result-value" id="ptuTotal">$0.00</div>
+          <div class="result-note">Suma de la parte por días y por salario.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell">
+      <div class="tool-title">Notas rápidas</div>
+      <ul style="margin-top:10px;display:grid;gap:8px;padding-left:16px;">
+        <li>Cálculo referencial en MXN.</li>
+        <li>La PTU depende de topes, reglas y datos reales de la empresa.</li>
+        <li>Verifica con tu recibo/empresa/contador.</li>
+      </ul>
+    </section>
+
+    <section class="shell">
+      <div class="tool-title">Preguntas rápidas sobre PTU</div>
+      <div class="faq-grid">
+        <article class="faq-item">
+          <h3 class="faq-question">¿Qué es la PTU en México?</h3>
+          <p class="faq-answer">Es la Participación de los Trabajadores en las Utilidades de la empresa. Cada año se reparte un porcentaje de las utilidades fiscales entre las personas trabajadoras elegibles.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Cómo se reparte la PTU?</h3>
+          <p class="faq-answer">La ley establece que 50% se distribuye según los días trabajados y 50% según los salarios. Esta calculadora aplica esa lógica de forma simplificada.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Qué pasa si no trabajé todo el año?</h3>
+          <p class="faq-answer">Tu parte se ajusta proporcionalmente a los días laborados en el ejercicio. Al bajar tus días trabajados verás un monto menor.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿La PTU paga impuestos?</h3>
+          <p class="faq-answer">La PTU forma parte de tus ingresos y puede retener ISR según los topes y reglas vigentes. Usa este resultado como referencia y revisa tu recibo de nómina.</p>
+        </article>
+        <article class="faq-item">
+          <h3 class="faq-question">¿Quiénes tienen derecho a PTU?</h3>
+          <p class="faq-answer">Personas trabajadoras subordinadas con más de 60 días laborados en el ejercicio, salvo excepciones como directores, socios o empresas sin obligación de repartir utilidades.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <strong>Calculando.mx</strong> es un proyecto independiente.
+      Usa esta herramienta como guía rápida y valida los datos reales de tu empresa o con tu asesoría fiscal.
+    </footer>
+  </main>
+
+  <script src="/js/theme-toggle.js"></script>
+  <script>
+    const utilidadesInput = document.getElementById("utilidadesInput");
+    const trabajadoresInput = document.getElementById("trabajadoresInput");
+    const salarioInput = document.getElementById("salarioInput");
+    const diasUsuarioInput = document.getElementById("diasUsuarioInput");
+    const diasEmpresaInput = document.getElementById("diasEmpresaInput");
+    const salariosEmpresaInput = document.getElementById("salariosEmpresaInput");
+
+    const helperText = document.getElementById("helperText");
+    const ptuDiasValue = document.getElementById("ptuDias");
+    const ptuSalarioValue = document.getElementById("ptuSalario");
+    const ptuTotalValue = document.getElementById("ptuTotal");
+
+    function formatMXN(value) {
+      if (!isFinite(value)) return "$0.00";
+      try {
+        return new Intl.NumberFormat("es-MX", {
+          style: "currency",
+          currency: "MXN",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(value);
+      } catch (e) {
+        const safeValue = Number(value) || 0;
+        return "$" + safeValue.toLocaleString("es-MX", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+    }
+
+    function parseNumber(raw) {
+      const parsed = Number((raw || "").trim());
+      if (!isFinite(parsed) || parsed < 0) return null;
+      return parsed;
+    }
+
+    function setResultsToZero(message) {
+      ptuDiasValue.textContent = "$0.00";
+      ptuSalarioValue.textContent = "$0.00";
+      ptuTotalValue.textContent = "$0.00";
+      helperText.textContent = message;
+    }
+
+    function recalculatePTU() {
+      const utilidades = parseNumber(utilidadesInput.value);
+      const trabajadores = parseNumber(trabajadoresInput.value);
+      const salarioMensual = parseNumber(salarioInput.value);
+      const diasUsuario = parseNumber(diasUsuarioInput.value) ?? 365;
+      const diasEmpresa = parseNumber(diasEmpresaInput.value);
+      const salarioAnualEmpresa = parseNumber(salariosEmpresaInput.value);
+
+      const missingFields = [];
+      if (utilidades === null || utilidades <= 0) missingFields.push("utilidades totales");
+      if (trabajadores === null || trabajadores <= 0) missingFields.push("número de trabajadores");
+      if (salarioMensual === null || salarioMensual <= 0) missingFields.push("tu salario mensual");
+
+      if (missingFields.length > 0) {
+        setResultsToZero(`Ingresa ${missingFields.join(", ")} para calcular.`);
+        return;
+      }
+
+      const pool = utilidades;
+      const mitadDias = pool * 0.5;
+      const mitadSalarios = pool * 0.5;
+
+      const diasTotalesEmpresa = diasEmpresa !== null ? diasEmpresa : trabajadores * 365;
+      const ptuDias = diasTotalesEmpresa > 0 ? mitadDias * (diasUsuario / diasTotalesEmpresa) : 0;
+
+      const salarioDiarioUsuario = salarioMensual / 30;
+      const salarioAnualUsuario = salarioDiarioUsuario * diasUsuario;
+
+      const salarioAnualTotalEmpresa =
+        salarioAnualEmpresa !== null
+          ? salarioAnualEmpresa
+          : salarioDiarioUsuario * 365 * trabajadores;
+
+      const ptuSalario = salarioAnualTotalEmpresa > 0
+        ? mitadSalarios * (salarioAnualUsuario / salarioAnualTotalEmpresa)
+        : 0;
+
+      const ptuTotal = ptuDias + ptuSalario;
+
+      ptuDiasValue.textContent = formatMXN(ptuDias);
+      ptuSalarioValue.textContent = formatMXN(ptuSalario);
+      ptuTotalValue.textContent = formatMXN(ptuTotal);
+      helperText.textContent = "Cálculo referencial con tus datos ingresados.";
+    }
+
+    [
+      utilidadesInput,
+      trabajadoresInput,
+      salarioInput,
+      diasUsuarioInput,
+      diasEmpresaInput,
+      salariosEmpresaInput,
+    ].forEach((input) => {
+      input.addEventListener("input", recalculatePTU);
+    });
+
+    recalculatePTU();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es la PTU en México?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Es la Participación de los Trabajadores en las Utilidades de la empresa. Cada año se reparte un porcentaje de las utilidades fiscales entre las personas trabajadoras elegibles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo se reparte la PTU?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La ley establece que 50% se distribuye según los días trabajados y 50% según los salarios. Esta calculadora aplica esa lógica de forma simplificada."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué pasa si no trabajé todo el año?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tu parte se ajusta proporcionalmente a los días laborados en el ejercicio. Al bajar tus días trabajados verás un monto menor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿La PTU paga impuestos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La PTU forma parte de tus ingresos y puede retener ISR según los topes y reglas vigentes. Usa este resultado como referencia y revisa tu recibo de nómina."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quiénes tienen derecho a PTU?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Personas trabajadoras subordinadas con más de 60 días laborados en el ejercicio, salvo excepciones como directores, socios o empresas sin obligación de repartir utilidades."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    import { injectMxNav } from '/js/mx-nav.js';
+
+    bootstrapPage('ptu');
+    injectMxNav('#mxNav', 'ptu');
+  </script>
+</body>
+</html>
