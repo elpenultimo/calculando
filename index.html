@@ -3,82 +3,100 @@
 <head>
   <!-- Tucalculo country redirect (client-side) -->
   <script>
-    (function () {
-      const host = window.location.hostname;
-      const isTucalculo = host === 'tucalculo.com' || host.endsWith('.tucalculo.com');
-      if (!isTucalculo) return;
+  (function () {
+    const host = window.location.hostname;
+    const isTucalculo = host === 'tucalculo.com' || host.endsWith('.tucalculo.com');
+    if (!isTucalculo) return;
 
-      const path = window.location.pathname || '/';
-      const hash = window.location.hash || '';
-      const searchParams = new URLSearchParams(window.location.search);
-      const currentFullUrl = `${path}${window.location.search}${hash}`;
-      const pathIsRoot = path === '/' || path === '';
-      const pathIsMexico = path === '/mx' || path === '/mx/';
+    const path = window.location.pathname || '/';
+    const hash = window.location.hash || '';
+    const searchParams = new URLSearchParams(window.location.search);
+    const currentFullUrl = `${path}${window.location.search}${hash}`;
 
-      const createUrl = (targetPath, queryString) => {
-        const normalizedPath = targetPath.endsWith('/') ? targetPath : `${targetPath}/`;
-        const query = queryString ? `?${queryString}` : '';
-        return `${normalizedPath}${query}${hash}`;
-      };
+    const pathIsRoot = path === '/' || path === '';
+    const pathIsMexico = path === '/mx' || path === '/mx/';
+    const pathIsSelector = path === '/seleccionar-pais' || path === '/seleccionar-pais/';
 
-      const redirect = (targetPath, queryString) => {
-        const newUrl = createUrl(targetPath, queryString);
-        if (newUrl !== currentFullUrl) {
-          window.location.replace(newUrl);
-        }
-      };
+    // 1) Anti-loop: si estás en el selector, no redirijas por preferencia/idioma
+    if (pathIsSelector) return;
 
-      const force = searchParams.get('force');
-      if (force === 'mx' || force === 'cl') {
-        const preferredCountry = force;
-        try {
-          localStorage.setItem('preferredCountry', preferredCountry);
-        } catch (error) {
-          // Ignore storage errors
-        }
+    const createUrl = (targetPath, queryString) => {
+      const normalizedPath = targetPath.endsWith('/') ? targetPath : `${targetPath}/`;
+      const query = queryString ? `?${queryString}` : '';
+      return `${normalizedPath}${query}${hash}`;
+    };
 
-        searchParams.delete('force');
-        const remainingQuery = searchParams.toString();
-        const targetPath = preferredCountry === 'mx' ? '/mx/' : '/';
-        redirect(targetPath, remainingQuery);
-        return;
+    const redirect = (targetPath, queryString) => {
+      const newUrl = createUrl(targetPath, queryString);
+      if (newUrl !== currentFullUrl) {
+        window.location.replace(newUrl);
       }
+    };
 
-      let preferredCountry = null;
+    // 2) RESET: borra preferencia y manda al selector
+    const reset = searchParams.get('reset');
+    if (reset === '1' || reset === 'true') {
       try {
-        preferredCountry = localStorage.getItem('preferredCountry');
-      } catch (error) {
-        // Ignore storage errors
-      }
+        localStorage.removeItem('preferredCountry');
+      } catch (error) {}
+      searchParams.delete('reset');
+      const remainingQuery = searchParams.toString();
+      redirect('/seleccionar-pais/', remainingQuery);
+      return;
+    }
 
-      if (preferredCountry === 'mx' && pathIsRoot) {
+    // 3) FORCE: fuerza país + guarda preferencia
+    const force = searchParams.get('force');
+    if (force === 'mx' || force === 'cl') {
+      const preferredCountry = force;
+      try {
+        localStorage.setItem('preferredCountry', preferredCountry);
+      } catch (error) {}
+
+      searchParams.delete('force');
+      const remainingQuery = searchParams.toString();
+
+      // Si forzaste, te mando directo donde corresponde
+      const targetPath = preferredCountry === 'mx' ? '/mx/' : '/';
+      redirect(targetPath, remainingQuery);
+      return;
+    }
+
+    // 4) Preferencia guardada
+    let preferredCountry = null;
+    try {
+      preferredCountry = localStorage.getItem('preferredCountry');
+    } catch (error) {}
+
+    if (preferredCountry === 'mx' && pathIsRoot) {
+      redirect('/mx/');
+      return;
+    }
+
+    if (preferredCountry === 'cl' && pathIsMexico) {
+      redirect('/');
+      return;
+    }
+
+    // 5) Autodetección sólo si NO hay preferencia
+    if (!preferredCountry) {
+      const languages = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language];
+
+      const isMexico = languages.some((lang) => {
+        if (typeof lang !== 'string') return false;
+        const lower = lang.toLowerCase();
+        return lower.startsWith('es-mx') || lower.includes('mx');
+      });
+
+      if (isMexico && pathIsRoot) {
         redirect('/mx/');
         return;
       }
-
-      if (preferredCountry === 'cl' && pathIsMexico) {
-        redirect('/');
-        return;
-      }
-
-      if (!preferredCountry) {
-        const languages = Array.isArray(navigator.languages) && navigator.languages.length
-          ? navigator.languages
-          : [navigator.language];
-
-        const isMexico = languages.some((lang) => {
-          if (typeof lang !== 'string') return false;
-          const lower = lang.toLowerCase();
-          return lower.startsWith('es-mx') || lower.includes('mx');
-        });
-
-        if (isMexico && pathIsRoot) {
-          redirect('/mx/');
-          return;
-        }
-      }
-    })();
-  </script>
+    }
+  })();
+</script>
   <meta charset="UTF-8" />
   <title>Calculando.cl – Calculadoras Chile 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
