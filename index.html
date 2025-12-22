@@ -1,102 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
 <head>
-  <!-- Tucalculo country redirect (client-side) -->
-  <script>
-  (function () {
-    const host = window.location.hostname;
-    const isTucalculo = host === 'tucalculo.com' || host.endsWith('.tucalculo.com');
-    if (!isTucalculo) return;
-
-    const path = window.location.pathname || '/';
-    const hash = window.location.hash || '';
-    const searchParams = new URLSearchParams(window.location.search);
-    const currentFullUrl = `${path}${window.location.search}${hash}`;
-
-    const pathIsRoot = path === '/' || path === '';
-    const pathIsMexico = path === '/mx' || path === '/mx/';
-    const pathIsSelector = path === '/seleccionar-pais' || path === '/seleccionar-pais/';
-
-    // 1) Anti-loop: si estás en el selector, no redirijas por preferencia/idioma
-    if (pathIsSelector) return;
-
-    const createUrl = (targetPath, queryString) => {
-      const normalizedPath = targetPath.endsWith('/') ? targetPath : `${targetPath}/`;
-      const query = queryString ? `?${queryString}` : '';
-      return `${normalizedPath}${query}${hash}`;
-    };
-
-    const redirect = (targetPath, queryString) => {
-      const newUrl = createUrl(targetPath, queryString);
-      if (newUrl !== currentFullUrl) {
-        window.location.replace(newUrl);
-      }
-    };
-
-    // 2) RESET: borra preferencia y manda al selector
-    const reset = searchParams.get('reset');
-    if (reset === '1' || reset === 'true') {
-      try {
-        localStorage.removeItem('preferredCountry');
-      } catch (error) {}
-      searchParams.delete('reset');
-      const remainingQuery = searchParams.toString();
-      redirect('/seleccionar-pais/', remainingQuery);
-      return;
-    }
-
-    // 3) FORCE: fuerza país + guarda preferencia
-    const force = searchParams.get('force');
-    if (force === 'mx' || force === 'cl') {
-      const preferredCountry = force;
-      try {
-        localStorage.setItem('preferredCountry', preferredCountry);
-      } catch (error) {}
-
-      searchParams.delete('force');
-      const remainingQuery = searchParams.toString();
-
-      // Si forzaste, te mando directo donde corresponde
-      const targetPath = preferredCountry === 'mx' ? '/mx/' : '/';
-      redirect(targetPath, remainingQuery);
-      return;
-    }
-
-    // 4) Preferencia guardada
-    let preferredCountry = null;
-    try {
-      preferredCountry = localStorage.getItem('preferredCountry');
-    } catch (error) {}
-
-    if (preferredCountry === 'mx' && pathIsRoot) {
-      redirect('/mx/');
-      return;
-    }
-
-    if (preferredCountry === 'cl' && pathIsMexico) {
-      redirect('/');
-      return;
-    }
-
-    // 5) Autodetección sólo si NO hay preferencia
-    if (!preferredCountry) {
-      const languages = Array.isArray(navigator.languages) && navigator.languages.length
-        ? navigator.languages
-        : [navigator.language];
-
-      const isMexico = languages.some((lang) => {
-        if (typeof lang !== 'string') return false;
-        const lower = lang.toLowerCase();
-        return lower.startsWith('es-mx') || lower.includes('mx');
-      });
-
-      if (isMexico && pathIsRoot) {
-        redirect('/mx/');
-        return;
-      }
-    }
-  })();
-</script>
   <meta charset="UTF-8" />
   <title>Calculando.cl – Calculadoras Chile 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -106,8 +10,11 @@
   />
   <link rel="canonical" href="https://calculando.cl/" />
   <link rel="stylesheet" href="/css/calculando.css">
+
+  <!-- País (tucalculo.com) -->
   <script src="/js/country-preference.js"></script>
   <script>
+    // OJO: esto solo hará algo en tucalculo.com y SOLO cuando estés en "/"
     if (window.tcCountry?.handleRootCountryRedirect) {
       window.tcCountry.handleRootCountryRedirect();
     }
@@ -118,6 +25,7 @@
       }
     });
   </script>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6081924342681092"
      crossorigin="anonymous"></script>
 </head>
@@ -161,7 +69,7 @@
         <span>🧾</span> Boleta de honorarios
       </a>
       <a class="tool-tab" data-page="sueldo" data-tool="sueldo" href="/sueldo-liquido/">
-    <span>💼</span> Sueldo Líquido
+        <span>💼</span> Sueldo Líquido
       </a>
       <a class="tool-tab" data-page="uf" data-tool="uf" href="/uf/">
         <span>💱</span> Calculadora UF
@@ -252,8 +160,8 @@
       </div>
     </div>
   </section>
-<!-- ------------- TOOL 2: SUELDO ------------- -->
 
+<!-- ------------- TOOL 2: SUELDO ------------- -->
 <section id="tool-sueldo" class="shell tool-shell">
   <div class="tool-title">Calculadora de Sueldo Líquido 2026 (Simplificada)</div>
   <div class="tool-subtitle">
@@ -306,29 +214,29 @@
   <div id="sl-error" class="error"></div>
 
   <div class="results-row" id="sl-results" style="opacity:0.45; margin-top:16px;">
-  <div class="result-card">
-    <div class="result-title">Descuentos obligatorios</div>
+    <div class="result-card">
+      <div class="result-title">Descuentos obligatorios</div>
 
-    <div class="result-main-label">AFP:</div>
-    <div id="sl-afp-val" class="result-value">$0</div>
+      <div class="result-main-label">AFP:</div>
+      <div id="sl-afp-val" class="result-value">$0</div>
 
-    <div class="result-main-label" style="margin-top:10px;">Salud:</div>
-    <div id="sl-salud-val" class="result-value">$0</div>
+      <div class="result-main-label" style="margin-top:10px;">Salud:</div>
+      <div id="sl-salud-val" class="result-value">$0</div>
 
-    <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
-    <div id="sl-cesantia-val" class="result-value">$0</div>
+      <div class="result-main-label" style="margin-top:10px;">Cesantía:</div>
+      <div id="sl-cesantia-val" class="result-value">$0</div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-title">Resultado final</div>
+
+      <div class="result-main-label">Impuesto (simple):</div>
+      <div id="sl-impuesto-val" class="result-value">$0</div>
+
+      <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
+      <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
+    </div>
   </div>
-
-  <div class="result-card">
-    <div class="result-title">Resultado final</div>
-
-    <div class="result-main-label">Impuesto (simple):</div>
-    <div id="sl-impuesto-val" class="result-value">$0</div>
-
-    <div class="result-main-label" style="margin-top:10px;">Sueldo líquido:</div>
-    <div id="sl-liquido-val" class="result-value" style="color:var(--accent);">$0</div>
-  </div>
-</div>
 </section>
 
   <!-- ------------- TOOL 3: UF ------------- -->
@@ -338,14 +246,13 @@
       Ingresa el monto y el valor de la UF que quieras usar.
       Puedes convertir de pesos a UF o de UF a pesos.
     </div>
-    <!-- Texto explicativo extra -->
-  <div class="tool-subtitle tool-extra">
-  La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
-  usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
-  dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
-  en pesos o en UF y obtendrás su equivalente al instante.
-</div>
 
+    <div class="tool-subtitle tool-extra">
+      La calculadora UF de Calculando.cl te permite convertir rápidamente entre UF y pesos chilenos
+      usando el valor actualizado de la Unidad de Fomento en Chile. Es útil para estimar arriendos,
+      dividendos, créditos hipotecarios y contratos que estén expresados en UF. Solo ingresa un monto
+      en pesos o en UF y obtendrás su equivalente al instante.
+    </div>
 
     <div class="input-row">
       <div class="input-label">Monto</div>
@@ -452,6 +359,7 @@
       Ingresa un monto para calcular su IVA, valor neto y bruto.
     </div>
   </section>
+
  <!-- ========== BLOG DESTACADO 2026 (DINÁMICO) ========== -->
 <section class="shell" style="margin-top:26px;">
   <div class="tool-title">Últimos artículos del Blog 2026</div>
@@ -472,7 +380,7 @@
   </div>
 </section>
 <!-- ========== FIN BLOG DESTACADO 2026 (DINÁMICO) ========== -->
-  
+
   <footer>
     <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
     relación con el SII ni con ningún organismo del Estado.
@@ -480,11 +388,11 @@
   </footer>
 
 </main>
+
 <script src="/blog/posts.js"></script>
-  
+
 <script>
   // ---------- TEMA CLARO/OSCURO ----------
-
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
   const themeLabel = document.getElementById("themeLabel");
@@ -518,7 +426,6 @@
   });
 
   // ---------- NAV ENTRE HERRAMIENTAS ----------
-
   const toolNav = document.getElementById("toolNav");
   const toolTabs = toolNav.querySelectorAll(".tool-tab");
   const boletaSection = document.getElementById("tool-boleta");
@@ -540,36 +447,23 @@
     ivaSection.classList.toggle("tool-shell-active", tool === "iva");
   }
 
-  // ---------- SELECCIONAR HERRAMIENTA SEGÚN LA URL ----------
   (function selectToolFromPath() {
-    // Normalizamos el path (sin slash final)
     let path = window.location.pathname || "/";
-    if (path.length > 1 && path.endsWith("/")) {
-      path = path.slice(0, -1);
-    }
+    if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1);
 
     let page = "home";
-    let tool = "boleta"; // por defecto
+    let tool = "boleta";
 
-    if (path.endsWith("/boleta")) {
-      page = "boleta";
-      tool = "boleta";
-    } else if (path.endsWith("/sueldo-liquido")) {
-      page = "sueldo";
-      tool = "sueldo";
-    } else if (path.endsWith("/uf")) {
-      page = "uf";
-      tool = "uf";
-    } else if (path.endsWith("/iva")) {
-      page = "iva";
-      tool = "iva";
-    }
+    if (path.endsWith("/boleta")) { page = "boleta"; tool = "boleta"; }
+    else if (path.endsWith("/sueldo-liquido")) { page = "sueldo"; tool = "sueldo"; }
+    else if (path.endsWith("/uf")) { page = "uf"; tool = "uf"; }
+    else if (path.endsWith("/iva")) { page = "iva"; tool = "iva"; }
 
     setActiveNav(page);
     activateTool(tool);
   })();
-  // ---------- UTILS ----------
 
+  // ---------- UTILS ----------
   function formatCLP(value) {
     if (!isFinite(value)) return "$0";
     try {
@@ -584,7 +478,6 @@
   }
 
   // ---------- CALCULADORA BOLETA ----------
-
   const montoInput = document.getElementById("monto");
   const errorBox = document.getElementById("error");
   const resultsEl = document.getElementById("results");
@@ -657,9 +550,7 @@
     recalculateBoleta();
   });
 
-// ---------- CALCULADORA SUELDO ----------
   // ---------- CALCULADORA SUELDO ----------
-
   const slBrutoInput = document.getElementById("sl-bruto");
   const slAfpInput = document.getElementById("sl-afp");
   const slSaludInput = document.getElementById("sl-salud");
@@ -682,7 +573,6 @@
 
     err.textContent = "";
 
-    // Si no hay sueldo bruto válido, dejamos todo en cero
     if (!bruto || bruto <= 0) {
       row.style.opacity = 0.45;
       vAfp.textContent = "$0";
@@ -693,15 +583,12 @@
       return;
     }
 
-    // Descuentos
     const dAfp = bruto * afpPct;
     const dSalud = bruto * saludPct;
     const dCes = bruto * cesPct;
 
-    // Base imponible simple (bruto menos AFP y salud)
     const imponible = bruto - dAfp - dSalud;
 
-    // Impuesto súper simplificado por tramos
     let impuesto = 0;
     if (imponible > 2052302) impuesto = imponible * 0.08;
     else if (imponible > 923537) impuesto = imponible * 0.04;
@@ -719,17 +606,14 @@
     row.style.opacity = 1;
   }
 
-  // Escuchar cambios en los 4 inputs
   ["sl-bruto", "sl-afp", "sl-salud", "sl-cesantia"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", calcularSueldo);
   });
 
-  // Llamada inicial por si ya hay valores por defecto
   calcularSueldo();
 
   // ---------- CALCULADORA UF ----------
-
   const ufMontoInput = document.getElementById("ufMonto");
   const ufValorInput = document.getElementById("ufValor");
   const ufDirectionGroup = document.getElementById("ufDirectionGroup");
@@ -737,7 +621,6 @@
   const ufResults = document.getElementById("ufResults");
   const ufLegend = document.getElementById("ufLegend");
 
-  // UF automática desde API pública
   async function autoFillUF() {
     try {
       const res = await fetch("https://mindicador.cl/api");
@@ -840,8 +723,7 @@
     recalculateUF();
   });
 
-  // ---------- CALCULADORA IVA (19%) ----------
-
+  // ---------- CALCULADORA IVA ----------
   const ivaMontoInput = document.getElementById("ivaMonto");
   const ivaModeGroup = document.getElementById("ivaModeGroup");
   const ivaError = document.getElementById("ivaError");
@@ -905,41 +787,43 @@
     });
     recalculateIVA();
   });
-// ---------- BLOG: CARGAR ÚLTIMOS ARTÍCULOS ----------
-   function renderLatestBlogPosts(limit = 5) {
-     const list = document.getElementById("blogLatestList");
-     if (!list || !window.CALCULANDO_POSTS_2026) return;
 
-     const posts = [...window.CALCULANDO_POSTS_2026].sort((a, b) =>
-       (b.date || "").localeCompare(a.date || "")
-     );
+  // ---------- BLOG: CARGAR ÚLTIMOS ARTÍCULOS ----------
+  function renderLatestBlogPosts(limit = 5) {
+    const list = document.getElementById("blogLatestList");
+    if (!list || !window.CALCULANDO_POSTS_2026) return;
 
-     const latest = posts.slice(0, limit);
+    const posts = [...window.CALCULANDO_POSTS_2026].sort((a, b) =>
+      (b.date || "").localeCompare(a.date || "")
+    );
 
-     list.innerHTML = "";
-     latest.forEach(post => {
-       const li = document.createElement("li");
-       li.innerHTML = `
-         <a href="${post.slug}">
-           <strong>${post.title}</strong>
-         </a>
-         <div class="tool-subtitle">${post.description}</div>
-       `;
-       list.appendChild(li);
-     });
-   }
+    const latest = posts.slice(0, limit);
 
-   document.addEventListener("DOMContentLoaded", () => {
-     renderLatestBlogPosts(5);
-   });
+    list.innerHTML = "";
+    latest.forEach(post => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="${post.slug}">
+          <strong>${post.title}</strong>
+        </a>
+        <div class="tool-subtitle">${post.description}</div>
+      `;
+      list.appendChild(li);
+    });
+  }
 
-  
-  </script>
-  <script type="module">
-    import { bootstrapPage } from '/js/country-bootstrap.js';
-    bootstrapPage('home');
-  </script>
+  document.addEventListener("DOMContentLoaded", () => {
+    renderLatestBlogPosts(5);
+  });
+</script>
+
+<script type="module">
+  import { bootstrapPage } from '/js/country-bootstrap.js';
+  bootstrapPage('home');
+</script>
+
 <script src="https://cdn.counter.dev/script.js" data-id="2b4d8db2-1873-4e97-b61c-13d1ec0c6458" data-utcoffset="-3"></script>
+
 <!-- ASISTENTE IA CALCULANDO -->
 <div id="calc-ai-widget">
   <button id="calc-ai-toggle" aria-label="Abrir asistente Calculando">💬</button>
