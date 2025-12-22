@@ -1,9 +1,11 @@
 (function initCountryPreference() {
-  const REGION_KEY = 'tc_region';
+  const COUNTRY_COOKIE = 'tc_country';
+  const ONE_YEAR_SECONDS = 31_536_000;
   const SUPPORTED_HOSTS = ['tucalculo.com', 'www.tucalculo.com'];
 
   function isTuCalculoHost() {
-    return SUPPORTED_HOSTS.includes(window.location.hostname);
+    const host = window.location.hostname || '';
+    return SUPPORTED_HOSTS.some((value) => host.includes(value));
   }
 
   function normalizePath(pathname) {
@@ -13,29 +15,39 @@
       : pathname;
   }
 
-  function getStoredRegion() {
-    try {
-      return localStorage.getItem(REGION_KEY);
-    } catch (err) {
-      return null;
-    }
+  function parseCookieValue(cookieString) {
+    return cookieString.split('=')[1]?.trim() ?? '';
   }
 
-  function storeRegion(region) {
-    try {
-      localStorage.setItem(REGION_KEY, region);
-    } catch (err) {
-      /* ignore localStorage write errors */
+  function getCookieValue(name) {
+    const cookies = document.cookie?.split(';') || [];
+    for (const cookie of cookies) {
+      const trimmed = cookie.trim();
+      if (trimmed.startsWith(`${name}=`)) {
+        return parseCookieValue(trimmed);
+      }
     }
+
+    return '';
   }
 
-  function redirectForRegion(region) {
-    if (region === 'cl') {
-      window.location.href = 'https://calculando.cl/';
+  function storeCountry(country) {
+    const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = `${COUNTRY_COOKIE}=${country}; Max-Age=${ONE_YEAR_SECONDS}; Path=/; SameSite=Lax${secure}`;
+  }
+
+  function getStoredCountry() {
+    const value = (getCookieValue(COUNTRY_COOKIE) || '').toLowerCase();
+    return value === 'cl' || value === 'mx' ? value : '';
+  }
+
+  function redirectForCountry(country) {
+    if (country === 'cl') {
+      window.location.href = '/';
       return true;
     }
 
-    if (region === 'mx') {
+    if (country === 'mx') {
       window.location.href = '/mx/';
       return true;
     }
@@ -43,15 +55,55 @@
     return false;
   }
 
-  function handleRootCountryRedirect() {
+  async function detectCountryFromHeaders() {
+    try {
+      const response = await fetch('/api/country', { credentials: 'same-origin' });
+      if (!response.ok) return '';
+
+      const data = await response.json();
+      const headerCountry = (data.country || '').toLowerCase();
+      return headerCountry === 'mx' || headerCountry === 'cl' ? headerCountry : '';
+    } catch (err) {
+      return '';
+    }
+  }
+
+  function handleForceParam() {
+    if (!isTuCalculoHost()) return false;
+
+    try {
+      const url = new URL(window.location.href);
+      const force = (url.searchParams.get('force') || '').toLowerCase();
+      if (force === 'mx' || force === 'cl') {
+        storeCountry(force);
+        redirectForCountry(force);
+        return true;
+      }
+    } catch (err) {
+      /* ignore URL parsing errors */
+    }
+
+    return false;
+  }
+
+  async function handleRootCountryRedirect() {
     if (!isTuCalculoHost()) return;
+
+    if (handleForceParam()) return;
 
     const normalizedPath = normalizePath(window.location.pathname || '/');
     if (normalizedPath !== '/') return;
 
-    const stored = getStoredRegion();
+    const stored = getStoredCountry();
     if (stored) {
-      redirectForRegion(stored);
+      redirectForCountry(stored);
+      return;
+    }
+
+    const detected = await detectCountryFromHeaders();
+    if (detected) {
+      storeCountry(detected);
+      redirectForCountry(detected);
       return;
     }
 
@@ -73,15 +125,18 @@
     header.appendChild(link);
   }
 
-  // Nota: Si se requiere GEOIP real más adelante, la regla debe vivirse en Cloudflare
-  // (Redirect Rules/Workers). Este archivo solo maneja preferencias locales del usuario.
-
   window.tcCountry = {
     isTuCalculoHost,
-    getStoredRegion,
-    storeRegion,
-    redirectForRegion,
+    getStoredCountry,
+    storeCountry,
+    redirectForCountry,
     handleRootCountryRedirect,
     addChangeCountryLink,
+    // Backward compatibility with previous API
+    getStoredRegion: getStoredCountry,
+    storeRegion: storeCountry,
+    redirectForRegion: redirectForCountry,
   };
+
+  handleForceParam();
 })();
