@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Calculadora de PTU en México | Calculando.mx</title>
+
+  <meta
+    name="description"
+    content="Calcula la Participación de Utilidades (PTU) en México con utilidades, número de trabajadores y tu sueldo mensual."
+  />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/ptu/" />
+
+  <meta property="og:title" content="Calculadora de PTU en México" />
+  <meta
+    property="og:description"
+    content="Ingresa utilidades totales, número de trabajadores y sueldo mensual para estimar PTU por días, por salario y total."
+  />
+  <meta property="og:url" content="https://calculando.cl/mx/ptu/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora de PTU MX" />
+  <meta
+    name="twitter:description"
+    content="Estima la PTU en pesos mexicanos con utilidades totales, número de trabajadores y sueldo mensual."
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    :root {
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    html[data-theme="dark"] {
+      --bg: radial-gradient(circle at top, #0f172a 0, #020617 52%, #020617 100%);
+      --shell: rgba(15, 23, 42, 0.9);
+      --card: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.12);
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.85);
+      --shadow-card: 0 18px 42px rgba(15, 23, 42, 0.95);
+      --header-glow: 0 0 40px rgba(56, 189, 248, 0.35);
+      --chip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    html[data-theme="light"] {
+      --bg: radial-gradient(circle at top, #e0edff 0, #f4f7fb 45%, #ffffff 100%);
+      --shell: rgba(255, 255, 255, 0.9);
+      --card: #ffffff;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #0f172a;
+      --muted: #6b7280;
+      --accent: #eab308;
+      --accent-soft: rgba(234, 179, 8, 0.12);
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.15);
+      --shadow-card: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --header-glow: 0 0 0 rgba(0, 0, 0, 0);
+      --chip-bg: #f9fafb;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      transition: background 0.4s ease-out, color 0.25s ease-out;
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+      padding: 22px 16px 34px;
+      margin: 0 auto;
+      animation: fade-in 0.6s ease-out;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb 0, #e5e7eb 24%, #0ea5e9 50%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0b1120;
+      box-shadow: var(--header-glow);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .logo-block:hover .logo-mark {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 0 55px rgba(56, 189, 248, 0.55);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), color var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .theme-toggle-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-icon {
+      background: #0f172a;
+    }
+
+    html[data-theme="light"] .theme-toggle-icon {
+      background: #facc15;
+      color: #1f2933;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+    }
+
+    .theme-toggle:active {
+      transform: translateY(1px);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 18px 16px 20px;
+      background: linear-gradient(120deg, rgba(14, 165, 233, 0.14), rgba(14, 165, 233, 0));
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+      display: inline-block;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
+    }
+
+    .tool-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tool-tab {
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .tool-tab-active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .shell {
+      margin-top: 14px;
+      border: 1px solid var(--border-subtle);
+      background: var(--shell);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .tool-shell {
+      border: 1px solid var(--border-strong);
+    }
+
+    .tool-shell-active {
+      box-shadow: var(--shadow-card);
+    }
+
+    .tool-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tool-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .input-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      background: var(--card);
+    }
+
+    .input-label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+
+    .input-hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .helper-text {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .result-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .result-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 120px;
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .result-value {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .result-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .quick-notes {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .note-item {
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: var(--card);
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .faq-question {
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .faq-answer {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.mx</strong>
+        <span>Calculadoras simples y claras.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+
+
+  </header>
+
+  <section class="hero">
+    <h1>Calculadora de PTU en México</h1>
+    <p>
+      Estima la Participación de Utilidades (PTU) con tus datos. Ingresa las utilidades totales,
+      el número de trabajadores, tu sueldo y los días trabajados para ver el cálculo por días, por
+      salario y el total en MXN.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      PTU anual · Proporcional por días y salarios · Valores referenciales
+    </div>
+
+    <div id="mxNav"></div>
+  </section>
+
+  <section class="shell tool-shell tool-shell-active">
+    <div class="tool-title">Ingresa los datos para estimar tu PTU</div>
+    <div class="tool-subtitle">
+      Completa los campos obligatorios. Si dejas los opcionales vacíos usaremos valores aproximados
+      con 365 días trabajados y salarios anuales calculados desde tu sueldo mensual.
+    </div>
+
+    <div class="input-grid">
+      <div class="input-card">
+        <div class="input-label">Utilidades totales de la empresa (MXN)</div>
+        <input
+          id="utilidadesInput"
+          class="input-field"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="1000"
+          placeholder="Ej: 1200000"
+          aria-label="Utilidades totales de la empresa en MXN"
+        />
+        <div class="input-hint">Obligatorio. No se aceptan valores negativos.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Número de trabajadores</div>
+        <input
+          id="trabajadoresInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1"
+          placeholder="Ej: 25"
+          aria-label="Número total de trabajadores"
+        />
+        <div class="input-hint">Obligatorio. Usado para los promedios por días y salarios.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Tu sueldo mensual (MXN)</div>
+        <input
+          id="salarioMensualInput"
+          class="input-field"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="500"
+          placeholder="Ej: 20000"
+          aria-label="Sueldo mensual del trabajador en MXN"
+        />
+        <div class="input-hint">Obligatorio. Se usa para la parte proporcional por salario.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días trabajados por ti en el año</div>
+        <input
+          id="diasUsuarioInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="365"
+          step="1"
+          value="365"
+          aria-label="Días trabajados por el usuario en el año"
+        />
+        <div class="input-hint">Default 365. Ajusta si trabajaste menos días.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días trabajados totales en la empresa</div>
+        <input
+          id="diasEmpresaInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          step="1"
+          placeholder="Ej: 9000"
+          aria-label="Suma de días trabajados por todo el personal"
+        />
+        <div class="input-hint">Opcional. Si lo dejas vacío se estima como trabajadores × 365.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Salarios anuales base de la empresa (MXN)</div>
+        <input
+          id="salariosEmpresaInput"
+          class="input-field"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="1000"
+          placeholder="Ej: 2500000"
+          aria-label="Suma de salarios anuales para todos los trabajadores"
+        />
+        <div class="input-hint">Opcional. Si está vacío se aproxima con tu sueldo mensual × 365 × trabajadores.</div>
+      </div>
+    </div>
+
+    <div class="helper-text" id="helperText">Ingresa las utilidades, trabajadores y sueldo para ver la PTU.</div>
+
+    <div class="result-grid" aria-live="polite">
+      <div class="result-card">
+        <div class="result-label">PTU por días</div>
+        <div class="result-value" id="ptuDiasValor">$0.00</div>
+        <div class="result-note">50% del fondo proporcional a los días trabajados sobre el total de la empresa.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">PTU por salario</div>
+        <div class="result-value" id="ptuSalarioValor">$0.00</div>
+        <div class="result-note">50% del fondo proporcional a tu salario anual sobre el total de la empresa.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">PTU total estimada</div>
+        <div class="result-value" id="ptuTotalValor">$0.00</div>
+        <div class="result-note">Suma de la parte por días y la parte por salarios.</div>
+      </div>
+    </div>
+
+    <p class="helper-text" style="margin-top:14px;">Cálculo referencial en MXN. Los montos muestran dos decimales.</p>
+  </section>
+
+  <section class="shell">
+    <div class="tool-title">Notas rápidas para el cálculo</div>
+    <div class="quick-notes">
+      <div class="note-item">Si falta un dato obligatorio o un denominador es 0, la PTU mostrará $0.00 para evitar divisiones no válidas.</div>
+      <div class="note-item">Puedes dejar en blanco los días totales de la empresa y los salarios anuales. Tomaremos trabajadores × 365 y una aproximación desde tu sueldo mensual.</div>
+      <div class="note-item">No se aceptan valores negativos. Usa esta calculadora como referencia y confirma con tu recibo oficial o asesoría laboral.</div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="tool-title">Preguntas frecuentes sobre la PTU</div>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué es la PTU en México?</h3>
+        <p class="faq-answer">Es la Participación de Utilidades que las empresas reparten a las personas trabajadoras cuando hay utilidades fiscales.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Por qué se divide en días y salarios?</h3>
+        <p class="faq-answer">La ley reparte 50% por los días trabajados por cada persona y 50% por los salarios anuales de todo el equipo.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué pasa si no conozco los totales de la empresa?</h3>
+        <p class="faq-answer">Puedes dejar los campos opcionales vacíos para usar estimaciones con tu sueldo mensual y el número de trabajadores.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Esto reemplaza el cálculo oficial?</h3>
+        <p class="faq-answer">No. Es una guía rápida con dos decimales. Valida siempre con tu recibo oficial y la asesoría de tu empresa.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Calculando.mx</strong> es un proyecto independiente.
+    Usa estas herramientas como guía rápida y valida la normativa vigente con tu asesoría laboral o fiscal.
+  </footer>
+</main>
+
+<script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+
+<script>
+  const utilidadesInput = document.getElementById("utilidadesInput");
+  const trabajadoresInput = document.getElementById("trabajadoresInput");
+  const salarioMensualInput = document.getElementById("salarioMensualInput");
+  const diasUsuarioInput = document.getElementById("diasUsuarioInput");
+  const diasEmpresaInput = document.getElementById("diasEmpresaInput");
+  const salariosEmpresaInput = document.getElementById("salariosEmpresaInput");
+
+  const helperText = document.getElementById("helperText");
+  const ptuDiasValor = document.getElementById("ptuDiasValor");
+  const ptuSalarioValor = document.getElementById("ptuSalarioValor");
+  const ptuTotalValor = document.getElementById("ptuTotalValor");
+
+  function formatMXN(value) {
+    if (!isFinite(value)) return "$0.00";
+    try {
+      return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    } catch (e) {
+      const safeValue = Number(value) || 0;
+      return "$" + safeValue.toLocaleString("es-MX", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+  }
+
+  function sanitize(value) {
+    const parsed = Number(value);
+    if (!isFinite(parsed) || parsed < 0) return null;
+    return parsed;
+  }
+
+  function recalculatePTU() {
+    const utilidadesRaw = (utilidadesInput.value || "").trim();
+    const trabajadoresRaw = (trabajadoresInput.value || "").trim();
+    const salarioMensualRaw = (salarioMensualInput.value || "").trim();
+    const diasUsuarioRaw = (diasUsuarioInput.value || "").trim();
+    const diasEmpresaRaw = (diasEmpresaInput.value || "").trim();
+    const salariosEmpresaRaw = (salariosEmpresaInput.value || "").trim();
+
+    const utilidades = sanitize(utilidadesRaw);
+    const trabajadores = sanitize(trabajadoresRaw);
+    const salarioMensual = sanitize(salarioMensualRaw);
+    const diasUsuario = sanitize(diasUsuarioRaw);
+    const diasEmpresa = sanitize(diasEmpresaRaw);
+    const salariosEmpresa = sanitize(salariosEmpresaRaw);
+
+    if (utilidades === null || trabajadores === null || salarioMensual === null) {
+      helperText.textContent = "Ingresa utilidades, número de trabajadores y sueldo mensual.";
+      ptuDiasValor.textContent = "$0.00";
+      ptuSalarioValor.textContent = "$0.00";
+      ptuTotalValor.textContent = "$0.00";
+      return;
+    }
+
+    const diasUsuarioValidos = diasUsuario === null ? 365 : Math.min(Math.max(diasUsuario, 0), 365);
+    const pool = utilidades;
+    const mitadDias = pool * 0.5;
+    const mitadSalarios = pool * 0.5;
+
+    const denDias = diasEmpresa === null
+      ? (trabajadores ? trabajadores * 365 : 0)
+      : diasEmpresa;
+
+    const salarioDiario = salarioMensual / 30;
+    const salarioAnualUsuario = salarioDiario * diasUsuarioValidos;
+    const salarioAnualEmpresa = salariosEmpresa === null
+      ? (trabajadores ? (salarioMensual / 30 * 365) * trabajadores : 0)
+      : salariosEmpresa;
+
+    const ptuDias = denDias > 0 ? mitadDias * (diasUsuarioValidos / denDias) : 0;
+    const ptuSalario = salarioAnualEmpresa > 0
+      ? mitadSalarios * (salarioAnualUsuario / salarioAnualEmpresa)
+      : 0;
+    const ptuTotal = ptuDias + ptuSalario;
+
+    helperText.textContent = "Cálculo referencial en MXN. Los montos muestran dos decimales.";
+    ptuDiasValor.textContent = formatMXN(ptuDias || 0);
+    ptuSalarioValor.textContent = formatMXN(ptuSalario || 0);
+    ptuTotalValor.textContent = formatMXN(ptuTotal || 0);
+  }
+
+  [
+    utilidadesInput,
+    trabajadoresInput,
+    salarioMensualInput,
+    diasUsuarioInput,
+    diasEmpresaInput,
+    salariosEmpresaInput
+  ].forEach(input => {
+    input.addEventListener("input", recalculatePTU);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    recalculatePTU();
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es la PTU en México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es la Participación de Utilidades que las empresas reparten al personal cuando hay utilidades fiscales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué se divide en días y salarios?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La ley reparte 50% por días trabajados y 50% por salarios anuales de todas las personas trabajadoras."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si no conozco los totales de la empresa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes dejar los campos opcionales vacíos para usar estimaciones con tu sueldo mensual y el número de trabajadores."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Esto reemplaza el cálculo oficial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Es una guía referencial con montos en MXN y dos decimales. Confirma siempre con documentos oficiales."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Calculadora de PTU en México",
+      "url": "https://calculando.cl/mx/ptu/",
+      "description": "Calcula la Participación de Utilidades (PTU) por días y por salarios con datos de utilidades, trabajadores y sueldo mensual.",
+      "inLanguage": "es-MX"
+    }
+  ]
+}
+</script>
+
+<script type="module">
+  import { bootstrapPage } from '/js/country-bootstrap.js';
+  import { autoMountMxNav } from '/js/mx-nav.js';
+
+  bootstrapPage('ptu');
+  autoMountMxNav();
+</script>
+</body>
+</html>

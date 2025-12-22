@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Calculadora de Vacaciones y Prima Vacacional en México | Calculando.mx</title>
+  <meta name="description" content="Estima el pago de vacaciones pendientes, la prima vacacional y el total referencial en MXN con cálculo en vivo." />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/vacaciones/" />
+  <meta property="og:title" content="Calculadora de Vacaciones y Prima Vacacional en México" />
+  <meta property="og:description" content="Calcula vacaciones pendientes, prima vacacional y total estimado en MXN con actualización en vivo." />
+  <meta property="og:url" content="https://calculando.cl/mx/vacaciones/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Vacaciones y prima vacacional MX – Calculadora" />
+  <meta name="twitter:description" content="Ingresa sueldo mensual, días pendientes y prima vacacional para ver montos estimados en MXN." />
+
+  <link rel="stylesheet" href="/css/calculando.css">
+
+  <style>
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .layout-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 900px) {
+      .layout-grid {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .input-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .input-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-field label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      background: var(--chip-bg);
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .input-field input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 14px 32px rgba(56, 189, 248, 0.18);
+    }
+
+    .input-helper {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 700px) {
+      .results-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .result-tile {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 12px 14px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.9));
+      box-shadow: var(--shadow-card);
+    }
+
+    html[data-theme="light"] .result-tile {
+      background: linear-gradient(135deg, #ffffff, #e0edff);
+    }
+
+    .result-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .result-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .notes-list {
+      display: grid;
+      gap: 8px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 720px) {
+      .faq-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .faq-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background: var(--chip-bg);
+      padding: 12px 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando México</strong>
+          <span>Beta de calculadoras para MX</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora de Vacaciones y Prima Vacacional en México</h1>
+      <p>Estima cuánto recibirías por vacaciones pendientes y la prima vacacional con un cálculo referencial en MXN.</p>
+      <div class="badge">
+        <span class="pill-dot"></span>
+        Cálculo en vivo · MXN · Referencial
+      </div>
+      <div id="mxNav"></div>
+    </section>
+
+    <section class="layout-grid">
+      <div class="card">
+        <h2>Ingresa tus datos</h2>
+        <p>Evita valores negativos. Si falta un dato obligatorio, los montos se mostrarán en $0.00.</p>
+        <div class="input-grid">
+          <div class="input-field">
+            <label for="salaryInput">Sueldo mensual (MXN) *</label>
+            <input id="salaryInput" type="number" min="0" step="0.01" placeholder="Ej: 20000" value="20000" />
+            <span class="input-helper">Sueldo diario = sueldo mensual / 30.</span>
+          </div>
+          <div class="input-field">
+            <label for="daysInput">Días de vacaciones pendientes *</label>
+            <input id="daysInput" type="number" min="0" step="0.5" placeholder="Ej: 6" value="6" />
+            <span class="input-helper">Acepta 0. Usa decimales si corresponde.</span>
+          </div>
+          <div class="input-field" style="grid-column: span 2;">
+            <label for="primaInput">Prima vacacional (%)</label>
+            <input id="primaInput" type="number" min="0" step="0.01" placeholder="Ej: 25" value="25" />
+            <span class="input-helper">Porcentaje opcional. Si lo dejas vacío, se usa 25% como referencia común.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Resultados en vivo</h2>
+        <p>Se actualizan mientras escribes. Redondeados a 2 decimales.</p>
+        <div class="results-grid">
+          <div class="result-tile">
+            <div class="result-label">Pago de vacaciones (MXN)</div>
+            <div class="result-value" id="vacationPay">$0.00</div>
+            <div class="result-desc">(Sueldo mensual/30) × días</div>
+          </div>
+          <div class="result-tile">
+            <div class="result-label">Prima vacacional (MXN)</div>
+            <div class="result-value" id="bonusPay">$0.00</div>
+            <div class="result-desc">Vacaciones × %</div>
+          </div>
+          <div class="result-tile">
+            <div class="result-label">Total estimado (MXN)</div>
+            <div class="result-value" id="totalPay">$0.00</div>
+            <div class="result-desc">Vacaciones + prima</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" style="margin-top:16px;">
+      <div class="tool-title">Notas rápidas</div>
+      <ul class="notes-list">
+        <li>Cálculo referencial. Verifica con tu recibo, contrato o empresa.</li>
+        <li>No incluye ISR, topes, ni particularidades del contrato.</li>
+      </ul>
+    </section>
+
+    <section class="shell" style="margin-top:16px;">
+      <div class="tool-title">Preguntas rápidas</div>
+      <div class="tool-subtitle">Respuestas breves y cautelosas.</div>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h3>¿Qué es la prima vacacional?</h3>
+          <p>Es un pago adicional sobre el monto de vacaciones. Se calcula como un porcentaje del pago de vacaciones para que el total sea mayor al sueldo diario regular.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Cuál es el mínimo típico de prima vacacional?</h3>
+          <p>Un porcentaje común de referencia es 25%. Algunas empresas ofrecen más; usa el número indicado en tu contrato.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Esto incluye impuestos (ISR)?</h3>
+          <p>No. El resultado es bruto y referencial. Los descuentos reales dependen de retenciones, topes y políticas de tu empresa.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Qué pasa si ya tomé vacaciones?</h3>
+          <p>Usa 0 días pendientes. Así verás $0.00 en vacaciones y solo un efecto si ingresas un porcentaje de prima.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    import { autoMountMxNav } from '/js/mx-nav.js';
+
+    const salaryInput = document.getElementById('salaryInput');
+    const daysInput = document.getElementById('daysInput');
+    const primaInput = document.getElementById('primaInput');
+    const vacationPayEl = document.getElementById('vacationPay');
+    const bonusPayEl = document.getElementById('bonusPay');
+    const totalPayEl = document.getElementById('totalPay');
+
+    const formatter = new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function formatCurrencyMXN(value) {
+      if (!Number.isFinite(value)) return '$0.00';
+      return formatter.format(value);
+    }
+
+    function parseNumber(value) {
+      if (typeof value !== 'string') return null;
+      const normalized = value.replace(',', '.');
+      const parsed = Number.parseFloat(normalized);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function isValidNumber(value) {
+      return Number.isFinite(value) && value >= 0;
+    }
+
+    function calculate() {
+      const salary = parseNumber(salaryInput.value);
+      const days = parseNumber(daysInput.value);
+      const primaRaw = primaInput.value.trim();
+      const prima = primaRaw === '' ? 25 : parseNumber(primaRaw);
+
+      const hasValidSalary = isValidNumber(salary);
+      const hasValidDays = isValidNumber(days);
+      const hasValidPrima = isValidNumber(prima);
+
+      if (!hasValidSalary || !hasValidDays || !hasValidPrima) {
+        vacationPayEl.textContent = '$0.00';
+        bonusPayEl.textContent = '$0.00';
+        totalPayEl.textContent = '$0.00';
+        return;
+      }
+
+      const dailySalary = salary / 30;
+      const vacationPay = dailySalary * days;
+      const bonusPay = vacationPay * (prima / 100);
+      const total = vacationPay + bonusPay;
+
+      vacationPayEl.textContent = formatCurrencyMXN(vacationPay);
+      bonusPayEl.textContent = formatCurrencyMXN(bonusPay);
+      totalPayEl.textContent = formatCurrencyMXN(total);
+    }
+
+    [salaryInput, daysInput, primaInput].forEach((input) => {
+      input.addEventListener('input', calculate);
+    });
+
+    bootstrapPage('vacaciones');
+    autoMountMxNav();
+    calculate();
+  </script>
+</body>
+</html>
