@@ -1,6 +1,84 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
 <head>
+  <!-- Tucalculo country redirect (client-side) -->
+  <script>
+    (function () {
+      const host = window.location.hostname;
+      const isTucalculo = host === 'tucalculo.com' || host.endsWith('.tucalculo.com');
+      if (!isTucalculo) return;
+
+      const path = window.location.pathname || '/';
+      const hash = window.location.hash || '';
+      const searchParams = new URLSearchParams(window.location.search);
+      const currentFullUrl = `${path}${window.location.search}${hash}`;
+      const pathIsRoot = path === '/' || path === '';
+      const pathIsMexico = path === '/mx' || path === '/mx/';
+
+      const createUrl = (targetPath, queryString) => {
+        const normalizedPath = targetPath.endsWith('/') ? targetPath : `${targetPath}/`;
+        const query = queryString ? `?${queryString}` : '';
+        return `${normalizedPath}${query}${hash}`;
+      };
+
+      const redirect = (targetPath, queryString) => {
+        const newUrl = createUrl(targetPath, queryString);
+        if (newUrl !== currentFullUrl) {
+          window.location.replace(newUrl);
+        }
+      };
+
+      const force = searchParams.get('force');
+      if (force === 'mx' || force === 'cl') {
+        const preferredCountry = force;
+        try {
+          localStorage.setItem('preferredCountry', preferredCountry);
+        } catch (error) {
+          // Ignore storage errors
+        }
+
+        searchParams.delete('force');
+        const remainingQuery = searchParams.toString();
+        const targetPath = preferredCountry === 'mx' ? '/mx/' : '/';
+        redirect(targetPath, remainingQuery);
+        return;
+      }
+
+      let preferredCountry = null;
+      try {
+        preferredCountry = localStorage.getItem('preferredCountry');
+      } catch (error) {
+        // Ignore storage errors
+      }
+
+      if (preferredCountry === 'mx' && pathIsRoot) {
+        redirect('/mx/');
+        return;
+      }
+
+      if (preferredCountry === 'cl' && pathIsMexico) {
+        redirect('/');
+        return;
+      }
+
+      if (!preferredCountry) {
+        const languages = Array.isArray(navigator.languages) && navigator.languages.length
+          ? navigator.languages
+          : [navigator.language];
+
+        const isMexico = languages.some((lang) => {
+          if (typeof lang !== 'string') return false;
+          const lower = lang.toLowerCase();
+          return lower.startsWith('es-mx') || lower.includes('mx');
+        });
+
+        if (isMexico && pathIsRoot) {
+          redirect('/mx/');
+          return;
+        }
+      }
+    })();
+  </script>
   <meta charset="UTF-8" />
   <title>Calculando.cl – Calculadoras Chile 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
