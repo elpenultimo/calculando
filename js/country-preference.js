@@ -88,6 +88,11 @@
       return true;
     }
 
+    if (region === 'gq') {
+      window.location.href = '/gq/';
+      return true;
+    }
+
     if (region === 'ni') {
       window.location.href = '/ni/';
       return true;
