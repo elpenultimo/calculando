@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elige tu país – Calculando</title>
   <link rel="stylesheet" href="/css/calculando.css">
-  <script src="/js/country-preference.js"></script>
 </head>
 <body>
   <main style="max-width:520px;margin:40px auto;padding:0 16px;">
@@ -17,10 +16,18 @@
           <span>Elige dónde quieres navegar</span>
         </div>
       </div>
-      <button id="themeToggle" class="theme-toggle" type="button">
-        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-        <span id="themeLabel">Modo oscuro</span>
-      </button>
+
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button id="themeToggle" class="theme-toggle" type="button">
+          <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+          <span id="themeLabel">Modo oscuro</span>
+        </button>
+
+        <a href="/seleccionar-pais/" id="changeCountryLink"
+           style="font-size:13px;color:var(--primary);text-decoration:underline;white-space:nowrap;">
+          Cambiar país
+        </a>
+      </div>
     </header>
 
     <section class="shell" style="margin-top:18px;">
@@ -36,6 +43,14 @@
         </button>
         <button id="btnBrasil" class="pill" style="justify-content:center;">
           🇧🇷 Brasil
+        <button id="btnArgentina" class="pill" style="justify-content:center;">
+          🇦🇷 Argentina
+        </button>
+        <button id="btnPeru" class="pill" style="justify-content:center;">
+          🇵🇪 Perú
+        </button>
+        <button id="btnColombia" class="pill" style="justify-content:center;">
+          🇨🇴 Colombia
         </button>
       </div>
     </section>
@@ -47,20 +62,42 @@
       const chile = document.getElementById('btnChile');
       const mexico = document.getElementById('btnMexico');
       const brasil = document.getElementById('btnBrasil');
+    (function setupCountrySelectionStandalone() {
+      const REGION_KEY = "tc_region";
 
-      if (window.tcCountry?.addChangeCountryLink) {
-        window.tcCountry.addChangeCountryLink();
+      const btnChile = document.getElementById("btnChile");
+      const btnMexico = document.getElementById("btnMexico");
+      const btnArgentina = document.getElementById("btnArgentina");
+      const btnPeru = document.getElementById("btnPeru");
+      const btnColombia = document.getElementById("btnColombia");
+
+      function storeRegion(region) {
+        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
       }
 
-      function choose(region) {
-        if (!window.tcCountry) return;
-        window.tcCountry.storeRegion(region);
-        window.tcCountry.redirectForRegion(region);
+      function go(region) {
+        storeRegion(region);
+
+        // En tucalculo.com las rutas viven por país (/cl/, /mx/, /ar/, /pe/, /co/)
+        const routes = {
+          cl: "/cl/",
+          mx: "/mx/",
+          ar: "/ar/",
+          pe: "/pe/",
+          co: "/co/",
+        };
+
+        window.location.href = routes[region] || "/cl/";
       }
 
       chile?.addEventListener('click', () => choose('cl'));
       mexico?.addEventListener('click', () => choose('mx'));
       brasil?.addEventListener('click', () => choose('br'));
+      btnChile?.addEventListener("click", () => go("cl"));
+      btnMexico?.addEventListener("click", () => go("mx"));
+      btnArgentina?.addEventListener("click", () => go("ar"));
+      btnPeru?.addEventListener("click", () => go("pe"));
+      btnColombia?.addEventListener("click", () => go("co"));
     })();
   </script>
 </body>
