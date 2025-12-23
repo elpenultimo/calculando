@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="co">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retención en la fuente – Colombia</title>
+  <meta name="description" content="Calcula una retención mensual estimada en Colombia. Ingresa tu ingreso en COP y ajusta el porcentaje de retención para ver el valor retenido y tu ingreso final." />
+  <link rel="canonical" href="https://calculando.cl/co/retencion/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Colombia</strong>
+          <span>Retención</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Retención en la fuente (estimada)</h1>
+      <p>
+        Calcula de forma informativa la retención mensual en Colombia. Ingresa tu ingreso en pesos colombianos (COP) y ajusta el porcentaje para ver la retención y cuánto recibirías después.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Enfoque informativo, no oficial.
+      </div>
+
+      <div id="coNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="ingresoInput">Ingreso mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="ingresoInput" type="number" min="0" step="50000" class="amount-input" placeholder="Ej: 3500000" />
+          <span style="font-size:12px;color:var(--muted);">COP</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="porcentajeInput">Porcentaje de retención (%)</label>
+        <input id="porcentajeInput" type="number" min="0" max="40" step="0.5" class="amount-input" style="max-width:220px;" value="11" />
+        <div class="input-help">Ajusta el porcentaje según tu situación tributaria.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Retención estimada</div>
+          <div class="result-value" id="retencionResult">$ 0</div>
+          <div class="result-sub">Monto retenido según el porcentaje ingresado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Ingreso luego de retención</div>
+          <div class="result-main-label">Recibirías: <span id="ingresoNeto">$ 0</span></div>
+          <div class="result-sub">Cálculo simple para referencia mensual.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountCoNav } from '/js/co-nav.js';
+
+    const ingresoInput = document.getElementById('ingresoInput');
+    const porcentajeInput = document.getElementById('porcentajeInput');
+    const retencionResult = document.getElementById('retencionResult');
+    const ingresoNeto = document.getElementById('ingresoNeto');
+
+    const formatter = new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      maximumFractionDigits: 0,
+    });
+
+    function update() {
+      const ingreso = Number(ingresoInput.value) || 0;
+      const porcentaje = (Number(porcentajeInput.value) || 0) / 100;
+
+      const retencion = ingreso * porcentaje;
+      const neto = ingreso - retencion;
+
+      retencionResult.textContent = formatter.format(retencion);
+      ingresoNeto.textContent = formatter.format(neto);
+    }
+
+    ingresoInput.addEventListener('input', update);
+    porcentajeInput.addEventListener('input', update);
+
+    autoMountCoNav();
+    ingresoInput.value = 3500000;
+    update();
+  </script>
+</body>
+</html>
