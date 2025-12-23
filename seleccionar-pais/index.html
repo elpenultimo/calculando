@@ -23,7 +23,7 @@
           <span id="themeLabel">Modo oscuro</span>
         </button>
 
-        <a href="/seleccionar-pais/" id="changeCountryLink"
+        <a href="/seleccionar-pais/"
            style="font-size:13px;color:var(--primary);text-decoration:underline;white-space:nowrap;">
           Cambiar país
         </a>
@@ -32,26 +32,17 @@
 
     <section class="shell" style="margin-top:18px;">
       <div class="tool-title">Elige tu país</div>
-      <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
+      <div class="tool-subtitle" style="margin-top:8px;">
+        Esto ajusta las calculadoras y la navegación.
+      </div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
-        <button id="btnChile" class="pill" style="justify-content:center;">
-          🇨🇱 Chile
-        </button>
-        <button id="btnMexico" class="pill" style="justify-content:center;">
-          🇲🇽 México
-        </button>
-        <button id="btnBrasil" class="pill" style="justify-content:center;">
-          🇧🇷 Brasil
-        <button id="btnArgentina" class="pill" style="justify-content:center;">
-          🇦🇷 Argentina
-        </button>
-        <button id="btnPeru" class="pill" style="justify-content:center;">
-          🇵🇪 Perú
-        </button>
-        <button id="btnColombia" class="pill" style="justify-content:center;">
-          🇨🇴 Colombia
-        </button>
+        <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
+        <button id="btnMexico" class="pill" style="justify-content:center;">🇲🇽 México</button>
+        <button id="btnArgentina" class="pill" style="justify-content:center;">🇦🇷 Argentina</button>
+        <button id="btnPeru" class="pill" style="justify-content:center;">🇵🇪 Perú</button>
+        <button id="btnColombia" class="pill" style="justify-content:center;">🇨🇴 Colombia</button>
+        <button id="btnBrasil" class="pill" style="justify-content:center;">🇧🇷 Brasil</button>
       </div>
     </section>
   </main>
@@ -59,45 +50,28 @@
   <script src="/js/theme-toggle.js"></script>
   <script>
     (function setupCountrySelection() {
-      const chile = document.getElementById('btnChile');
-      const mexico = document.getElementById('btnMexico');
-      const brasil = document.getElementById('btnBrasil');
-    (function setupCountrySelectionStandalone() {
       const REGION_KEY = "tc_region";
 
-      const btnChile = document.getElementById("btnChile");
-      const btnMexico = document.getElementById("btnMexico");
-      const btnArgentina = document.getElementById("btnArgentina");
-      const btnPeru = document.getElementById("btnPeru");
-      const btnColombia = document.getElementById("btnColombia");
-
-      function storeRegion(region) {
-        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
-      }
+      const routes = {
+        cl: "/cl/",
+        mx: "/mx/",
+        ar: "/ar/",
+        pe: "/pe/",
+        co: "/co/",
+        br: "/br/",
+      };
 
       function go(region) {
-        storeRegion(region);
-
-        // En tucalculo.com las rutas viven por país (/cl/, /mx/, /ar/, /pe/, /co/)
-        const routes = {
-          cl: "/cl/",
-          mx: "/mx/",
-          ar: "/ar/",
-          pe: "/pe/",
-          co: "/co/",
-        };
-
+        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
         window.location.href = routes[region] || "/cl/";
       }
 
-      chile?.addEventListener('click', () => choose('cl'));
-      mexico?.addEventListener('click', () => choose('mx'));
-      brasil?.addEventListener('click', () => choose('br'));
-      btnChile?.addEventListener("click", () => go("cl"));
-      btnMexico?.addEventListener("click", () => go("mx"));
-      btnArgentina?.addEventListener("click", () => go("ar"));
-      btnPeru?.addEventListener("click", () => go("pe"));
-      btnColombia?.addEventListener("click", () => go("co"));
+      document.getElementById("btnChile")?.addEventListener("click", () => go("cl"));
+      document.getElementById("btnMexico")?.addEventListener("click", () => go("mx"));
+      document.getElementById("btnArgentina")?.addEventListener("click", () => go("ar"));
+      document.getElementById("btnPeru")?.addEventListener("click", () => go("pe"));
+      document.getElementById("btnColombia")?.addEventListener("click", () => go("co"));
+      document.getElementById("btnBrasil")?.addEventListener("click", () => go("br"));
     })();
   </script>
 </body>
