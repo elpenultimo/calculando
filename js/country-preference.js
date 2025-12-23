@@ -40,6 +40,11 @@
       return true;
     }
 
+    if (region === 'br') {
+      window.location.href = '/br/';
+      return true;
+    }
+
     return false;
   }
 

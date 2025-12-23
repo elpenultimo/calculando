@@ -34,6 +34,9 @@
         <button id="btnMexico" class="pill" style="justify-content:center;">
           🇲🇽 México
         </button>
+        <button id="btnBrasil" class="pill" style="justify-content:center;">
+          🇧🇷 Brasil
+        </button>
       </div>
     </section>
   </main>
@@ -43,6 +46,7 @@
     (function setupCountrySelection() {
       const chile = document.getElementById('btnChile');
       const mexico = document.getElementById('btnMexico');
+      const brasil = document.getElementById('btnBrasil');
 
       if (window.tcCountry?.addChangeCountryLink) {
         window.tcCountry.addChangeCountryLink();
@@ -56,6 +60,7 @@
 
       chile?.addEventListener('click', () => choose('cl'));
       mexico?.addEventListener('click', () => choose('mx'));
+      brasil?.addEventListener('click', () => choose('br'));
     })();
   </script>
 </body>
