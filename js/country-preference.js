@@ -78,6 +78,11 @@
       return true;
     }
 
+    if (region === 'pa') {
+      window.location.href = '/pa/';
+      return true;
+    }
+
     return false;
   }
 
