@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="do">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regalía Pascual República Dominicana – Calculadora</title>
+  <meta name="description" content="Calcula la regalía pascual estimada en República Dominicana. Ingresa tu salario mensual y meses trabajados para obtener el monto proporcional en RD$." />
+  <link rel="canonical" href="https://calculando.cl/do/regalia/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora RD</strong>
+          <span>Regalía pascual</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Regalía pascual</h1>
+      <p>
+        Estima tu regalía pascual (doble sueldo) en República Dominicana. Ingresa el salario mensual y los meses
+        trabajados para ver el monto proporcional en RD$.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo simple: salario × (meses / 12). Sin descuentos automáticos.
+      </div>
+
+      <div id="doNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">RD$</span>
+          <input id="salarioInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 45000" />
+          <span style="font-size:12px;color:var(--muted);">DOP</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados (1-12)</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Usa 12 si trabajaste todo el año. Edita para un cálculo proporcional.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Regalía pascual estimada</div>
+          <div class="result-value" id="regaliaResult">RD$ 0.00</div>
+          <div class="result-sub">Monto proporcional sin aplicar descuentos.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle</div>
+          <div class="result-main-label">Meses considerados: <span id="mesesLabel">12</span></div>
+          <div class="result-main-label">Factor aplicado: <span id="factorLabel">1.00</span></div>
+          <div class="result-sub">Se calcula como salario mensual × (meses / 12).</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountDoNav } from '/js/do-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const regaliaResult = document.getElementById('regaliaResult');
+    const mesesLabel = document.getElementById('mesesLabel');
+    const factorLabel = document.getElementById('factorLabel');
+
+    const formatter = new Intl.NumberFormat('es-DO', {
+      style: 'currency',
+      currency: 'DOP',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = clamp(Number(mesesInput.value) || 0, 1, 12);
+      const factor = meses / 12;
+      const regalia = salario * factor;
+
+      mesesInput.value = meses;
+      regaliaResult.textContent = formatter.format(regalia);
+      mesesLabel.textContent = meses;
+      factorLabel.textContent = factor.toFixed(2);
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountDoNav();
+    salarioInput.value = 45000;
+    update();
+  </script>
+</body>
+</html>

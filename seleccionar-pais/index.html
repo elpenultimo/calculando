@@ -35,6 +35,7 @@
       <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
+        <button id="btnRepublicaDominicana" class="pill" style="justify-content:center;">🇩🇴 República Dominicana</button>
         <button id="btnGuatemala" class="pill" style="justify-content:center;">🇬🇹 Guatemala</button>
         <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
         <button id="btnMexico" class="pill" style="justify-content:center;">🇲🇽 México</button>
@@ -77,6 +78,7 @@
         hn: document.getElementById('btnHonduras'),
         sv: document.getElementById('btnElSalvador'),
         gt: document.getElementById('btnGuatemala'),
+        do: document.getElementById('btnRepublicaDominicana'),
       };
 
       const routes = {
@@ -96,6 +98,7 @@
         hn: '/hn/',
         sv: '/sv/',
         gt: '/gt/',
+        do: '/do/',
       };
 
       function storeRegion(region) {

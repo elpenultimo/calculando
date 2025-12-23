@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="do">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salario Neto República Dominicana – Calculadora en DOP</title>
+  <meta name="description" content="Calcula tu salario neto estimado en República Dominicana. Ingresa el salario bruto mensual y descuenta AFP, ARS y otros porcentajes editables en RD$." />
+  <link rel="canonical" href="https://calculando.cl/do/salario-neto/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora RD</strong>
+          <span>Salario neto</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Salario neto en República Dominicana</h1>
+      <p>
+        Convierte tu salario bruto mensual a salario neto estimado en pesos dominicanos (DOP).
+        Incluye AFP y ARS con porcentajes editables, más cualquier otro descuento que quieras agregar.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo referencial sin ISR por tramos. Ajusta los porcentajes en vivo.
+      </div>
+
+      <div id="doNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Salario bruto mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">RD$</span>
+          <input id="brutoInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 50000" />
+          <span style="font-size:12px;color:var(--muted);">DOP</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="afpInput">AFP trabajador (%)</label>
+        <input id="afpInput" type="number" min="0" max="20" step="0.01" class="amount-input" style="max-width:200px;" value="2.87" />
+        <div class="input-help">Porcentaje editable para el aporte de AFP.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="arsInput">ARS trabajador (%)</label>
+        <input id="arsInput" type="number" min="0" max="20" step="0.01" class="amount-input" style="max-width:200px;" value="3.04" />
+        <div class="input-help">Aporte de seguro de salud del trabajador.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="otrosInput">Otros descuentos (%)</label>
+        <input id="otrosInput" type="number" min="0" max="50" step="0.5" class="amount-input" style="max-width:200px;" value="0" />
+        <div class="input-help">Préstamos, seguros adicionales u otros conceptos.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Salario neto estimado</div>
+          <div class="result-value" id="netoResult">RD$ 0.00</div>
+          <div class="result-sub">Monto aproximado después de AFP, ARS y descuentos indicados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle de descuentos</div>
+          <div class="result-main-label">AFP: <span id="afpMonto">RD$ 0.00</span></div>
+          <div class="result-main-label">ARS: <span id="arsMonto">RD$ 0.00</span></div>
+          <div class="result-main-label">Otros: <span id="otrosMonto">RD$ 0.00</span></div>
+          <div class="result-main-label">Total descontado: <span id="totalDescuento">RD$ 0.00</span></div>
+          <div class="result-sub">Valores referenciales sin aplicar ISR por tramos.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountDoNav } from '/js/do-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const afpInput = document.getElementById('afpInput');
+    const arsInput = document.getElementById('arsInput');
+    const otrosInput = document.getElementById('otrosInput');
+    const netoResult = document.getElementById('netoResult');
+    const afpMonto = document.getElementById('afpMonto');
+    const arsMonto = document.getElementById('arsMonto');
+    const otrosMonto = document.getElementById('otrosMonto');
+    const totalDescuento = document.getElementById('totalDescuento');
+
+    const formatter = new Intl.NumberFormat('es-DO', {
+      style: 'currency',
+      currency: 'DOP',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const bruto = Number(brutoInput.value) || 0;
+      const afpRate = (Number(afpInput.value) || 0) / 100;
+      const arsRate = (Number(arsInput.value) || 0) / 100;
+      const otrosRate = (Number(otrosInput.value) || 0) / 100;
+
+      const afp = bruto * afpRate;
+      const ars = bruto * arsRate;
+      const otros = bruto * otrosRate;
+      const total = afp + ars + otros;
+      const neto = bruto - total;
+
+      netoResult.textContent = formatter.format(neto);
+      afpMonto.textContent = formatter.format(afp);
+      arsMonto.textContent = formatter.format(ars);
+      otrosMonto.textContent = formatter.format(otros);
+      totalDescuento.textContent = formatter.format(total);
+    }
+
+    brutoInput.addEventListener('input', update);
+    afpInput.addEventListener('input', update);
+    arsInput.addEventListener('input', update);
+    otrosInput.addEventListener('input', update);
+
+    autoMountDoNav();
+    brutoInput.value = 50000;
+    update();
+  </script>
+</body>
+</html>

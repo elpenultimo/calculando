@@ -108,6 +108,11 @@
       return true;
     }
 
+    if (region === 'do') {
+      window.location.href = '/do/';
+      return true;
+    }
+
     return false;
   }
 
