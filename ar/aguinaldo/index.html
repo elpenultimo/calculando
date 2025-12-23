@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aguinaldo / SAC Argentina – Calculadora simple</title>
+  <meta name="description" content="Calcula rápidamente tu aguinaldo en Argentina: ingresa el mejor sueldo del semestre en ARS y obtén el 50% correspondiente." />
+  <link rel="canonical" href="https://calculando.cl/ar/aguinaldo/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Argentina</strong>
+          <span>Aguinaldo / SAC</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Aguinaldo argentino (SAC)</h1>
+      <p>
+        Calcula el Sueldo Anual Complementario tomando el mejor sueldo del semestre y aplicando el 50%.
+        Útil para los pagos de junio y diciembre.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Resultado informativo en ARS.
+      </div>
+
+      <div id="arNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="mejorSueldo">Mejor sueldo del semestre</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="mejorSueldo" type="number" min="0" step="1000" class="amount-input" placeholder="Ej: 800000" />
+          <span style="font-size:12px;color:var(--muted);">ARS</span>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <div class="result-card">
+          <div class="result-title">Aguinaldo estimado</div>
+          <div class="result-value" id="aguinaldoResult">$0</div>
+          <div class="result-sub">Corresponde al 50% del mejor sueldo del semestre.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Contexto</div>
+          <div class="result-main-label">Se paga en dos cuotas: junio y diciembre.</div>
+          <div class="result-sub">Verifica siempre con tu recibo para montos exactos.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountArNav } from '/js/ar-nav.js';
+
+    const mejorSueldo = document.getElementById('mejorSueldo');
+    const aguinaldoResult = document.getElementById('aguinaldoResult');
+    const formatter = new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      maximumFractionDigits: 0,
+    });
+
+    function update() {
+      const monto = Number(mejorSueldo.value) || 0;
+      const aguinaldo = monto / 2;
+      aguinaldoResult.textContent = formatter.format(aguinaldo);
+    }
+
+    mejorSueldo.addEventListener('input', update);
+
+    autoMountArNav();
+    update();
+  </script>
+</body>
+</html>
