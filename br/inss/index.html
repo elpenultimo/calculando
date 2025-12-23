@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark" data-country="br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INSS e Descontos – Calculadora Brasil em BRL</title>
+  <meta name="description" content="Simule o desconto total sobre sua renda mensal no Brasil. Informe o valor em BRL e um percentual total editável para ver o desconto e a renda após dedução." />
+  <link rel="canonical" href="https://calculando.cl/br/inss/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Brasil</strong>
+          <span>INSS / Descontos</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo escuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>INSS e descontos</h1>
+      <p>
+        Estime o total de descontos sobre sua renda mensal em reais brasileiros (BRL). Edite o percentual para refletir INSS e outros abatimentos que queira simular.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Estimativa informativa, não substitui cálculo oficial.
+      </div>
+
+      <div id="brNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="rendaInput">Renda mensal</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">R$</span>
+          <input id="rendaInput" type="number" min="0" step="100" class="amount-input" placeholder="Ex: 4500" />
+          <span style="font-size:12px;color:var(--muted);">BRL</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="percentualInput">Percentual total de desconto (%)</label>
+        <input id="percentualInput" type="number" min="0" max="80" step="0.5" class="amount-input" style="max-width:200px;" value="14" />
+        <div class="input-help">Inclua a soma de INSS e demais descontos que deseja aplicar.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Valor descontado</div>
+          <div class="result-value" id="descontoValor">R$ 0,00</div>
+          <div class="result-sub">Total abatido considerando o percentual informado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Renda após desconto</div>
+          <div class="result-main-label">Resultado: <span id="rendaLiquida">R$ 0,00</span></div>
+          <div class="result-sub">Estimativa simples com valores editáveis.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountBrNav } from '/js/br-nav.js';
+
+    const rendaInput = document.getElementById('rendaInput');
+    const percentualInput = document.getElementById('percentualInput');
+    const descontoValor = document.getElementById('descontoValor');
+    const rendaLiquida = document.getElementById('rendaLiquida');
+
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const renda = Number(rendaInput.value) || 0;
+      const percentual = (Number(percentualInput.value) || 0) / 100;
+      const desconto = renda * percentual;
+      const liquida = renda - desconto;
+
+      descontoValor.textContent = formatter.format(desconto);
+      rendaLiquida.textContent = formatter.format(liquida);
+    }
+
+    rendaInput.addEventListener('input', update);
+    percentualInput.addEventListener('input', update);
+
+    autoMountBrNav();
+    rendaInput.value = 4500;
+    update();
+  </script>
+</body>
+</html>

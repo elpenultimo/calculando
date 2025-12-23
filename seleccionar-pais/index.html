@@ -41,6 +41,8 @@
         <button id="btnMexico" class="pill" style="justify-content:center;">
           🇲🇽 México
         </button>
+        <button id="btnBrasil" class="pill" style="justify-content:center;">
+          🇧🇷 Brasil
         <button id="btnArgentina" class="pill" style="justify-content:center;">
           🇦🇷 Argentina
         </button>
@@ -56,6 +58,10 @@
 
   <script src="/js/theme-toggle.js"></script>
   <script>
+    (function setupCountrySelection() {
+      const chile = document.getElementById('btnChile');
+      const mexico = document.getElementById('btnMexico');
+      const brasil = document.getElementById('btnBrasil');
     (function setupCountrySelectionStandalone() {
       const REGION_KEY = "tc_region";
 
@@ -84,6 +90,9 @@
         window.location.href = routes[region] || "/cl/";
       }
 
+      chile?.addEventListener('click', () => choose('cl'));
+      mexico?.addEventListener('click', () => choose('mx'));
+      brasil?.addEventListener('click', () => choose('br'));
       btnChile?.addEventListener("click", () => go("cl"));
       btnMexico?.addEventListener("click", () => go("mx"));
       btnArgentina?.addEventListener("click", () => go("ar"));
