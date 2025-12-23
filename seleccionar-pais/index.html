@@ -55,6 +55,7 @@
         <button id="btnElSalvador" class="pill" style="justify-content:center;">🇸🇻 El Salvador</button>
         <button id="btnPuertoRico" class="pill" style="justify-content:center;">🇵🇷 Puerto Rico</button>
         <button id="btnCuba" class="pill" style="justify-content:center;">🇨🇺 Cuba</button>
+        <button id="btnEspana" class="pill" style="justify-content:center;">🇪🇸 España</button>
       </div>
     </section>
   </main>
@@ -85,6 +86,7 @@
         do: document.getElementById('btnRepublicaDominicana'),
         pr: document.getElementById('btnPuertoRico'),
         cu: document.getElementById('btnCuba'),
+        es: document.getElementById('btnEspana'),
       };
 
       const routes = {
@@ -108,6 +110,7 @@
         do: '/do/',
         pr: '/pr/',
         cu: '/cu/',
+        es: '/es/',
       };
 
       function storeRegion(region) {

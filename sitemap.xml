@@ -85,6 +85,38 @@
 
   <url><loc>https://www.calculando.cl/blog/uf-2026.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
+  <!-- España -->
+  <url>
+    <loc>https://www.calculando.cl/es/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/es/salario-neto/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/es/nomina/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/es/iva/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/es/irpf/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/es/pagas-extra/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Estados Unidos (Español) -->
   <url>
     <loc>https://www.calculando.cl/us/</loc>
