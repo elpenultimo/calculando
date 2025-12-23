@@ -13,6 +13,8 @@
   --radius-pill: 999px;
   --transition-fast: 0.18s ease-out;
   --transition-med: 0.25s ease-out;
+  --country-accent: var(--primary);
+  --country-accent-soft: var(--primary-soft);
 }
 
 html[data-theme="dark"] {
@@ -182,6 +184,11 @@ html[data-theme="light"] .theme-toggle-icon {
   box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
 }
 
+#changeCountryLink {
+  color: var(--country-accent);
+  text-decoration-color: var(--country-accent);
+}
+
 /* --------- HERO --------- */
 
 .hero {
@@ -207,8 +214,9 @@ html[data-theme="light"] .theme-toggle-icon {
   gap: 6px;
   padding: 6px 12px;
   border-radius: var(--radius-pill);
-  background: var(--primary-soft);
-  color: var(--primary);
+  background: var(--country-accent-soft);
+  color: var(--country-accent);
+  border: 1px solid var(--country-accent);
   font-size: 11px;
   font-weight: 500;
   margin-top: 10px;
@@ -218,8 +226,8 @@ html[data-theme="light"] .theme-toggle-icon {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #22c55e;
-  box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+  background: var(--country-accent);
+  box-shadow: 0 0 12px var(--country-accent-soft);
 }
 
 /* --------- NAV DE HERRAMIENTAS --------- */
@@ -262,8 +270,8 @@ html[data-theme="light"] .theme-toggle-icon {
 }
 
 .tool-tab-active {
-  background: var(--primary-soft);
-  color: var(--primary);
+  background: var(--country-accent-soft);
+  color: var(--country-accent);
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
   transform: translateY(-0.5px);
 }
@@ -277,6 +285,7 @@ html[data-theme="light"] .theme-toggle-icon {
   padding: 18px 16px 22px;
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--country-accent);
   backdrop-filter: blur(24px);
 }
 
