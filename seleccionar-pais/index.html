@@ -47,6 +47,9 @@
         <button id="btnPeru" class="pill" style="justify-content:center;">
           🇵🇪 Perú
         </button>
+        <button id="btnColombia" class="pill" style="justify-content:center;">
+          🇨🇴 Colombia
+        </button>
       </div>
     </section>
   </main>
@@ -60,6 +63,7 @@
       const btnMexico = document.getElementById("btnMexico");
       const btnArgentina = document.getElementById("btnArgentina");
       const btnPeru = document.getElementById("btnPeru");
+      const btnColombia = document.getElementById("btnColombia");
 
       function storeRegion(region) {
         try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
@@ -68,17 +72,23 @@
       function go(region) {
         storeRegion(region);
 
-        // OJO: en tucalculo.com las rutas viven por país (/cl/, /mx/, /ar/, /pe/)
-        if (region === "cl") { window.location.href = "/cl/"; return; }
-        if (region === "mx") { window.location.href = "/mx/"; return; }
-        if (region === "ar") { window.location.href = "/ar/"; return; }
-        if (region === "pe") { window.location.href = "/pe/"; return; }
+        // En tucalculo.com las rutas viven por país (/cl/, /mx/, /ar/, /pe/, /co/)
+        const routes = {
+          cl: "/cl/",
+          mx: "/mx/",
+          ar: "/ar/",
+          pe: "/pe/",
+          co: "/co/",
+        };
+
+        window.location.href = routes[region] || "/cl/";
       }
 
       btnChile?.addEventListener("click", () => go("cl"));
       btnMexico?.addEventListener("click", () => go("mx"));
       btnArgentina?.addEventListener("click", () => go("ar"));
       btnPeru?.addEventListener("click", () => go("pe"));
+      btnColombia?.addEventListener("click", () => go("co"));
     })();
   </script>
 </body>
