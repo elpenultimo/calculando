@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ni">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inflación Nicaragua – Ajuste rápido en NIO</title>
+  <meta name="description" content="Actualiza un valor en córdobas (NIO) según la inflación acumulada en Nicaragua. Ingresa el monto original y el porcentaje para ver el valor ajustado y la diferencia." />
+  <link rel="canonical" href="https://calculando.cl/ni/inflacion/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Nicaragua</strong>
+          <span>Inflación</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Ajuste por inflación</h1>
+      <p>
+        Proyecta un valor actualizado en córdobas (NIO) según la inflación acumulada que definas. Ingresa el monto original
+        y el porcentaje de inflación para ver el nuevo valor y la diferencia.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Sin APIs externas, cifras editables al 100%.
+      </div>
+
+      <div id="niNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="valorInput">Valor original</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">C$</span>
+          <input id="valorInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 30000" />
+          <span style="font-size:12px;color:var(--muted);">NIO</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="inflacionInput">Inflación acumulada (%)</label>
+        <input id="inflacionInput" type="number" min="-50" max="200" step="0.1" class="amount-input" style="max-width:200px;" value="5" />
+        <div class="input-help">Ingresa el porcentaje del periodo que quieras ajustar.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Valor actualizado</div>
+          <div class="result-value" id="valorActualizado">C$ 0</div>
+          <div class="result-sub">Incluye el efecto completo de la inflación indicada.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Diferencia</div>
+          <div class="result-main-label">Variación: <span id="diferenciaMonto">C$ 0</span></div>
+          <div class="result-main-label">Porcentaje aplicado: <span id="porcentajeLabel">0%</span></div>
+          <div class="result-sub">Estimación directa sin consultas externas.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountNiNav } from '/js/ni-nav.js';
+
+    const valorInput = document.getElementById('valorInput');
+    const inflacionInput = document.getElementById('inflacionInput');
+    const valorActualizado = document.getElementById('valorActualizado');
+    const diferenciaMonto = document.getElementById('diferenciaMonto');
+    const porcentajeLabel = document.getElementById('porcentajeLabel');
+
+    const formatter = new Intl.NumberFormat('es-NI', {
+      style: 'currency',
+      currency: 'NIO',
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+
+    function update() {
+      const valor = Number(valorInput.value) || 0;
+      const inflacion = Number(inflacionInput.value) || 0;
+      const factor = 1 + inflacion / 100;
+
+      const ajustado = valor * factor;
+      const diferencia = ajustado - valor;
+
+      valorActualizado.textContent = formatter.format(ajustado);
+      diferenciaMonto.textContent = formatter.format(diferencia);
+      porcentajeLabel.textContent = `${inflacion.toFixed(2)}%`;
+    }
+
+    valorInput.addEventListener('input', update);
+    inflacionInput.addEventListener('input', update);
+
+    autoMountNiNav();
+    valorInput.value = 30000;
+    update();
+  </script>
+</body>
+</html>
