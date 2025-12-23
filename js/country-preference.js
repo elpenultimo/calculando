@@ -98,6 +98,11 @@
       return true;
     }
 
+    if (region === 'sv') {
+      window.location.href = '/sv/';
+      return true;
+    }
+
     return false;
   }
 

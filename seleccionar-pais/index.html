@@ -49,6 +49,7 @@
         <button id="btnCostaRica" class="pill" style="justify-content:center;">🇨🇷 Costa Rica</button>
         <button id="btnNicaragua" class="pill" style="justify-content:center;">🇳🇮 Nicaragua</button>
         <button id="btnHonduras" class="pill" style="justify-content:center;">🇭🇳 Honduras</button>
+        <button id="btnElSalvador" class="pill" style="justify-content:center;">🇸🇻 El Salvador</button>
       </div>
     </section>
   </main>
@@ -73,6 +74,7 @@
         cr: document.getElementById('btnCostaRica'),
         ni: document.getElementById('btnNicaragua'),
         hn: document.getElementById('btnHonduras'),
+        sv: document.getElementById('btnElSalvador'),
       };
 
       const routes = {
@@ -90,6 +92,7 @@
         cr: '/cr/',
         ni: '/ni/',
         hn: '/hn/',
+        sv: '/sv/',
       };
 
       function storeRegion(region) {
