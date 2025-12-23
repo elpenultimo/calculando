@@ -73,6 +73,11 @@
       return true;
     }
 
+    if (region === 've') {
+      window.location.href = '/ve/';
+      return true;
+    }
+
     return false;
   }
 
