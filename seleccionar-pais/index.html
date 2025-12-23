@@ -23,40 +23,73 @@
           <span id="themeLabel">Modo oscuro</span>
         </button>
 
-        <a href="/seleccionar-pais/" id="changeCountryLink"
-           style="font-size:13px;color:var(--primary);text-decoration:underline;white-space:nowrap;">
+        <!-- Estás en la página de selección, así que este link es opcional -->
+        <span
+          style="font-size:13px;opacity:.75;white-space:nowrap;"
+          aria-hidden="true"
+        >
           Cambiar país
-        </a>
+        </span>
       </div>
     </header>
 
     <section class="shell" style="margin-top:18px;">
       <div class="tool-title">Elige tu país</div>
-      <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
+      <div class="tool-subtitle" style="margin-top:8px;">
+        Esto ajusta las calculadoras y la navegación.
+      </div>
 
-      <div style="display:grid;gap:12px;margin-top:16px;">
-        <button id="btnGuineaEcuatorial" class="pill" style="justify-content:center;">🇬🇶 Guinea Ecuatorial</button>
-        <button id="btnRepublicaDominicana" class="pill" style="justify-content:center;">🇩🇴 República Dominicana</button>
-        <button id="btnGuatemala" class="pill" style="justify-content:center;">🇬🇹 Guatemala</button>
-        <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
-        <button id="btnMexico" class="pill" style="justify-content:center;">🇲🇽 México</button>
-        <button id="btnBrasil" class="pill" style="justify-content:center;">🇧🇷 Brasil</button>
+      <!-- ===== Sudamérica ===== -->
+      <div class="tool-title" style="margin-top:18px;">Sudamérica</div>
+      <div style="display:grid;gap:12px;margin-top:12px;">
         <button id="btnArgentina" class="pill" style="justify-content:center;">🇦🇷 Argentina</button>
-        <button id="btnEstadosUnidos" class="pill" style="justify-content:center;">🇺🇸 Estados Unidos (Español)</button>
-        <button id="btnPeru" class="pill" style="justify-content:center;">🇵🇪 Perú</button>
+        <button id="btnBolivia" class="pill" style="justify-content:center;">🇧🇴 Bolivia</button>
+        <button id="btnBrasil" class="pill" style="justify-content:center;">🇧🇷 Brasil</button>
+        <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
         <button id="btnColombia" class="pill" style="justify-content:center;">🇨🇴 Colombia</button>
-        <button id="btnParaguay" class="pill" style="justify-content:center;">🇵🇾 Paraguay</button>
-        <button id="btnUruguay" class="pill" style="justify-content:center;">🇺🇾 Uruguay</button>
         <button id="btnEcuador" class="pill" style="justify-content:center;">🇪🇨 Ecuador</button>
+        <button id="btnParaguay" class="pill" style="justify-content:center;">🇵🇾 Paraguay</button>
+        <button id="btnPeru" class="pill" style="justify-content:center;">🇵🇪 Perú</button>
+        <button id="btnUruguay" class="pill" style="justify-content:center;">🇺🇾 Uruguay</button>
         <button id="btnVenezuela" class="pill" style="justify-content:center;">🇻🇪 Venezuela</button>
-        <button id="btnPanama" class="pill" style="justify-content:center;">🇵🇦 Panamá</button>
+      </div>
+
+      <!-- ===== Centroamérica ===== -->
+      <div class="tool-title" style="margin-top:22px;">Centroamérica</div>
+      <div style="display:grid;gap:12px;margin-top:12px;">
         <button id="btnCostaRica" class="pill" style="justify-content:center;">🇨🇷 Costa Rica</button>
-        <button id="btnNicaragua" class="pill" style="justify-content:center;">🇳🇮 Nicaragua</button>
-        <button id="btnHonduras" class="pill" style="justify-content:center;">🇭🇳 Honduras</button>
         <button id="btnElSalvador" class="pill" style="justify-content:center;">🇸🇻 El Salvador</button>
-        <button id="btnPuertoRico" class="pill" style="justify-content:center;">🇵🇷 Puerto Rico</button>
+        <button id="btnGuatemala" class="pill" style="justify-content:center;">🇬🇹 Guatemala</button>
+        <button id="btnHonduras" class="pill" style="justify-content:center;">🇭🇳 Honduras</button>
+        <button id="btnNicaragua" class="pill" style="justify-content:center;">🇳🇮 Nicaragua</button>
+        <button id="btnPanama" class="pill" style="justify-content:center;">🇵🇦 Panamá</button>
+      </div>
+
+      <!-- ===== Caribe ===== -->
+      <div class="tool-title" style="margin-top:22px;">Caribe</div>
+      <div style="display:grid;gap:12px;margin-top:12px;">
         <button id="btnCuba" class="pill" style="justify-content:center;">🇨🇺 Cuba</button>
+        <button id="btnRepublicaDominicana" class="pill" style="justify-content:center;">🇩🇴 República Dominicana</button>
+        <button id="btnPuertoRico" class="pill" style="justify-content:center;">🇵🇷 Puerto Rico</button>
+      </div>
+
+      <!-- ===== Norteamérica ===== -->
+      <div class="tool-title" style="margin-top:22px;">Norteamérica</div>
+      <div style="display:grid;gap:12px;margin-top:12px;">
+        <button id="btnEstadosUnidos" class="pill" style="justify-content:center;">🇺🇸 Estados Unidos (Español)</button>
+        <button id="btnMexico" class="pill" style="justify-content:center;">🇲🇽 México</button>
+      </div>
+
+      <!-- ===== Europa ===== -->
+      <div class="tool-title" style="margin-top:22px;">Europa</div>
+      <div style="display:grid;gap:12px;margin-top:12px;">
         <button id="btnEspana" class="pill" style="justify-content:center;">🇪🇸 España</button>
+      </div>
+
+      <!-- ===== África ===== -->
+      <div class="tool-title" style="margin-top:22px;">África</div>
+      <div style="display:grid;gap:12px;margin-top:12px;">
+        <button id="btnGuineaEcuatorial" class="pill" style="justify-content:center;">🇬🇶 Guinea Ecuatorial</button>
       </div>
     </section>
   </main>
@@ -67,61 +100,74 @@
       const REGION_KEY = 'tc_region';
 
       const buttons = {
-        gq: document.getElementById('btnGuineaEcuatorial'),
-        cl: document.getElementById('btnChile'),
-        mx: document.getElementById('btnMexico'),
-        br: document.getElementById('btnBrasil'),
+        // Sudamérica
         ar: document.getElementById('btnArgentina'),
-        us: document.getElementById('btnEstadosUnidos'),
-        pe: document.getElementById('btnPeru'),
+        bo: document.getElementById('btnBolivia'),
+        br: document.getElementById('btnBrasil'),
+        cl: document.getElementById('btnChile'),
         co: document.getElementById('btnColombia'),
-        py: document.getElementById('btnParaguay'),
-        uy: document.getElementById('btnUruguay'),
         ec: document.getElementById('btnEcuador'),
+        py: document.getElementById('btnParaguay'),
+        pe: document.getElementById('btnPeru'),
+        uy: document.getElementById('btnUruguay'),
         ve: document.getElementById('btnVenezuela'),
-        pa: document.getElementById('btnPanama'),
+
+        // Centroamérica
         cr: document.getElementById('btnCostaRica'),
-        ni: document.getElementById('btnNicaragua'),
-        hn: document.getElementById('btnHonduras'),
         sv: document.getElementById('btnElSalvador'),
         gt: document.getElementById('btnGuatemala'),
+        hn: document.getElementById('btnHonduras'),
+        ni: document.getElementById('btnNicaragua'),
+        pa: document.getElementById('btnPanama'),
+
+        // Caribe
+        cu: document.getElementById('btnCuba'),
         do: document.getElementById('btnRepublicaDominicana'),
         pr: document.getElementById('btnPuertoRico'),
-        cu: document.getElementById('btnCuba'),
+
+        // Norteamérica
+        us: document.getElementById('btnEstadosUnidos'),
+        mx: document.getElementById('btnMexico'),
+
+        // Europa
         es: document.getElementById('btnEspana'),
+
+        // África
+        gq: document.getElementById('btnGuineaEcuatorial'),
       };
 
       const routes = {
-        gq: '/gq/',
-        cl: '/cl/',
-        mx: '/mx/',
-        br: '/br/',
         ar: '/ar/',
-        us: '/us/',
-        pe: '/pe/',
+        bo: '/bo/',
+        br: '/br/',
+        cl: '/cl/',
         co: '/co/',
-        py: '/py/',
-        uy: '/uy/',
         ec: '/ec/',
+        py: '/py/',
+        pe: '/pe/',
+        uy: '/uy/',
         ve: '/ve/',
-        pa: '/pa/',
+
         cr: '/cr/',
-        ni: '/ni/',
-        hn: '/hn/',
         sv: '/sv/',
         gt: '/gt/',
+        hn: '/hn/',
+        ni: '/ni/',
+        pa: '/pa/',
+
+        cu: '/cu/',
         do: '/do/',
         pr: '/pr/',
-        cu: '/cu/',
+
+        us: '/us/',
+        mx: '/mx/',
+
         es: '/es/',
+        gq: '/gq/',
       };
 
       function storeRegion(region) {
-        try {
-          localStorage.setItem(REGION_KEY, region);
-        } catch (e) {
-          /* ignore localStorage errors */
-        }
+        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
       }
 
       function go(region) {
@@ -130,9 +176,7 @@
       }
 
       Object.entries(buttons).forEach(([region, btn]) => {
-        if (btn) {
-          btn.addEventListener('click', () => go(region));
-        }
+        if (btn) btn.addEventListener('click', () => go(region));
       });
     })();
   </script>
