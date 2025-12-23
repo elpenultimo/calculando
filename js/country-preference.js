@@ -123,6 +123,11 @@
       return true;
     }
 
+    if (region === 'us') {
+      window.location.href = '/us/';
+      return true;
+    }
+
     return false;
   }
 
