@@ -63,6 +63,11 @@
       return true;
     }
 
+    if (region === 'uy') {
+      window.location.href = '/uy/';
+      return true;
+    }
+
     return false;
   }
 
