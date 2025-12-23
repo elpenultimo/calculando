@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora IVA 21% España</title>
+  <meta name="description" content="Calcula IVA en España con tasa editable (21% por defecto). Convierte de neto a total, de total a neto o calcula solo el IVA en euros." />
+  <link rel="canonical" href="https://www.calculando.cl/es/iva/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora España</strong>
+          <span>IVA 21% (editable)</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Calculadora IVA España</h1>
+      <p>
+        Convierte montos aplicando IVA en España. Cambia entre neto → total, total → neto o calcula solo el IVA.
+        Tasa editable (21% por defecto, puedes usar 10% o 4% si aplica).
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Modo con pills: elige el sentido del cálculo y obtén IVA, neto y total en euros.
+      </div>
+
+      <div id="esNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="tool-title">Selecciona el modo</div>
+      <div class="tool-subtitle">Neto → Total (default), Total → Neto o Solo IVA.</div>
+      <div class="tool-nav" style="margin-bottom:12px;">
+        <button class="tool-tab tool-tab-active" data-mode="netoTotal">Neto → Total</button>
+        <button class="tool-tab" data-mode="totalNeto">Total → Neto</button>
+        <button class="tool-tab" data-mode="soloIva">Solo IVA</button>
+      </div>
+
+      <div class="input-row">
+        <label class="input-label" for="montoInput">Monto</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">€</span>
+          <input id="montoInput" type="number" min="0" step="10" class="amount-input" placeholder="Ej: 200" />
+          <span style="font-size:12px;color:var(--muted);">EUR</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="tasaInput">Tipo IVA (%)</label>
+        <input id="tasaInput" type="number" min="0" step="0.1" class="amount-input" style="max-width:200px;" value="21" />
+        <div class="input-help">Editable. Puedes usar 10% o 4% si aplica.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">IVA calculado</div>
+          <div class="result-value" id="ivaResult">€0.00</div>
+          <div class="result-sub">Impuesto según el modo seleccionado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Neto y total</div>
+          <div class="result-main-label">Neto: <span id="netoResult">€0.00</span></div>
+          <div class="result-main-label">Total con IVA: <span id="totalResult">€0.00</span></div>
+          <div class="result-sub">Convierte en ambos sentidos o calcula solo IVA.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountEsNav } from '/js/es-nav.js';
+
+    const modeButtons = Array.from(document.querySelectorAll('[data-mode]'));
+    const montoInput = document.getElementById('montoInput');
+    const tasaInput = document.getElementById('tasaInput');
+    const ivaResult = document.getElementById('ivaResult');
+    const netoResult = document.getElementById('netoResult');
+    const totalResult = document.getElementById('totalResult');
+
+    let activeMode = 'netoTotal';
+
+    const formatter = new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function setActiveMode(mode) {
+      activeMode = mode;
+      modeButtons.forEach(btn => {
+        if (btn.dataset.mode === mode) {
+          btn.classList.add('tool-tab-active');
+        } else {
+          btn.classList.remove('tool-tab-active');
+        }
+      });
+      update();
+    }
+
+    function update() {
+      const monto = Number(montoInput.value) || 0;
+      const tasa = (Number(tasaInput.value) || 0) / 100;
+
+      let iva = 0;
+      let neto = 0;
+      let total = 0;
+
+      if (activeMode === 'netoTotal') {
+        neto = monto;
+        iva = neto * tasa;
+        total = neto + iva;
+      } else if (activeMode === 'totalNeto') {
+        total = monto;
+        const divisor = 1 + tasa;
+        neto = divisor !== 0 ? total / divisor : 0;
+        iva = total - neto;
+      } else {
+        neto = monto;
+        iva = neto * tasa;
+        total = neto + iva;
+      }
+
+      ivaResult.textContent = formatter.format(iva);
+      netoResult.textContent = formatter.format(neto);
+      totalResult.textContent = formatter.format(total);
+    }
+
+    modeButtons.forEach(btn => {
+      btn.addEventListener('click', () => setActiveMode(btn.dataset.mode));
+    });
+
+    montoInput.addEventListener('input', update);
+    tasaInput.addEventListener('input', update);
+
+    autoMountEsNav();
+    montoInput.value = 200;
+    update();
+  </script>
+</body>
+</html>
