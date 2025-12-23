@@ -103,6 +103,11 @@
       return true;
     }
 
+    if (region === 'pr') {
+      window.location.href = '/pr/';
+      return true;
+    }
+
     if (region === 'gt') {
       window.location.href = '/gt/';
       return true;
