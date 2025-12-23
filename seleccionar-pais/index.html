@@ -19,12 +19,12 @@
 
       <div style="display:flex;align-items:center;gap:14px;">
         <button id="themeToggle" class="theme-toggle" type="button">
-          <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-          <span id="themeLabel">Modo oscuro</span>
+          <span class="theme-toggle-icon">🌙</span>
+          <span>Modo oscuro</span>
         </button>
 
         <a href="/seleccionar-pais/"
-           style="font-size:13px;color:var(--primary);text-decoration:underline;white-space:nowrap;">
+           style="font-size:13px;color:var(--primary);text-decoration:underline;">
           Cambiar país
         </a>
       </div>
@@ -37,42 +37,16 @@
       </div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
-        <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
-        <button id="btnMexico" class="pill" style="justify-content:center;">🇲🇽 México</button>
-        <button id="btnArgentina" class="pill" style="justify-content:center;">🇦🇷 Argentina</button>
-        <button id="btnPeru" class="pill" style="justify-content:center;">🇵🇪 Perú</button>
-        <button id="btnColombia" class="pill" style="justify-content:center;">🇨🇴 Colombia</button>
-        <button id="btnBrasil" class="pill" style="justify-content:center;">🇧🇷 Brasil</button>
+        <a href="/cl/" class="pill" style="justify-content:center;">🇨🇱 Chile</a>
+        <a href="/mx/" class="pill" style="justify-content:center;">🇲🇽 México</a>
+        <a href="/ar/" class="pill" style="justify-content:center;">🇦🇷 Argentina</a>
+        <a href="/pe/" class="pill" style="justify-content:center;">🇵🇪 Perú</a>
+        <a href="/co/" class="pill" style="justify-content:center;">🇨🇴 Colombia</a>
+        <a href="/br/" class="pill" style="justify-content:center;">🇧🇷 Brasil</a>
       </div>
     </section>
   </main>
 
   <script src="/js/theme-toggle.js"></script>
-  <script>
-    (function setupCountrySelection() {
-      const REGION_KEY = "tc_region";
-
-      const routes = {
-        cl: "/cl/",
-        mx: "/mx/",
-        ar: "/ar/",
-        pe: "/pe/",
-        co: "/co/",
-        br: "/br/",
-      };
-
-      function go(region) {
-        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
-        window.location.href = routes[region] || "/cl/";
-      }
-
-      document.getElementById("btnChile")?.addEventListener("click", () => go("cl"));
-      document.getElementById("btnMexico")?.addEventListener("click", () => go("mx"));
-      document.getElementById("btnArgentina")?.addEventListener("click", () => go("ar"));
-      document.getElementById("btnPeru")?.addEventListener("click", () => go("pe"));
-      document.getElementById("btnColombia")?.addEventListener("click", () => go("co"));
-      document.getElementById("btnBrasil")?.addEventListener("click", () => go("br"));
-    })();
-  </script>
 </body>
 </html>
