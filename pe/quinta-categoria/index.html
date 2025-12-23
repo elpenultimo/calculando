@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="pe">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impuesto a la Renta Perú – Quinta Categoría</title>
+  <meta name="description" content="Calcula un estimado de impuesto a la renta de quinta categoría en Perú. Ingresa tu sueldo bruto mensual, deduce 7 UIT y revisa el impuesto anual y mensual aproximado." />
+  <link rel="canonical" href="https://calculando.cl/pe/quinta-categoria/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Perú</strong>
+          <span>Quinta categoría</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Impuesto a la Renta – Quinta Categoría</h1>
+      <p>
+        Estima el impuesto de quinta categoría anual y mensual en Perú. Se anualiza el sueldo bruto, se descuenta
+        automáticamente 7 UIT (editable) y se aplican tramos progresivos simplificados.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Resultado aproximado, úsalo como referencia.
+      </div>
+
+      <div id="peNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Sueldo bruto mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">S/</span>
+          <input id="brutoInput" type="number" min="0" step="100" class="amount-input" placeholder="Ej: 5000" />
+          <span style="font-size:12px;color:var(--muted);">PEN</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="uitInput">Valor UIT (PEN)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">S/</span>
+          <input id="uitInput" type="number" min="0" step="50" class="amount-input" style="max-width:220px;" value="5150" />
+          <span style="font-size:12px;color:var(--muted);">ajustable</span>
+        </div>
+        <div class="input-help">Se descuentan 7 UIT de forma automática antes de calcular el impuesto.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Impuesto anual estimado</div>
+          <div class="result-value" id="impuestoAnual">S/ 0</div>
+          <div class="result-sub">Calculado tras deducir 7 UIT y aplicar tramos progresivos.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle mensual</div>
+          <div class="result-main-label">Base imponible anual: <span id="baseImponible">S/ 0</span></div>
+          <div class="result-main-label">Impuesto mensual ref.: <span id="impuestoMensual">S/ 0</span></div>
+          <div class="result-sub">El prorrateo mensual es una guía, puede variar según retenciones reales.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountPeNav } from '/js/pe-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const uitInput = document.getElementById('uitInput');
+    const impuestoAnual = document.getElementById('impuestoAnual');
+    const impuestoMensual = document.getElementById('impuestoMensual');
+    const baseImponible = document.getElementById('baseImponible');
+
+    const formatter = new Intl.NumberFormat('es-PE', {
+      style: 'currency',
+      currency: 'PEN',
+      maximumFractionDigits: 2,
+    });
+
+    const tramosUIT = [
+      { limite: 5, tasa: 0.08 },
+      { limite: 20, tasa: 0.14 },
+      { limite: 35, tasa: 0.17 },
+      { limite: 45, tasa: 0.2 },
+      { limite: Infinity, tasa: 0.3 },
+    ];
+
+    function calcularImpuesto(baseAnual, uit) {
+      let restante = baseAnual;
+      let impuesto = 0;
+      let tramoAnterior = 0;
+
+      for (const tramo of tramosUIT) {
+        if (restante <= 0) break;
+
+        const limiteMonetario = tramo.limite === Infinity ? Infinity : tramo.limite * uit;
+        const tramoDisponible = limiteMonetario === Infinity
+          ? restante
+          : Math.max(0, limiteMonetario - tramoAnterior * uit);
+
+        const montoGravado = Math.min(restante, tramoDisponible);
+        impuesto += montoGravado * tramo.tasa;
+        restante -= montoGravado;
+        tramoAnterior = tramo.limite === Infinity ? tramoAnterior : tramo.limite;
+      }
+
+      return impuesto;
+    }
+
+    function update() {
+      const brutoMensual = Number(brutoInput.value) || 0;
+      const uit = Number(uitInput.value) || 0;
+      const deduccion = uit * 7;
+      const baseAnual = Math.max(0, brutoMensual * 12 - deduccion);
+
+      const impuesto = uit > 0 ? calcularImpuesto(baseAnual, uit) : 0;
+      const mensual = impuesto / 12;
+
+      impuestoAnual.textContent = formatter.format(impuesto);
+      impuestoMensual.textContent = formatter.format(mensual);
+      baseImponible.textContent = formatter.format(baseAnual);
+    }
+
+    brutoInput.addEventListener('input', update);
+    uitInput.addEventListener('input', update);
+
+    autoMountPeNav();
+    update();
+  </script>
+</body>
+</html>
