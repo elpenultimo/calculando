@@ -93,6 +93,11 @@
       return true;
     }
 
+    if (region === 'hn') {
+      window.location.href = '/hn/';
+      return true;
+    }
+
     return false;
   }
 
