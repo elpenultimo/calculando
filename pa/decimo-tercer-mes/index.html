@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="pa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Décimo tercer mes Panamá – Cálculo proporcional</title>
+  <meta name="description" content="Calcula el décimo tercer mes estimado en Panamá. Ingresa tu salario mensual en balboas (B/.) y los meses trabajados para obtener un monto proporcional." />
+  <link rel="canonical" href="https://calculando.cl/pa/decimo-tercer-mes/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Panamá</strong>
+          <span>Décimo tercer mes</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Décimo tercer mes estimado</h1>
+      <p>
+        Calcula tu décimo tercer mes proporcional en balboas (B/.) usando tu salario mensual y los meses trabajados (1–12).
+        Fórmula simple: salario × (meses / 12). Se paga en 3 partidas al año.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Estimación proporcional sin descuentos.
+      </div>
+
+      <div id="paNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual (B/.)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">B/.</span>
+          <input id="salarioInput" type="number" min="0" step="25" class="amount-input" placeholder="Ej: 900" />
+          <span style="font-size:12px;color:var(--muted);">PAB</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados (1–12)</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Usa meses proporcionales si aún no completas el año.</div>
+      </div>
+
+      <div class="result-card" style="margin-top:16px;">
+        <div class="result-title">Décimo tercer mes estimado</div>
+        <div class="result-value" id="decimoResult">B/. 0.00</div>
+        <div class="result-sub">Fórmula: salario × (meses / 12). Pago en tres partidas al año.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountPaNav } from '/js/pa-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const decimoResult = document.getElementById('decimoResult');
+
+    const formatter = new Intl.NumberFormat('es-PA', {
+      style: 'currency',
+      currency: 'PAB',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = Math.min(Math.max(Number(mesesInput.value) || 0, 0), 12);
+
+      const decimo = salario * (meses / 12);
+
+      decimoResult.textContent = formatter.format(decimo);
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountPaNav();
+    salarioInput.value = 900;
+    update();
+  </script>
+</body>
+</html>
