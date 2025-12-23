@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="cr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aguinaldo Costa Rica – Cálculo proporcional en CRC</title>
+  <meta name="description" content="Calcula el aguinaldo proporcional en Costa Rica según tu salario mensual y los meses trabajados. Estimación sencilla en colones (CRC)." />
+  <link rel="canonical" href="https://calculando.cl/cr/aguinaldo/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Costa Rica</strong>
+          <span>Aguinaldo</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Aguinaldo en Costa Rica</h1>
+      <p>
+        Calcula tu aguinaldo de forma proporcional según los meses trabajados.
+        Ingresa tu salario mensual en colones y obtén el monto estimado sin descuentos obligatorios.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Fórmula simple: salario × (meses trabajados / 12).
+      </div>
+
+      <div id="crNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">₡</span>
+          <input id="salarioInput" type="number" min="0" step="5000" class="amount-input" placeholder="Ej: 500000" />
+          <span style="font-size:12px;color:var(--muted);">CRC</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Usa números enteros entre 1 y 12.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Aguinaldo estimado</div>
+          <div class="result-value" id="aguinaldoResult">₡ 0</div>
+          <div class="result-sub">Cálculo proporcional según los meses ingresados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle rápido</div>
+          <div class="result-main-label">Proporción aplicada: <span id="proporcionLabel">0 / 12</span></div>
+          <div class="result-sub">No considera deducciones automáticas.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountCrNav } from '/js/cr-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const aguinaldoResult = document.getElementById('aguinaldoResult');
+    const proporcionLabel = document.getElementById('proporcionLabel');
+
+    const formatter = new Intl.NumberFormat('es-CR', {
+      style: 'currency',
+      currency: 'CRC',
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = Math.min(12, Math.max(1, Math.round(Number(mesesInput.value) || 0)));
+
+      mesesInput.value = meses;
+
+      const proporcion = meses / 12;
+      const aguinaldo = salario * proporcion;
+
+      aguinaldoResult.textContent = formatter.format(aguinaldo);
+      proporcionLabel.textContent = `${meses} / 12`;
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountCrNav();
+    salarioInput.value = 500000;
+    update();
+  </script>
+</body>
+</html>

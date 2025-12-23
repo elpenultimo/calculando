@@ -46,6 +46,7 @@
         <button id="btnEcuador" class="pill" style="justify-content:center;">🇪🇨 Ecuador</button>
         <button id="btnVenezuela" class="pill" style="justify-content:center;">🇻🇪 Venezuela</button>
         <button id="btnPanama" class="pill" style="justify-content:center;">🇵🇦 Panamá</button>
+        <button id="btnCostaRica" class="pill" style="justify-content:center;">🇨🇷 Costa Rica</button>
       </div>
     </section>
   </main>
@@ -67,6 +68,7 @@
         ec: document.getElementById('btnEcuador'),
         ve: document.getElementById('btnVenezuela'),
         pa: document.getElementById('btnPanama'),
+        cr: document.getElementById('btnCostaRica'),
       };
 
       const routes = {
@@ -81,6 +83,7 @@
         ec: '/ec/',
         ve: '/ve/',
         pa: '/pa/',
+        cr: '/cr/',
       };
 
       function storeRegion(region) {
