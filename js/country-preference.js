@@ -103,6 +103,11 @@
       return true;
     }
 
+    if (region === 'gt') {
+      window.location.href = '/gt/';
+      return true;
+    }
+
     return false;
   }
 
