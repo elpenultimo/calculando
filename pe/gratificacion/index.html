@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="pe">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gratificación Perú – Cálculo rápido</title>
+  <meta name="description" content="Calcula tu gratificación en Perú. Ingresa tu sueldo mensual en PEN y obtén el monto a recibir con la bonificación extraordinaria de EsSalud (9%)." />
+  <link rel="canonical" href="https://calculando.cl/pe/gratificacion/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Perú</strong>
+          <span>Gratificación</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Gratificación en Perú</h1>
+      <p>
+        Estima la gratificación de julio o diciembre en soles peruanos. Considera un sueldo completo más la
+        bonificación extraordinaria de EsSalud (9%) para trabajadores formales.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Referencia informativa, revisa condiciones específicas de tu empresa.
+      </div>
+
+      <div id="peNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="sueldoInput">Sueldo mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">S/</span>
+          <input id="sueldoInput" type="number" min="0" step="100" class="amount-input" placeholder="Ej: 4500" />
+          <span style="font-size:12px;color:var(--muted);">PEN</span>
+        </div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Gratificación base</div>
+          <div class="result-value" id="gratificacionBase">S/ 0</div>
+          <div class="result-sub">Equivale a un sueldo mensual completo.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Total a recibir</div>
+          <div class="result-main-label">Bonificación EsSalud 9%: <span id="bonoEssalud">S/ 0</span></div>
+          <div class="result-main-label">Monto total: <span id="totalResult">S/ 0</span></div>
+          <div class="result-sub">Aplica para trabajadores en planilla con aporte a EsSalud.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountPeNav } from '/js/pe-nav.js';
+
+    const sueldoInput = document.getElementById('sueldoInput');
+    const gratificacionBase = document.getElementById('gratificacionBase');
+    const bonoEssalud = document.getElementById('bonoEssalud');
+    const totalResult = document.getElementById('totalResult');
+
+    const formatter = new Intl.NumberFormat('es-PE', {
+      style: 'currency',
+      currency: 'PEN',
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const sueldo = Number(sueldoInput.value) || 0;
+      const base = sueldo;
+      const bono = sueldo * 0.09;
+      const total = base + bono;
+
+      gratificacionBase.textContent = formatter.format(base);
+      bonoEssalud.textContent = formatter.format(bono);
+      totalResult.textContent = formatter.format(total);
+    }
+
+    sueldoInput.addEventListener('input', update);
+
+    autoMountPeNav();
+    update();
+  </script>
+</body>
+</html>
