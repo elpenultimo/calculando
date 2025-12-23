@@ -25,14 +25,21 @@
 
     <section class="shell" style="margin-top:18px;">
       <div class="tool-title">Elige tu país</div>
-      <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
+      <div class="tool-subtitle" style="margin-top:8px;">
+        Esto ajusta las calculadoras y la navegación.
+      </div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
         <button id="btnChile" class="pill" style="justify-content:center;">
           🇨🇱 Chile
         </button>
+
         <button id="btnMexico" class="pill" style="justify-content:center;">
           🇲🇽 México
+        </button>
+
+        <button id="btnArgentina" class="pill" style="justify-content:center;">
+          🇦🇷 Argentina
         </button>
       </div>
     </section>
@@ -43,6 +50,7 @@
     (function setupCountrySelection() {
       const chile = document.getElementById('btnChile');
       const mexico = document.getElementById('btnMexico');
+      const argentina = document.getElementById('btnArgentina');
 
       if (window.tcCountry?.addChangeCountryLink) {
         window.tcCountry.addChangeCountryLink();
@@ -56,6 +64,7 @@
 
       chile?.addEventListener('click', () => choose('cl'));
       mexico?.addEventListener('click', () => choose('mx'));
+      argentina?.addEventListener('click', () => choose('ar'));
     })();
   </script>
 </body>
