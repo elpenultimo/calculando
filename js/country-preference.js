@@ -108,6 +108,11 @@
       return true;
     }
 
+    if (region === 'cu') {
+      window.location.href = '/cu/';
+      return true;
+    }
+
     if (region === 'gt') {
       window.location.href = '/gt/';
       return true;
