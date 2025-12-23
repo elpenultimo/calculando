@@ -58,6 +58,11 @@
       return true;
     }
 
+    if (region === 'py') {
+      window.location.href = '/py/';
+      return true;
+    }
+
     return false;
   }
 
