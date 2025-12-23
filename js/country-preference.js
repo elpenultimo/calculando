@@ -68,6 +68,11 @@
       return true;
     }
 
+    if (region === 'ec') {
+      window.location.href = '/ec/';
+      return true;
+    }
+
     return false;
   }
 
