@@ -35,69 +35,60 @@
       <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
-        <button id="btnChile" class="pill" style="justify-content:center;">
-          🇨🇱 Chile
-        </button>
-        <button id="btnMexico" class="pill" style="justify-content:center;">
-          🇲🇽 México
-        </button>
-        <button id="btnBrasil" class="pill" style="justify-content:center;">
-          🇧🇷 Brasil
-        <button id="btnArgentina" class="pill" style="justify-content:center;">
-          🇦🇷 Argentina
-        </button>
-        <button id="btnPeru" class="pill" style="justify-content:center;">
-          🇵🇪 Perú
-        </button>
-        <button id="btnColombia" class="pill" style="justify-content:center;">
-          🇨🇴 Colombia
-        </button>
+        <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
+        <button id="btnMexico" class="pill" style="justify-content:center;">🇲🇽 México</button>
+        <button id="btnBrasil" class="pill" style="justify-content:center;">🇧🇷 Brasil</button>
+        <button id="btnArgentina" class="pill" style="justify-content:center;">🇦🇷 Argentina</button>
+        <button id="btnPeru" class="pill" style="justify-content:center;">🇵🇪 Perú</button>
+        <button id="btnColombia" class="pill" style="justify-content:center;">🇨🇴 Colombia</button>
+        <button id="btnParaguay" class="pill" style="justify-content:center;">🇵🇾 Paraguay</button>
       </div>
     </section>
   </main>
 
   <script src="/js/theme-toggle.js"></script>
   <script>
-    (function setupCountrySelection() {
-      const chile = document.getElementById('btnChile');
-      const mexico = document.getElementById('btnMexico');
-      const brasil = document.getElementById('btnBrasil');
     (function setupCountrySelectionStandalone() {
-      const REGION_KEY = "tc_region";
+      const REGION_KEY = 'tc_region';
 
-      const btnChile = document.getElementById("btnChile");
-      const btnMexico = document.getElementById("btnMexico");
-      const btnArgentina = document.getElementById("btnArgentina");
-      const btnPeru = document.getElementById("btnPeru");
-      const btnColombia = document.getElementById("btnColombia");
+      const buttons = {
+        cl: document.getElementById('btnChile'),
+        mx: document.getElementById('btnMexico'),
+        br: document.getElementById('btnBrasil'),
+        ar: document.getElementById('btnArgentina'),
+        pe: document.getElementById('btnPeru'),
+        co: document.getElementById('btnColombia'),
+        py: document.getElementById('btnParaguay'),
+      };
+
+      const routes = {
+        cl: '/cl/',
+        mx: '/mx/',
+        br: '/br/',
+        ar: '/ar/',
+        pe: '/pe/',
+        co: '/co/',
+        py: '/py/',
+      };
 
       function storeRegion(region) {
-        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
+        try {
+          localStorage.setItem(REGION_KEY, region);
+        } catch (e) {
+          /* ignore localStorage errors */
+        }
       }
 
       function go(region) {
         storeRegion(region);
-
-        // En tucalculo.com las rutas viven por país (/cl/, /mx/, /ar/, /pe/, /co/)
-        const routes = {
-          cl: "/cl/",
-          mx: "/mx/",
-          ar: "/ar/",
-          pe: "/pe/",
-          co: "/co/",
-        };
-
-        window.location.href = routes[region] || "/cl/";
+        window.location.href = routes[region] || '/cl/';
       }
 
-      chile?.addEventListener('click', () => choose('cl'));
-      mexico?.addEventListener('click', () => choose('mx'));
-      brasil?.addEventListener('click', () => choose('br'));
-      btnChile?.addEventListener("click", () => go("cl"));
-      btnMexico?.addEventListener("click", () => go("mx"));
-      btnArgentina?.addEventListener("click", () => go("ar"));
-      btnPeru?.addEventListener("click", () => go("pe"));
-      btnColombia?.addEventListener("click", () => go("co"));
+      Object.entries(buttons).forEach(([region, btn]) => {
+        if (btn) {
+          btn.addEventListener('click', () => go(region));
+        }
+      });
     })();
   </script>
 </body>
