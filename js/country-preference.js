@@ -83,6 +83,11 @@
       return true;
     }
 
+    if (region === 'cr') {
+      window.location.href = '/cr/';
+      return true;
+    }
+
     return false;
   }
 
