@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Elige tu país – Calculando</title>
   <link rel="stylesheet" href="/css/calculando.css">
-  <script src="/js/country-preference.js"></script>
 </head>
 <body>
   <main style="max-width:520px;margin:40px auto;padding:0 16px;">
@@ -17,27 +16,31 @@
           <span>Elige dónde quieres navegar</span>
         </div>
       </div>
-      <button id="themeToggle" class="theme-toggle" type="button">
-        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
-        <span id="themeLabel">Modo oscuro</span>
-      </button>
+
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button id="themeToggle" class="theme-toggle" type="button">
+          <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+          <span id="themeLabel">Modo oscuro</span>
+        </button>
+
+        <a href="/seleccionar-pais/" id="changeCountryLink"
+           style="font-size:13px;color:var(--primary);text-decoration:underline;white-space:nowrap;">
+          Cambiar país
+        </a>
+      </div>
     </header>
 
     <section class="shell" style="margin-top:18px;">
       <div class="tool-title">Elige tu país</div>
-      <div class="tool-subtitle" style="margin-top:8px;">
-        Esto ajusta las calculadoras y la navegación.
-      </div>
+      <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
         <button id="btnChile" class="pill" style="justify-content:center;">
           🇨🇱 Chile
         </button>
-
         <button id="btnMexico" class="pill" style="justify-content:center;">
           🇲🇽 México
         </button>
-
         <button id="btnArgentina" class="pill" style="justify-content:center;">
           🇦🇷 Argentina
         </button>
@@ -47,24 +50,37 @@
 
   <script src="/js/theme-toggle.js"></script>
   <script>
-    (function setupCountrySelection() {
-      const chile = document.getElementById('btnChile');
-      const mexico = document.getElementById('btnMexico');
-      const argentina = document.getElementById('btnArgentina');
+    (function setupCountrySelectionStandalone() {
+      const REGION_KEY = "tc_region";
 
-      if (window.tcCountry?.addChangeCountryLink) {
-        window.tcCountry.addChangeCountryLink();
+      const btnChile = document.getElementById("btnChile");
+      const btnMexico = document.getElementById("btnMexico");
+      const btnArgentina = document.getElementById("btnArgentina");
+
+      function storeRegion(region) {
+        try { localStorage.setItem(REGION_KEY, region); } catch (e) {}
       }
 
-      function choose(region) {
-        if (!window.tcCountry) return;
-        window.tcCountry.storeRegion(region);
-        window.tcCountry.redirectForRegion(region);
+      function go(region) {
+        storeRegion(region);
+
+        if (region === "cl") {
+          window.location.href = "https://calculando.cl/";
+          return;
+        }
+        if (region === "mx") {
+          window.location.href = "/mx/";
+          return;
+        }
+        if (region === "ar") {
+          window.location.href = "/ar/";
+          return;
+        }
       }
 
-      chile?.addEventListener('click', () => choose('cl'));
-      mexico?.addEventListener('click', () => choose('mx'));
-      argentina?.addEventListener('click', () => choose('ar'));
+      btnChile?.addEventListener("click", () => go("cl"));
+      btnMexico?.addEventListener("click", () => go("mx"));
+      btnArgentina?.addEventListener("click", () => go("ar"));
     })();
   </script>
 </body>
