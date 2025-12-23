@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="hn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculando Honduras – Calculadoras en lempiras (HNL)</title>
+  <meta name="description" content="Calculadoras simples para Honduras: salario neto, IHSS, aguinaldo y ajuste por inflación en lempiras (HNL)." />
+  <link rel="canonical" href="https://calculando.cl/hn/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculando Honduras</strong>
+          <span>Calculadoras en lempiras</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Calculando Honduras</h1>
+      <p>
+        Calculadoras simples en lempiras (HNL) para salario neto, IHSS/deducciones, aguinaldo y ajuste por inflación.
+        Todo se actualiza en vivo y muestra decimales solo cuando los ingresas.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Rápido y referencial, enfocado en Honduras.
+      </div>
+
+      <div id="hnNav"></div>
+    </section>
+
+    <section class="shell" style="margin-top:16px;">
+      <div class="tool-title">Atajos rápidos</div>
+      <div class="tool-subtitle">Navega directo a cada calculadora</div>
+      <ul style="list-style:none;display:grid;gap:10px;padding:0;margin-top:10px;">
+        <li><a class="tool-tab tool-tab-active" style="display:inline-flex;width:fit-content;" href="/hn/salario-neto/">💰 Salario neto</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/hn/ihss/">🛡️ IHSS / Deducciones</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/hn/aguinaldo/">🎁 Aguinaldo</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/hn/inflacion/">📊 Ajuste por inflación</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountHnNav } from '/js/hn-nav.js';
+
+    autoMountHnNav();
+  </script>
+</body>
+</html>
