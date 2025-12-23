@@ -149,4 +149,36 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Guinea Ecuatorial -->
+  <url>
+    <loc>https://www.calculando.cl/gq/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/gq/salario-neto/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/gq/descuentos/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/gq/iva/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/gq/eur-xaf/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.calculando.cl/gq/aguinaldo/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

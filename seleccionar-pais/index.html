@@ -35,6 +35,7 @@
       <div class="tool-subtitle" style="margin-top:8px;">Esto ajusta las calculadoras y la navegación.</div>
 
       <div style="display:grid;gap:12px;margin-top:16px;">
+        <button id="btnGuineaEcuatorial" class="pill" style="justify-content:center;">🇬🇶 Guinea Ecuatorial</button>
         <button id="btnRepublicaDominicana" class="pill" style="justify-content:center;">🇩🇴 República Dominicana</button>
         <button id="btnGuatemala" class="pill" style="justify-content:center;">🇬🇹 Guatemala</button>
         <button id="btnChile" class="pill" style="justify-content:center;">🇨🇱 Chile</button>
@@ -66,6 +67,7 @@
       const REGION_KEY = 'tc_region';
 
       const buttons = {
+        gq: document.getElementById('btnGuineaEcuatorial'),
         cl: document.getElementById('btnChile'),
         mx: document.getElementById('btnMexico'),
         br: document.getElementById('btnBrasil'),
@@ -90,6 +92,7 @@
       };
 
       const routes = {
+        gq: '/gq/',
         cl: '/cl/',
         mx: '/mx/',
         br: '/br/',
