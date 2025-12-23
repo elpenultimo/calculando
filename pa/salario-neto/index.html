@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="pa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salario Neto Panamá – Calculadora en balboas</title>
+  <meta name="description" content="Calcula tu salario neto estimado en Panamá. Ingresa tu salario bruto mensual y descuentos editables de CSS, Seguro Educativo y otros para ver el neto en balboas (B/.)." />
+  <link rel="canonical" href="https://calculando.cl/pa/salario-neto/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Panamá</strong>
+          <span>Salario neto</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Salario neto en Panamá</h1>
+      <p>
+        Convierte tu salario bruto mensual a salario neto estimado en balboas (B/.). Incluye CSS del trabajador, Seguro Educativo y otros descuentos configurables sin tramos de impuesto.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo referencial. Todos los porcentajes son editables.
+      </div>
+
+      <div id="paNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Salario bruto mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">B/.</span>
+          <input id="brutoInput" type="number" min="0" step="50" class="amount-input" placeholder="Ej: 1200" />
+          <span style="font-size:12px;color:var(--muted);">PAB</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="cssInput">Seguro Social (CSS) trabajador (%)</label>
+        <input id="cssInput" type="number" min="0" max="25" step="0.01" class="amount-input" style="max-width:220px;" value="9.75" />
+        <div class="input-help">Porcentaje referencial aplicado al trabajador.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="educativoInput">Seguro Educativo (%)</label>
+        <input id="educativoInput" type="number" min="0" max="10" step="0.01" class="amount-input" style="max-width:220px;" value="1.25" />
+        <div class="input-help">Editable para reflejar variaciones personales.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="otrosInput">Otros descuentos (%)</label>
+        <input id="otrosInput" type="number" min="0" max="50" step="0.25" class="amount-input" style="max-width:220px;" value="0" />
+        <div class="input-help">Seguros, préstamos u otros conceptos opcionales.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Salario neto estimado</div>
+          <div class="result-value" id="netoResult">B/. 0.00</div>
+          <div class="result-sub">Monto aproximado después de los descuentos ingresados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle de descuentos</div>
+          <div class="result-main-label">CSS: <span id="cssMonto">B/. 0.00</span></div>
+          <div class="result-main-label">Seguro Educativo: <span id="educativoMonto">B/. 0.00</span></div>
+          <div class="result-main-label">Otros: <span id="otrosMonto">B/. 0.00</span></div>
+          <div class="result-main-label" style="margin-top:6px;">Total descontado: <span id="totalDescuento">B/. 0.00</span></div>
+          <div class="result-sub">Referencial sin tramos de impuesto sobre la renta.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountPaNav } from '/js/pa-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const cssInput = document.getElementById('cssInput');
+    const educativoInput = document.getElementById('educativoInput');
+    const otrosInput = document.getElementById('otrosInput');
+    const netoResult = document.getElementById('netoResult');
+    const cssMonto = document.getElementById('cssMonto');
+    const educativoMonto = document.getElementById('educativoMonto');
+    const otrosMonto = document.getElementById('otrosMonto');
+    const totalDescuento = document.getElementById('totalDescuento');
+
+    const formatter = new Intl.NumberFormat('es-PA', {
+      style: 'currency',
+      currency: 'PAB',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const bruto = Number(brutoInput.value) || 0;
+      const cssRate = (Number(cssInput.value) || 0) / 100;
+      const educativoRate = (Number(educativoInput.value) || 0) / 100;
+      const otrosRate = (Number(otrosInput.value) || 0) / 100;
+
+      const css = bruto * cssRate;
+      const educativo = bruto * educativoRate;
+      const otros = bruto * otrosRate;
+      const total = css + educativo + otros;
+      const neto = bruto - total;
+
+      netoResult.textContent = formatter.format(neto);
+      cssMonto.textContent = formatter.format(css);
+      educativoMonto.textContent = formatter.format(educativo);
+      otrosMonto.textContent = formatter.format(otros);
+      totalDescuento.textContent = formatter.format(total);
+    }
+
+    brutoInput.addEventListener('input', update);
+    cssInput.addEventListener('input', update);
+    educativoInput.addEventListener('input', update);
+    otrosInput.addEventListener('input', update);
+
+    autoMountPaNav();
+    brutoInput.value = 1200;
+    update();
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="uy">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Horas extra Uruguay – Calculadora en pesos uruguayos</title>
+  <meta name="description" content="Calcula el pago de horas extra en Uruguay. Usa tu salario mensual o un valor hora directo, define el recargo y obtén el total adicional estimado en $U." />
+  <link rel="canonical" href="https://calculando.cl/uy/horas-extra/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Uruguay</strong>
+          <span>Horas extra</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Horas extra en Uruguay</h1>
+      <p>
+        Calcula el valor de tus horas extra usando tu salario mensual o ingresando directamente el valor hora.
+        Ajusta el recargo y las horas base para un cálculo rápido y editable.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Fórmula simple y referencial, sin descuentos automáticos.
+      </div>
+
+      <div id="uyNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual (para calcular valor hora)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$U</span>
+          <input id="salarioInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 42000" />
+          <span style="font-size:12px;color:var(--muted);">UYU</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="horasBaseInput">Horas mensuales base</label>
+        <input id="horasBaseInput" type="number" min="1" step="1" class="amount-input" style="max-width:200px;" value="192" />
+        <div class="input-help">Se usa solo si calculas el valor hora desde el salario mensual.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="manualToggle">Ingresar valor hora manualmente</label>
+        <input id="manualToggle" type="checkbox" style="width:20px;height:20px;" />
+      </div>
+
+      <div class="input-row" id="valorHoraRow" style="margin-top:12px;display:none;">
+        <label class="input-label" for="valorHoraInput">Valor hora directo</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$U</span>
+          <input id="valorHoraInput" type="number" min="0" step="50" class="amount-input" placeholder="Ej: 220" />
+          <span style="font-size:12px;color:var(--muted);">UYU</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="horasExtraInput">Horas extra realizadas</label>
+        <input id="horasExtraInput" type="number" min="0" step="1" class="amount-input" style="max-width:200px;" placeholder="Ej: 10" />
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="recargoInput">Recargo por hora extra (%)</label>
+        <input id="recargoInput" type="number" min="0" max="300" step="10" class="amount-input" style="max-width:200px;" value="100" />
+        <div class="input-help">Recargo sobre el valor hora. 100% = pago al doble.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Valor hora base</div>
+          <div class="result-value" id="valorHoraResult">$U 0</div>
+          <div class="result-sub">Calculado desde el salario mensual o tomado del valor ingresado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Pago por horas extra</div>
+          <div class="result-value" id="pagoResult">$U 0</div>
+          <div class="result-sub">Incluye recargo aplicado a cada hora extra.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Total adicional estimado</div>
+          <div class="result-value" id="totalResult">$U 0</div>
+          <div class="result-sub">Suma de todas las horas extra indicadas.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountUyNav } from '/js/uy-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const horasBaseInput = document.getElementById('horasBaseInput');
+    const manualToggle = document.getElementById('manualToggle');
+    const valorHoraRow = document.getElementById('valorHoraRow');
+    const valorHoraInput = document.getElementById('valorHoraInput');
+    const horasExtraInput = document.getElementById('horasExtraInput');
+    const recargoInput = document.getElementById('recargoInput');
+    const valorHoraResult = document.getElementById('valorHoraResult');
+    const pagoResult = document.getElementById('pagoResult');
+    const totalResult = document.getElementById('totalResult');
+
+    const formatter = new Intl.NumberFormat('es-UY', {
+      style: 'currency',
+      currency: 'UYU',
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+
+    function getValorHora() {
+      if (manualToggle.checked) {
+        return Number(valorHoraInput.value) || 0;
+      }
+
+      const salario = Number(salarioInput.value) || 0;
+      const horasBase = Number(horasBaseInput.value) || 0;
+      if (horasBase <= 0) return 0;
+      return salario / horasBase;
+    }
+
+    function update() {
+      const horasExtra = Number(horasExtraInput.value) || 0;
+      const recargo = (Number(recargoInput.value) || 0) / 100;
+      const valorHora = getValorHora();
+      const valorHoraConRecargo = valorHora * (1 + recargo);
+      const pago = valorHoraConRecargo * horasExtra;
+
+      valorHoraResult.textContent = formatter.format(valorHora);
+      pagoResult.textContent = formatter.format(valorHoraConRecargo);
+      totalResult.textContent = formatter.format(pago);
+    }
+
+    function toggleManualRow() {
+      valorHoraRow.style.display = manualToggle.checked ? 'block' : 'none';
+      update();
+    }
+
+    salarioInput.addEventListener('input', update);
+    horasBaseInput.addEventListener('input', update);
+    manualToggle.addEventListener('change', toggleManualRow);
+    valorHoraInput.addEventListener('input', update);
+    horasExtraInput.addEventListener('input', update);
+    recargoInput.addEventListener('input', update);
+
+    autoMountUyNav();
+    salarioInput.value = 42000;
+    horasExtraInput.value = 10;
+    toggleManualRow();
+    update();
+  </script>
+</body>
+</html>

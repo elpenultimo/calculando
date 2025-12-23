@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="us">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convertir hourly a anual – Calculadora en USD</title>
+  <meta name="description" content="Convierte pago por hora a salario anual o viceversa en Estados Unidos. Ajusta horas por semana y semanas por año para ver salario anual, mensual y pago por hora estimado." />
+  <link rel="canonical" href="https://calculando.cl/us/hourly-yearly/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Estados Unidos</strong>
+          <span>Hourly ↔ Yearly</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Hourly ↔ Yearly en Estados Unidos</h1>
+      <p>
+        Convierte rápidamente pago por hora a salario anual o de anual a hora.
+        Ajusta las horas semanales y semanas trabajadas al año para ver el salario anual,
+        mensual y el pago por hora estimado en USD.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Fórmulas: anual = hourly × horasSemana × semanasAño; mensual = anual / 12; hourly = anual / (horasSemana × semanasAño).
+      </div>
+
+      <div id="usNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="rate-row" style="margin-top:0;">
+        <div class="rate-group" id="modoGroup">
+          <label class="rate-pill active">
+            <input type="radio" name="modo" value="hourlyToYearly" checked />
+            Hourly → Yearly
+          </label>
+          <label class="rate-pill">
+            <input type="radio" name="modo" value="yearlyToHourly" />
+            Yearly → Hourly
+          </label>
+        </div>
+        <div class="helper">Elige qué deseas convertir. Todos los resultados se muestran en USD.</div>
+      </div>
+
+      <div class="input-row" id="hourlyRow" style="margin-top:12px;">
+        <label class="input-label" for="hourlyInput">Pago por hora (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="hourlyInput" type="number" min="0" step="0.25" class="amount-input" placeholder="Ej: 28" />
+        </div>
+      </div>
+
+      <div class="input-row" id="annualRow" style="margin-top:12px;display:none;">
+        <label class="input-label" for="annualInput">Salario anual (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="annualInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 58000" />
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="horasInput">Horas por semana</label>
+        <input id="horasInput" type="number" min="1" max="80" step="1" class="amount-input" style="max-width:200px;" value="40" />
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="semanasInput">Semanas por año</label>
+        <input id="semanasInput" type="number" min="1" max="60" step="1" class="amount-input" style="max-width:200px;" value="52" />
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Salario anual estimado</div>
+          <div class="result-value" id="anualResult">$0.00</div>
+          <div class="result-sub">USD al año según las horas y semanas ingresadas.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Salario mensual estimado</div>
+          <div class="result-value" id="mensualResult">$0.00</div>
+          <div class="result-sub">Equivalente mensual (anual / 12).</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Pago por hora estimado</div>
+          <div class="result-value" id="hourlyResult">$0.00</div>
+          <div class="result-sub">Si conviertes desde salario anual, aquí ves el valor por hora.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountUsNav } from '/js/us-nav.js';
+
+    const modoGroup = document.getElementById('modoGroup');
+    const hourlyRow = document.getElementById('hourlyRow');
+    const annualRow = document.getElementById('annualRow');
+
+    const hourlyInput = document.getElementById('hourlyInput');
+    const annualInput = document.getElementById('annualInput');
+    const horasInput = document.getElementById('horasInput');
+    const semanasInput = document.getElementById('semanasInput');
+
+    const anualResult = document.getElementById('anualResult');
+    const mensualResult = document.getElementById('mensualResult');
+    const hourlyResult = document.getElementById('hourlyResult');
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function getMode() {
+      const active = modoGroup.querySelector('input[name="modo"]:checked');
+      return active?.value || 'hourlyToYearly';
+    }
+
+    function toggleInputs() {
+      const mode = getMode();
+      if (mode === 'hourlyToYearly') {
+        hourlyRow.style.display = '';
+        annualRow.style.display = 'none';
+      } else {
+        hourlyRow.style.display = 'none';
+        annualRow.style.display = '';
+      }
+    }
+
+    function update() {
+      const mode = getMode();
+      const horasSemana = Number(horasInput.value) || 0;
+      const semanasAno = Number(semanasInput.value) || 0;
+
+      let hourlyValue = 0;
+      let anualValue = 0;
+
+      if (mode === 'hourlyToYearly') {
+        hourlyValue = Number(hourlyInput.value) || 0;
+        anualValue = hourlyValue * horasSemana * semanasAno;
+      } else {
+        anualValue = Number(annualInput.value) || 0;
+        const divisor = horasSemana * semanasAno;
+        hourlyValue = divisor > 0 ? anualValue / divisor : 0;
+      }
+
+      const mensualValue = anualValue / 12;
+
+      anualResult.textContent = formatter.format(anualValue);
+      mensualResult.textContent = formatter.format(mensualValue);
+      hourlyResult.textContent = formatter.format(hourlyValue);
+    }
+
+    modoGroup.addEventListener('change', () => {
+      toggleInputs();
+      update();
+    });
+
+    [hourlyInput, annualInput, horasInput, semanasInput].forEach(input => {
+      input.addEventListener('input', update);
+    });
+
+    autoMountUsNav();
+    hourlyInput.value = 28;
+    annualInput.value = 58000;
+    toggleInputs();
+    update();
+  </script>
+</body>
+</html>

@@ -58,6 +58,86 @@
       return true;
     }
 
+    if (region === 'py') {
+      window.location.href = '/py/';
+      return true;
+    }
+
+    if (region === 'uy') {
+      window.location.href = '/uy/';
+      return true;
+    }
+
+    if (region === 'ec') {
+      window.location.href = '/ec/';
+      return true;
+    }
+
+    if (region === 've') {
+      window.location.href = '/ve/';
+      return true;
+    }
+
+    if (region === 'pa') {
+      window.location.href = '/pa/';
+      return true;
+    }
+
+    if (region === 'cr') {
+      window.location.href = '/cr/';
+      return true;
+    }
+
+    if (region === 'gq') {
+      window.location.href = '/gq/';
+      return true;
+    }
+
+    if (region === 'ni') {
+      window.location.href = '/ni/';
+      return true;
+    }
+
+    if (region === 'hn') {
+      window.location.href = '/hn/';
+      return true;
+    }
+
+    if (region === 'sv') {
+      window.location.href = '/sv/';
+      return true;
+    }
+
+    if (region === 'pr') {
+      window.location.href = '/pr/';
+      return true;
+    }
+
+    if (region === 'es') {
+      window.location.href = '/es/';
+      return true;
+    }
+
+    if (region === 'cu') {
+      window.location.href = '/cu/';
+      return true;
+    }
+
+    if (region === 'gt') {
+      window.location.href = '/gt/';
+      return true;
+    }
+
+    if (region === 'do') {
+      window.location.href = '/do/';
+      return true;
+    }
+
+    if (region === 'us') {
+      window.location.href = '/us/';
+      return true;
+    }
+
     return false;
   }
 
