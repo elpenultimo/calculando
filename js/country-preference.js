@@ -185,7 +185,7 @@
     link.href = '/seleccionar-pais/';
     link.textContent = 'Cambiar país';
     link.style.cssText =
-      'font-size:13px;color:var(--primary);text-decoration:underline;';
+      'font-size:13px;color:var(--country-accent);text-decoration:underline;text-decoration-color:var(--country-accent);';
 
     header.appendChild(link);
   }
@@ -198,4 +198,21 @@
     handleRootCountryRedirect,
     addChangeCountryLink,
   };
+
+  function loadFaqInjector() {
+    if (window.__faqInjectorLoaded) return;
+    window.__faqInjectorLoaded = true;
+
+    const script = document.createElement('script');
+    script.src = '/js/faq-injector.js';
+    script.defer = true;
+    script.crossOrigin = 'anonymous';
+    (document.head || document.body || document.documentElement).appendChild(script);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadFaqInjector);
+  } else {
+    loadFaqInjector();
+  }
 })();
