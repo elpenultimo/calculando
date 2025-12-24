@@ -198,4 +198,21 @@
     handleRootCountryRedirect,
     addChangeCountryLink,
   };
+
+  function loadFaqInjector() {
+    if (window.__faqInjectorLoaded) return;
+    window.__faqInjectorLoaded = true;
+
+    const script = document.createElement('script');
+    script.src = '/js/faq-injector.js';
+    script.defer = true;
+    script.crossOrigin = 'anonymous';
+    (document.head || document.body || document.documentElement).appendChild(script);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadFaqInjector);
+  } else {
+    loadFaqInjector();
+  }
 })();
