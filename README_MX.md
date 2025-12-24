@@ -15,7 +15,7 @@ Esta rama agrega la estructura inicial para habilitar páginas y calculadoras en
 
 ## Checklist de QA manual
 - `/` sigue mostrando la versión Chile sin cambios funcionales.
-- Navegación hacia México disponible (link “Versión México (beta)” en cabeceras).
+- Navegación hacia México disponible (link “Versión México” en cabeceras).
 - `/mx/` carga con estilos y navegación base.
 - `/mx/iva/` carga la plantilla, permite escribir montos y muestra el cálculo demo.
-- Verifica que el título/description cambien según el país: CL mantiene sus textos, MX muestra los placeholders beta.
+- Verifica que el título/description cambien según el país: CL mantiene sus textos, MX muestra los placeholders en construcción.

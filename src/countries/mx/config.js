@@ -6,15 +6,15 @@ export const mxConfig = {
     home: {
       path: '/mx',
       seo: {
-        title: 'Calculando México – Calculadoras y guías (beta)',
+        title: 'Calculando México – Calculadoras y guías',
         description:
           'Versión preliminar de Calculando para México: navegación y calculadoras en construcción. Pruebas de IVA, sueldo y más.',
         canonical: 'https://calculando.cl/mx/',
-        ogTitle: 'Calculando México – Beta',
+        ogTitle: 'Calculando México',
         ogDescription:
-          'Explora la versión beta de Calculando enfocada en herramientas para México.',
+          'Explora la versión de Calculando enfocada en herramientas para México.',
         ogUrl: 'https://calculando.cl/mx/',
-        twitterTitle: 'Calculando México – Beta',
+        twitterTitle: 'Calculando México',
         twitterDescription:
           'Base técnica para calculadoras de México. IVA y sueldos próximamente.',
       },
@@ -22,15 +22,15 @@ export const mxConfig = {
     iva: {
       path: '/mx/iva/',
       seo: {
-        title: 'Calculadora IVA México (beta)',
+        title: 'Calculadora IVA México',
         description:
           'Plantilla inicial para cálculo de IVA en México. Resultado referencial y pendiente de tasas oficiales.',
         canonical: 'https://calculando.cl/mx/iva/',
-        ogTitle: 'Calculadora IVA México (beta)',
+        ogTitle: 'Calculadora IVA México',
         ogDescription:
           'Prueba la experiencia de cálculo de IVA pensada para México. Cálculo real pendiente.',
         ogUrl: 'https://calculando.cl/mx/iva/',
-        twitterTitle: 'IVA México – Calculadora beta',
+        twitterTitle: 'IVA México – Calculadora',
         twitterDescription:
           'Vista previa de la calculadora de IVA para México. Próximamente cálculo con tasa 16%.',
       },
