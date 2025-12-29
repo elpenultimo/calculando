@@ -36,6 +36,27 @@
       "source": "/sitemap.xml",
       "has": [{ "type": "host", "value": "www.calculando.cl" }],
       "destination": "/sitemap-calculando.xml"
+    },
+
+    {
+      "source": "/robots.txt",
+      "has": [{ "type": "host", "value": "tucalculo.com" }],
+      "destination": "/robots-tucalculo.txt"
+    },
+    {
+      "source": "/robots.txt",
+      "has": [{ "type": "host", "value": "www.tucalculo.com" }],
+      "destination": "/robots-tucalculo.txt"
+    },
+    {
+      "source": "/robots.txt",
+      "has": [{ "type": "host", "value": "calculando.cl" }],
+      "destination": "/robots-calculando.txt"
+    },
+    {
+      "source": "/robots.txt",
+      "has": [{ "type": "host", "value": "www.calculando.cl" }],
+      "destination": "/robots-calculando.txt"
     }
   ]
 }
