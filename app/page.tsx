@@ -1,8 +1,8 @@
-export default function Home() {
+export default function HomePage() {
   return (
     <main style={{ padding: 40 }}>
-      <h1>TuCálculo</h1>
-      <p>Calculadoras financieras por país</p>
+      <h1>Calculando está vivo</h1>
+      <p>Home temporal de prueba</p>
     </main>
   );
 }
