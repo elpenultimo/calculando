@@ -1,6 +1,10 @@
 {
   "name": "calculando",
   "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'Static site: nothing to build'",
+    "start": "python -m http.server 3000"
+  },
   "dependencies": {
     "groq-sdk": "^0.6.0"
   }
