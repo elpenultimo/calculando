@@ -10,13 +10,6 @@
     return normalized;
   }
 
-  function isoFromPathname() {
-    const first = (window.location.pathname.split('/')[1] || '').trim().toLowerCase();
-    // Países típicos: 2 letras. Si algún día usas /pais/mexico, esto no se activa.
-    if (/^[a-z]{2}$/.test(first)) return first;
-    return '';
-  }
-
   function ensureContainer() {
     const existing = document.getElementById('countryFlag');
     if (existing) return existing;
@@ -39,26 +32,9 @@
     return span;
   }
 
-  let lastIso = '';
-
-  function resolveIso() {
-    const attrIso = normalizeCountry(root.getAttribute('data-country'));
-    const pathIso = normalizeCountry(isoFromPathname());
-
-    // Si hay iso en path, es la fuente más “real” del país actual.
-    if (pathIso) return pathIso;
-
-    // Si no hay iso en path, cae al atributo (caso calculando.cl raíz, etc.)
-    return attrIso;
-  }
-
   function renderFlag() {
-    const iso = resolveIso();
+    const iso = normalizeCountry(root.getAttribute('data-country'));
     if (!iso) return;
-
-    // Evita re-render innecesario y “parpadeos”
-    if (iso === lastIso && document.getElementById('countryFlag')) return;
-    lastIso = iso;
 
     const container = ensureContainer();
     if (!container) return;
@@ -75,41 +51,9 @@
     container.appendChild(img);
   }
 
-  function hookHistory() {
-    // Re-render cuando cambie la URL sin recargar
-    const _pushState = history.pushState;
-    const _replaceState = history.replaceState;
-
-    history.pushState = function () {
-      const ret = _pushState.apply(this, arguments);
-      queueMicrotask(renderFlag);
-      return ret;
-    };
-
-    history.replaceState = function () {
-      const ret = _replaceState.apply(this, arguments);
-      queueMicrotask(renderFlag);
-      return ret;
-    };
-
-    window.addEventListener('popstate', () => renderFlag());
-  }
-
-  function watchDataCountry() {
-    // Si alguien actualiza <html data-country="...">, re-renderiza
-    const obs = new MutationObserver(() => renderFlag());
-    obs.observe(root, { attributes: true, attributeFilter: ['data-country'] });
-  }
-
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      hookHistory();
-      watchDataCountry();
-      renderFlag();
-    });
+    document.addEventListener('DOMContentLoaded', renderFlag);
   } else {
-    hookHistory();
-    watchDataCountry();
     renderFlag();
   }
 })();
