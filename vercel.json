@@ -15,5 +15,27 @@
       "destination": "/mx/sueldo-neto/",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "has": [{ "type": "host", "value": "tucalculo.com" }],
+      "destination": "/sitemap-tucalculo.xml"
+    },
+    {
+      "source": "/sitemap.xml",
+      "has": [{ "type": "host", "value": "www.tucalculo.com" }],
+      "destination": "/sitemap-tucalculo.xml"
+    },
+    {
+      "source": "/sitemap.xml",
+      "has": [{ "type": "host", "value": "calculando.cl" }],
+      "destination": "/sitemap-calculando.xml"
+    },
+    {
+      "source": "/sitemap.xml",
+      "has": [{ "type": "host", "value": "www.calculando.cl" }],
+      "destination": "/sitemap-calculando.xml"
+    }
   ]
 }
