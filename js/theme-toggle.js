@@ -101,3 +101,18 @@
     localStorage.setItem('calculando-theme', next);
   });
 })();
+
+(function loadCountryFlagScript() {
+  const FLAG_SCRIPT_SRC = '/js/country-flag.js';
+
+  const head = document.head || document.documentElement;
+  if (!head) return;
+
+  const alreadyLoaded = head.querySelector(`script[src="${FLAG_SCRIPT_SRC}"]`);
+  if (alreadyLoaded) return;
+
+  const script = document.createElement('script');
+  script.src = FLAG_SCRIPT_SRC;
+  script.defer = true;
+  head.appendChild(script);
+})();

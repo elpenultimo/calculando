@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="dark" data-country="cl">
 <head>
   <meta charset="UTF-8" />
   <title>Calculando.cl – Calculadoras Chile 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
   <meta
     name="description"
     content="Calculando.cl: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile."
@@ -33,7 +38,8 @@
 <main>
   <header>
     <div class="logo-block">
-      <div class="logo-mark">C</div>
+      <div class="logo-mark">TC</div>
+      <span id="countryFlag" class="country-flag" aria-hidden="true"></span>
       <div class="logo-text">
         <strong>Calculando.cl</strong>
         <span>Tus cálculos, sin enredos.</span>
@@ -849,5 +855,6 @@
 </div>
 
 <script src="/js/calc-ai-chat.js"></script>
+  <script src="/js/theme-toggle.js"></script>
 </body>
 </html>

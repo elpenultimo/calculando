@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="dark" data-country="mx">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
 
   <title>Calculadora de Finiquito en México 2026 | Calculando.mx</title>
 
@@ -132,6 +137,7 @@
       justify-content: center;
       font-weight: 800;
       font-size: 18px;
+  letter-spacing: -0.02em;
       color: #0b1120;
       box-shadow: var(--header-glow);
       transform: translateY(0);
@@ -447,7 +453,8 @@
 <main>
   <header>
     <div class="logo-block">
-      <div class="logo-mark">C</div>
+      <div class="logo-mark">TC</div>
+      <span id="countryFlag" class="country-flag" aria-hidden="true"></span>
       <div class="logo-text">
         <strong>Calculando.mx</strong>
         <span>Calculadoras simples y claras.</span>

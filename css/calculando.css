@@ -115,6 +115,7 @@ header {
   justify-content: center;
   font-weight: 800;
   font-size: 18px;
+  letter-spacing: -0.02em;
   color: #0b1120;
   box-shadow: var(--header-glow);
   transform: translateY(0);
@@ -139,6 +140,20 @@ header {
 .logo-text span {
   font-size: 12px;
   color: var(--muted);
+}
+
+.country-flag {
+  display: inline-flex;
+  align-items: center;
+}
+
+.country-flag img {
+  height: 18px;
+  width: auto;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
 }
 
 .theme-toggle {
