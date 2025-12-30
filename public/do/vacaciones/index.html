@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="do">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Vacaciones República Dominicana – Cálculo rápido</title>
+  <meta name="description" content="Calcula un pago referencial de vacaciones en República Dominicana. Usa tu salario mensual, los días de vacaciones y el método diario = sueldo / 30 para obtener el monto en RD$." />
+  <link rel="canonical" href="https://calculando.cl/do/vacaciones/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora RD</strong>
+          <span>Vacaciones</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Vacaciones (estimación simple)</h1>
+      <p>
+        Calcula un pago referencial por vacaciones en República Dominicana usando el método diario = sueldo / 30.
+        Ingresa tu salario mensual y los días de vacaciones para ver el monto aproximado en RD$.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Valores referenciales y editables. No se aplican descuentos automáticos.
+      </div>
+
+      <div id="doNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">RD$</span>
+          <input id="salarioInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 48000" />
+          <span style="font-size:12px;color:var(--muted);">DOP</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="diasInput">Días de vacaciones</label>
+        <input id="diasInput" type="number" min="0" max="60" step="1" class="amount-input" style="max-width:200px;" value="14" />
+        <div class="input-help">Método base: valor diario = salario / 30.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Pago estimado por vacaciones</div>
+          <div class="result-value" id="pagoResult">RD$ 0.00</div>
+          <div class="result-sub">Calculado como valor diario × días ingresados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle</div>
+          <div class="result-main-label">Valor por día: <span id="valorDia">RD$ 0.00</span></div>
+          <div class="result-main-label">Días considerados: <span id="diasLabel">14</span></div>
+          <div class="result-sub">Método diario = sueldo / 30. Edita libremente.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Dirección General de Impuestos Internos (DGII) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountDoNav } from '/js/do-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const diasInput = document.getElementById('diasInput');
+    const pagoResult = document.getElementById('pagoResult');
+    const valorDia = document.getElementById('valorDia');
+    const diasLabel = document.getElementById('diasLabel');
+
+    const formatter = new Intl.NumberFormat('es-DO', {
+      style: 'currency',
+      currency: 'DOP',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const dias = clamp(Number(diasInput.value) || 0, 0, 60);
+      const valorPorDia = salario / 30;
+      const pago = valorPorDia * dias;
+
+      diasInput.value = dias;
+      pagoResult.textContent = formatter.format(pago);
+      valorDia.textContent = formatter.format(valorPorDia);
+      diasLabel.textContent = dias;
+    }
+
+    salarioInput.addEventListener('input', update);
+    diasInput.addEventListener('input', update);
+
+    autoMountDoNav();
+    salarioInput.value = 48000;
+    update();
+  </script>
+</body>
+</html>

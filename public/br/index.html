@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark" data-country="br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Tu Cálculo Brasil – Calculadoras em BRL</title>
+  <meta name="description" content="Calculadoras rápidas em reais brasileiros (BRL): salário líquido, INSS e descontos, 13º salário e ajuste por inflação. Valores editáveis e sem APIs externas." />
+  <link rel="canonical" href="https://calculando.cl/br/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Tu Cálculo Brasil</strong>
+          <span>Calculadoras em BRL</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo escuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Tu Cálculo Brasil</h1>
+      <p>
+        Ferramentas simples em reais brasileiros (BRL) para salário líquido, INSS e descontos, 13º salário e ajuste por inflação. Tudo editável e pensado para uso rápido.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Enfocado 100% no Brasil.
+      </div>
+
+      <div id="brNav"></div>
+    </section>
+
+    <section class="shell" style="margin-top:16px;">
+      <div class="tool-title">Atalhos rápidos</div>
+      <div class="tool-subtitle">Acesse direto cada calculadora</div>
+      <ul style="list-style:none;display:grid;gap:10px;padding:0;margin-top:10px;">
+        <li><a class="tool-tab tool-tab-active" style="display:inline-flex;width:fit-content;" href="/br/salario-liquido/">💰 Salário líquido em BRL</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/br/inss/">🧾 INSS / Descontos</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/br/decimo-terceiro/">🎁 13º salário</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/br/inflacao/">📊 Ajuste por inflação</a></li>
+      </ul>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Receita Federal ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountBrNav } from '/js/br-nav.js';
+
+    autoMountBrNav();
+  </script>
+</body>
+</html>

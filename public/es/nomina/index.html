@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Simulador de nómina España</title>
+  <meta name="description" content="Simulador simple de nómina en España. Ingresa bruto mensual, Seguridad Social %, IRPF % y otros descuentos para ver el neto estimado." />
+  <link rel="canonical" href="https://www.calculando.cl/es/nomina/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora España</strong>
+          <span>Nómina / Retenciones</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Nómina (retenciones simples)</h1>
+      <p>
+        Calcula cuánto se descuenta en tu nómina mensual en España considerando Seguridad Social, IRPF y otros descuentos fijos.
+        Resultado referencial en euros.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Fórmula básica: ss = bruto × SS%, irpf = bruto × IRPF%. Neto = bruto - ss - irpf - otros.
+      </div>
+
+      <div id="esNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Bruto mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">€</span>
+          <input id="brutoInput" type="number" min="0" step="50" class="amount-input" placeholder="Ej: 2100" />
+          <span style="font-size:12px;color:var(--muted);">EUR</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="ssInput">Seguridad Social (%)</label>
+        <input id="ssInput" type="number" min="0" step="0.01" class="amount-input" style="max-width:200px;" value="6.35" />
+        <div class="input-help">Editable. Valor de referencia para asalariados.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="irpfInput">IRPF (%)</label>
+        <input id="irpfInput" type="number" min="0" step="0.1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Ajusta según tus retenciones actuales.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="otrosInput">Otros descuentos (EUR)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">€</span>
+          <input id="otrosInput" type="number" min="0" step="10" class="amount-input" style="max-width:220px;" value="0" />
+          <span style="font-size:12px;color:var(--muted);">EUR</span>
+        </div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Seguridad Social</div>
+          <div class="result-value" id="ssResult">€0.00</div>
+          <div class="result-sub">Bruto × SS%.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">IRPF</div>
+          <div class="result-value" id="irpfResult">€0.00</div>
+          <div class="result-sub">Bruto × IRPF%.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Total descuentos</div>
+          <div class="result-value" id="totalResult">€0.00</div>
+          <div class="result-sub">Suma de todos los descuentos.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Neto estimado</div>
+          <div class="result-value" id="netoResult">€0.00</div>
+          <div class="result-sub">Bruto menos descuentos.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Agencia Tributaria ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountEsNav } from '/js/es-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const ssInput = document.getElementById('ssInput');
+    const irpfInput = document.getElementById('irpfInput');
+    const otrosInput = document.getElementById('otrosInput');
+
+    const ssResult = document.getElementById('ssResult');
+    const irpfResult = document.getElementById('irpfResult');
+    const totalResult = document.getElementById('totalResult');
+    const netoResult = document.getElementById('netoResult');
+
+    const formatter = new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const bruto = Number(brutoInput.value) || 0;
+      const ssPct = (Number(ssInput.value) || 0) / 100;
+      const irpfPct = (Number(irpfInput.value) || 0) / 100;
+      const otros = Number(otrosInput.value) || 0;
+
+      const ss = bruto * ssPct;
+      const irpf = bruto * irpfPct;
+      const total = ss + irpf + otros;
+      const neto = bruto - total;
+
+      ssResult.textContent = formatter.format(ss);
+      irpfResult.textContent = formatter.format(irpf);
+      totalResult.textContent = formatter.format(total);
+      netoResult.textContent = formatter.format(neto);
+    }
+
+    brutoInput.addEventListener('input', update);
+    ssInput.addEventListener('input', update);
+    irpfInput.addEventListener('input', update);
+    otrosInput.addEventListener('input', update);
+
+    autoMountEsNav();
+    brutoInput.value = 2100;
+    update();
+  </script>
+</body>
+</html>

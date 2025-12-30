@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="bo">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Salario líquido Bolivia – Calculadora en BOB</title>
+  <meta name="description" content="Calcula tu salario líquido en Bolivia. Ingresa tu salario bruto mensual en BOB, ajusta el descuento AFP u otros porcentajes y obtén un neto estimado." />
+  <link rel="canonical" href="https://calculando.cl/bo/salario-liquido/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Bolivia</strong>
+          <span>Salario líquido</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Salario líquido en Bolivia</h1>
+      <p>
+        Convierte tu salario bruto mensual a salario líquido estimado en bolivianos (BOB). Edita la tasa de
+        descuento AFP y agrega otros descuentos porcentuales según tu realidad laboral.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo referencial, porcentajes editables.
+      </div>
+
+      <div id="boNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Salario bruto mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">Bs</span>
+          <input id="brutoInput" type="number" min="0" step="100" class="amount-input" placeholder="Ej: 5000" />
+          <span style="font-size:12px;color:var(--muted);">BOB</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="afpInput">Descuento AFP (%)</label>
+        <input id="afpInput" type="number" min="0" max="30" step="0.01" class="amount-input" style="max-width:200px;" value="12.71" />
+        <div class="input-help">Porcentaje editable para tu administradora de fondos de pensiones.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="otrosInput">Otros descuentos (%)</label>
+        <input id="otrosInput" type="number" min="0" max="50" step="0.5" class="amount-input" style="max-width:200px;" value="0" />
+        <div class="input-help">Seguro, préstamos u otros descuentos que quieras considerar.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Salario líquido estimado</div>
+          <div class="result-value" id="netoResult">Bs 0</div>
+          <div class="result-sub">Monto aproximado después de los descuentos ingresados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle de descuentos</div>
+          <div class="result-main-label">AFP: <span id="afpMonto">Bs 0</span></div>
+          <div class="result-main-label">Otros: <span id="otrosMonto">Bs 0</span></div>
+          <div class="result-main-label">Total descuentos: <span id="totalMonto">Bs 0</span></div>
+          <div class="result-sub">No aplica tramos de impuesto; todo es editable.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Servicio de Impuestos Nacionales (SIN) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountBoNav } from '/js/bo-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const afpInput = document.getElementById('afpInput');
+    const otrosInput = document.getElementById('otrosInput');
+    const netoResult = document.getElementById('netoResult');
+    const afpMonto = document.getElementById('afpMonto');
+    const otrosMonto = document.getElementById('otrosMonto');
+    const totalMonto = document.getElementById('totalMonto');
+
+    const formatter = new Intl.NumberFormat('es-BO', {
+      style: 'currency',
+      currency: 'BOB',
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const bruto = Number(brutoInput.value) || 0;
+      const afpRate = (Number(afpInput.value) || 0) / 100;
+      const otrosRate = (Number(otrosInput.value) || 0) / 100;
+
+      const afp = bruto * afpRate;
+      const otros = bruto * otrosRate;
+      const total = afp + otros;
+      const neto = bruto - total;
+
+      netoResult.textContent = formatter.format(neto);
+      afpMonto.textContent = formatter.format(afp);
+      otrosMonto.textContent = formatter.format(otros);
+      totalMonto.textContent = formatter.format(total);
+    }
+
+    brutoInput.addEventListener('input', update);
+    afpInput.addEventListener('input', update);
+    otrosInput.addEventListener('input', update);
+
+    autoMountBoNav();
+    brutoInput.value = 5000;
+    update();
+  </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ve">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Bono vacacional Venezuela – Calculadora simple</title>
+  <meta name="description" content="Calcula un bono vacacional estimado en Venezuela. Ingresa tu sueldo mensual en bolívares (VES) y los días a pagar." />
+  <link rel="canonical" href="https://calculando.cl/ve/bono-vacacional/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Venezuela</strong>
+          <span>Bono vacacional</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Bono vacacional en Venezuela</h1>
+      <p>
+        Estima tu bono vacacional en bolívares (VES) con una fórmula directa. Ingresa tu sueldo mensual
+        y ajusta los días que te corresponden según contrato o antigüedad.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Fórmula: salario diario x días de bono. Todo editable.
+      </div>
+
+      <div id="veNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="sueldoInput">Sueldo mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">Bs.</span>
+          <input id="sueldoInput" type="number" min="0" step="0.01" class="amount-input" placeholder="Ej: 1500" />
+          <span style="font-size:12px;color:var(--muted);">VES</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="diasInput">Días de bono vacacional</label>
+        <input id="diasInput" type="number" min="0" max="200" step="1" class="amount-input" style="max-width:200px;" value="15" />
+        <div class="input-help">Referencia legal: mínimo 15 días; puede aumentar por antigüedad o contrato.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Bono vacacional estimado</div>
+          <div class="result-value" id="bonoResult">Bs. 0,00</div>
+          <div class="result-sub">Cálculo rápido: (sueldo mensual / 30) x días.</div>
+        </div>
+      </div>
+
+      <div class="pill" style="margin-top:12px;">
+        Referencia legal: mínimo 15 días; puede aumentar por antigüedad/contrato. Ajusta los días según tu realidad.
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con SENIAT ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountVeNav } from '/js/ve-nav.js';
+
+    const sueldoInput = document.getElementById('sueldoInput');
+    const diasInput = document.getElementById('diasInput');
+    const bonoResult = document.getElementById('bonoResult');
+
+    const formatter = new Intl.NumberFormat('es-VE', {
+      style: 'currency',
+      currency: 'VES',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const sueldo = Number(sueldoInput.value) || 0;
+      const dias = Number(diasInput.value) || 0;
+
+      const salarioDiario = sueldo / 30;
+      const bono = salarioDiario * dias;
+
+      bonoResult.textContent = formatter.format(bono);
+    }
+
+    sueldoInput.addEventListener('input', update);
+    diasInput.addEventListener('input', update);
+
+    autoMountVeNav();
+    sueldoInput.value = 2000;
+    update();
+  </script>
+</body>
+</html>

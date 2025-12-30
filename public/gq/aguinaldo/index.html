@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="gq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Aguinaldo Guinea Ecuatorial – Bono proporcional</title>
+  <meta name="description" content="Calcula aguinaldo o bono proporcional en Guinea Ecuatorial. Ingresa salario mensual, meses trabajados y porcentaje extra opcional en francos CFA (XAF)." />
+  <link rel="canonical" href="https://calculando.cl/gq/aguinaldo/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Guinea Ecuatorial</strong>
+          <span>Aguinaldo / Bono</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Aguinaldo / Bono proporcional</h1>
+      <p>
+        Calcula un aguinaldo estimado en francos CFA (XAF) según meses trabajados.
+        Añade un % extra opcional si tu empresa paga más o menos de un sueldo.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Estimación simple. Ajusta el % si tu empresa paga más/menos de 1 sueldo.
+      </div>
+
+      <div id="gqNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">FCFA</span>
+          <input id="salarioInput" type="number" min="0" step="1000" class="amount-input" placeholder="Ej: 300000" />
+          <span style="font-size:12px;color:var(--muted);">XAF</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados (1–12)</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Coloca los meses completos trabajados en el período.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="bonusPctInput">% Bono extra opcional</label>
+        <input id="bonusPctInput" type="number" min="0" max="200" step="1" class="amount-input" style="max-width:200px;" value="0" />
+        <div class="input-help">Usa este campo si el bono es mayor o menor a un sueldo.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Bono proporcional base</div>
+          <div class="result-value" id="baseResult">FCFA 0</div>
+          <div class="result-sub">base = salario × (meses / 12)</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle y total</div>
+          <div class="result-main-label">Bono extra por %: <span id="extraResult">FCFA 0</span></div>
+          <div class="result-main-label">Total estimado: <span id="totalResult">FCFA 0</span></div>
+          <div class="result-sub">Estimación simple. Ajusta el % si tu empresa paga más/menos de 1 sueldo.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con autoridades fiscales ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountGqNav } from '/js/gq-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const bonusPctInput = document.getElementById('bonusPctInput');
+    const baseResult = document.getElementById('baseResult');
+    const extraResult = document.getElementById('extraResult');
+    const totalResult = document.getElementById('totalResult');
+
+    const formatter = new Intl.NumberFormat('es-GQ', {
+      style: 'currency',
+      currency: 'XAF',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = Math.min(Math.max(Number(mesesInput.value) || 1, 1), 12);
+      const bonusPct = (Number(bonusPctInput.value) || 0) / 100;
+
+      const base = salario * (meses / 12);
+      const extra = base * bonusPct;
+      const total = base + extra;
+
+      mesesInput.value = meses;
+      baseResult.textContent = formatter.format(base);
+      extraResult.textContent = formatter.format(extra);
+      totalResult.textContent = formatter.format(total);
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+    bonusPctInput.addEventListener('input', update);
+
+    autoMountGqNav();
+    salarioInput.value = 300000;
+    update();
+  </script>
+</body>
+</html>

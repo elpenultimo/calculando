@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="co">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Prima de servicios – Colombia</title>
+  <meta name="description" content="Calcula tu prima de servicios en Colombia. Ingresa tu sueldo mensual y los meses trabajados para estimar la prima semestral en COP." />
+  <link rel="canonical" href="https://calculando.cl/co/prima/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Colombia</strong>
+          <span>Prima</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Prima de servicios</h1>
+      <p>
+        Estima la prima semestral en Colombia con la fórmula básica: (sueldo × meses trabajados) / 12. Ajusta los valores en pesos colombianos (COP) según tu realidad.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Referencia simple, sin APIs ni datos externos.
+      </div>
+
+      <div id="coNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="sueldoInput">Sueldo mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="sueldoInput" type="number" min="0" step="50000" class="amount-input" placeholder="Ej: 2400000" />
+          <span style="font-size:12px;color:var(--muted);">COP</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados</label>
+        <input id="mesesInput" type="number" min="0" max="12" step="0.5" class="amount-input" style="max-width:180px;" value="6" />
+        <div class="input-help">Usa el periodo acumulado dentro del semestre (máximo 6 meses).</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Prima estimada</div>
+          <div class="result-value" id="primaResult">$ 0</div>
+          <div class="result-sub">Calculada con la fórmula (sueldo × meses) / 12.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle</div>
+          <div class="result-main-label">Meses considerados: <span id="mesesLabel">0</span></div>
+          <div class="result-main-label">Base utilizada: <span id="baseLabel">$ 0</span></div>
+          <div class="result-sub">Herramienta informativa para referencia rápida.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con DIAN ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountCoNav } from '/js/co-nav.js';
+
+    const sueldoInput = document.getElementById('sueldoInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const primaResult = document.getElementById('primaResult');
+    const mesesLabel = document.getElementById('mesesLabel');
+    const baseLabel = document.getElementById('baseLabel');
+
+    const formatter = new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      maximumFractionDigits: 0,
+    });
+
+    function update() {
+      const sueldo = Number(sueldoInput.value) || 0;
+      const meses = Number(mesesInput.value) || 0;
+      const base = sueldo * meses;
+      const prima = base / 12;
+
+      primaResult.textContent = formatter.format(prima);
+      mesesLabel.textContent = meses.toFixed(1).replace('.0', '');
+      baseLabel.textContent = formatter.format(base);
+    }
+
+    sueldoInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountCoNav();
+    sueldoInput.value = 2400000;
+    update();
+  </script>
+</body>
+</html>

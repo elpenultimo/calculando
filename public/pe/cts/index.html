@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="pe">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>CTS Perú – Calculadora rápida</title>
+  <meta name="description" content="Calcula una CTS referencial en Perú. Ingresa tu sueldo mensual y los meses trabajados del semestre para estimar la CTS a depositar." />
+  <link rel="canonical" href="https://calculando.cl/pe/cts/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Perú</strong>
+          <span>CTS</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>CTS (Compensación por Tiempo de Servicios)</h1>
+      <p>
+        Estima tu CTS semestral en Perú. Usa el sueldo mensual y los meses trabajados en el periodo; la fórmula
+        simplificada divide el sueldo entre 12 y lo multiplica por los meses acumulados.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo simple, puede variar con beneficios y topes sectoriales.
+      </div>
+
+      <div id="peNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="sueldoInput">Sueldo mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">S/</span>
+          <input id="sueldoInput" type="number" min="0" step="100" class="amount-input" placeholder="Ej: 4200" />
+          <span style="font-size:12px;color:var(--muted);">PEN</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados en el semestre</label>
+        <input id="mesesInput" type="number" min="0" max="6" step="0.5" class="amount-input" style="max-width:180px;" value="6" />
+        <div class="input-help">Considera el periodo mayo-octubre o noviembre-abril.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">CTS semestral estimada</div>
+          <div class="result-value" id="ctsResult">S/ 0</div>
+          <div class="result-sub">Usa la fórmula referencial sueldo/12 × meses.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle</div>
+          <div class="result-main-label">Factor aplicado: <span id="factorLabel">0</span></div>
+          <div class="result-main-label">Base mensual: <span id="baseMensual">S/ 0</span></div>
+          <div class="result-sub">No incluye asignaciones ni topes adicionales.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con SUNAT ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountPeNav } from '/js/pe-nav.js';
+
+    const sueldoInput = document.getElementById('sueldoInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const ctsResult = document.getElementById('ctsResult');
+    const factorLabel = document.getElementById('factorLabel');
+    const baseMensual = document.getElementById('baseMensual');
+
+    const formatter = new Intl.NumberFormat('es-PE', {
+      style: 'currency',
+      currency: 'PEN',
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const sueldo = Number(sueldoInput.value) || 0;
+      const meses = Math.max(0, Number(mesesInput.value) || 0);
+      const factor = meses / 12;
+      const base = sueldo / 12;
+      const cts = base * meses;
+
+      ctsResult.textContent = formatter.format(cts);
+      factorLabel.textContent = `${factor.toFixed(2)} del sueldo`;
+      baseMensual.textContent = formatter.format(base);
+    }
+
+    sueldoInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountPeNav();
+    update();
+  </script>
+</body>
+</html>
