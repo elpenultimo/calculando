@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark" data-country="br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>13º Salário – Calculadora Brasil em BRL</title>
+  <meta name="description" content="Simule o valor do 13º salário no Brasil. Informe seu salário mensal em BRL e quantos meses foram trabalhados para estimar o valor proporcional." />
+  <link rel="canonical" href="https://calculando.cl/br/decimo-terceiro/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Brasil</strong>
+          <span>13º salário</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo escuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>13º salário</h1>
+      <p>
+        Estime o valor do 13º salário proporcional no Brasil. Informe o salário mensal e quantos meses foram trabalhados no ano para ver o cálculo.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Valor bruto estimado, sem descontos obrigatórios.
+      </div>
+
+      <div id="brNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salário mensal</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">R$</span>
+          <input id="salarioInput" type="number" min="0" step="100" class="amount-input" placeholder="Ex: 5500" />
+          <span style="font-size:12px;color:var(--muted);">BRL</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabalhados</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Use um valor entre 1 e 12 conforme o período trabalhado.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">13º salário estimado</div>
+          <div class="result-value" id="decimoValor">R$ 0,00</div>
+          <div class="result-sub">Cálculo proporcional simples.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalhe do cálculo</div>
+          <div class="result-main-label">Fórmula: <span id="detalheFormula">-</span></div>
+          <div class="result-sub">Referencial, sem considerar descontos obrigatórios.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Receita Federal ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountBrNav } from '/js/br-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const decimoValor = document.getElementById('decimoValor');
+    const detalheFormula = document.getElementById('detalheFormula');
+
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = Math.min(12, Math.max(1, Number(mesesInput.value) || 0));
+      mesesInput.value = meses;
+
+      const proporcional = (salario / 12) * meses;
+
+      decimoValor.textContent = formatter.format(proporcional);
+      detalheFormula.textContent = `${formatter.format(salario)} / 12 × ${meses}`;
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountBrNav();
+    salarioInput.value = 5500;
+    update();
+  </script>
+</body>
+</html>

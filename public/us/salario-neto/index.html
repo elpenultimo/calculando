@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="us">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Calculadora salario neto en EE.UU. – USD</title>
+  <meta name="description" content="Calcula tu salario neto estimado en Estados Unidos. Ingresa el salario bruto, frecuencia de pago y descuentos editables para ver el neto mensual en dólares (USD)." />
+  <link rel="canonical" href="https://calculando.cl/us/salario-neto/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Estados Unidos</strong>
+          <span>Salario neto (estimado)</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Salario neto en Estados Unidos (estimación simple)</h1>
+      <p>
+        Convierte tu salario bruto en USD según la frecuencia de pago y aplica un descuento total
+        (federal + state + FICA aproximado) y otros descuentos opcionales.
+        Todo se muestra como neto mensual en dólares.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Estimación simple. Impuestos reales dependen de estado, filing status, deductions, etc.
+      </div>
+
+      <div id="usNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Salario bruto (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="brutoInput" type="number" min="0" step="100" class="amount-input" placeholder="Ej: 5200" />
+          <span style="font-size:12px;color:var(--muted);">USD</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="frecuenciaInput">Frecuencia</label>
+        <select id="frecuenciaInput" class="amount-input" style="max-width:240px;">
+          <option value="monthly">Mensual</option>
+          <option value="biweekly">Quincenal (biweekly)</option>
+          <option value="weekly">Semanal</option>
+          <option value="annual">Anual</option>
+        </select>
+        <div class="input-help">Si el valor no es mensual, lo convertimos a mensual para el cálculo.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="descuentoPctInput">Descuento total (%)</label>
+        <input id="descuentoPctInput" type="number" min="0" max="80" step="0.5" class="amount-input" style="max-width:200px;" value="22" />
+        <div class="input-help">Incluye federal + state + FICA aproximado, editable.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="otrosInput">Otros descuentos (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="otrosInput" type="number" min="0" step="10" class="amount-input" style="max-width:200px;" value="0" />
+        </div>
+        <div class="input-help">Seguros, aportes voluntarios u otros descuentos fijos.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Bruto mensual</div>
+          <div class="result-value" id="brutoMensual">$0.00</div>
+          <div class="result-sub">Salario bruto convertido a base mensual según la frecuencia.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Descuento por %</div>
+          <div class="result-value" id="descuentoPctMonto">$0.00</div>
+          <div class="result-sub">Monto descontado por el porcentaje ingresado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Otros descuentos</div>
+          <div class="result-value" id="otrosMonto">$0.00</div>
+          <div class="result-sub">Descuentos fijos adicionales en USD.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Neto estimado mensual</div>
+          <div class="result-value" id="netoMensual">$0.00</div>
+          <div class="result-sub">Resultado referencial en dólares con dos decimales.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Internal Revenue Service (IRS) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountUsNav } from '/js/us-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const frecuenciaInput = document.getElementById('frecuenciaInput');
+    const descuentoPctInput = document.getElementById('descuentoPctInput');
+    const otrosInput = document.getElementById('otrosInput');
+
+    const brutoMensual = document.getElementById('brutoMensual');
+    const descuentoPctMonto = document.getElementById('descuentoPctMonto');
+    const otrosMonto = document.getElementById('otrosMonto');
+    const netoMensual = document.getElementById('netoMensual');
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function toMonthly(bruto, frecuencia) {
+      switch (frecuencia) {
+        case 'biweekly':
+          return (bruto * 26) / 12;
+        case 'weekly':
+          return (bruto * 52) / 12;
+        case 'annual':
+          return bruto / 12;
+        default:
+          return bruto;
+      }
+    }
+
+    function update() {
+      const bruto = Number(brutoInput.value) || 0;
+      const frecuencia = frecuenciaInput.value || 'monthly';
+      const descuentoPct = (Number(descuentoPctInput.value) || 0) / 100;
+      const otros = Number(otrosInput.value) || 0;
+
+      const brutoMes = toMonthly(bruto, frecuencia);
+      const descuentoMonto = brutoMes * descuentoPct;
+      const neto = brutoMes - descuentoMonto - otros;
+
+      brutoMensual.textContent = formatter.format(brutoMes);
+      descuentoPctMonto.textContent = formatter.format(descuentoMonto);
+      otrosMonto.textContent = formatter.format(otros);
+      netoMensual.textContent = formatter.format(neto);
+    }
+
+    brutoInput.addEventListener('input', update);
+    frecuenciaInput.addEventListener('change', update);
+    descuentoPctInput.addEventListener('input', update);
+    otrosInput.addEventListener('input', update);
+
+    autoMountUsNav();
+    brutoInput.value = 5200;
+    frecuenciaInput.value = 'monthly';
+    update();
+  </script>
+</body>
+</html>

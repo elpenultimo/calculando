@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ec">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Décimo tercero Ecuador – Cálculo proporcional</title>
+  <meta name="description" content="Calcula el décimo tercero proporcional en Ecuador en USD según tu ingreso mensual promedio y meses trabajados." />
+  <link rel="canonical" href="https://calculando.cl/ec/decimo-tercero/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Ecuador</strong>
+          <span>Décimo tercero</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Décimo tercero estimado</h1>
+      <p>
+        Calcula tu décimo tercero proporcional en dólares (USD) usando el ingreso mensual promedio y los meses trabajados. Fórmula simple: ingreso × (meses / 12).
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo proporcional sin descuentos.
+      </div>
+
+      <div id="ecNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="ingresoInput">Ingreso mensual promedio (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="ingresoInput" type="number" min="0" step="50" class="amount-input" placeholder="Ej: 1000" />
+          <span style="font-size:12px;color:var(--muted);">USD</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados (1–12)</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Usa meses proporcionales si aún no completas el año.</div>
+      </div>
+
+      <div class="result-card" style="margin-top:16px;">
+        <div class="result-title">Décimo tercero estimado</div>
+        <div class="result-value" id="decimoResult">$ 0.00</div>
+        <div class="result-sub">Fórmula: ingreso × (meses / 12). Sin descuentos aplicados.</div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Servicio de Rentas Internas (SRI) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountEcNav } from '/js/ec-nav.js';
+
+    const ingresoInput = document.getElementById('ingresoInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const decimoResult = document.getElementById('decimoResult');
+
+    const formatter = new Intl.NumberFormat('es-EC', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const ingreso = Number(ingresoInput.value) || 0;
+      const meses = Math.min(Math.max(Number(mesesInput.value) || 0, 0), 12);
+
+      const decimo = ingreso * (meses / 12);
+
+      decimoResult.textContent = formatter.format(decimo);
+    }
+
+    ingresoInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountEcNav();
+    ingresoInput.value = 1000;
+    update();
+  </script>
+</body>
+</html>

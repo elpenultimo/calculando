@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="us">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Presupuesto mensual 50/30/20 – USD</title>
+  <meta name="description" content="Calcula un presupuesto mensual estilo 50/30/20 en Estados Unidos. Ingresa tu ingreso neto en USD y ajusta porcentajes para ver cuánto destinar a necesidades, gustos y ahorro/deuda." />
+  <link rel="canonical" href="https://calculando.cl/us/presupuesto/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Estados Unidos</strong>
+          <span>Presupuesto mensual</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Presupuesto mensual en Estados Unidos</h1>
+      <p>
+        Distribuye tu ingreso mensual neto en USD usando la regla 50/30/20 o ajusta los porcentajes
+        a tu realidad. Calcula montos para necesidades, gustos y ahorro o pago de deuda.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Si la suma de porcentajes no es 100% mostramos un aviso, pero calculamos igualmente.
+      </div>
+
+      <div id="usNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="ingresoInput">Ingreso mensual neto (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="ingresoInput" type="number" min="0" step="100" class="amount-input" placeholder="Ej: 4200" />
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="necesidadesInput">Necesidades (%)</label>
+        <input id="necesidadesInput" type="number" min="0" max="100" step="1" class="amount-input" style="max-width:200px;" value="50" />
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="gustosInput">Gustos (%)</label>
+        <input id="gustosInput" type="number" min="0" max="100" step="1" class="amount-input" style="max-width:200px;" value="30" />
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="ahorroInput">Ahorro/deuda (%)</label>
+        <input id="ahorroInput" type="number" min="0" max="100" step="1" class="amount-input" style="max-width:200px;" value="20" />
+      </div>
+
+      <div id="sumWarning" class="pill" style="display:none;margin-top:12px;background:rgba(255,255,255,0.06);">
+        <span class="pill-dot" style="background-color:var(--warning);"></span>
+        La suma de porcentajes no es 100%. Ajusta si quieres un reparto exacto.
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Necesidades</div>
+          <div class="result-value" id="necesidadesMonto">$0.00</div>
+          <div class="result-sub">Vivienda, comida, transporte, seguros.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Gustos</div>
+          <div class="result-value" id="gustosMonto">$0.00</div>
+          <div class="result-sub">Salidas, hobbies y extras planificados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Ahorro / Deuda</div>
+          <div class="result-value" id="ahorroMonto">$0.00</div>
+          <div class="result-sub">Ahorro, fondo de emergencia o pagos de deuda.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Internal Revenue Service (IRS) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountUsNav } from '/js/us-nav.js';
+
+    const ingresoInput = document.getElementById('ingresoInput');
+    const necesidadesInput = document.getElementById('necesidadesInput');
+    const gustosInput = document.getElementById('gustosInput');
+    const ahorroInput = document.getElementById('ahorroInput');
+    const sumWarning = document.getElementById('sumWarning');
+
+    const necesidadesMonto = document.getElementById('necesidadesMonto');
+    const gustosMonto = document.getElementById('gustosMonto');
+    const ahorroMonto = document.getElementById('ahorroMonto');
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const ingreso = Number(ingresoInput.value) || 0;
+      const pctNecesidades = Number(necesidadesInput.value) || 0;
+      const pctGustos = Number(gustosInput.value) || 0;
+      const pctAhorro = Number(ahorroInput.value) || 0;
+
+      const sumPct = pctNecesidades + pctGustos + pctAhorro;
+      sumWarning.style.display = sumPct === 100 || sumPct === 0 ? 'none' : '';
+
+      const necesidades = ingreso * (pctNecesidades / 100);
+      const gustos = ingreso * (pctGustos / 100);
+      const ahorro = ingreso * (pctAhorro / 100);
+
+      necesidadesMonto.textContent = formatter.format(necesidades);
+      gustosMonto.textContent = formatter.format(gustos);
+      ahorroMonto.textContent = formatter.format(ahorro);
+    }
+
+    [ingresoInput, necesidadesInput, gustosInput, ahorroInput].forEach(input => {
+      input.addEventListener('input', update);
+    });
+
+    autoMountUsNav();
+    ingresoInput.value = 4200;
+    update();
+  </script>
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+
+  <title>Calculadora Sueldo Neto México – ISR e IMSS</title>
+
+  <meta name="description" content="Calcula tu sueldo neto mensual estimado en México considerando ISR e IMSS. Ingresa tu sueldo bruto y obtén los descuentos principales en MXN." />
+  <meta name="keywords" content="sueldo neto mexico, sueldo neto, calcular isr, calcular imss, sueldo bruto a neto" />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/sueldo-neto/" />
+
+  <meta property="og:title" content="Sueldo Neto México – Calculadora rápida" />
+  <meta property="og:description" content="Convierte sueldo bruto a sueldo neto estimando ISR e IMSS en pesos mexicanos." />
+  <meta property="og:url" content="https://calculando.cl/mx/sueldo-neto/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora sueldo neto MX" />
+  <meta name="twitter:description" content="Ingresa tu sueldo bruto mensual y obtén ISR, IMSS y sueldo neto estimado." />
+
+  <style>
+    /* --------- TIPOGRAFÍA Y RESET --------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    :root {
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    html[data-theme="dark"] {
+      --bg: radial-gradient(circle at top, #0f172a 0, #020617 52%, #020617 100%);
+      --shell: rgba(15, 23, 42, 0.9);
+      --card: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.12);
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.85);
+      --shadow-card: 0 18px 42px rgba(15, 23, 42, 0.95);
+      --header-glow: 0 0 40px rgba(56, 189, 248, 0.35);
+      --chip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    html[data-theme="light"] {
+      --bg: radial-gradient(circle at top, #e0edff 0, #f4f7fb 45%, #ffffff 100%);
+      --shell: rgba(255, 255, 255, 0.9);
+      --card: #ffffff;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #0f172a;
+      --muted: #6b7280;
+      --accent: #eab308;
+      --accent-soft: rgba(234, 179, 8, 0.12);
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.15);
+      --shadow-card: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --header-glow: 0 0 0 rgba(0, 0, 0, 0);
+      --chip-bg: #f9fafb;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      transition: background 0.4s ease-out, color 0.25s ease-out;
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+      padding: 22px 16px 34px;
+      margin: 0 auto;
+      animation: fade-in 0.6s ease-out;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --------- HEADER --------- */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb 0, #e5e7eb 24%, #0ea5e9 50%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0b1120;
+      box-shadow: var(--header-glow);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .logo-block:hover .logo-mark {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 0 55px rgba(56, 189, 248, 0.55);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), color var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .theme-toggle-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-icon {
+      background: #0f172a;
+    }
+
+    html[data-theme="light"] .theme-toggle-icon {
+      background: #facc15;
+      color: #1f2933;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- HERO --------- */
+
+    .hero {
+      margin: 12px 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
+    }
+
+    /* --------- NAV DE HERRAMIENTAS --------- */
+
+    .tool-nav {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tool-tab {
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .tool-tab span {
+      font-size: 14px;
+    }
+
+    .tool-tab-active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- SHELL / CONTENEDORES --------- */
+
+    .shell {
+      margin-top: 14px;
+      background: var(--shell);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(24px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 20px 22px 24px;
+      }
+    }
+
+    .tool-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tool-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* INPUT MONTO */
+
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .input-row {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .input-label {
+      font-size: 12px;
+      color: var(--muted);
+      min-width: 160px;
+    }
+
+    .amount-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: rgba(2, 6, 23, 0.45);
+      color: var(--text);
+      width: 100%;
+    }
+
+    .amount-prefix {
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .amount-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* RESULTADOS */
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .result-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .result-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* FAQ */
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    footer strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.mx</strong>
+        <span>Calculadoras simples y claras.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+
+
+  </header>
+
+  <section class="hero">
+    <h1>Calculadora de sueldo neto en México</h1>
+    <p>
+      Ingresa tu sueldo bruto mensual en pesos mexicanos y obtén una estimación de ISR, IMSS y sueldo neto.
+      Este es un cálculo referencial para visualizar descuentos comunes.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Estimación mensual · Muestra ISR, IMSS y sueldo neto en vivo
+    </div>
+
+    <div id="mxNav"></div>
+  </section>
+
+  <section class="shell tool-shell">
+    <div class="tool-title">Ingresa tu sueldo bruto mensual (MXN)</div>
+    <div class="tool-subtitle">
+      La calculadora usa tablas de ISR e IMSS referenciales para mostrar descuentos habituales de un trabajador dependiente.
+    </div>
+
+    <div class="input-row">
+      <div class="input-label">Sueldo bruto mensual (MXN)</div>
+      <div class="amount-wrap">
+        <span class="amount-prefix">$</span>
+        <input
+          id="brutoInput"
+          class="amount-input"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="100"
+          placeholder="Ej: 35000"
+        />
+      </div>
+    </div>
+
+    <div class="helper-text" id="inputHelper">Escribe para ver el cálculo en vivo.</div>
+
+    <div class="result-grid" aria-live="polite">
+      <div class="result-card">
+        <div class="result-label">ISR estimado</div>
+        <div class="result-value" id="isrValue">$0.00</div>
+        <div class="result-note">Calculado con tabla mensual de ISR 2024 (monto gravable en MXN).</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">IMSS trabajador</div>
+        <div class="result-value" id="imssValue">$0.00</div>
+        <div class="result-note">Cuotas obreras aproximadas considerando tope de 25 UMA.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Total descuentos</div>
+        <div class="result-value" id="totalValue">$0.00</div>
+        <div class="result-note">Suma de ISR estimado + IMSS trabajador.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Sueldo neto</div>
+        <div class="result-value" id="netoValue">$0.00</div>
+        <div class="result-note">Sueldo bruto menos descuentos principales.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="tool-title">Preguntas rápidas sobre el cálculo</div>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué tasa de ISR se usa?</h3>
+        <p class="faq-answer">Se aplica la tabla mensual de ISR 2024 con cuota fija y porcentaje sobre el excedente. Es una estimación sin subsidio al empleo ni deducciones personales.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo se calcula el IMSS del trabajador?</h3>
+        <p class="faq-answer">Se aproxima con un porcentaje sobre el salario base de cotización y se limita a 25 UMA. No incluye aportaciones patronales ni prestaciones adicionales.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿El resultado es exacto?</h3>
+        <p class="faq-answer">Es un estimado para visualizar descuentos frecuentes. Factores como subsidio al empleo, vales, primas o pensiones pueden modificar el cálculo real.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Puedo ingresar sueldos altos?</h3>
+        <p class="faq-answer">Sí. El cálculo considera un tope de 25 UMA para IMSS y aplica la tasa marginal de ISR según el tramo correspondiente.</p>
+      </article>
+    </div>
+  </section>
+  <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Servicio de Administración Tributaria (SAT) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+<script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+
+<script>
+  const brutoInput = document.getElementById("brutoInput");
+  const helper = document.getElementById("inputHelper");
+  const isrValue = document.getElementById("isrValue");
+  const imssValue = document.getElementById("imssValue");
+  const totalValue = document.getElementById("totalValue");
+  const netoValue = document.getElementById("netoValue");
+
+  const isrTable2024 = [
+    { min: 0, max: 746.04, rate: 0.0192, fixed: 0 },
+    { min: 746.05, max: 6332.05, rate: 0.064, fixed: 14.32 },
+    { min: 6332.06, max: 11128.01, rate: 0.1088, fixed: 371.83 },
+    { min: 11128.02, max: 12935.82, rate: 0.16, fixed: 893.63 },
+    { min: 12935.83, max: 15487.71, rate: 0.1792, fixed: 1182.88 },
+    { min: 15487.72, max: 31236.49, rate: 0.2136, fixed: 1623.58 },
+    { min: 31236.50, max: 49233.0, rate: 0.2352, fixed: 2135.47 },
+    { min: 49233.01, max: 93993.9, rate: 0.3, fixed: 6376.44 },
+    { min: 93993.91, max: 125325.2, rate: 0.32, fixed: 8735.0 },
+    { min: 125325.21, max: 375975.61, rate: 0.34, fixed: 12344.71 },
+    { min: 375975.62, max: Number.POSITIVE_INFINITY, rate: 0.35, fixed: 16274.38 }
+  ];
+
+  const UMA_MENSUAL = 3257.1;
+  const IMSS_RATE_OBRERO = 0.0275;
+  const IMSS_TOPE = UMA_MENSUAL * 25;
+
+  function formatMXN(value) {
+    if (!isFinite(value)) return "$0.00";
+    try {
+      return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    } catch (e) {
+      const safeValue = Number(value) || 0;
+      return "$" + safeValue.toLocaleString("es-MX", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+  }
+
+  function calculateISR(bruto) {
+    if (!isFinite(bruto) || bruto <= 0) return 0;
+    const tramo = isrTable2024.find(t => bruto >= t.min && bruto <= t.max);
+    if (!tramo) return 0;
+    return tramo.fixed + (bruto - tramo.min) * tramo.rate;
+  }
+
+  function calculateIMSS(bruto) {
+    if (!isFinite(bruto) || bruto <= 0) return 0;
+    const base = Math.min(bruto, IMSS_TOPE);
+    return base * IMSS_RATE_OBRERO;
+  }
+
+  function recalculate() {
+    const raw = (brutoInput.value || "").trim();
+
+    if (!raw) {
+      helper.textContent = "Escribe un sueldo bruto para calcular descuentos.";
+      isrValue.textContent = "$0.00";
+      imssValue.textContent = "$0.00";
+      totalValue.textContent = "$0.00";
+      netoValue.textContent = "$0.00";
+      return;
+    }
+
+    const bruto = Number(raw);
+    if (!isFinite(bruto) || bruto <= 0) {
+      helper.textContent = "Ingresa un monto mayor a 0.";
+      isrValue.textContent = "$0.00";
+      imssValue.textContent = "$0.00";
+      totalValue.textContent = "$0.00";
+      netoValue.textContent = "$0.00";
+      return;
+    }
+
+    const isr = calculateISR(bruto);
+    const imss = calculateIMSS(bruto);
+    const total = isr + imss;
+    const neto = Math.max(bruto - total, 0);
+
+    helper.textContent = "Cálculo referencial en MXN. No considera subsidios ni deducciones personales.";
+    isrValue.textContent = formatMXN(isr);
+    imssValue.textContent = formatMXN(imss);
+    totalValue.textContent = formatMXN(total);
+    netoValue.textContent = formatMXN(neto);
+  }
+
+  brutoInput.addEventListener("input", recalculate);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    brutoInput.value = "35000";
+    recalculate();
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué tasa de ISR se usa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se utiliza una tabla mensual de ISR 2024 para estimar el impuesto sin subsidio al empleo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el IMSS del trabajador?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se aproxima con una cuota obrera sobre el salario base de cotización, limitada a 25 UMA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El resultado es exacto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es un cálculo referencial que no considera subsidio al empleo, deducciones personales ni prestaciones adicionales."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Calculadora sueldo neto México",
+      "url": "https://calculando.cl/mx/sueldo-neto/",
+      "description": "Convierte sueldo bruto a sueldo neto estimando ISR e IMSS en México.",
+      "inLanguage": "es-MX"
+    }
+  ]
+}
+</script>
+
+<script type="module">
+  import { bootstrapPage } from '/js/country-bootstrap.js';
+  import { autoMountMxNav } from '/js/mx-nav.js';
+
+  bootstrapPage('sueldo');
+  autoMountMxNav();
+</script>
+</body>
+</html>

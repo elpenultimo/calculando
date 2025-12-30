@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Aguinaldo El Salvador – Cálculo proporcional</title>
+  <meta name="description" content="Calcula tu aguinaldo proporcional en El Salvador. Ingresa salario mensual, meses trabajados y días de aguinaldo para ver el monto estimado en dólares (USD)." />
+  <link rel="canonical" href="https://calculando.cl/sv/aguinaldo/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora El Salvador</strong>
+          <span>Aguinaldo</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Aguinaldo en El Salvador</h1>
+      <p>
+        Calcula tu aguinaldo estimado en dólares (USD) usando una fórmula proporcional.
+        Ajusta meses trabajados y días de aguinaldo según tu escenario, sin aplicar impuestos ni deducciones automáticas.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Estimación simple con datos editables.
+      </div>
+
+      <div id="svNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="salarioInput" type="number" min="0" step="50" class="amount-input" placeholder="Ej: 900" />
+          <span style="font-size:12px;color:var(--muted);">USD</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados (1–12)</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Coloca los meses del período a considerar.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="diasInput">Días de aguinaldo</label>
+        <input id="diasInput" type="number" min="0" max="30" step="0.5" class="amount-input" style="max-width:200px;" value="15" />
+        <div class="input-help">Editable según tu tramo o convenio.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Aguinaldo estimado</div>
+          <div class="result-value" id="aguinaldoResult">$ 0.00</div>
+          <div class="result-sub">Usamos (salario/30) × días de aguinaldo × (meses/12).</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Ministerio de Hacienda ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountSvNav } from '/js/sv-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const diasInput = document.getElementById('diasInput');
+    const aguinaldoResult = document.getElementById('aguinaldoResult');
+
+    const formatter = new Intl.NumberFormat('es-SV', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function clampMonths(value) {
+      const months = Number(value) || 1;
+      return Math.min(Math.max(months, 1), 12);
+    }
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = clampMonths(mesesInput.value);
+      const dias = Math.max(Number(diasInput.value) || 0, 0);
+
+      const aguinaldo = (salario / 30) * dias * (meses / 12);
+
+      mesesInput.value = meses;
+      aguinaldoResult.textContent = formatter.format(aguinaldo);
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+    diasInput.addEventListener('input', update);
+
+    autoMountSvNav();
+    salarioInput.value = 900;
+    update();
+  </script>
+</body>
+</html>

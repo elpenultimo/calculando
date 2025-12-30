@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ec">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>IESS Ecuador – Aporte del trabajador</title>
+  <meta name="description" content="Calcula el aporte mensual al IESS en Ecuador a partir de tu ingreso en USD y porcentaje editable." />
+  <link rel="canonical" href="https://calculando.cl/ec/iess/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Ecuador</strong>
+          <span>IESS / Aportes</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Aporte al IESS</h1>
+      <p>
+        Estima tu aporte mensual al IESS en dólares (USD). Ajusta el porcentaje de aporte del trabajador y observa el ingreso restante después de la contribución.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Estimación informativa, editable en vivo.
+      </div>
+
+      <div id="ecNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="ingresoInput">Ingreso mensual (USD)</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="ingresoInput" type="number" min="0" step="50" class="amount-input" placeholder="Ej: 1200" />
+          <span style="font-size:12px;color:var(--muted);">USD</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="aporteInput">Aporte trabajador (%)</label>
+        <input id="aporteInput" type="number" min="0" max="20" step="0.01" class="amount-input" style="max-width:200px;" value="9.45" />
+        <div class="input-help">Tasa editable para el aporte personal al IESS.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Aporte mensual estimado</div>
+          <div class="result-value" id="aporteResult">$ 0.00</div>
+          <div class="result-sub">Monto referencial según el porcentaje ingresado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Ingreso después del aporte</div>
+          <div class="result-value" id="ingresoRestante">$ 0.00</div>
+          <div class="result-sub">Ingreso aproximado tras descontar el aporte.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Servicio de Rentas Internas (SRI) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountEcNav } from '/js/ec-nav.js';
+
+    const ingresoInput = document.getElementById('ingresoInput');
+    const aporteInput = document.getElementById('aporteInput');
+    const aporteResult = document.getElementById('aporteResult');
+    const ingresoRestante = document.getElementById('ingresoRestante');
+
+    const formatter = new Intl.NumberFormat('es-EC', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const ingreso = Number(ingresoInput.value) || 0;
+      const rate = (Number(aporteInput.value) || 0) / 100;
+
+      const aporte = ingreso * rate;
+      const restante = ingreso - aporte;
+
+      aporteResult.textContent = formatter.format(aporte);
+      ingresoRestante.textContent = formatter.format(restante);
+    }
+
+    ingresoInput.addEventListener('input', update);
+    aporteInput.addEventListener('input', update);
+
+    autoMountEcNav();
+    ingresoInput.value = 1200;
+    update();
+  </script>
+</body>
+</html>

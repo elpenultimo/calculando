@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="gt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Bono 14 Guatemala – Estimación rápida</title>
+  <meta name="description" content="Calcula tu Bono 14 estimado en Guatemala. Ingresa salario mensual y meses trabajados para obtener el monto proporcional en quetzales (GTQ)." />
+  <link rel="canonical" href="https://calculando.cl/gt/bono-14/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Guatemala</strong>
+          <span>Bono 14</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Bono 14 estimado</h1>
+      <p>
+        Calcula un Bono 14 referencial en quetzales (GTQ) usando la proporción de meses trabajados.
+        Misma fórmula que el aguinaldo: salario mensual x (meses / 12).
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Referencial y sin descuentos automáticos. Consulta la normativa vigente para casos específicos.
+      </div>
+
+      <div id="gtNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="salarioInput">Salario mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">Q</span>
+          <input id="salarioInput" type="number" min="0" step="0.01" class="amount-input" placeholder="Ej: 5200" />
+          <span style="font-size:12px;color:var(--muted);">GTQ</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="mesesInput">Meses trabajados</label>
+        <input id="mesesInput" type="number" min="1" max="12" step="1" class="amount-input" style="max-width:200px;" value="12" />
+        <div class="input-help">Define los meses laborados para prorratear el beneficio anual.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Bono 14 estimado</div>
+          <div class="result-value" id="bonoResult">Q 0.00</div>
+          <div class="result-sub">Cálculo proporcional simple, con fines informativos.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Superintendencia de Administración Tributaria (SAT) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountGtNav } from '/js/gt-nav.js';
+
+    const salarioInput = document.getElementById('salarioInput');
+    const mesesInput = document.getElementById('mesesInput');
+    const bonoResult = document.getElementById('bonoResult');
+
+    const formatter = new Intl.NumberFormat('es-GT', {
+      style: 'currency',
+      currency: 'GTQ',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const salario = Number(salarioInput.value) || 0;
+      const meses = Math.min(12, Math.max(1, Number(mesesInput.value) || 0));
+      const bono = salario * (meses / 12);
+
+      bonoResult.textContent = formatter.format(bono);
+    }
+
+    salarioInput.addEventListener('input', update);
+    mesesInput.addEventListener('input', update);
+
+    autoMountGtNav();
+    salarioInput.value = 5200;
+    update();
+  </script>
+</body>
+</html>
