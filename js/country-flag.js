@@ -33,13 +33,11 @@
   }
 
   function renderFlag() {
-    const iso = normalizeCountry(root.getAttribute('data-country'));
+    const iso = normalizeCountry(root.dataset.country);
     if (!iso) return;
 
     const container = ensureContainer();
     if (!container) return;
-
-    container.innerHTML = '';
 
     const img = document.createElement('img');
     img.src = `https://flagcdn.com/24x18/${iso}.png`;
@@ -48,6 +46,7 @@
     img.loading = 'lazy';
     img.decoding = 'async';
 
+    container.innerHTML = '';
     container.appendChild(img);
   }
 
