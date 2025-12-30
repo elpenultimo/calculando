@@ -1,9 +1,3 @@
----
-
-## Tu `package.json` arreglado (por el error de TypeScript)
-Como tu repo **tiene `.tsx` y `tsconfig`**, Vercel te va a exigir TypeScript instalado. Déjalo así:
-
-```json
 {
   "name": "calculando",
   "private": true,
@@ -15,15 +9,8 @@ Como tu repo **tiene `.tsx` y `tsconfig`**, Vercel te va a exigir TypeScript ins
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^14.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "groq-sdk": "^0.6.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.5.4",
-    "@types/node": "^20.14.10",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0"
+    "next": "14.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
