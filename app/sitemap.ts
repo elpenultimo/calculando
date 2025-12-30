@@ -3,16 +3,22 @@ import { headers } from "next/headers";
 import fs from "fs";
 import path from "path";
 
+// ✅ Fuerza generación por request (clave para 2 dominios en Vercel)
+export const dynamic = "force-dynamic";
+
 function isCountryFolder(name: string) {
   return /^[a-z]{2}$/.test(name);
 }
 
 function listDirs(fullPath: string) {
-  if (!fs.existsSync(fullPath)) return [];
-  return fs
-    .readdirSync(fullPath, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name);
+  try {
+    return fs
+      .readdirSync(fullPath, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
+  } catch {
+    return [];
+  }
 }
 
 function hasIndexHtml(dirPath: string) {
@@ -22,8 +28,10 @@ function hasIndexHtml(dirPath: string) {
 export default function sitemap(): MetadataRoute.Sitemap {
   const h = headers();
 
-  // Vercel/Next suelen pasar host aquí
-  const host = h.get("x-forwarded-host") ?? h.get("host") ?? "localhost:3000";
+  // ✅ A prueba de Vercel: a veces viene "host1, host2"
+  const hostRaw = h.get("x-forwarded-host") ?? h.get("host") ?? "localhost:3000";
+  const host = hostRaw.split(",")[0].trim();
+
   const proto = h.get("x-forwarded-proto") ?? "https";
   const baseUrl = `${proto}://${host}`.replace(/\/$/, "");
 
@@ -63,6 +71,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       for (const sub of listDirs(basePath)) {
         const subPath = path.join(basePath, sub);
+
+        // ✅ solo sub-rutas que realmente existen como HTML estático
         if (hasIndexHtml(subPath)) {
           items.push({
             url: `${baseUrl}/${cc}/${sub}/`,
