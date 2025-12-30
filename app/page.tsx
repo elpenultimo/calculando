@@ -1,9 +1,7 @@
-// app/page.tsx
-
 export default function HomePage() {
   return (
-    <main>
-      <h1>Calculandoo</h1>
+    <main style={{ padding: 24, fontFamily: "system-ui" }}>
+      <h1>Calculando</h1>
       <p>Deploy de emergencia funcionando.</p>
     </main>
   );
