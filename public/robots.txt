@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tucalculo.com/sitemap.xml
-Sitemap: https://calculando.cl/sitemap.xml
+Sitemap: https://www.tucalculo.com/sitemap.xml
