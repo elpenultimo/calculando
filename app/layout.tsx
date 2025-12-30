@@ -1,6 +1,8 @@
+// app/layout.tsx
+
 export const metadata = {
   title: "Calculando",
-  description: "Calculadoras y herramientas",
+  description: "Calculadoras simples",
 };
 
 export default function RootLayout({
@@ -10,7 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body style={{ margin: 0, fontFamily: "system-ui" }}>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
