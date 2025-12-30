@@ -1,20 +1,15 @@
-// app/layout.tsx
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-export const metadata = {
-  title: "Calculandoo",
+export const metadata: Metadata = {
+  title: "Calculando",
   description: "Calculadoras simples",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
