@@ -1,7 +1,7 @@
 // app/layout.tsx
 
 export const metadata = {
-  title: "Calculando",
+  title: "Calculandoo",
   description: "Calculadoras simples",
 };
 
