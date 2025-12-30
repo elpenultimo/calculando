@@ -1,8 +1,10 @@
-export default function Home() {
+// app/page.tsx
+
+export default function HomePage() {
   return (
-    <main style={{ padding: 24, fontFamily: "system-ui" }}>
+    <main>
       <h1>Calculando</h1>
-      <p>Home restaurada. Si ves esto, el App Router está OK.</p>
+      <p>Deploy de emergencia funcionando.</p>
     </main>
   );
 }
