@@ -142,20 +142,6 @@ header {
   color: var(--muted);
 }
 
-.country-flag {
-  display: inline-flex;
-  align-items: center;
-}
-
-.country-flag img {
-  height: 18px;
-  width: auto;
-  border-radius: 4px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 8px;
-}
-
 .theme-toggle {
   display: inline-flex;
   align-items: center;
