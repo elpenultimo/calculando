@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Calculadora de dólar en Argentina – Oficial, Blue y MEP</title>
+  <meta name="description" content="Convierte pesos argentinos a dólares y viceversa. Elige tipo de dólar (oficial, blue, MEP), ajusta el valor manualmente y calcula al instante." />
+  <link rel="canonical" href="https://calculando.cl/ar/dolar/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Argentina</strong>
+          <span>Dólar (ARS ⇄ USD)</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Conversor de dólar argentino</h1>
+      <p>
+        Ingresa un monto en pesos argentinos (ARS), elige tipo de dólar y ajusta el valor manualmente si lo deseas.
+        La calculadora muestra la conversión ARS → USD y la equivalencia de USD → ARS con el mismo tipo de cambio.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Valores editables · Sin consumo de APIs.
+      </div>
+
+      <div id="arNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row" style="margin-bottom:12px;">
+        <label class="input-label" for="montoArs">Monto en ARS</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="montoArs" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 250000" />
+          <span style="font-size:12px;color:var(--muted);">ARS</span>
+        </div>
+      </div>
+
+      <div class="rate-row">
+        <div class="rate-group" id="tipoGrupo">
+          <label class="rate-pill">
+            <input type="radio" name="tipo" value="oficial" checked /> Oficial
+          </label>
+          <label class="rate-pill">
+            <input type="radio" name="tipo" value="blue" /> Blue
+          </label>
+          <label class="rate-pill">
+            <input type="radio" name="tipo" value="mep" /> MEP
+          </label>
+        </div>
+        <div class="helper">Puedes editar el valor manualmente.</div>
+      </div>
+
+      <div class="input-row">
+        <label class="input-label" for="valorDolar">Valor del dólar</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">$</span>
+          <input id="valorDolar" type="number" min="0" step="1" class="amount-input" />
+          <span style="font-size:12px;color:var(--muted);">ARS por USD</span>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <div class="result-card">
+          <div class="result-title">ARS → USD</div>
+          <div class="result-value" id="arsToUsd">USD 0</div>
+          <div class="result-sub">Conversión directa del monto ingresado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">USD → ARS</div>
+          <div class="result-main-label">1 USD = <span id="usdToArs">$0</span></div>
+          <div class="result-sub">Equivalencia con el tipo de cambio seleccionado.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con AFIP ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountArNav } from '/js/ar-nav.js';
+
+    const montoArs = document.getElementById('montoArs');
+    const valorDolar = document.getElementById('valorDolar');
+    const arsToUsd = document.getElementById('arsToUsd');
+    const usdToArs = document.getElementById('usdToArs');
+    const tipoRadios = Array.from(document.querySelectorAll('input[name="tipo"]'));
+
+    const valoresBase = {
+      oficial: 980,
+      blue: 1250,
+      mep: 1100,
+    };
+
+    const arsFormatter = new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS',
+      maximumFractionDigits: 0,
+    });
+
+    const usdFormatter = new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 2,
+    });
+
+    function setValorPorDefecto(tipo) {
+      const base = valoresBase[tipo];
+      if (valorDolar.value === '' && base) {
+        valorDolar.value = base;
+      }
+    }
+
+    function updateTipoActivo() {
+      const activo = document.querySelector('input[name="tipo"]:checked');
+      tipoRadios.forEach(radio => {
+        const label = radio.closest('.rate-pill');
+        if (!label) return;
+        label.classList.toggle('active', radio === activo);
+      });
+      return activo?.value || 'oficial';
+    }
+
+    function update() {
+      const tipo = updateTipoActivo();
+      setValorPorDefecto(tipo);
+
+      const monto = Number(montoArs.value) || 0;
+      const valor = Number(valorDolar.value) || 0;
+      const usd = valor > 0 ? monto / valor : 0;
+
+      arsToUsd.textContent = `${usdFormatter.format(usd)} USD`;
+      usdToArs.textContent = valor > 0 ? arsFormatter.format(valor) : '$0';
+    }
+
+    tipoRadios.forEach(radio => radio.addEventListener('change', () => {
+      valorDolar.value = '';
+      setValorPorDefecto(radio.value);
+      update();
+    }));
+
+    montoArs.addEventListener('input', update);
+    valorDolar.addEventListener('input', update);
+
+    autoMountArNav();
+    setValorPorDefecto('oficial');
+    update();
+  </script>
+</body>
+</html>

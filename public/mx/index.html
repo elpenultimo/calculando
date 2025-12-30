@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Tu Cálculo México – Calculadoras y guías</title>
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Tu Cálculo México</strong>
+          <span>Calculadoras para MX</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+
+
+    </header>
+
+    <section class="hero">
+      <h1>Tu Cálculo México</h1>
+      <p>
+        Estamos levantando la versión mexicana de Tu Cálculo. Por ahora verás
+        plantillas y navegación base mientras definimos cálculos y textos locales.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Vista previa · Ayúdanos probando las rutas y el flujo.
+      </div>
+
+      <div id="mxNav"></div>
+    </section>
+
+    <section class="shell tool-shell tool-shell-active">
+      <div class="tool-title">Lo que podrás hacer aquí</div>
+      <div class="tool-subtitle">
+        Reutilizamos el diseño de Tu Cálculo para que puedas previsualizar cómo se verán las calculadoras con datos de México.
+      </div>
+
+      <ul style="margin-top:12px;display:grid;gap:12px;padding-left:0;list-style:none;">
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">IVA México</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">Plantilla activa. Usa el botón para abrirla y revisar la experiencia.</div>
+          <a class="pill" href="/mx/iva/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de IVA MX
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">Sueldo neto MX</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">
+            Calcula sueldo neto estimado con ISR e IMSS para ver los descuentos principales.
+          </div>
+          <a class="pill" href="/mx/sueldo-neto/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de sueldo neto MX
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">Aguinaldo MX</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">
+            Estima tu aguinaldo bruto y proporcional con tu sueldo mensual y los días trabajados.
+          </div>
+          <a class="pill" href="/mx/aguinaldo/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de aguinaldo
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">PTU</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">Calcula la participación de utilidades con los días y salarios del equipo.</div>
+          <a class="pill" href="/mx/ptu/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de PTU
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">Finiquito MX</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">
+            Calcula un finiquito estimado con aguinaldo proporcional, vacaciones pendientes y prima vacacional.
+          </div>
+          <a class="pill" href="/mx/finiquito/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de finiquito
+          </a>
+        </li>
+        <li class="result-card" style="padding:14px 16px;">
+          <div class="tool-title" style="font-size:18px;margin-bottom:4px;">Vacaciones MX</div>
+          <div class="tool-subtitle" style="margin-bottom:10px;">Calcula vacaciones pendientes más la prima vacacional con montos referenciales en MXN.</div>
+          <a class="pill" href="/mx/vacaciones/" style="display:inline-flex;align-items:center;gap:6px;">
+            <span class="pill-dot"></span> Ir a la calculadora de vacaciones
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <footer style="margin-top:18px;">
+      <strong>Tu Cálculo México</strong> está en construcción. La versión oficial de Chile sigue disponible en <a href="/" style="color:var(--primary);text-decoration:underline;">Calculando.cl</a>.
+    </footer>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Servicio de Administración Tributaria (SAT) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { bootstrapPage } from '/js/country-bootstrap.js';
+    import { autoMountMxNav } from '/js/mx-nav.js';
+
+    bootstrapPage('home');
+    autoMountMxNav();
+  </script>
+</body>
+</html>

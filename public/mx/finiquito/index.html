@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+
+  <title>Calculadora de Finiquito en México 2026 | Calculando.mx</title>
+
+  <meta name="description" content="Calcula tu finiquito estimado en México con aguinaldo proporcional, vacaciones y prima vacacional en MXN." />
+  <meta name="author" content="Calculando.mx" />
+  <meta name="robots" content="index,follow" />
+
+  <link rel="canonical" href="https://calculando.cl/mx/finiquito/" />
+
+  <meta property="og:title" content="Calculadora de Finiquito en México" />
+  <meta property="og:description" content="Ingresa tu sueldo mensual, días trabajados, vacaciones pendientes y prima vacacional para estimar tu finiquito." />
+  <meta property="og:url" content="https://calculando.cl/mx/finiquito/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Calculando.mx" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Calculadora de Finiquito MX" />
+  <meta name="twitter:description" content="Calcula un finiquito estimado en pesos mexicanos en segundos." />
+
+  <style>
+    /* --------- TIPOGRAFÍA Y RESET --------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    :root {
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    html[data-theme="dark"] {
+      --bg: radial-gradient(circle at top, #0f172a 0, #020617 52%, #020617 100%);
+      --shell: rgba(15, 23, 42, 0.9);
+      --card: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.5);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.12);
+      --primary: #38bdf8;
+      --primary-soft: rgba(56, 189, 248, 0.12);
+      --shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.85);
+      --shadow-card: 0 18px 42px rgba(15, 23, 42, 0.95);
+      --header-glow: 0 0 40px rgba(56, 189, 248, 0.35);
+      --chip-bg: rgba(15, 23, 42, 0.9);
+    }
+
+    html[data-theme="light"] {
+      --bg: radial-gradient(circle at top, #e0edff 0, #f4f7fb 45%, #ffffff 100%);
+      --shell: rgba(255, 255, 255, 0.9);
+      --card: #ffffff;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --border-strong: rgba(148, 163, 184, 0.8);
+      --text: #0f172a;
+      --muted: #6b7280;
+      --accent: #eab308;
+      --accent-soft: rgba(234, 179, 8, 0.12);
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.12);
+      --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.15);
+      --shadow-card: 0 16px 36px rgba(15, 23, 42, 0.12);
+      --header-glow: 0 0 0 rgba(0, 0, 0, 0);
+      --chip-bg: #f9fafb;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      transition: background 0.4s ease-out, color 0.25s ease-out;
+    }
+
+    main {
+      width: 100%;
+      max-width: 960px;
+      padding: 22px 16px 34px;
+      margin: 0 auto;
+      animation: fade-in 0.6s ease-out;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --------- HEADER --------- */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb 0, #e5e7eb 24%, #0ea5e9 50%, #4f46e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0b1120;
+      box-shadow: var(--header-glow);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .logo-block:hover .logo-mark {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 0 55px rgba(56, 189, 248, 0.55);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--chip-bg);
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), color var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .theme-toggle-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-icon {
+      background: #0f172a;
+    }
+
+    html[data-theme="light"] .theme-toggle-icon {
+      background: #facc15;
+      color: #1f2933;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- HERO --------- */
+
+    .hero {
+      background: linear-gradient(145deg, rgba(14, 165, 233, 0.16), rgba(59, 130, 246, 0.08));
+      padding: 18px 18px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 16px;
+      backdrop-filter: blur(18px);
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08);
+    }
+
+    /* --------- NAV DE HERRAMIENTAS --------- */
+
+    .tool-nav {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: var(--chip-bg);
+      border: 1px solid var(--border-subtle);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tool-tab {
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .tool-tab span {
+      font-size: 14px;
+    }
+
+    .tool-tab-active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+      transform: translateY(-0.5px);
+    }
+
+    /* --------- SHELL / CONTENEDORES --------- */
+
+    .shell {
+      margin-top: 14px;
+      background: var(--shell);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(24px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 20px 22px 24px;
+      }
+    }
+
+    .tool-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tool-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* INPUTS */
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .input-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 12px 14px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .input-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-strong);
+      background: radial-gradient(circle at top, #fef9c3 0, #fef3c7 45%, #fefce8 100%);
+      color: #111827;
+      font-size: 16px;
+      text-align: right;
+      outline: none;
+      transition: box-shadow var(--transition-med), transform var(--transition-med),
+        border-color var(--transition-fast), background 0.35s ease-out;
+    }
+
+    .input-field:focus {
+      box-shadow: 0 14px 35px rgba(14, 165, 233, 0.45);
+      border-color: var(--primary);
+      transform: translateY(-0.5px);
+    }
+
+    .input-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* RESULTS */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .result-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .faq-answer {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    footer strong {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <header>
+    <div class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.mx</strong>
+        <span>Calculadoras simples y claras.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+
+
+  </header>
+
+  <section class="hero">
+    <h1>Calculadora de finiquito en México</h1>
+    <p>
+      Estima un finiquito referencial con aguinaldo proporcional, vacaciones pendientes y prima vacacional.
+      Ajusta los días según tu caso y revisa los montos en MXN con dos decimales.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Aguinaldo proporcional · Vacaciones · Prima vacacional
+    </div>
+
+    <div id="mxNav"></div>
+  </section>
+
+  <section class="shell tool-shell">
+    <div class="tool-title">Ingresa los datos para estimar tu finiquito</div>
+    <div class="tool-subtitle">
+      Usa tu sueldo mensual y completa los días trabajados, de aguinaldo y vacaciones. El cálculo se actualiza al escribir.
+    </div>
+
+    <div class="input-grid">
+      <div class="input-card">
+        <div class="input-label">Sueldo mensual (MXN)</div>
+        <input
+          id="sueldoInput"
+          class="input-field"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          step="100"
+          placeholder="Ej: 20000"
+          aria-label="Sueldo mensual en pesos mexicanos"
+        />
+        <div class="input-hint">Obligatorio. No se aceptan valores negativos.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días trabajados en el año</div>
+        <input
+          id="diasTrabajadosInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="365"
+          step="1"
+          value="365"
+          aria-label="Días trabajados durante el año"
+        />
+        <div class="input-hint">Default 365. Ajusta si trabajaste menos.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días de aguinaldo</div>
+        <input
+          id="diasAguinaldoInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="60"
+          step="1"
+          value="15"
+          aria-label="Días de aguinaldo asignados"
+        />
+        <div class="input-hint">Default 15 días. Mínimo por ley.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Días de vacaciones pendientes</div>
+        <input
+          id="diasVacacionesInput"
+          class="input-field"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="60"
+          step="1"
+          value="0"
+          aria-label="Días de vacaciones no tomadas"
+        />
+        <div class="input-hint">Opcional. Usa 0 si ya las tomaste.</div>
+      </div>
+
+      <div class="input-card">
+        <div class="input-label">Prima vacacional (%)</div>
+        <input
+          id="primaVacacionalInput"
+          class="input-field"
+          type="number"
+          inputmode="decimal"
+          min="0"
+          max="100"
+          step="1"
+          value="25"
+          aria-label="Porcentaje de prima vacacional"
+        />
+        <div class="input-hint">Default 25%. Ajusta según tu contrato.</div>
+      </div>
+    </div>
+
+    <div class="helper-text" id="helperText">Escribe tu sueldo mensual para ver el cálculo.</div>
+
+    <div class="result-grid" aria-live="polite">
+      <div class="result-card">
+        <div class="result-label">Aguinaldo proporcional</div>
+        <div class="result-value" id="aguinaldoProporcional">$0.00</div>
+        <div class="result-note">(Sueldo/30 × días de aguinaldo) × (días trabajados / 365).</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Vacaciones pendientes</div>
+        <div class="result-value" id="vacacionesValor">$0.00</div>
+        <div class="result-note">Sueldo mensual / 30 × días de vacaciones pendientes.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Prima vacacional</div>
+        <div class="result-value" id="primaVacacionalValor">$0.00</div>
+        <div class="result-note">Vacaciones × prima vacacional.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Total finiquito estimado</div>
+        <div class="result-value" id="totalFiniquito">$0.00</div>
+        <div class="result-note">Suma de aguinaldo proporcional, vacaciones y prima vacacional.</div>
+      </div>
+    </div>
+
+    <p class="helper-text" style="margin-top:14px;">Cálculo referencial. Verifica con tu recibo/contrato y asesoría laboral.</p>
+  </section>
+
+  <section class="shell">
+    <div class="tool-title">Preguntas rápidas sobre el finiquito</div>
+    <div class="faq-grid">
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué es el finiquito en México?</h3>
+        <p class="faq-answer">Es el pago que recibes al terminar una relación laboral. Incluye prestaciones devengadas como aguinaldo proporcional y vacaciones pendientes.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué incluye normalmente?</h3>
+        <p class="faq-answer">Sueldo pendiente, parte proporcional de aguinaldo, vacaciones no gozadas, prima vacacional y otras prestaciones según contrato o convenio.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Cómo se calcula el aguinaldo proporcional?</h3>
+        <p class="faq-answer">Se toma tu sueldo diario (sueldo mensual/30), se multiplica por los días de aguinaldo y luego por la fracción del año trabajado (días trabajados/365).</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Qué es la prima vacacional?</h3>
+        <p class="faq-answer">Es un porcentaje adicional sobre tus vacaciones pendientes. En México suele ser 25% como mínimo, aunque algunas empresas otorgan más.</p>
+      </article>
+      <article class="faq-item">
+        <h3 class="faq-question">¿Esto reemplaza un cálculo oficial?</h3>
+        <p class="faq-answer">No. Es una guía rápida y referencial. Valida siempre con tu recibo, contrato y asesoría laboral para obtener montos oficiales.</p>
+      </article>
+    </div>
+  </section>
+  <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Servicio de Administración Tributaria (SAT) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+<script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+
+<script>
+  const sueldoInput = document.getElementById("sueldoInput");
+  const diasTrabajadosInput = document.getElementById("diasTrabajadosInput");
+  const diasAguinaldoInput = document.getElementById("diasAguinaldoInput");
+  const diasVacacionesInput = document.getElementById("diasVacacionesInput");
+  const primaVacacionalInput = document.getElementById("primaVacacionalInput");
+
+  const helperText = document.getElementById("helperText");
+  const aguinaldoProporcionalValue = document.getElementById("aguinaldoProporcional");
+  const vacacionesValor = document.getElementById("vacacionesValor");
+  const primaVacacionalValor = document.getElementById("primaVacacionalValor");
+  const totalFiniquitoValue = document.getElementById("totalFiniquito");
+
+  function formatMXN(value) {
+    if (!isFinite(value)) return "$0.00";
+    try {
+      return new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    } catch (e) {
+      const safeValue = Number(value) || 0;
+      return "$" + safeValue.toLocaleString("es-MX", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+  }
+
+  function sanitizeNumber(raw, fallback, min = 0, max = Infinity) {
+    const parsed = Number(raw);
+    if (!isFinite(parsed) || parsed < 0) return fallback;
+    return Math.min(Math.max(parsed, min), max);
+  }
+
+  function recalculateFiniquito() {
+    const sueldoRaw = (sueldoInput.value || "").trim();
+    const diasTrabajadosRaw = (diasTrabajadosInput.value || "").trim();
+    const diasAguinaldoRaw = (diasAguinaldoInput.value || "").trim();
+    const diasVacacionesRaw = (diasVacacionesInput.value || "").trim();
+    const primaVacacionalRaw = (primaVacacionalInput.value || "").trim();
+
+    const diasTrabajados = sanitizeNumber(diasTrabajadosRaw, 365, 0, 365);
+    const diasAguinaldo = sanitizeNumber(diasAguinaldoRaw, 15, 0, 60);
+    const diasVacaciones = sanitizeNumber(diasVacacionesRaw, 0, 0, 60);
+    const primaVacacional = sanitizeNumber(primaVacacionalRaw, 25, 0, 100);
+
+    if (!sueldoRaw) {
+      helperText.textContent = "Escribe un sueldo mensual para calcular tu finiquito.";
+      aguinaldoProporcionalValue.textContent = "$0.00";
+      vacacionesValor.textContent = "$0.00";
+      primaVacacionalValor.textContent = "$0.00";
+      totalFiniquitoValue.textContent = "$0.00";
+      return;
+    }
+
+    const sueldoMensual = sanitizeNumber(sueldoRaw, 0, 0, Infinity);
+    if (sueldoMensual <= 0) {
+      helperText.textContent = "Ingresa un sueldo mensual mayor a 0.";
+      aguinaldoProporcionalValue.textContent = "$0.00";
+      vacacionesValor.textContent = "$0.00";
+      primaVacacionalValor.textContent = "$0.00";
+      totalFiniquitoValue.textContent = "$0.00";
+      return;
+    }
+
+    const sueldoDiario = sueldoMensual / 30;
+    const aguinaldoAnual = sueldoDiario * diasAguinaldo;
+    const aguinaldoProporcional = Math.max(aguinaldoAnual * (diasTrabajados / 365), 0);
+
+    const vacaciones = Math.max(sueldoDiario * diasVacaciones, 0);
+    const primaVacacionalMonto = Math.max(vacaciones * (primaVacacional / 100), 0);
+
+    const total = aguinaldoProporcional + vacaciones + primaVacacionalMonto;
+
+    helperText.textContent = "Cálculo referencial en MXN. Los montos muestran dos decimales.";
+    aguinaldoProporcionalValue.textContent = formatMXN(aguinaldoProporcional);
+    vacacionesValor.textContent = formatMXN(vacaciones);
+    primaVacacionalValor.textContent = formatMXN(primaVacacionalMonto);
+    totalFiniquitoValue.textContent = formatMXN(total);
+  }
+
+  sueldoInput.addEventListener("input", recalculateFiniquito);
+  diasTrabajadosInput.addEventListener("input", recalculateFiniquito);
+  diasAguinaldoInput.addEventListener("input", recalculateFiniquito);
+  diasVacacionesInput.addEventListener("input", recalculateFiniquito);
+  primaVacacionalInput.addEventListener("input", recalculateFiniquito);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    recalculateFiniquito();
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el finiquito en México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es el pago al terminar una relación laboral que incluye prestaciones devengadas como aguinaldo proporcional y vacaciones pendientes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye normalmente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sueldo pendiente, parte proporcional de aguinaldo, vacaciones no gozadas, prima vacacional y otras prestaciones según contrato o convenio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se calcula el aguinaldo proporcional?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se usa el sueldo diario (sueldo mensual dividido entre 30) multiplicado por los días de aguinaldo y por la fracción del año trabajada (días trabajados/365)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la prima vacacional?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es un porcentaje adicional aplicado a las vacaciones pendientes. En México suele ser 25% como mínimo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Esto reemplaza un cálculo oficial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Es una herramienta referencial y no sustituye la revisión de tu recibo, contrato ni la asesoría profesional."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Calculadora de Finiquito en México",
+      "url": "https://calculando.cl/mx/finiquito/",
+      "description": "Calcula un finiquito estimado con aguinaldo proporcional, vacaciones pendientes y prima vacacional en MXN.",
+      "inLanguage": "es-MX"
+    }
+  ]
+}
+</script>
+
+<script type="module">
+  import { bootstrapPage } from '/js/country-bootstrap.js';
+  import { autoMountMxNav } from '/js/mx-nav.js';
+
+  bootstrapPage('finiquito');
+  autoMountMxNav();
+</script>
+</body>
+</html>

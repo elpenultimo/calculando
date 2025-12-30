@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Pagas extra 12 o 14 – España</title>
+  <meta name="description" content="Compara pagas de 12 vs 14 en España. Ingresa bruto anual, elige modalidad y aplica retenciones para ver bruto y neto por paga y diferencia mensual." />
+  <link rel="canonical" href="https://www.calculando.cl/es/pagas-extra/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora España</strong>
+          <span>Pagas extra</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Pagas extra (14 vs 12)</h1>
+      <p>
+        Calcula cómo se reparte tu bruto anual en 12 o 14 pagas.
+        Aplica un porcentaje de retenciones opcional y compara el neto mensual aproximado entre ambas modalidades.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Si eliges 14 pagas: paga = anual / 14. Si eliges 12 pagas: paga = anual / 12. Comparamos la diferencia mensual.
+      </div>
+
+      <div id="esNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="tool-title">Elige modalidad</div>
+      <div class="tool-subtitle">14 pagas por defecto (con extras) o 12 pagas prorrateadas.</div>
+      <div class="tool-nav" style="margin-bottom:12px;">
+        <button class="tool-tab tool-tab-active" data-mode="14">14 pagas</button>
+        <button class="tool-tab" data-mode="12">12 pagas</button>
+      </div>
+
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Bruto anual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">€</span>
+          <input id="brutoInput" type="number" min="0" step="500" class="amount-input" placeholder="Ej: 30000" />
+          <span style="font-size:12px;color:var(--muted);">EUR</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="retencionInput">Retenciones totales (%)</label>
+        <input id="retencionInput" type="number" min="0" step="0.1" class="amount-input" style="max-width:200px;" value="19" />
+        <div class="input-help">Opcional. Se aplica sobre cada paga para mostrar neto.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Bruto por paga</div>
+          <div class="result-value" id="brutoPaga">€0.00</div>
+          <div class="result-sub">Anual dividido según la modalidad.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Neto por paga</div>
+          <div class="result-value" id="netoPaga">€0.00</div>
+          <div class="result-sub">Se descuenta el porcentaje indicado.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Comparativa mensual</div>
+          <div class="result-main-label">12 pagas: <span id="mensual12">€0.00</span></div>
+          <div class="result-main-label">14 pagas: <span id="mensual14">€0.00</span></div>
+          <div class="result-sub">Diferencia mensual aproximada: <span id="diferenciaMensual">€0.00</span></div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Agencia Tributaria ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountEsNav } from '/js/es-nav.js';
+
+    const modeButtons = Array.from(document.querySelectorAll('[data-mode]'));
+    const brutoInput = document.getElementById('brutoInput');
+    const retencionInput = document.getElementById('retencionInput');
+    const brutoPaga = document.getElementById('brutoPaga');
+    const netoPaga = document.getElementById('netoPaga');
+    const mensual12 = document.getElementById('mensual12');
+    const mensual14 = document.getElementById('mensual14');
+    const diferenciaMensual = document.getElementById('diferenciaMensual');
+
+    let activeMode = '14';
+
+    const formatter = new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function setMode(mode) {
+      activeMode = mode;
+      modeButtons.forEach(btn => {
+        if (btn.dataset.mode === mode) {
+          btn.classList.add('tool-tab-active');
+        } else {
+          btn.classList.remove('tool-tab-active');
+        }
+      });
+      update();
+    }
+
+    function calculateNetoPorPaga(bruto, retencionPct) {
+      const retencion = bruto * retencionPct;
+      return bruto - retencion;
+    }
+
+    function update() {
+      const brutoAnual = Number(brutoInput.value) || 0;
+      const retencionPct = (Number(retencionInput.value) || 0) / 100;
+
+      const pagaActual = activeMode === '14' ? brutoAnual / 14 : brutoAnual / 12;
+      const netoActual = calculateNetoPorPaga(pagaActual, retencionPct);
+
+      const paga12 = brutoAnual / 12;
+      const paga14 = brutoAnual / 14;
+      const neto12 = calculateNetoPorPaga(paga12, retencionPct);
+      const neto14 = calculateNetoPorPaga(paga14, retencionPct);
+      const diferencia = neto12 - neto14;
+
+      brutoPaga.textContent = formatter.format(pagaActual);
+      netoPaga.textContent = formatter.format(netoActual);
+      mensual12.textContent = formatter.format(neto12);
+      mensual14.textContent = formatter.format(neto14);
+      diferenciaMensual.textContent = formatter.format(diferencia);
+    }
+
+    modeButtons.forEach(btn => {
+      btn.addEventListener('click', () => setMode(btn.dataset.mode));
+    });
+
+    brutoInput.addEventListener('input', update);
+    retencionInput.addEventListener('input', update);
+
+    autoMountEsNav();
+    brutoInput.value = 30000;
+    update();
+  </script>
+</body>
+</html>

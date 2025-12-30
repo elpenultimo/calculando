@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ni">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Tu Cálculo Nicaragua – Calculadoras en córdobas (NIO)</title>
+  <meta name="description" content="Calculadoras simples para Nicaragua: salario neto, INSS, aguinaldo proporcional y ajuste por inflación en córdobas (NIO)." />
+  <link rel="canonical" href="https://calculando.cl/ni/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Tu Cálculo Nicaragua</strong>
+          <span>Calculadoras en córdobas</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Tu Cálculo Nicaragua</h1>
+      <p>
+        Calculadoras simples en córdobas (NIO) para salario neto, INSS, aguinaldo y ajuste por inflación.
+        Todos los montos son editables en vivo y se muestran sin decimales por defecto.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Rápido y referencial, enfocado en Nicaragua.
+      </div>
+
+      <div id="niNav"></div>
+    </section>
+
+    <section class="shell" style="margin-top:16px;">
+      <div class="tool-title">Atajos rápidos</div>
+      <div class="tool-subtitle">Navega directo a cada calculadora</div>
+      <ul style="list-style:none;display:grid;gap:10px;padding:0;margin-top:10px;">
+        <li><a class="tool-tab tool-tab-active" style="display:inline-flex;width:fit-content;" href="/ni/salario-neto/">💰 Salario neto</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/ni/inss/">🛡️ INSS / Deducciones</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/ni/aguinaldo/">🎁 Aguinaldo proporcional</a></li>
+        <li><a class="tool-tab" style="display:inline-flex;width:fit-content;" href="/ni/inflacion/">📊 Ajuste por inflación</a></li>
+      </ul>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con Dirección General de Ingresos (DGI) ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountNiNav } from '/js/ni-nav.js';
+
+    autoMountNiNav();
+  </script>
+</body>
+</html>

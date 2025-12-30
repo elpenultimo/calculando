@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="gq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Descuentos Guinea Ecuatorial – Calculadora rápida en XAF</title>
+  <meta name="description" content="Calcula descuentos simples en Guinea Ecuatorial. Ingresa ingreso mensual y porcentaje total para ver cuánto se descuenta en francos CFA (XAF)." />
+  <link rel="canonical" href="https://calculando.cl/gq/descuentos/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Guinea Ecuatorial</strong>
+          <span>Descuentos</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Descuentos en Guinea Ecuatorial</h1>
+      <p>
+        Calcula rápidamente cuánto se descuenta de tu ingreso mensual en francos CFA (XAF) con un porcentaje total editable.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Resultado referencial con formato FCFA y miles.
+      </div>
+
+      <div id="gqNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="ingresoInput">Ingreso mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">FCFA</span>
+          <input id="ingresoInput" type="number" min="0" step="1000" class="amount-input" placeholder="Ej: 250000" />
+          <span style="font-size:12px;color:var(--muted);">XAF</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="descuentoInput">Descuento total (%)</label>
+        <input id="descuentoInput" type="number" min="0" max="80" step="0.5" class="amount-input" style="max-width:200px;" value="5" />
+        <div class="input-help">Editable. Ajusta el porcentaje para simular retenciones.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Monto descontado</div>
+          <div class="result-value" id="descontadoResult">FCFA 0</div>
+          <div class="result-sub">Equivale al porcentaje aplicado sobre el ingreso.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Ingreso después de descuentos</div>
+          <div class="result-value" id="netoResult">FCFA 0</div>
+          <div class="result-sub">Resultado aproximado en francos CFA.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con autoridades fiscales ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountGqNav } from '/js/gq-nav.js';
+
+    const ingresoInput = document.getElementById('ingresoInput');
+    const descuentoInput = document.getElementById('descuentoInput');
+    const descontadoResult = document.getElementById('descontadoResult');
+    const netoResult = document.getElementById('netoResult');
+
+    const formatter = new Intl.NumberFormat('es-GQ', {
+      style: 'currency',
+      currency: 'XAF',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+
+    function update() {
+      const ingreso = Number(ingresoInput.value) || 0;
+      const pct = (Number(descuentoInput.value) || 0) / 100;
+      const descontado = ingreso * pct;
+      const neto = ingreso - descontado;
+
+      descontadoResult.textContent = formatter.format(descontado);
+      netoResult.textContent = formatter.format(neto);
+    }
+
+    ingresoInput.addEventListener('input', update);
+    descuentoInput.addEventListener('input', update);
+
+    autoMountGqNav();
+    ingresoInput.value = 250000;
+    update();
+  </script>
+</body>
+</html>

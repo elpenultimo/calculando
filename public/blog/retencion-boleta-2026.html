@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Retención Boleta de Honorarios 2026 – Calculando.cl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <meta
+    name="description"
+    content="Explicación simple de la retención de boleta de honorarios 2026 en Chile, con ejemplos y enlace directo a la calculadora de boletas de Calculando.cl."
+  />
+
+ <link rel="stylesheet" href="/css/calculando.css"> 
+ 
+  <link rel="canonical" href="https://calculando.cl/blog/retencion-boleta-2026.html" />
+
+</head>
+<body>
+<main>
+  
+  <!-- HEADER: el mismo del index -->
+  <header>
+    <div class="logo-block">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <strong>Calculando.cl</strong>
+        <span>Tus cálculos, sin enredos.</span>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="theme-toggle" type="button">
+      <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+      <span id="themeLabel">Modo oscuro</span>
+    </button>
+  </header>
+
+  <!-- HERO / TÍTULO DEL ARTÍCULO -->
+  <section class="hero">
+    <h1>Retención Boleta de Honorarios 2026: explicado en simple</h1>
+    <p>
+      Revisa cuál es la tasa de retención para boletas de honorarios en 2026, mira un ejemplo
+      numérico y luego usa la calculadora de boletas para hacer tus propios cálculos.
+    </p>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Actualizado 2026 · Datos referenciales, verifica siempre en SII.cl
+    </div>
+       <!-- MINI MENÚ DEL BLOG -->
+<nav class="mini-blog-menu" style="margin:14px 0 22px; display:flex; flex-wrap:wrap; gap:10px; font-size:13px;">
+  <a href="/blog/" class="mini-link">Destacados</a>
+  <a href="/blog/#sueldos" class="mini-link">Sueldos</a>
+  <a href="/blog/#impuestos" class="mini-link active">Impuestos y boletas</a>
+  <a href="/blog/#uf" class="mini-link">UF & reajustes</a>
+  <a href="/blog/#afp" class="mini-link">AFP & salud</a>
+  <a href="/blog/#beneficios" class="mini-link">Beneficios</a>
+  <a href="/" class="mini-link" style="opacity:.85;">← Volver a calculadoras</a>
+</nav>
+  </section>
+
+  <!-- CONTENIDO DEL ARTÍCULO, CON TU MISMA SHELL -->
+  <section class="shell">
+    <article>
+      <h2 style="font-size:16px; margin-bottom:8px;">¿Cuál es la retención para 2026?</h2>
+      <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">
+        Durante el año <strong>2026</strong>, la retención de boletas de honorarios es de
+        <strong>13,75&nbsp;%</strong> según el calendario de aumento gradual definido en la ley.
+      </p>
+
+      <h2 style="font-size:16px; margin-bottom:8px;">Ejemplo rápido</h2>
+      <p style="font-size:13px; color:var(--muted); line-height:1.6;">
+        Si emites una boleta por <strong>$1.000.000</strong>:
+      </p>
+      <ul style="font-size:13px; color:var(--muted); margin:10px 0 18px 18px; line-height:1.6;">
+        <li>Retención (13,75&nbsp;%): <strong>$137.500</strong></li>
+        <li>Neto que recibes: <strong>$862.500</strong></li>
+      </ul>
+
+      <h2 style="font-size:16px; margin-bottom:8px;">Calcula tu propia boleta</h2>
+      <p style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px;">
+        Para no hacer las cuentas a mano, puedes usar la
+        <a href="/boleta/" style="color:var(--primary); text-decoration:underline;">
+          calculadora de boletas de honorarios de Calculando.cl
+        </a>.
+        Ingresas el monto bruto o líquido y obtienes el desglose listo: bruto, líquido y retención.
+      </p>
+
+      <div style="margin-top:20px; text-align:center;">
+        <a
+          href="/boleta/"
+          style="
+            display:inline-block;
+            padding:10px 18px;
+            border-radius:999px;
+            background:var(--primary);
+            color:white;
+            font-size:13px;
+            text-decoration:none;
+            box-shadow:0 18px 32px rgba(15,23,42,0.6);
+          "
+        >
+          👉 Ir a la calculadora de boletas
+        </a>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <strong>Calculando.cl</strong> es un proyecto independiente y no tiene
+    relación con el SII ni con ningún organismo del Estado.
+    Usa estas herramientas como guía rápida y, ante dudas, consulta con un contador.
+  </footer>
+</main>
+
+<!-- SOLO EL JS DEL TEMA. SIN CALCULADORAS -->
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const themeLabel = document.getElementById("themeLabel");
+  const rootEl = document.documentElement;
+
+  function applyTheme(theme) {
+    rootEl.setAttribute("data-theme", theme);
+    if (theme === "dark") {
+      themeIcon.textContent = "🌙";
+      themeLabel.textContent = "Modo oscuro";
+    } else {
+      themeIcon.textContent = "☀️";
+      themeLabel.textContent = "Modo claro";
+    }
+  }
+
+  (function initTheme() {
+    const stored = localStorage.getItem("calculando-theme");
+    if (stored === "light" || stored === "dark") {
+      applyTheme(stored);
+    } else {
+      applyTheme("dark");
+    }
+  })();
+
+  themeToggle.addEventListener("click", () => {
+    const current = rootEl.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem("calculando-theme", next);
+  });
+</script>
+</body>
+</html>

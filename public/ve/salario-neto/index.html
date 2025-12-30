@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-country="ve">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=3">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=3">
+
+  <title>Salario neto Venezuela – Calculadora en bolívares</title>
+  <meta name="description" content="Calcula tu salario neto estimado en Venezuela. Ingresa sueldo bruto, IVSS, FAOV, paro forzoso y otros descuentos en bolívares (VES)." />
+  <link rel="canonical" href="https://calculando.cl/ve/salario-neto/" />
+  <link rel="stylesheet" href="/css/calculando.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo-block">
+        <div class="logo-mark">C</div>
+        <div class="logo-text">
+          <strong>Calculadora Venezuela</strong>
+          <span>Salario neto</span>
+        </div>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Modo oscuro</span>
+      </button>
+    </header>
+
+    <section class="hero">
+      <h1>Salario neto en Venezuela</h1>
+      <p>
+        Convierte tu sueldo bruto mensual a salario neto estimado en bolívares (VES).
+        Ajusta los porcentajes de IVSS, FAOV, paro forzoso y otros descuentos según tu caso.
+      </p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Cálculo referencial, editable en vivo y sin tramos de ISLR.
+      </div>
+
+      <div id="veNav"></div>
+    </section>
+
+    <section class="shell">
+      <div class="input-row">
+        <label class="input-label" for="brutoInput">Sueldo bruto mensual</label>
+        <div class="amount-wrap">
+          <span class="amount-prefix">Bs.</span>
+          <input id="brutoInput" type="number" min="0" step="0.01" class="amount-input" placeholder="Ej: 1500" />
+          <span style="font-size:12px;color:var(--muted);">VES</span>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="ivssInput">IVSS trabajador (%)</label>
+        <input id="ivssInput" type="number" min="0" max="20" step="0.1" class="amount-input" style="max-width:200px;" value="4" />
+        <div class="input-help">Porcentaje editable del aporte al IVSS.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="faovInput">FAOV trabajador (%)</label>
+        <input id="faovInput" type="number" min="0" max="20" step="0.1" class="amount-input" style="max-width:200px;" value="1" />
+        <div class="input-help">Aporte al fondo de vivienda (FAOV). Ajusta según tu tasa.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="paroInput">Paro forzoso (%)</label>
+        <input id="paroInput" type="number" min="0" max="10" step="0.1" class="amount-input" style="max-width:200px;" value="0.5" />
+        <div class="input-help">Seguro social para desempleo. Porcentaje editable.</div>
+      </div>
+
+      <div class="input-row" style="margin-top:12px;">
+        <label class="input-label" for="otrosInput">Otros descuentos (%)</label>
+        <input id="otrosInput" type="number" min="0" max="50" step="0.1" class="amount-input" style="max-width:200px;" value="0" />
+        <div class="input-help">Préstamos, seguros u otros descuentos que quieras simular.</div>
+      </div>
+
+      <div class="results-row" style="margin-top:16px;">
+        <div class="result-card">
+          <div class="result-title">Sueldo neto estimado</div>
+          <div class="result-value" id="netoResult">Bs. 0,00</div>
+          <div class="result-sub">Monto aproximado después de los descuentos ingresados.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">Detalle de descuentos</div>
+          <div class="result-main-label">IVSS: <span id="ivssMonto">Bs. 0,00</span></div>
+          <div class="result-main-label">FAOV: <span id="faovMonto">Bs. 0,00</span></div>
+          <div class="result-main-label">Paro forzoso: <span id="paroMonto">Bs. 0,00</span></div>
+          <div class="result-main-label">Otros: <span id="otrosMonto">Bs. 0,00</span></div>
+          <div class="result-main-label">Total descontado: <span id="totalDescuento">Bs. 0,00</span></div>
+          <div class="result-sub">Todo editable y referencial. No incluye ISLR detallado.</div>
+        </div>
+      </div>
+    </section>
+    <footer>
+    TuCalculo.com es un proyecto independiente y no tiene relación con SENIAT ni con ningún organismo del Estado. Las herramientas entregan resultados referenciales y no constituyen asesoría oficial. Ante dudas, consulta con un profesional o la entidad correspondiente.
+  </footer>
+
+</main>
+
+  <script src="/js/country-preference.js"></script>
+  <script src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import { autoMountVeNav } from '/js/ve-nav.js';
+
+    const brutoInput = document.getElementById('brutoInput');
+    const ivssInput = document.getElementById('ivssInput');
+    const faovInput = document.getElementById('faovInput');
+    const paroInput = document.getElementById('paroInput');
+    const otrosInput = document.getElementById('otrosInput');
+    const netoResult = document.getElementById('netoResult');
+    const ivssMonto = document.getElementById('ivssMonto');
+    const faovMonto = document.getElementById('faovMonto');
+    const paroMonto = document.getElementById('paroMonto');
+    const otrosMonto = document.getElementById('otrosMonto');
+    const totalDescuento = document.getElementById('totalDescuento');
+
+    const formatter = new Intl.NumberFormat('es-VE', {
+      style: 'currency',
+      currency: 'VES',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function update() {
+      const bruto = Number(brutoInput.value) || 0;
+      const ivssRate = (Number(ivssInput.value) || 0) / 100;
+      const faovRate = (Number(faovInput.value) || 0) / 100;
+      const paroRate = (Number(paroInput.value) || 0) / 100;
+      const otrosRate = (Number(otrosInput.value) || 0) / 100;
+
+      const ivss = bruto * ivssRate;
+      const faov = bruto * faovRate;
+      const paro = bruto * paroRate;
+      const otros = bruto * otrosRate;
+      const total = ivss + faov + paro + otros;
+      const neto = bruto - total;
+
+      netoResult.textContent = formatter.format(neto);
+      ivssMonto.textContent = formatter.format(ivss);
+      faovMonto.textContent = formatter.format(faov);
+      paroMonto.textContent = formatter.format(paro);
+      otrosMonto.textContent = formatter.format(otros);
+      totalDescuento.textContent = formatter.format(total);
+    }
+
+    brutoInput.addEventListener('input', update);
+    ivssInput.addEventListener('input', update);
+    faovInput.addEventListener('input', update);
+    paroInput.addEventListener('input', update);
+    otrosInput.addEventListener('input', update);
+
+    autoMountVeNav();
+    brutoInput.value = 2000;
+    update();
+  </script>
+</body>
+</html>
