@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import fs from "fs";
 import path from "path";
 
@@ -26,14 +25,13 @@ function xmlEscape(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-export async function GET() {
-  const h = headers();
-  const host = h.get("x-forwarded-host") ?? h.get("host") ?? "localhost:3000";
-  const proto = h.get("x-forwarded-proto") ?? "https";
-  const baseUrl = `${proto}://${host}`.replace(/\/$/, "");
+export async function GET(req: Request) {
+  const origin = new URL(req.url).origin; // ✅ funciona perfecto en Vercel
+  const baseUrl = origin.replace(/\/$/, "");
 
   const urls: { loc: string; changefreq: string; priority: string }[] = [];
 
+  // Páginas principales
   urls.push(
     { loc: `${baseUrl}/`, changefreq: "daily", priority: "1.0" },
     { loc: `${baseUrl}/blog/`, changefreq: "weekly", priority: "0.8" },
@@ -91,7 +89,7 @@ export async function GET() {
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+      "Cache-Control": "no-store",
     },
   });
 }
