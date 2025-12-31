@@ -26,12 +26,17 @@ function xmlEscape(s: string) {
 }
 
 export async function GET(req: Request) {
-  const origin = new URL(req.url).origin; // ✅ funciona perfecto en Vercel
+  const origin = new URL(req.url).origin;
   const baseUrl = origin.replace(/\/$/, "");
 
   const urls: { loc: string; changefreq: string; priority: string }[] = [];
 
-  // Páginas principales
+  const repoRoot = process.cwd();
+  const publicDir = path.join(repoRoot, "public");
+
+  /* ===============================
+     PÁGINAS PRINCIPALES
+  =============================== */
   urls.push(
     { loc: `${baseUrl}/`, changefreq: "daily", priority: "1.0" },
     { loc: `${baseUrl}/blog/`, changefreq: "weekly", priority: "0.8" },
@@ -41,9 +46,56 @@ export async function GET(req: Request) {
     { loc: `${baseUrl}/iva/`, changefreq: "weekly", priority: "0.9" }
   );
 
-  const repoRoot = process.cwd();
-  const publicDir = path.join(repoRoot, "public");
+  /* ===============================
+     BLOG: /public/blog/*.html
+     - excluye index.html
+     - excluye probando.html
+  =============================== */
+  const publicBlogDir = path.join(publicDir, "blog");
+  if (fs.existsSync(publicBlogDir)) {
+    const blogFiles = fs
+      .readdirSync(publicBlogDir, { withFileTypes: true })
+      .filter((f) => f.isFile())
+      .map((f) => f.name)
+      .filter((n) => n.endsWith(".html"))
+      .filter((n) => n !== "index.html")
+      .filter((n) => n !== "probando.html")
+      .sort((a, b) => a.localeCompare(b));
 
+    for (const file of blogFiles) {
+      urls.push({
+        loc: `${baseUrl}/blog/${file}`,
+        changefreq: "monthly",
+        priority: "0.6",
+      });
+    }
+  }
+
+  /* ===============================
+     PÁGINAS ESTÁTICAS EN /public
+     (no países)
+  =============================== */
+  const publicStaticDirs = [
+    "sueldo-liquido",
+    "uf",
+    "boleta",
+    "iva",
+  ];
+
+  for (const dir of publicStaticDirs) {
+    const fullPath = path.join(publicDir, dir);
+    if (hasIndexHtml(fullPath)) {
+      urls.push({
+        loc: `${baseUrl}/${dir}/`,
+        changefreq: "weekly",
+        priority: "0.9",
+      });
+    }
+  }
+
+  /* ===============================
+     PAÍSES + CALCULADORAS
+  =============================== */
   const countries = Array.from(
     new Set([
       ...listDirs(repoRoot).filter(isCountryFolder),
@@ -52,7 +104,11 @@ export async function GET(req: Request) {
   ).sort();
 
   for (const cc of countries) {
-    urls.push({ loc: `${baseUrl}/${cc}/`, changefreq: "weekly", priority: "0.8" });
+    urls.push({
+      loc: `${baseUrl}/${cc}/`,
+      changefreq: "weekly",
+      priority: "0.8",
+    });
 
     const candidates = [path.join(repoRoot, cc), path.join(publicDir, cc)];
     for (const basePath of candidates) {
@@ -71,6 +127,9 @@ export async function GET(req: Request) {
     }
   }
 
+  /* ===============================
+     XML OUTPUT
+  =============================== */
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
