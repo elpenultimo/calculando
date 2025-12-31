@@ -1,7 +1,3 @@
-const nextConfig = {
-  async rewrites() {
-    return [{ source: "/sitemap.xml", destination: "/sitemap" }];
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
