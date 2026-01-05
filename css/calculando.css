@@ -818,3 +818,29 @@ nav.mini-blog-menu .mini-link:hover {
   opacity: .7;
   margin-bottom: 8px;
 }
+
+/* Country flag titles */
+.country-flag-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.country-flag-emoji {
+  display: inline-block;
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
