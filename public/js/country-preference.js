@@ -2,6 +2,92 @@
   const REGION_KEY = 'tc_region';
   const SUPPORTED_HOSTS = ['tucalculo.com', 'www.tucalculo.com'];
 
+  const COUNTRIES = {
+    ar: { name: 'Argentina', iso2: 'AR' },
+    bo: { name: 'Bolivia', iso2: 'BO' },
+    br: { name: 'Brasil', iso2: 'BR' },
+    cl: { name: 'Chile', iso2: 'CL' },
+    co: { name: 'Colombia', iso2: 'CO' },
+    ec: { name: 'Ecuador', iso2: 'EC' },
+    py: { name: 'Paraguay', iso2: 'PY' },
+    pe: { name: 'Perú', iso2: 'PE' },
+    uy: { name: 'Uruguay', iso2: 'UY' },
+    ve: { name: 'Venezuela', iso2: 'VE' },
+    cr: { name: 'Costa Rica', iso2: 'CR' },
+    sv: { name: 'El Salvador', iso2: 'SV' },
+    gt: { name: 'Guatemala', iso2: 'GT' },
+    hn: { name: 'Honduras', iso2: 'HN' },
+    ni: { name: 'Nicaragua', iso2: 'NI' },
+    pa: { name: 'Panamá', iso2: 'PA' },
+    cu: { name: 'Cuba', iso2: 'CU' },
+    do: { name: 'República Dominicana', iso2: 'DO' },
+    pr: { name: 'Puerto Rico', iso2: 'PR' },
+    us: { name: 'Estados Unidos', iso2: 'US' },
+    mx: { name: 'México', iso2: 'MX' },
+    es: { name: 'España', iso2: 'ES' },
+    gq: { name: 'Guinea Ecuatorial', iso2: 'GQ' },
+  };
+
+  function iso2ToFlagEmoji(iso2) {
+    if (!iso2 || iso2.length !== 2) return '';
+    const code = iso2.toUpperCase();
+    const A = 0x1f1e6;
+    const base = 'A'.charCodeAt(0);
+    const first = code.charCodeAt(0) - base + A;
+    const second = code.charCodeAt(1) - base + A;
+    if (code.charCodeAt(0) < 65 || code.charCodeAt(0) > 90) return '';
+    if (code.charCodeAt(1) < 65 || code.charCodeAt(1) > 90) return '';
+    return String.fromCodePoint(first, second);
+  }
+
+  function getCountryBySlug(slug) {
+    if (!slug) return null;
+    return COUNTRIES[String(slug).toLowerCase()] || null;
+  }
+
+  function detectCountrySlug() {
+    const pathSlug = (window.location.pathname.split('/')[1] || '').toLowerCase();
+    if (getCountryBySlug(pathSlug)) return pathSlug;
+
+    const attrSlug = (document.documentElement.getAttribute('data-country') || '').toLowerCase();
+    if (getCountryBySlug(attrSlug)) return attrSlug;
+
+    return '';
+  }
+
+  function renderCountryTitles() {
+    const slug = detectCountrySlug();
+    const country = getCountryBySlug(slug);
+    const flag = country ? iso2ToFlagEmoji(country.iso2) : '';
+    const defaultLabel = country ? `Tu Cálculo ${country.name}` : '';
+
+    const targets = [
+      ...document.querySelectorAll('header .logo-text strong'),
+      ...document.querySelectorAll('.hero h1'),
+    ];
+
+    targets.forEach((target) => {
+      if (!target) return;
+      const fallbackText = target.textContent?.trim() || 'Tu Cálculo';
+      const label = defaultLabel || fallbackText;
+
+      target.innerHTML = '';
+
+      if (flag) {
+        const flagSpan = document.createElement('span');
+        flagSpan.setAttribute('aria-hidden', 'true');
+        flagSpan.textContent = flag;
+        target.appendChild(flagSpan);
+
+        target.appendChild(document.createTextNode(' '));
+      }
+
+      const textSpan = document.createElement('span');
+      textSpan.textContent = label;
+      target.appendChild(textSpan);
+    });
+  }
+
   function isTuCalculoHost() {
     return SUPPORTED_HOSTS.includes(window.location.hostname);
   }
@@ -211,8 +297,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadFaqInjector);
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCountryTitles();
+      loadFaqInjector();
+    });
   } else {
+    renderCountryTitles();
     loadFaqInjector();
   }
 })();
