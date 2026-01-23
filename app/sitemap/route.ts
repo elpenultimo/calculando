@@ -5,6 +5,13 @@ import path from "path";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const CANONICAL_DOMAIN = "https://www.tucalculo.com";
+const CHANGEFREQ_PRIORITY: Record<string, number> = {
+  daily: 3,
+  weekly: 2,
+  monthly: 1,
+};
+
 function isCountryFolder(name: string) {
   return /^[a-z]{2}$/.test(name);
 }
@@ -25,9 +32,30 @@ function xmlEscape(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+function normalizeLoc(loc: string) {
+  const url = new URL(loc, CANONICAL_DOMAIN);
+  let pathname = url.pathname.replace(/\/$/, "");
+  if (pathname === "") pathname = "/";
+  return `${CANONICAL_DOMAIN}${pathname === "/" ? "" : pathname}`;
+}
+
+function pickStrongerUrl(
+  current: { loc: string; changefreq: string; priority: string },
+  candidate: { loc: string; changefreq: string; priority: string }
+) {
+  const currentPriority = Number.parseFloat(current.priority);
+  const candidatePriority = Number.parseFloat(candidate.priority);
+  if (candidatePriority > currentPriority) return candidate;
+  if (candidatePriority < currentPriority) return current;
+
+  const currentFreq = CHANGEFREQ_PRIORITY[current.changefreq] ?? 0;
+  const candidateFreq = CHANGEFREQ_PRIORITY[candidate.changefreq] ?? 0;
+  if (candidateFreq > currentFreq) return candidate;
+  return current;
+}
+
 export async function GET(req: Request) {
-  const origin = new URL(req.url).origin;
-  const baseUrl = origin.replace(/\/$/, "");
+  const baseUrl = CANONICAL_DOMAIN;
 
   const urls: { loc: string; changefreq: string; priority: string }[] = [];
 
@@ -127,13 +155,29 @@ export async function GET(req: Request) {
     }
   }
 
+  const dedupedUrls = Array.from(
+    urls.reduce((acc, entry) => {
+      const normalizedLoc = normalizeLoc(entry.loc);
+      const normalizedEntry = { ...entry, loc: normalizedLoc };
+      const existing = acc.get(normalizedLoc);
+      if (!existing) {
+        acc.set(normalizedLoc, normalizedEntry);
+        return acc;
+      }
+      acc.set(normalizedLoc, pickStrongerUrl(existing, normalizedEntry));
+      return acc;
+    }, new Map<string, { loc: string; changefreq: string; priority: string }>())
+  )
+    .map(([, value]) => value)
+    .sort((a, b) => a.loc.localeCompare(b.loc));
+
   /* ===============================
      XML OUTPUT
   =============================== */
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    urls
+    dedupedUrls
       .map(
         (u) =>
           `  <url>\n` +
