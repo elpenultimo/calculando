@@ -38,12 +38,12 @@ export async function GET(req: Request) {
      PÁGINAS PRINCIPALES
   =============================== */
   urls.push(
-    { loc: `${baseUrl}/`, changefreq: "daily", priority: "1.0" },
-    { loc: `${baseUrl}/blog/`, changefreq: "weekly", priority: "0.8" },
-    { loc: `${baseUrl}/sueldo-liquido/`, changefreq: "weekly", priority: "0.9" },
-    { loc: `${baseUrl}/boleta/`, changefreq: "weekly", priority: "0.9" },
-    { loc: `${baseUrl}/uf/`, changefreq: "daily", priority: "0.9" },
-    { loc: `${baseUrl}/iva/`, changefreq: "weekly", priority: "0.9" }
+    { loc: `${baseUrl}`, changefreq: "daily", priority: "1.0" },
+    { loc: `${baseUrl}/blog`, changefreq: "weekly", priority: "0.8" },
+    { loc: `${baseUrl}/sueldo-liquido`, changefreq: "weekly", priority: "0.9" },
+    { loc: `${baseUrl}/boleta`, changefreq: "weekly", priority: "0.9" },
+    { loc: `${baseUrl}/uf`, changefreq: "daily", priority: "0.9" },
+    { loc: `${baseUrl}/iva`, changefreq: "weekly", priority: "0.9" }
   );
 
   /* ===============================
@@ -86,7 +86,7 @@ export async function GET(req: Request) {
     const fullPath = path.join(publicDir, dir);
     if (hasIndexHtml(fullPath)) {
       urls.push({
-        loc: `${baseUrl}/${dir}/`,
+        loc: `${baseUrl}/${dir}`,
         changefreq: "weekly",
         priority: "0.9",
       });
@@ -105,7 +105,7 @@ export async function GET(req: Request) {
 
   for (const cc of countries) {
     urls.push({
-      loc: `${baseUrl}/${cc}/`,
+      loc: `${baseUrl}/${cc}`,
       changefreq: "weekly",
       priority: "0.8",
     });
@@ -118,7 +118,7 @@ export async function GET(req: Request) {
         const subPath = path.join(basePath, sub);
         if (hasIndexHtml(subPath)) {
           urls.push({
-            loc: `${baseUrl}/${cc}/${sub}/`,
+            loc: `${baseUrl}/${cc}/${sub}`,
             changefreq: "weekly",
             priority: "0.7",
           });
