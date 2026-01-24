@@ -1,22 +1,22 @@
 export const clConfig = {
   code: 'cl',
-  name: 'Calculando.cl',
+  name: 'Tu Cálculo',
   basePath: '',
   pages: {
     home: {
       path: '/',
       seo: {
-        title: 'Calculando.cl – Calculadoras Chile 2026',
+        title: 'Tu Cálculo – Calculadoras Chile 2026',
         description:
-          'Calculando.cl: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile.',
+          'Tu Cálculo: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile.',
         canonical: 'https://calculando.cl/',
-        ogTitle: 'Calculando.cl – Calculadoras Chile 2026',
+        ogTitle: 'Tu Cálculo – Calculadoras Chile 2026',
         ogDescription:
-          'Calculando.cl: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile.',
+          'Tu Cálculo: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile.',
         ogUrl: 'https://calculando.cl/',
-        twitterTitle: 'Calculando.cl – Calculadoras Chile 2026',
+        twitterTitle: 'Tu Cálculo – Calculadoras Chile 2026',
         twitterDescription:
-          'Calculando.cl: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile.',
+          'Tu Cálculo: calculadora de boletas de honorarios, conversor UF↔CLP y calculadora de IVA. Herramientas simples y modernas para tus cálculos en Chile.',
       },
     },
     iva: {
