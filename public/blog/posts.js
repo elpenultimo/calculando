@@ -3,6 +3,27 @@
 
 window.CALCULANDO_POSTS_2026 = [
   {
+    slug: "/blog/que-es-la-uf-en-chile/",
+    title: "¿Qué es la UF en Chile? Guía clara para entenderla",
+    description: "Explicación simple, usos frecuentes y ejemplos en pesos chilenos.",
+    date: "2025-12-10",
+    category: "uf"
+  },
+  {
+    slug: "/blog/como-calcular-sueldo-liquido-en-chile/",
+    title: "Cómo calcular sueldo líquido en Chile (guía completa)",
+    description: "Paso a paso con descuentos, impuesto y ejemplo práctico.",
+    date: "2025-12-10",
+    category: "sueldos"
+  },
+  {
+    slug: "/blog/boleta-de-honorarios-guia-completa/",
+    title: "Boleta de honorarios: guía completa y ejemplos",
+    description: "Conceptos clave, retención y consejos para independientes.",
+    date: "2025-12-10",
+    category: "impuestos"
+  },
+  {
     slug: "/blog/sueldo-minimo-2026.html",
     title: "Sueldo mínimo 2026 en Chile: monto, fechas y tabla completa",
     description: "Revisa los montos por tramo de edad y desde qué fecha aplica cada cambio.",
