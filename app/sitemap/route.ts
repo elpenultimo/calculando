@@ -55,6 +55,17 @@ function pickStrongerUrl(
 }
 
 export async function GET(req: Request) {
+  // Keep the TuCalculo.com sitemap intact; Calculando.cl has a separate canonical home.
+  const hostname = new URL(req.url).hostname.toLowerCase();
+  if (hostname === "calculando.cl" || hostname === "www.calculando.cl") {
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+      `  <url><loc>https://calculando.cl/</loc></url>\n` +
+      `</urlset>\n`;
+    return new NextResponse(xml, {
+      headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": "no-store" },
+    });
+  }
   const baseUrl = CANONICAL_DOMAIN;
 
   const urls: { loc: string; changefreq: string; priority: string }[] = [];
